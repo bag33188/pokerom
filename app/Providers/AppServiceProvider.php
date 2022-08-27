@@ -3,11 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use View;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
-    private bool $useIdeHelper = false;
+    private static bool $useIdeHelper = false;
 
     /**
      * Register any application services.
@@ -16,9 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        if ($this->useIdeHelper === true) {
-            if (\App::isLocal()) {
-                \App::register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        if (self::$useIdeHelper === true) {
+            if (\Illuminate\Support\Facades\App::isLocal()) {
+                \Illuminate\Support\Facades\App::register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
             }
         }
     }
