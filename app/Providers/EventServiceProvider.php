@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\RomFileCreated;
 use App\Events\RomFileDeleting;
+use App\Events\RomProcessed;
 use App\Listeners\UnsetRomFileDataFromRom;
 use App\Listeners\UpdateMatchingRom;
 use App\Models\Game;
@@ -32,6 +33,9 @@ class EventServiceProvider extends ServiceProvider
             UnsetRomFileDataFromRom::class
         ],
         RomFileCreated::class => [
+            UpdateMatchingRom::class
+        ],
+        RomProcessed::class => [
             UpdateMatchingRom::class
         ],
     ];
