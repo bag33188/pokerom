@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
-class RomFilesDatabase extends \GridFS\Client\AbstractGridFSDatabase
+use GridFS\Client\AbstractGridFSDatabase;
+
+class RomFilesDatabase extends AbstractGridFSDatabase
 {
     protected string $entityName = 'pokerom_files.db';
 

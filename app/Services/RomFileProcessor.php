@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
-class RomFileProcessor extends \GridFS\Support\GridFSProcessor
+use GridFS\Support\GridFSProcessor;
+
+class RomFileProcessor extends GridFSProcessor
 {
     protected string $entityName = 'pokerom_files.gridfs';
 

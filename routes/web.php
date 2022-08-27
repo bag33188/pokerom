@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\web\RomController;
+use App\Http\Controllers\web\RomFileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,7 @@ Route::middleware([
     Route::get('/roms', [RomController::class, 'index'])->name('roms.index');
     Route::get('/roms/create', [RomController::class, 'create'])->name('roms.create');
     Route::post('/roms/store', [RomController::class, 'store'])->name('roms.store');
-    Route::get('/rom-files/create', [\App\Http\Controllers\web\RomFileController::class, 'create'])->name('rom-files.create');
-    Route::post('/rom-files/store', [\App\Http\Controllers\web\RomFileController::class, 'store'])->name('rom-files.store');
+    Route::get('/rom-files', [RomFileController::class, 'index'])->name('rom-files.index');
+    Route::get('/rom-files/create', [RomFileController::class, 'create'])->name('rom-files.create');
+    Route::post('/rom-files/store', [RomFileController::class, 'store'])->name('rom-files.store');
 });

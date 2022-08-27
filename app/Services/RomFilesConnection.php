@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
-class RomFilesConnection extends \GridFS\Client\AbstractGridFSConnection
+use GridFS\Client\AbstractGridFSConnection;
+
+class RomFilesConnection extends AbstractGridFSConnection
 {
     protected string $entityName = 'pokerom_files.mongo';
 

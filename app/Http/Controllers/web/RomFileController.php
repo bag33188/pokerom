@@ -6,6 +6,9 @@ use App\Events\RomFileCreated;
 use App\Http\Controllers\Controller;
 use App\Jobs\ProcessRomFileUpload;
 use App\Models\RomFile;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Storage;
 
@@ -14,11 +17,13 @@ class RomFileController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
-        //
+        return view('rom-files.index', [
+            'romFiles' => RomFile::all(),
+        ]);
     }
 
     public function create()
@@ -28,12 +33,12 @@ class RomFileController extends Controller
     }
 
     public function store(Request $request) {
-        $romFilename = $request['rom_filename'];
+        $romFilename = $request->get('rom-filename');
         RomFile::normalizeRomFilename($romFilename);
         ProcessRomFileUpload::dispatchSync($romFilename);
         $romFile = RomFile::where('filename', $romFilename)->first();
         RomFileCreated::dispatch($romFile);
-       return response()->redirectTo(route('roms.index'))->banner('Rom file uploaded successfully! ' . $romFile->filename);
+       return response()->redirectTo(route('rom-files.index'))->banner('Rom file uploaded successfully! ' . $romFile->filename);
     }
 
     /**
