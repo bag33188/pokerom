@@ -8,8 +8,10 @@ use App\Listeners\UnsetRomFileDataFromRom;
 use App\Listeners\UpdateMatchingRom;
 use App\Models\Game;
 use App\Models\Rom;
+use App\Models\User;
 use App\Observers\GameObserver;
 use App\Observers\RomObserver;
+use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -40,6 +42,7 @@ class EventServiceProvider extends ServiceProvider
      * @var string[][]
      */
     protected $observers = [
+        User::class => [UserObserver::class],
         Game::class => [GameObserver::class],
         Rom::class => [RomObserver::class],
     ];

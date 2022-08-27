@@ -9,6 +9,7 @@ use App\Models\Rom;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class RomController extends Controller
 {
@@ -19,7 +20,8 @@ class RomController extends Controller
      */
     public function index()
     {
-        return view('roms.index', ['roms' => Rom::all()]);
+        $roms = Rom::all()->sortBy('game_id');
+        return view('roms.index', ['roms' => $roms]);
     }
 
     /**
@@ -35,19 +37,19 @@ class RomController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreRomRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param StoreRomRequest $request
+     * @return RedirectResponse
      */
     public function store(StoreRomRequest $request)
     {
         $rom = Rom::create($request->validated());
-        return response()->redirectTo(route('roms.index'));
+        return response()->redirectTo(route('roms.index'))->banner('Rom created successfully! ' . $rom->rom_name);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Rom  $rom
+     * @param \App\Models\Rom $rom
      * @return \Illuminate\Http\Response
      */
     public function show(Rom $rom)
@@ -58,7 +60,7 @@ class RomController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Rom  $rom
+     * @param \App\Models\Rom $rom
      * @return \Illuminate\Http\Response
      */
     public function edit(Rom $rom)
@@ -69,8 +71,8 @@ class RomController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateRomRequest  $request
-     * @param  \App\Models\Rom  $rom
+     * @param \App\Http\Requests\UpdateRomRequest $request
+     * @param \App\Models\Rom $rom
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRomRequest $request, Rom $rom)
@@ -81,7 +83,7 @@ class RomController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Rom  $rom
+     * @param \App\Models\Rom $rom
      * @return \Illuminate\Http\Response
      */
     public function destroy(Rom $rom)
