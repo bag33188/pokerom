@@ -12,7 +12,7 @@ class LinkRomToRomFile implements ShouldQueue
 {
     use InteractsWithQueue;
 
-    private static RomFile|null $matchingRomFile;
+    private static ?RomFile $matchingRomFile;
 
     /**
      * Create the event listener.
@@ -27,8 +27,13 @@ class LinkRomToRomFile implements ShouldQueue
     public function shouldQueue(RomProcessed $event): bool
     {
         $romFile = RomFile::where('filename', $event->rom->getRomFileName())->first();
+        $this->setMatchingRomFile($romFile);
+        return $romFile->exists();
+    }
+
+    private function setMatchingRomFile(?RomFile $romFile): void
+    {
         self::$matchingRomFile = $romFile;
-        return isset($romFile);
     }
 
     /**

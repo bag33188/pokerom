@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\RomFileCreated;
 use App\Models\Rom;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Queue\InteractsWithQueue;
 
 class UpdateMatchingRom implements ShouldQueue
@@ -44,14 +45,16 @@ class UpdateMatchingRom implements ShouldQueue
     public function shouldQueue(RomFileCreated $event): bool
     {
         list($romName, $romType) = explode('.', $event->romFile->filename, 2);
+
         $matchingRom = Rom::where('rom_name', '=', $romName, 'and')
             ->where('rom_type', '=', $romType, 'and')
-            ->where(function ($query) {
+            ->where(function (Builder $query) {
                 $query->where('has_file', false)
                     ->orWhere('file_id', null);
             })->first();
+
         $this->setMatchingRom($matchingRom);
-        return !$event->romFile->rom()->exists() && isset($matchingRom);
+        return !$event->romFile->rom()->exists() && $matchingRom->exists();
     }
 
     /**
