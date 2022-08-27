@@ -42,9 +42,7 @@
                          required autofocus/>
         </div>
         <div class="mt-4">
-            <x-jet-button class="float-right">
-                {{ __('Save!') }}
-            </x-jet-button>
+            <x-jet-button class="float-right">Save!</x-jet-button>
         </div>
     </form>
 </x-app-layout>
