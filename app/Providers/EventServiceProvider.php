@@ -2,6 +2,14 @@
 
 namespace App\Providers;
 
+use App\Events\RomFileCreated;
+use App\Events\RomFileDeleting;
+use App\Listeners\UnsetRomFileDataFromRom;
+use App\Listeners\UpdateMatchingRom;
+use App\Models\Game;
+use App\Models\Rom;
+use App\Observers\GameObserver;
+use App\Observers\RomObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -15,9 +23,25 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        Registered::class => [
-            SendEmailVerificationNotification::class,
+        # Registered::class => [
+        #     SendEmailVerificationNotification::class,
+        # ],
+        RomFileDeleting::class => [
+            UnsetRomFileDataFromRom::class
         ],
+        RomFileCreated::class => [
+            UpdateMatchingRom::class
+        ],
+    ];
+
+    /**
+     * The model observers to register.
+     *
+     * @var string[][]
+     */
+    protected $observers = [
+        Game::class => [GameObserver::class],
+        Rom::class => [RomObserver::class],
     ];
 
     /**
@@ -25,9 +49,12 @@ class EventServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        //
+        Event::listen(
+            Registered::class,
+            [SendEmailVerificationNotification::class, 'handle']
+        );
     }
 
     /**
@@ -35,7 +62,7 @@ class EventServiceProvider extends ServiceProvider
      *
      * @return bool
      */
-    public function shouldDiscoverEvents()
+    public function shouldDiscoverEvents(): bool
     {
         return false;
     }

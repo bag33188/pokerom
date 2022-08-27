@@ -11,6 +11,15 @@ class UpdateMatchingRom implements ShouldQueue
 {
     use InteractsWithQueue;
 
+    public bool $afterCommit = true;
+
+    /**
+     * Needs to be static since RomFile bucket connection is (a single) scoped singleton
+     *
+     * @var Rom|null
+     */
+    private static ?Rom $matchingRom;
+
     /**
      * Create the event listener.
      *
@@ -19,6 +28,17 @@ class UpdateMatchingRom implements ShouldQueue
     public function __construct()
     {
         //
+    }
+
+    /**
+     * be sure to wrap in an instance method since this listener has multiple instances
+     *
+     * @param Rom|null $rom
+     * @return void
+     */
+    private function setMatchingRom(?Rom $rom): void
+    {
+        self::$matchingRom = $rom;
     }
 
     public function shouldQueue(RomFileCreated $event): bool
@@ -30,7 +50,8 @@ class UpdateMatchingRom implements ShouldQueue
                 $query->where('has_file', false)
                     ->orWhere('file_id', null);
             })->first();
-        return isset($matchingRom);
+        $this->setMatchingRom($matchingRom);
+        return !$event->romFile->rom()->exists() && isset($matchingRom);
     }
 
     /**
@@ -39,8 +60,15 @@ class UpdateMatchingRom implements ShouldQueue
      * @param RomFileCreated $event
      * @return void
      */
-    public function handle(RomFileCreated $event)
+    public function handle(RomFileCreated $event): void
     {
-        //
+        Rom::withoutEvents(function () use ($event) {
+            if (isset(self::$matchingRom)) {
+                self::$matchingRom->has_file = true;
+                self::$matchingRom->file_id = $event->romFile->_id;
+                self::$matchingRom->rom_size = $event->romFile->calculateRomSizeFromLength();
+                self::$matchingRom->save();
+            }
+        });
     }
 }

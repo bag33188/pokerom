@@ -15,6 +15,10 @@ class Rom extends Model
 
     protected $connection = 'mysql';
     protected $table = 'roms';
+    protected $primaryKey = 'id';
+    protected $keyType = 'int';
+    public $incrementing = true;
+    public $timestamps = true;
     protected $fillable = ['rom_name', 'rom_size', 'rom_type'];
     protected $guarded = ['file_id', 'game_id', 'has_game', 'has_file'];
     protected $attributes = [

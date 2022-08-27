@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\RomFile;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -13,15 +14,15 @@ use Illuminate\Queue\SerializesModels;
 class RomFileDeleting
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
+    public RomFile $romFile;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(RomFile $romFile)
     {
-        //
+        $this->romFile = $romFile;
     }
 
     /**

@@ -18,7 +18,7 @@ class RomFileController extends Controller
         ProcessRomFileUpload::dispatchSync($romFilename);
         // retrieve romfile once stored in gridfs
         $romFile = RomFile::where('filename', $romFilename)->first();
-       return response()->redirectTo(route('roms.index'));
+       return response()->redirectTo(route('roms.index'))->banner('Rom file uploaded successfully!' . $romFile->filename);
     }
     private static function normalizeRomFilename(string &$romFilename): void
     {

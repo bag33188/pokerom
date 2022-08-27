@@ -10,8 +10,13 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 class Game extends Model
 {
     use HasFactory;
+
     protected $connection = 'mysql';
     protected $table = "games";
+    protected $primaryKey = 'id';
+    protected $keyType = 'int';
+    public $incrementing = true;
+    public $timestamps = true;
     protected $fillable = [
         'game_name',
         'game_type',
