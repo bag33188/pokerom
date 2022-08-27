@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\web\RomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,5 +26,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/roms', [\App\Http\Controllers\web\RomController::class, 'index'])->name('roms.index');
+    Route::get('/roms', [RomController::class, 'index'])->name('roms.index');
+    Route::get('/roms/create', [RomController::class, 'create'])->name('roms.create');
+    Route::post('/roms/store', [RomController::class, 'store'])->name('roms.store');
 });

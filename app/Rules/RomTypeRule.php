@@ -12,7 +12,7 @@ class RomTypeRule implements Rule
 
     public function passes($attribute, $value)
     {
-        return in_array($value, array('gb', 'gbc', 'gba', 'nds', '3ds', 'xci'));
+        return in_array($value, ROM_TYPES);
     }
 
     public function message()
