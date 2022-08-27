@@ -1,3 +1,17 @@
+@php
+    $formSelectClasses = [
+      'border-gray-300',
+      'focus:border-indigo-300',
+      'focus:ring',
+      'focus:ring-indigo-200',
+      'focus:ring-opacity-50',
+      'rounded-md',
+      'shadow-sm',
+      'block',
+      'mt-1',
+      'w-full'
+    ];
+@endphp
 <x-app-layout>
     <x-jet-validation-errors class="mb-4"/>
     <form method="POST" action="{{ route('roms.store') }}">
@@ -12,20 +26,6 @@
         </div>
         <div class="mt-2.5">
             <x-jet-label for="romType" :value="__('Rom Type')"/>
-            @php
-                $formSelectClasses = [
-                  'border-gray-300',
-                  'focus:border-indigo-300',
-                  'focus:ring',
-                  'focus:ring-indigo-200',
-                  'focus:ring-opacity-50',
-                  'rounded-md',
-                  'shadow-sm',
-                  'block',
-                  'mt-1',
-                  'w-full'
-                ];
-            @endphp
             <select @class($formSelectClasses) name="rom_type" id="romType"
                     required autofocus>
                 @foreach(ROM_TYPES as $index => $romType)

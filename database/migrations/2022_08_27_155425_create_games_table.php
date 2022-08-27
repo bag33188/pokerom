@@ -17,20 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('rom_id')->unique()->references('id')->on('roms')->onDelete('cascade')->onUpdate('cascade');
             $table->string('game_name', 40);
-            $table->enum('game_type', array('core', 'spin-off', 'hack'));
+            $table->enum('game_type', GAME_TYPES);
             $table->date('date_released');
             $table->tinyInteger('generation')->unsigned();
-            $table->enum('region', array(
-                'kanto',
-                'johto',
-                'hoenn',
-                'sinnoh',
-                'unova',
-                'kalos',
-                'alola',
-                'galar',
-                'other'
-            ));
+            $table->enum('region', REGIONS);
             $table->string('slug', 42)->nullable()->unique();
             $table->timestamps();
         });
