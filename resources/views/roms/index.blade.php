@@ -1,6 +1,6 @@
 @php
     function formatRomSize(int $romSize): string {
-        return DB::selectOne("SELECT HIGH_PRIORITY FORMAT_ROM_SIZE(?) as `romSize`", [$romSize])->romSize;
+        return DB::selectOne(/** @lang MariaDB */ "SELECT HIGH_PRIORITY FORMAT_ROM_SIZE(?) as `romSize`", [$romSize])->romSize;
     }
 @endphp
 <x-app-layout>
