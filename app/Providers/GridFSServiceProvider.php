@@ -18,6 +18,7 @@ class GridFSServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register(): void
     {
+        // https://laravel.com/docs/9.x/container#binding-scoped
         $this->app->scoped(RomFilesConnection::class, function (Application $app) {
             return new RomFilesConnection($app->make(RomFilesDatabase::class));
         });
