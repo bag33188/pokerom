@@ -28,7 +28,7 @@ class GridFSServiceProvider extends ServiceProvider implements DeferrableProvide
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         //
     }

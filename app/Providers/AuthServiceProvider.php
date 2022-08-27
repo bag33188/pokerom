@@ -3,6 +3,14 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Models\Game;
+use App\Models\Rom;
+use App\Models\RomFile;
+use App\Models\User;
+use App\Policies\GamePolicy;
+use App\Policies\RomFilePolicy;
+use App\Policies\RomPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -14,6 +22,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        User::class => UserPolicy::class,
+        Game::class => GamePolicy::class,
+        Rom::class => RomPolicy::class,
+        RomFile::class => RomFilePolicy::class
     ];
 
     /**
@@ -21,7 +33,7 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
 
