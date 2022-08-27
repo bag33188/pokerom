@@ -44,6 +44,7 @@ class UpdateGameRequest extends FormRequest
             'region' => [$this->requiredIfPutRequest, 'string', new MinLengthRule(MIN_GAME_REGION_LENGTH), new MaxLengthRule(MAX_GAME_REGION_LENGTH), new GameRegionRule()],
             'date_released' => [$this->requiredIfPutRequest, 'date', 'after_or_equal:1996-02-27', 'date_format:Y-m-d'],
             'generation' => [$this->requiredIfPutRequest, 'integer', new MinSizeRule(MIN_GAME_GENERATION_VALUE), new MaxSizeRule(MAX_GAME_GENERATION_VALUE)],
+            'slug' => ['unique:games']
         ];
     }
 }

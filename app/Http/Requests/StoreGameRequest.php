@@ -10,6 +10,7 @@ use App\Rules\MaxLengthRule;
 use App\Rules\MaxSizeRule;
 use App\Rules\MinLengthRule;
 use App\Rules\MinSizeRule;
+use Date;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 
@@ -31,7 +32,7 @@ class StoreGameRequest extends FormRequest
         $this->merge([
             #'slug' => Str::slug($this->input('game_name')),
             'slug' => Str::slug($this->game_name),
-            'date_released' => \Date::create($this->date_released)->format('Y-m-d'),
+            'date_released' => Date::create($this->date_released)->format('Y-m-d'),
         ]);
     }
 
@@ -48,6 +49,7 @@ class StoreGameRequest extends FormRequest
             'region' => ['required', 'string', new MinLengthRule(MIN_GAME_REGION_LENGTH), new MaxLengthRule(MAX_GAME_REGION_LENGTH), new GameRegionRule()],
             'date_released' => ['required', 'date', 'after_or_equal:1996-02-27', 'date_format:Y-m-d'],
             'generation' => ['required', 'integer', new MinSizeRule(MIN_GAME_GENERATION_VALUE), new MaxSizeRule(MAX_GAME_GENERATION_VALUE)],
+            'slug' => ['unique:games']
         ];
     }
 }
