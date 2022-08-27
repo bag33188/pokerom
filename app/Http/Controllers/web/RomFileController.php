@@ -12,11 +12,11 @@ use Storage;
 class RomFileController extends Controller
 {
     public function create() {
-        $romFilesList = Storage::disk('public')->files(ROM_FILES_DIR);
-        return view('roms.create', ['romFilesList' => $romFilesList]);
+        $romFilesList = Storage::disk('public')->files(ROM_FILES_DIRNAME);
+        return view('rom-files.create', ['romFilesList' => $romFilesList]);
     }
     public function store(Request $request) {
-        $romFilename = $request->get('romFilename');
+        $romFilename = $request['rom_filename'];
         RomFile::normalizeRomFilename($romFilename);
         ProcessRomFileUpload::dispatchSync($romFilename);
         $romFile = RomFile::where('filename', $romFilename)->first();

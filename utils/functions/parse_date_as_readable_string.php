@@ -21,7 +21,7 @@ if (!function_exists('parseDateAsReadableString')) {
      * @return string
      */
     function parseDateAsReadableString(DateTime|Date $dateTime,
-                                       string        $format = DATE_FORMATS['readable_date_format']): string
+                                       string        $format = 'F jS, Y'): string
     {
         return date_format($dateTime, $format);
     }

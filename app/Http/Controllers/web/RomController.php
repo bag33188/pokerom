@@ -20,7 +20,7 @@ class RomController extends Controller
      */
     public function index()
     {
-        $roms = Rom::all()->sortBy('game_id');
+        $roms = Rom::with(['romFile', 'game'])->get();
         return view('roms.index', ['roms' => $roms]);
     }
 
@@ -42,7 +42,7 @@ class RomController extends Controller
      */
     public function store(StoreRomRequest $request)
     {
-        $rom = Rom::create($request->validated());
+        $rom = Rom::create($request->all());
         return response()->redirectTo(route('roms.index'))->banner('Rom created successfully! ' . $rom->rom_name);
     }
 

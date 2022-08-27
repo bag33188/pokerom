@@ -3,6 +3,10 @@
 namespace App\Http\Requests;
 
 use App\Models\Rom;
+use App\Rules\MaxLengthRule;
+use App\Rules\MaxSizeRule;
+use App\Rules\MinLengthRule;
+use App\Rules\MinSizeRule;
 use App\Rules\RomNameRule;
 use App\Rules\RomTypeRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -14,7 +18,7 @@ class StoreRomRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->user()->can('create', Rom::class);
     }
@@ -24,12 +28,12 @@ class StoreRomRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'rom_name' => ['required', 'string', 'min:3', 'max:28', new RomNameRule()],
-            'rom_size' => ['required', 'integer', 'min:1020', 'max:17825792'],
-            'rom_type' => ['required', 'string', 'min:2', 'max:4', new RomTypeRule()],
+            'rom_name' => ['required', 'string', new MinLengthRule(MIN_ROM_NAME_LENGTH), new MaxLengthRule(MAX_ROM_NAME_LENGTH), new RomNameRule()],
+            'rom_size' => ['required', 'integer', new MinSizeRule(MIN_ROM_SIZE), new MaxSizeRule(MAX_ROM_SIZE)],
+            'rom_type' => ['required', 'string', new MinLengthRule(MIN_ROM_TYPE_LENGTH), new MaxLengthRule(MAX_ROM_TYPE_LENGTH), new RomTypeRule()],
         ];
     }
 }

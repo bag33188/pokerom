@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Game;
 use App\Models\Rom;
 use App\Models\RomFile;
@@ -37,6 +37,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // establish these as gates since multiple controllers will need to use them
+        Gate::define('viewAny-romFile', fn(User $user) => $user->isAdmin());
+
+        // give admin user complete access to all endpoints and actions
+        Gate::before(function (User $user, string $ability) {
+            /* dd($ability); ddd($ability); */
+            if ($user->isAdmin()) {
+                return true;
+            }
+            return null;
+        });
     }
 }
