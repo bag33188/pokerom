@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Events\RomFileCreated;
 use App\Events\RomFileDeleting;
-use App\Events\RomProcessed;
+use App\Events\AttemptRomLink;
 use App\Listeners\LinkRomToRomFile;
 use App\Listeners\UnsetRomFileDataFromRom;
 use App\Listeners\UpdateMatchingRom;
@@ -36,7 +36,7 @@ class EventServiceProvider extends ServiceProvider
         RomFileCreated::class => [
             UpdateMatchingRom::class
         ],
-        RomProcessed::class => [
+        AttemptRomLink::class => [
             LinkRomToRomFile::class
         ],
     ];
