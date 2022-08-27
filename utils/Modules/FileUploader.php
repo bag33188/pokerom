@@ -76,9 +76,12 @@ class FileUploader
         $this->closeFileStream();
     }
 
+    /**
+     * flush and send output buffer
+     * @return void
+     */
     private static function flushBufferUpStream(): void
     {
-        // flush and send output buffer
         ob_flush();
     }
 

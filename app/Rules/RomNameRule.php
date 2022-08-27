@@ -10,12 +10,12 @@ class RomNameRule implements Rule
     {
     }
 
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool|int
     {
         return preg_match(ROM_NAME_PATTERN, $value);
     }
 
-    public function message()
+    public function message(): string
     {
         return "Invalid `:attribute`. Rom Name can only contain words, numbers, underscores, and/or hyphens";
     }

@@ -77,9 +77,12 @@ class FileDownloader
         $this->closeFileStream();
     }
 
+    /**
+     * flush output buffer
+     * @return void
+     */
     private static function flushBufferDownStream(): void
     {
-        // flush output buffer
         flush();
     }
 }

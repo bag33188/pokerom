@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
 use MongoDB\BSON\ObjectId;
 use DateTimeInterface;
+use Utils\Classes\AbstractGridFSModel as GridFSModel;
 
+/** @mixin GridFSModel */
 class RomFile extends MongoDbModel
 {
     use HasFactory;

@@ -10,12 +10,12 @@ class GameNameRule implements Rule
     {
     }
 
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool|int
     {
         return preg_match(GAME_NAME_PATTERN, $value);
     }
 
-    public function message()
+    public function message(): string
     {
         return "Invalid `:attribute`. Game Name must start with the word 'Pokemon'.";
     }

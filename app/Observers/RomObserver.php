@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class RomObserver
 {
-    private static bool $_USE_DB_LOGIC = true;
+    private bool $useDbLogic = true;
 
     public function created(Rom $rom): void
     {
@@ -48,7 +48,7 @@ class RomObserver
 
     public function deleted(Rom $rom): void
     {
-        if (self::$_USE_DB_LOGIC === false) {
+        if ($this->useDbLogic === false) {
             $rom->game()->delete();
         }
     }
