@@ -19,14 +19,11 @@ class FileDownloader
     /** @var int */
     private int $fileBufferSize;
 
-    /** `261120` Bytes (`255` Kibibytes) @var int */
-    protected const DEFAULT_DOWNLOAD_BUFFER_SIZE = 0x3FC00; // 261,120
-
     /**
      * @param resource $fileStream
      * @param int $fileBufferSize
      */
-    public function __construct($fileStream, int $fileBufferSize = self::DEFAULT_DOWNLOAD_BUFFER_SIZE)
+    public function __construct($fileStream, int $fileBufferSize = 0x3FC00)
     {
         $this->fileStream = $fileStream;
         $this->fileBufferSize = $fileBufferSize;

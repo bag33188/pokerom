@@ -43,4 +43,12 @@ class RomFile extends MongoDbModel
     {
         return $date->format('Y-m-d H:i:s');
     }
+
+    public static function normalizeRomFilename(string &$romFilename): void
+    {
+        list($name, $ext) = explode('.', $romFilename, 2);
+        $name = trim($name);
+        $ext = strtolower($ext);
+        $romFilename = "${name}.${ext}";
+    }
 }

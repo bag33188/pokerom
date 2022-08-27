@@ -13,16 +13,8 @@ return new class extends Migration {
      */
     protected $connection = 'mongodb';
 
-    /**
-     * Execute migration within transaction IF AVAILABLE
-     *
-     * @var bool
-     */
-    public $withinTransaction = true;
 
     protected static bool $_ALLOW_MIGRATIONS = false;
-
-    private const COLLECTION_NAME = 'rom.files';
 
 
     /**
@@ -34,7 +26,7 @@ return new class extends Migration {
     {
         /*!! never execute. current data is intended to be permanent !!*/
         if (self::$_ALLOW_MIGRATIONS === true) {
-            Schema::connection($this->connection)->create(self::COLLECTION_NAME, function (Blueprint $collection) {
+            Schema::connection($this->connection)->create('rom.files', function (Blueprint $collection) {
                 $collection->index(
                     columns: ['length', 'filename'],
                     name: 'length_1_filename_1',
@@ -63,10 +55,10 @@ return new class extends Migration {
     {
         /*! don't use down methods as it could overwrite current files in db */
         if (self::$_ALLOW_MIGRATIONS === true) {
-            Schema::dropIfExists(self::COLLECTION_NAME);
+            Schema::dropIfExists('rom.files');
 
             # Schema::connection($this->connection)
-            #     ->table(self::COLLECTION_NAME, function (Blueprint $collection) {
+            #     ->table('rom.files', function (Blueprint $collection) {
             #         $collection->drop();
             #     });
         }

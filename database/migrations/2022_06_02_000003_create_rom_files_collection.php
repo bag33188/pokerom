@@ -13,33 +13,14 @@ return new class extends Migration {
      */
     protected $connection = 'mongodb';
 
-    /**
-     * Execute migration within transaction IF AVAILABLE
-     *
-     * @var bool
-     */
-    public $withinTransaction = true;
-
     protected static bool $_ALLOW_MIGRATIONS = false;
-
-    private const COLLECTION_NAME = 'rom_files';
-
-    private static function getFileTypeEnumValues(): array
-    {
-        $fileTypes = [];
-        foreach (ROM_FILE_EXTENSIONS as $fileType) $fileTypes[] = str_replace('.', '', $fileType);
-        return $fileTypes;
-    }
 
     public function up(): void
     {
         if (self::$_ALLOW_MIGRATIONS === true) {
             $filename_length = MAX_ROM_FILENAME_LENGTH - 4;
 
-            Schema::connection($this->connection)->create(self::COLLECTION_NAME, function (Blueprint $collection) use ($filename_length) {
-                // compound index
-                // filename and filetype fields are unique if they already exist together on the same document
-                // at the time of querying
+            Schema::connection($this->connection)->create('rom_files', function (Blueprint $collection) use ($filename_length) {
                 $collection->index(
                     columns: ['filename', 'filetype'],
                     name: 'filename_1_filetype_1',
@@ -52,7 +33,7 @@ return new class extends Migration {
                     ]
                 );
                 $collection->string('filename', $filename_length);
-                $collection->enum('filetype', self::getFileTypeEnumValues());
+                $collection->enum('filetype', FILE_TYPES);
                 $collection->unsignedBigInteger('filesize', autoIncrement: false);
             });
         }
@@ -61,10 +42,10 @@ return new class extends Migration {
     public function down(): void
     {
         if (self::$_ALLOW_MIGRATIONS === true) {
-            Schema::dropIfExists(self::COLLECTION_NAME);
+            Schema::dropIfExists('rom_files');
 
             # Schema::connection($this->connection)
-            #     ->table(self::COLLECTION_NAME, function (Blueprint $collection) {
+            #     ->table('rom_files', function (Blueprint $collection) {
             #         $collection->drop();
             #     });
         }

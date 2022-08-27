@@ -15,6 +15,8 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 
     protected string $gridStoragePath;
 
+    protected int $contentTransferSize;
+
     private string $symbolicGridStoragePath;
 
     private Bucket $gridFSBucket;
@@ -45,14 +47,14 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
     {
         list('filepath' => $absoluteFilePath, 'originalFileName' => $originalFileName) = $this->processFilenameMetadata($filename);
         $stream = $this->gridFSBucket->openUploadStream($originalFileName, ['chunkSizeBytes' => $this->chunkSize]);
-        $fileUploader = new FileUploader($stream, $absoluteFilePath, CONTENT_TRANSFER_SIZE);
+        $fileUploader = new FileUploader($stream, $absoluteFilePath, $this->contentTransferSize);
         $fileUploader->uploadFile();
     }
 
     public final function download(ObjectId $fileId): void
     {
         $stream = $this->gridFSBucket->openDownloadStream($fileId);
-        $fileDownloader = new FileDownloader($stream, CONTENT_TRANSFER_SIZE);
+        $fileDownloader = new FileDownloader($stream, $this->contentTransferSize);
         $fileDownloader->downloadFile();
     }
 

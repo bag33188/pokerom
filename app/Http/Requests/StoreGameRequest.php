@@ -6,9 +6,14 @@ use App\Models\Game;
 use App\Rules\GameNameRule;
 use App\Rules\GameRegionRule;
 use App\Rules\GameTypeRule;
+use App\Rules\MaxLengthRule;
+use App\Rules\MaxSizeRule;
+use App\Rules\MinLengthRule;
+use App\Rules\MinSizeRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 
+/** @mixin Game */
 class StoreGameRequest extends FormRequest
 {
     /**
@@ -16,7 +21,7 @@ class StoreGameRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return $this->user()->can('create', Game::class);
     }
@@ -24,7 +29,7 @@ class StoreGameRequest extends FormRequest
     public function prepareForValidation()
     {
         $this->merge([
-//            'slug' => Str::slug($this->input('game_name')),
+            #'slug' => Str::slug($this->input('game_name')),
             'slug' => Str::slug($this->game_name),
             'date_released' => \Date::create($this->date_released)->format('Y-m-d'),
         ]);
@@ -35,14 +40,14 @@ class StoreGameRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'game_name' => ['required', 'string', 'max:' . MIN_GAME_NAME_LENGTH, 'max:' . MAX_GAME_NAME_LENGTH, new GameNameRule()],
-            'game_type' => ['required', 'string', 'min:' . MIN_GAME_TYPE_LENGTH, 'max:' . MAX_GAME_TYPE_LENGTH, new GameTypeRule()],
-            'region' => ['required', 'string', 'max:' . MAX_GAME_REGION_LENGTH, 'min:' . MIN_GAME_REGION_LENGTH, new GameRegionRule()],
+            'game_name' => ['required', 'string', new MinLengthRule(MIN_GAME_NAME_LENGTH), new MaxLengthRule(MAX_GAME_NAME_LENGTH), new GameNameRule()],
+            'game_type' => ['required', 'string', new MinLengthRule(MIN_GAME_TYPE_LENGTH), new MaxLengthRule(MAX_GAME_TYPE_LENGTH), new GameTypeRule()],
+            'region' => ['required', 'string', new MinLengthRule(MIN_GAME_REGION_LENGTH), new MaxLengthRule(MAX_GAME_REGION_LENGTH), new GameRegionRule()],
             'date_released' => ['required', 'date', 'after_or_equal:1996-02-27', 'date_format:Y-m-d'],
-            'generation' => ['required', 'integer', 'min:0', 'max:9'],
+            'generation' => ['required', 'integer', new MinSizeRule(MIN_GAME_GENERATION_VALUE), new MaxSizeRule(MAX_GAME_GENERATION_VALUE)],
         ];
     }
 }

@@ -18,7 +18,7 @@ class GameResource extends JsonResource
             'id' => $this->id,
             'game_name' => $this->game_name,
             'game_type' => $this->game_type,
-            'date_released' => $this->date_released,
+            'date_released' => $this->date_released->format('Y-m-d'),
             'generation' => $this->generation,
             'region' => $this->region,
             'slug' => $this->slug,
