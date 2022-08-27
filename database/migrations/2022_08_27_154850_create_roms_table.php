@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('roms', function (Blueprint $table) {
             $table->id();
-            $table->string('rom_name', 28);
+            $table->string('rom_name', 28)->unique();
             $table->bigInteger('game_id')->unsigned()->nullable()->unique();
             $table->char('file_id', 24)->nullable()->unique();
             $table->integer('rom_size')->unsigned()->default(1020);

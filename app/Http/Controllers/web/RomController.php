@@ -38,7 +38,6 @@ class RomController extends Controller
      */
     public function store(StoreRomRequest $request)
     {
-//        $request->validated();
         $rom = Rom::create($request->validated());
         return response()->redirectTo(route('roms.index'));
     }

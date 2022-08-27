@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -34,5 +35,24 @@ class Rom extends Model
     public function romFile(): HasOneDocument
     {
         return $this->hasOne(RomFile::class, '_id', 'file_id');
+    }
+
+    protected function romType(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => strtoupper($value)
+        );
+    }
+
+    public function setRomTypeAttribute(string $value): void
+    {
+        $this->attributes['rom_type'] = strtolower($value);
+    }
+
+    public function getRomFileName(): string
+    {
+        $romName = $this->attributes['rom_name'];
+        $romType = strtolower($this->attributes['rom_type']);
+        return "${romName}.${romType}";
     }
 }

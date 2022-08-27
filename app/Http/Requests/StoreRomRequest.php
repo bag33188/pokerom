@@ -27,7 +27,7 @@ class StoreRomRequest extends FormRequest
     public function rules()
     {
         return [
-            'rom_name' => ['required', 'string', 'max:3', 'max:28', new RomNameRule()],
+            'rom_name' => ['required', 'string', 'min:3', 'max:28', new RomNameRule()],
             'rom_size' => ['required', 'integer', 'min:1020', 'max:17825792'],
             'rom_type' => ['required', 'string', 'min:2', 'max:4', new RomTypeRule()],
         ];
