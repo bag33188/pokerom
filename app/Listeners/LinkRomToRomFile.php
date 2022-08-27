@@ -19,14 +19,14 @@ class LinkRomToRomFile implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(private readonly RomFile $romFile)
     {
         //
     }
 
     public function shouldQueue(AttemptRomLinkToRomFile $event): bool
     {
-        $romFile = RomFile::where('filename', $event->rom->getRomFileName())->first();
+        $romFile = $this->romFile->where('filename', $event->rom->getRomFileName())->first();
         $this->setMatchingRomFile($romFile);
         return isset($romFile);
     }
