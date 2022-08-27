@@ -15,6 +15,7 @@ class RomFileController extends Controller
         $romFilesList = Storage::disk('public')->files(ROM_FILES_DIRNAME);
         return view('rom-files.create', ['romFilesList' => $romFilesList]);
     }
+
     public function store(Request $request) {
         $romFilename = $request['rom_filename'];
         RomFile::normalizeRomFilename($romFilename);

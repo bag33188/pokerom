@@ -65,13 +65,11 @@ class Handler extends ExceptionHandler
             ['message' => $e->getMessage(), 'code' => HttpStatus::HTTP_CONFLICT]));
 
         $this->renderable(function (AuthenticationException $e, Request $request): JsonResponse|false {
-            $currentErrorRoute = self::getCurrentErrorRouteAsString();
             if ($request->expectsJson()) {
                 return response()->json(
                     ['message' => 'Error: Unauthenticated.', 'success' => false], # $e->getTraceAsString();
                     HttpStatus::HTTP_UNAUTHORIZED,
                     [
-                        'X-Http-Error-Request-URL' => $currentErrorRoute,
                         'X-Http-Auth-Exception-Original-Message' => $e->getMessage(),
                     ]
                 );
@@ -81,7 +79,7 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (HttpException $e, Request $request): JsonResponse|false {
-            $currentErrorRoute = self::getCurrentErrorRouteAsString();
+            $currentErrorRoute = str_replace(Config::get('app.url') . '/', '/', URL::current());
             if ($request->is("api/*")) {
                 $statusCode = $e->getCode() != 0 ? $e->getCode() : $e->getStatusCode();
                 $message = $e->getMessage();
@@ -92,7 +90,6 @@ class Handler extends ExceptionHandler
                     ['message' => $message, 'success' => false], # $e->getTrace();
                     $statusCode,
                     [
-                        'X-Http-Error-Request-URL' => $currentErrorRoute,
                         ...$e->getHeaders()
                     ]
                 );
@@ -100,12 +97,5 @@ class Handler extends ExceptionHandler
             // don't use custom rendering if request is not an API request
             return false;
         });
-    }
-
-    private static function getCurrentErrorRouteAsString(): string
-    {
-        $baseAppUrl = Config::get('app.url');
-        $currentUrl = URL::current();
-        return str_replace("$baseAppUrl/", '/', $currentUrl);
     }
 }
