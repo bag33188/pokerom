@@ -27,6 +27,7 @@ class RomResource extends JsonResource
             'updated_at' => $this->updated_at,
 
             'game' => new GameResource($this->whenLoaded('game')),
+            'romFile' => new RomFileResource($this->whenLoaded('romFile')),
         ];
     }
 }
