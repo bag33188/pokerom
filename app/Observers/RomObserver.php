@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Events\AttemptRomLink;
+use App\Events\AttemptRomLinkToRomFile;
 use App\Models\Rom;
 
 class RomObserver
@@ -18,12 +18,12 @@ class RomObserver
 
     public function created(Rom $rom): void
     {
-        AttemptRomLink::dispatch($rom);
+        AttemptRomLinkToRomFile::dispatch($rom);
     }
 
     public function updated(Rom $rom): void
     {
-        AttemptRomLink::dispatchIf($rom->has_file === FALSE, $rom);
+        AttemptRomLinkToRomFile::dispatchIf($rom->has_file === FALSE, $rom);
     }
 
     public function deleting(Rom $rom): void
