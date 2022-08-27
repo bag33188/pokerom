@@ -2,18 +2,31 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Rom;
+use App\Rules\MaxLengthRule;
+use App\Rules\MaxSizeRule;
+use App\Rules\MinLengthRule;
+use App\Rules\MinSizeRule;
+use App\Rules\RequiredIfPutRequest;
+use App\Rules\RomNameRule;
+use App\Rules\RomTypeRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRomRequest extends FormRequest
 {
+    function __construct(private readonly RequiredIfPutRequest $requiredIfPutRequest)
+    {
+        parent::__construct();
+    }
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        $rom = Rom::find($this->route('rom'));
+        return $this->user()->can('update', $rom);
     }
 
     /**
@@ -24,7 +37,9 @@ class UpdateRomRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'rom_name' => [$this->requiredIfPutRequest, 'string', new MinLengthRule(MIN_ROM_NAME_LENGTH), new MaxLengthRule(MAX_ROM_NAME_LENGTH), new RomNameRule()],
+            'rom_size' => [$this->requiredIfPutRequest, 'integer', new MinSizeRule(MIN_ROM_SIZE), new MaxSizeRule(MAX_ROM_SIZE)],
+            'rom_type' => [$this->requiredIfPutRequest, 'string', new MinLengthRule(MIN_ROM_TYPE_LENGTH), new MaxLengthRule(MAX_ROM_TYPE_LENGTH), new RomTypeRule()],
         ];
     }
 }
