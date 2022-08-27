@@ -17,6 +17,7 @@ class RomTypeRule implements Rule
 
     public function message(): string
     {
-        return 'The validation error message.';
+        $validRomTypeStr = implode(', ', ROM_TYPES);
+        return "Invalid `:attribute`. Rom Type must be one of: `" . $validRomTypeStr . "`.";
     }
 }
