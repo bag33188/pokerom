@@ -22,27 +22,6 @@ abstract class GridFS
      * @var int
      */
     protected int $chunkSize;
-    /**
-     * unique name/identifier for each instance of module
-     * @var string
-     */
-    protected string $entityName;
-
-    /**
-     * @return string
-     */
-    public final function get_entity_name(): string
-    {
-        return $this->entityName;
-    }
-
-    /**
-     * @param string $entityName
-     */
-    public final function set_entity_name(string $entityName): void
-    {
-        $this->entityName = $entityName;
-    }
 
     /**
      * @return string

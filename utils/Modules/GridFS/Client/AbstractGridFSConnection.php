@@ -14,6 +14,8 @@ use MongoDB\GridFS\Bucket;
  */
 abstract class AbstractGridFSConnection extends GridFS
 {
+    protected string $connectionName;
+
     /**
      * MongoDB Connection String
      * @link https://www.mongodb.com/docs/manual/reference/connection-string/

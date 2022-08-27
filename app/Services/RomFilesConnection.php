@@ -6,7 +6,7 @@ use GridFS\Client\AbstractGridFSConnection;
 
 class RomFilesConnection extends AbstractGridFSConnection
 {
-    protected string $entityName = 'pokerom_files.mongo';
+    protected string $connectionName = 'pokerom_files.mongo';
 
     function __construct(RomFilesDatabase $romFilesDatabase)
     {

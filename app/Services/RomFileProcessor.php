@@ -6,9 +6,8 @@ use GridFS\Support\GridFSProcessor;
 
 class RomFileProcessor extends GridFSProcessor
 {
-    protected string $entityName = 'pokerom_files.gridfs';
 
-    protected string $gridStoragePath = 'app/public/rom_files';
+    protected string $gridFilesStoragePath = 'app/public/rom_files';
 
     protected int $contentTransferSize = 0xFF000;
 

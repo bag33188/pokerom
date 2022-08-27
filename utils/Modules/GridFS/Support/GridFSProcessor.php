@@ -13,7 +13,7 @@ use Utils\Modules\FileUploader;
 class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 {
 
-    protected string $gridStoragePath;
+    protected string $gridFilesStoragePath;
 
     protected int $contentTransferSize;
 
@@ -25,10 +25,10 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
 
     public function __construct(private readonly AbstractGridFSConnection $gridFSConnection)
     {
-        if (empty($this->gridStoragePath)) {
+        if (empty($this->gridFilesStoragePath)) {
             $this->symbolicGridStoragePath = preg_replace(self::BACKSLASH_PATTERN, '/', config('gridfs.fileUploadPath'));
         } else {
-            $this->symbolicGridStoragePath = storage_path($this->gridStoragePath);
+            $this->symbolicGridStoragePath = storage_path($this->gridFilesStoragePath);
         }
 
         $this->setGridFSEntities();
@@ -61,6 +61,17 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
     public final function delete(ObjectId $fileId): void
     {
         $this->gridFSBucket->delete($fileId);
+    }
+
+
+    public static function fileIsTooBig(string $filename): bool
+    {
+        $seven_gibibytes = pow(2, 30) * 7;
+        if (filesize($filename) >= $seven_gibibytes) {
+            /*? do something for OVERLY large files?? ?*/
+            return true;
+        }
+        return false;
     }
 
     private function parseUploadPath(): string|array|null
@@ -111,16 +122,6 @@ class GridFSProcessor extends GridFS implements GridFSProcessorInterface
                 )
             );
         }
-    }
-
-    public static function fileIsTooBig(string $filename): bool
-    {
-        $seven_gibibytes = pow(2, 30) * 7;
-        if (filesize($filename) >= $seven_gibibytes) {
-            /*? do something for OVERLY large files?? ?*/
-            return true;
-        }
-        return false;
     }
 
     private static function getApplicationBasePath(): string|array
