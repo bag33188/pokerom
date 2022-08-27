@@ -26,7 +26,7 @@ class UpdateMatchingRom implements ShouldQueue
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(private readonly Rom $rom)
     {
         //
     }
@@ -46,7 +46,8 @@ class UpdateMatchingRom implements ShouldQueue
     {
         list($romName, $romType) = explode('.', $event->romFile->filename, 2);
 
-        $matchingRom = Rom::where('rom_name', '=', $romName, 'and')
+        $matchingRom = $this->rom
+            ->where('rom_name', '=', $romName, 'and')
             ->where('rom_type', '=', $romType, 'and')
             ->where(function (Builder $query) {
                 $query->where('has_file', false)
