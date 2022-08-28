@@ -16,7 +16,8 @@ abstract class AbstractGridFSConnection extends GridFS
 {
     protected array $uriOptions;
     protected bool $loadConnectionInfoFromConfig = true;
-    protected bool $useAuth;
+    protected bool $useAuth = false;
+    protected string $authMechanism;
 
     /**
      * MongoDB Connection String
@@ -42,26 +43,25 @@ abstract class AbstractGridFSConnection extends GridFS
     public final function mongoURI(): ?string
     {
         if ($this->loadConnectionInfoFromConfig === true) {
-            // does not have compatibility with atlas
-            $dsnBuilder = _SPACE .
-                self::$mongoConfig['driver'] . '://' .
-                (self::$mongoConfig->has('username') ? (self::$mongoConfig['username'] . ':' . self::$mongoConfig['password'] . '@') : '') .
-                self::$mongoConfig['host'] . ':' .
-                self::$mongoConfig['port'] . '/?' . 'authMechanism=' .
-                (self::$mongoConfig->has('options.authMechanism') ? self::$mongoConfig['options']['authMechanism'] : 'DEFAULT')
-                . '&authSource=' . (self::$mongoConfig->has('options.authSource') ? self::$mongoConfig['options.authSource'] : 'admin');
+            if ($this->useAuth === true) {
+                $dsnBuilder = _SPACE .
+                    self::$mongoConfig['driver'] . '://' .
+                    self::$mongoConfig['username'] . ':' .
+                    self::$mongoConfig['password'] . '@' .
+                    self::$mongoConfig['host'] . ':' .
+                    self::$mongoConfig['port'] . '/?' .
+                    'authMechanism=' . ($this->authMechanism ?: self::$mongoConfig['options']['authMechanism'] ?: 'DEFAULT') .
+                    '&authSource=' . self::$mongoConfig['options']['authSource'];
+            } else {
+                $dsnBuilder = _SPACE .
+                    self::$mongoConfig['driver'] . '://' .
+                    self::$mongoConfig['host'] . ':' .
+                    self::$mongoConfig['port'] . '/';
+            }
+            return ltrim($dsnBuilder, _SPACE);
         } else {
             return null;
         }
-
-//        if ($this->useAuth === true) {
-//            $dsnBuilder .= '?' .
-//                'authMechanism=' .
-//                (@self::$mongoConfig['options']['authMechanism'] ?? 'DEFAULT') .
-//                '&authSource=' .
-//                (@self::$mongoConfig['options']['authSource'] ?? 'admin');
-//        }
-        return ltrim($dsnBuilder, _SPACE);
     }
 
     protected function setConnectionValues(): void
