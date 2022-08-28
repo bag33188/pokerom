@@ -26,12 +26,19 @@ class UserController extends Controller
         }
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        auth()->user()->tokens()->delete();
-        return response()->json([
-            'success' => true,
-            'message' => 'You have been logged out!'
-        ]);
+        if($request->user()) {
+            auth()->user()->tokens()->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'You have been logged out!'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'You are not logged in!'
+            ], 400);
+        }
     }
 }
