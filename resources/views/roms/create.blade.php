@@ -12,20 +12,13 @@
       'w-full'
     ];
 @endphp
-@push('styles')
-    <style {!! 'type="text/css"'; !!}>
-        [x-cloak] {
-            display: none;
-        }
-    </style>
-@endpush
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">
             Create a new ROM
         </h2>
     </x-slot>
-    <div id="createRom">
+    <div class="container mx-auto w-full">
         <x-jet-validation-errors class="mb-4"/>
         <form method="POST" action="{{ route('roms.store') }}">
             @csrf
@@ -34,6 +27,7 @@
             <div class="mt-2.5">
                 <x-jet-label for="romName" value="Rom Name"/>
                 <x-jet-input type="text" id="romName" name="rom_name"
+                             class="block mt-1 w-full"
                              minlength="{{ MIN_ROM_NAME_LENGTH }}"
                              maxlength="{{ MAX_ROM_NAME_LENGTH }}"
                              required autofocus/>

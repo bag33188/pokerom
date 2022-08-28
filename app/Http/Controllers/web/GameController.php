@@ -34,7 +34,7 @@ class GameController extends Controller
      */
     public function create()
     {
-        return view('games.create', ['romsWithNoGame' => $this->gameRepository->getAllRomsWithNoGameSQL()]);
+        // return view('games.create', ['romsWithNoGame' => $this->gameRepository->getAllRomsWithNoGameSQL()]);
     }
 
     /**

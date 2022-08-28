@@ -7,6 +7,7 @@ use App\Http\Requests\StoreRomRequest;
 use App\Http\Requests\UpdateRomRequest;
 use App\Interfaces\RomRepositoryInterface;
 use App\Models\Rom;
+use App\Models\RomFile;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -22,9 +23,12 @@ class RomController extends Controller
     public function index(RomRepositoryInterface $romRepository)
     {
         $roms = Rom::with(['romFile', 'game'])->get();
+        $tableColumns = ['ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information'];
         return view('roms.index', [
             'roms' => $roms,
             'formatRomSize' => fn(int $rom_size): string => $romRepository->formatRomSizeSQL($rom_size),
+            'tableColumns' => $tableColumns,
+            'totalRomsSize' => RomFile::whereHas('rom')->sum('length')
         ]);
     }
 
