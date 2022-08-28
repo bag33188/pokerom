@@ -21,9 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/auth/login', [UserController::class, 'login']);
-Route::post('/auth/logout', [UserController::class, 'logout']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/auth/logout', [UserController::class, 'logout']);
+
     Route::get('/roms', [RomController::class, 'index']);
     Route::get('/roms/{rom}', [RomController::class, 'show']);
 });
