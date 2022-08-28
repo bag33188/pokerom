@@ -30,8 +30,9 @@
                         @endif</td>
                     <td class="px-6 py-4">
                         @if($rom->has_file)
-                            <form class="inline" method="GET"
-                                  action="{{ route('rom-files.download', ['romFile' => $rom->romFile]) }}">
+                            <form class="inline" method="GET" action="{{
+                                route('rom-files.download', ['romFile' => $rom->romFile])
+                            }}">
                                 @method('GET')
                                 @csrf
 
