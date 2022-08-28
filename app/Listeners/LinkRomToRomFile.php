@@ -27,7 +27,9 @@ class LinkRomToRomFile implements ShouldQueue
     public function shouldQueue(AttemptRomLinkToRomFile $event): bool
     {
         $romFile = $this->romFile->where('filename', $event->rom->getRomFileName())->first();
+
         $this->setMatchingRomFile($romFile);
+
         return isset($romFile) && $event->rom->has_file === FALSE;
     }
 
@@ -46,7 +48,8 @@ class LinkRomToRomFile implements ShouldQueue
     {
         $sql = /** @lang MariaDB */
             "CALL spUpdateRomFromRomFileData(:rom_file_id, :rom_file_size, :rom_id);";
-        DB::statement($sql, [
+        $query = DB::raw($sql);
+        DB::statement($query, [
             'rom_file_id' => self::$matchingRomFile->_id,
             'rom_file_size' => self::$matchingRomFile->length,
             'rom_id' => $event->rom->id,

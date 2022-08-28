@@ -81,12 +81,16 @@ class Handler extends ExceptionHandler
         $this->renderable(function (HttpException $e, Request $request): JsonResponse|false {
             $currentErrorRoute = str_replace(Config::get('app.url') . '/', '/', URL::current());
             if ($request->is("api/*")) {
+
                 // if `getCode` method returns any status at all, then use that method, else use the `getStatusCode` method
                 $statusCode = $e->getCode() != 0 ? $e->getCode() : $e->getStatusCode();
+
                 $message = $e->getMessage();
+
                 if ($statusCode === HttpStatus::HTTP_NOT_FOUND && strlen($message) === 0) {
                     $message = "Route not found: $currentErrorRoute";
                 }
+
                 return response()->json(
                     ['message' => $message, 'success' => false], # $e->getTrace();
                     $statusCode,

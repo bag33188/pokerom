@@ -22,10 +22,12 @@ class UnsetRomFileDataFromRom implements ShouldQueue
     {
         //
     }
+
     public function shouldQueue(RomFileDeleting $event): bool
     {
         return $event->romFile->rom()->exists();
     }
+
     /**
      * Handle the event.
      *
