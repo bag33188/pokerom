@@ -94,9 +94,7 @@ class Handler extends ExceptionHandler
                 return response()->json(
                     ['message' => $message, 'success' => false], # $e->getTrace();
                     $statusCode,
-                    [
-                        ...$e->getHeaders()
-                    ]
+                    [...$e->getHeaders()]
                 );
             }
             // don't use custom rendering if request is not an API request
