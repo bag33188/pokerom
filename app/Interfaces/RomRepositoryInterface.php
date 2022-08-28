@@ -4,5 +4,5 @@ namespace App\Interfaces;
 
 interface RomRepositoryInterface
 {
-    function formatRomSizeSQL(int $rom_size);
+    function formatRomSizeSQL(int $rom_size): string;
 }

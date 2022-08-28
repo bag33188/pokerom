@@ -59,6 +59,7 @@ class UserController extends Controller
         $this->authorize('view', $user);
         return new UserResource($user);
     }
+
 //    public function register(Request $request)
 //    {
 //        $user = User::create($request->all());

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRomRequest;
 use App\Http\Requests\UpdateRomRequest;
+use App\Interfaces\RomRepositoryInterface;
 use App\Models\Rom;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -19,12 +20,12 @@ class RomController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(RomRepositoryInterface $romRepository)
     {
         $roms = Rom::with(['romFile', 'game'])->get();
         return view('roms.index', [
             'roms' => $roms,
-            'formatRomSizeSQL' => fn($rom_size) => DB::selectOne(/** @lang MariaDB */ "SELECT HIGH_PRIORITY FORMAT_ROM_SIZE(?) AS `romSize`", [$rom_size])->romSize
+            'formatRomSize' => fn(int $rom_size): string => $romRepository->formatRomSizeSQL($rom_size),
         ]);
     }
 
