@@ -49,8 +49,8 @@ class UpdateMatchingRom implements ShouldQueue
             ->where('rom_name', '=', $romName, 'and')
             ->where('rom_type', '=', $romType, 'and')
             ->where(function ($query) {
-                $query->where('has_file', false)
-                    ->orWhere('file_id', null);
+                $query->where('has_file', '=', FALSE)
+                    ->orWhere('file_id', '=', NULL);
             })->first();
 
         $this->setMatchingRom($matchingRom);
