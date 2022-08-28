@@ -20,9 +20,6 @@ abstract class AbstractGridFSConnection extends GridFS
      */
     protected bool $useConfig = true;
 
-    protected bool $useAuth = false;
-    protected string $authMechanism;
-
     /**
      * MongoDB URI Options
      * @link https://www.php.net/manual/en/mongodb-driver-manager.construct.php
@@ -53,15 +50,15 @@ abstract class AbstractGridFSConnection extends GridFS
     public final function mongoURI(): string
     {
         if ($this->useConfig === true) {
-            if ($this->useAuth === true) {
+            if (config()->has('database.connections.mongodb.username') || config()->has('database.connections.mongodb.password')) {
                 $dsnBuilder = _SPACE .
                     self::$mongoConfig['driver'] . '://' .
                     self::$mongoConfig['username'] . ':' .
                     self::$mongoConfig['password'] . '@' .
                     self::$mongoConfig['host'] . ':' .
                     self::$mongoConfig['port'] . '/?' .
-                    'authMechanism=' . ($this->authMechanism ?: self::$mongoConfig['options']['authMechanism'] ?: 'DEFAULT') .
-                    '&authSource=' . self::$mongoConfig['options']['authSource'];
+                    'authMechanism=' . (@self::$mongoConfig['options']['authMechanism'] ?? 'DEFAULT') .
+                    '&authSource=' . (@self::$mongoConfig['options']['authSource'] ?? 'admin');
             } else {
                 $dsnBuilder = _SPACE .
                     self::$mongoConfig['driver'] . '://' .
