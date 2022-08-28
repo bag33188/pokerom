@@ -38,7 +38,7 @@ class UserController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'You are not logged in!'
-            ], 400);
+            ], 401);
         }
     }
 }
