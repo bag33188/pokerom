@@ -28,7 +28,7 @@ class LinkRomToRomFile implements ShouldQueue
     {
         $romFile = $this->romFile->where('filename', $event->rom->getRomFileName())->first();
         $this->setMatchingRomFile($romFile);
-        return isset($romFile);
+        return isset($romFile) && $event->rom->has_file === FALSE;
     }
 
     private function setMatchingRomFile(?RomFile $romFile): void
