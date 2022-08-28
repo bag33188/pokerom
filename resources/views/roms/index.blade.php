@@ -7,7 +7,7 @@
 @endpush
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-2xl font-semibold leading-tight text-gray-900">ROMs</h2>
+        <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">ROMs</h2>
     </x-slot>
     <div class="py-12">
         <table class="w-full test-sm text-left text-gray-800 table-auto">
