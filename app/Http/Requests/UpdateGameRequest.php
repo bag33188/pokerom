@@ -11,7 +11,9 @@ use App\Rules\MaxSizeRule;
 use App\Rules\MinLengthRule;
 use App\Rules\MinSizeRule;
 use App\Rules\RequiredIfPutRequest;
+use Date;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class UpdateGameRequest extends FormRequest
 {
@@ -30,6 +32,15 @@ class UpdateGameRequest extends FormRequest
         $game = Game::find($this->route('game'));
         return $this->user()->can('update', $game);
     }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'slug' => Str::slug($this->input('game_name')),
+            'date_released' => Date::create($this->input('date_released'))->format('Y-m-d'),
+        ]);
+    }
+
 
     /**
      * Get the validation rules that apply to the request.

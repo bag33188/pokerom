@@ -31,9 +31,9 @@ class StoreRomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'rom_name' => ['required', 'string', new MinLengthRule(MIN_ROM_NAME_LENGTH), new MaxLengthRule(MAX_ROM_NAME_LENGTH), new RomNameRule(), 'unique:roms'],
+            'rom_name' => ['required', 'string', new MinLengthRule(MIN_ROM_NAME_LENGTH), new MaxLengthRule(MAX_ROM_NAME_LENGTH), new RomNameRule, 'unique:roms'],
             'rom_size' => ['required', 'integer', new MinSizeRule(MIN_ROM_SIZE), new MaxSizeRule(MAX_ROM_SIZE)],
-            'rom_type' => ['required', 'string', new MinLengthRule(MIN_ROM_TYPE_LENGTH), new MaxLengthRule(MAX_ROM_TYPE_LENGTH), new RomTypeRule()],
+            'rom_type' => ['required', 'string', new MinLengthRule(MIN_ROM_TYPE_LENGTH), new MaxLengthRule(MAX_ROM_TYPE_LENGTH), new RomTypeRule],
         ];
     }
 }

@@ -30,8 +30,7 @@ class StoreGameRequest extends FormRequest
     public function prepareForValidation()
     {
         $this->merge([
-            #'slug' => Str::slug($this->input('game_name')),
-            'slug' => Str::slug($this->game_name),
+            'slug' => Str::slug($this->input('game_name')),
             'date_released' => Date::create($this->date_released)->format('Y-m-d'),
         ]);
     }
