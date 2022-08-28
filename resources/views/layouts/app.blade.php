@@ -1,20 +1,30 @@
+@php
+    function parsePageTitle(): string {
+        $_eacute_html_entity = "&eacute;";
+        $appName = config('app.name');
+        # return preg_replace("/pok[e\xe9]rom/i", $appName, "Pok" . $_eacute_html_entity . "ROM");
+        return str_replace('Poke', $appName, "Pok" . $_eacute_html_entity . "ROM");
+    }
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{!! parsePageTitle() !!}</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link rel="stylesheet" type="text/css" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" />
 
-        <!-- Scripts -->
+        <!-- Bundles -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        <!-- Styles -->
         @livewireStyles
+        <!-- Styles -->
+        @stack('styles')
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
@@ -40,5 +50,7 @@
         @stack('modals')
 
         @livewireScripts
+        <!-- Scripts -->
+        @stack('scripts')
     </body>
 </html>

@@ -1,0 +1,16 @@
+# php8 (https://stackoverflow.com/a/39806398)
+<IfModule mod_php.c>
+    # php settings to override when running on Apache [source: php.ini]
+    <IfModule mod_rewrite.c>
+        php_value max_input_time 0
+        php_value max_execution_time 0
+        php_value post_max_size 0
+        php_value memory_limit -1
+        php_value upload_max_filesize 20G
+        php_value max_file_uploads 20
+        php_value default_socket_timeout -1
+        php_value upload_tmp_dir "C:/xampp/tmp"
+        php_flag file_uploads on
+        php_flag exit_on_timeout false
+    </IfModule>
+</IfModule>
