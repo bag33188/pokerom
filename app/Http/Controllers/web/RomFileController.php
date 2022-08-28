@@ -52,7 +52,7 @@ class RomFileController extends Controller
         return response()->redirectTo(route('rom-files.index'))->banner('Rom file uploaded successfully! ' . $romFile->filename);
     }
 
-    public function download(RomFile $romFile)
+    public function download(RomFile $romFile): StreamedResponse
     {
         $disposition = HeaderUtils::makeDisposition(
             disposition: ResponseHeaderBag::DISPOSITION_ATTACHMENT,

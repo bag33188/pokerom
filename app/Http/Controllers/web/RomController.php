@@ -23,11 +23,10 @@ class RomController extends Controller
     public function index(RomRepositoryInterface $romRepository)
     {
         $roms = Rom::with(['romFile', 'game'])->get();
-        $tableColumns = ['ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information'];
         return view('roms.index', [
             'roms' => $roms,
             'formatRomSize' => fn(int $rom_size): string => $romRepository->formatRomSizeSQL($rom_size),
-            'tableColumns' => $tableColumns,
+            'tableColumns' => ['ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information'],
             'totalRomsSize' => RomFile::whereHas('rom')->sum('length'),
             'totalRomsCount' => Rom::all()->count(),
         ]);
