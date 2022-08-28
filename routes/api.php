@@ -27,6 +27,7 @@ Route::name('api.')->group(function () {
 
         Route::get('/roms', [RomController::class, 'index'])->name('roms.index');
         Route::get('/roms/{rom}', [RomController::class, 'show'])->name('roms.show');
+        Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
     });
 
 });

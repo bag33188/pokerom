@@ -4,8 +4,10 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Http\Resources\UserResource;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -48,4 +50,22 @@ class UserController extends Controller
             ], 401);
         }
     }
+
+    /**
+     * @throws AuthorizationException
+     */
+    public function show(User $user)
+    {
+        $this->authorize('view', $user);
+        return new UserResource($user);
+    }
+//    public function register(Request $request)
+//    {
+//        $user = User::create($request->all());
+//        return response()->json([
+//            'success' => true,
+//            'message' => 'User created successfully!',
+//            'user' => $user,
+//        ]);
+//    }
 }
