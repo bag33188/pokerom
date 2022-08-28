@@ -67,11 +67,9 @@ class RomController extends Controller
      *
      * @param StoreRomRequest $request
      * @return RedirectResponse
-     * @throws AuthorizationException
      */
     public function store(StoreRomRequest $request)
     {
-        $this->authorize('create', Rom::class);
         $rom = Rom::create($request->all());
         return response()->redirectTo(route('roms.index'))->banner('Rom created successfully! ' . $rom->rom_name);
     }
@@ -110,11 +108,9 @@ class RomController extends Controller
      * @param UpdateRomRequest $request
      * @param Rom $rom
      * @return RedirectResponse
-     * @throws AuthorizationException
      */
     public function update(UpdateRomRequest $request, Rom $rom)
     {
-        $this->authorize('update', $rom);
         $rom->update($request->all());
         return response()->redirectTo(route('roms.index'))->banner('Rom updated successfully! ' . $rom->rom_name);
     }
