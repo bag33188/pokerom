@@ -5,8 +5,8 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @foreach($roms as $rom)
-                <h3>{{$rom->rom_name}}</h3>
-                <h3>{{ $formatRomSize($rom->rom_size) }}</h3>
+                <h3>{{ $rom->rom_name }}</h3>
+                <h3>{{ $formatRomSizeSQL($rom->rom_size) }}</h3>
             @endforeach
         </div>
     </div>

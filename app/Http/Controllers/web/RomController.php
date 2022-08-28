@@ -24,7 +24,7 @@ class RomController extends Controller
         $roms = Rom::with(['romFile', 'game'])->get();
         return view('roms.index', [
             'roms' => $roms,
-            'formatRomSize' => fn($size) => DB::selectOne(/** @lang MariaDB */ "SELECT HIGH_PRIORITY FORMAT_ROM_SIZE(?) AS `romSize`", [$size])->romSize
+            'formatRomSizeSQL' => fn($rom_size) => DB::selectOne(/** @lang MariaDB */ "SELECT HIGH_PRIORITY FORMAT_ROM_SIZE(?) AS `romSize`", [$rom_size])->romSize
         ]);
     }
 
