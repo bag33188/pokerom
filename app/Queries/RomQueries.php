@@ -9,8 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class RomQueries implements RomQueriesInterface
 {
-    public function __construct(private readonly Rom $rom)
+    private readonly Rom $rom;
+
+    public function __construct(Rom $rom)
     {
+        $this->rom = $rom;
     }
 
     public function findRomMatchingRomFile(RomFile $romFile): ?Rom

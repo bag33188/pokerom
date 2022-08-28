@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class GameQueries implements GameQueriesInterface
 {
-
     public function formatGameTypeSQL(string $game_type): string
     {
         $sql = /** @lang MariaDB */

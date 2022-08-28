@@ -7,7 +7,6 @@ use App\Models\User;
 
 class UserRepository implements UserRepositoryInterface
 {
-
     public function revokeApiTokens(User $user): void
     {
         $user->tokens()->delete();

@@ -12,7 +12,6 @@ use App\Models\RomFile;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
-
     public function uploadToGrid(string $romFilename): RomFile
     {
         RomFile::normalizeRomFilename($romFilename);
