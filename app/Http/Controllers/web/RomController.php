@@ -28,7 +28,8 @@ class RomController extends Controller
             'roms' => $roms,
             'formatRomSize' => fn(int $rom_size): string => $romRepository->formatRomSizeSQL($rom_size),
             'tableColumns' => $tableColumns,
-            'totalRomsSize' => RomFile::whereHas('rom')->sum('length')
+            'totalRomsSize' => RomFile::whereHas('rom')->sum('length'),
+            'totalRomsCount' => Rom::all()->count(),
         ]);
     }
 

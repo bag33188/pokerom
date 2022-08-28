@@ -30,8 +30,7 @@
                         @endif</td>
                     <td class="px-6 py-4">
                         @if($rom->has_file)
-                            <form class="inline"
-                                  method="GET"
+                            <form class="inline" method="GET"
                                   action="{{ route('rom-files.download', ['romFile' => $rom->romFile]) }}">
                                 @method('GET')
                                 @csrf
@@ -47,10 +46,10 @@
             @endforeach
             </tbody>
             <tfoot class="bg-gray-50">
-                <tr class="text-sm text-gray-700 uppercase">
-                    <td class="px-6 py-3">Total Count: {{ \App\Models\Rom::all()->count() }}</td>
-                    <td class="px-6 py-3">Total Size: {{ $totalRomsSize }} Bytes</td>
-                </tr>
+            <tr class="text-sm text-gray-700 uppercase">
+                <td class="px-6 py-3">Total Count: {{ $totalRomsCount }}</td>
+                <td class="px-6 py-3">Total Size: {{ $totalRomsSize }} Bytes</td>
+            </tr>
             </tfoot>
         </table>
     </div>
