@@ -8,11 +8,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /** @mixin \App\Models\RomFile */
 class RomFileResource extends JsonResource
 {
+    public $additional = ['success' => true];
     /**
      * @param Request $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'chunkSize' => $this->chunkSize,

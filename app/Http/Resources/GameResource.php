@@ -8,11 +8,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /** @mixin \App\Models\Game */
 class GameResource extends JsonResource
 {
+    public $additional = ['success' => true];
     /**
      * @param Request $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'id' => $this->id,

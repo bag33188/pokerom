@@ -8,6 +8,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 /** @see \App\Models\RomFile */
 class RomFileCollection extends ResourceCollection
 {
+    public $additional = ['success' => true];
     /**
      * @param Request $request
      * @return array
