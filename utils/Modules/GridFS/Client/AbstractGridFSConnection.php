@@ -50,8 +50,8 @@ abstract class AbstractGridFSConnection extends GridFS
     public final function mongoURI(): string
     {
         if ($this->useConfig === true) {
-            $detectedConfigUsesAuth = config()->has('database.connections.mongodb.username') || config()->has('database.connections.mongodb.password');
-            if ($detectedConfigUsesAuth) {
+            $detectedThatConfigUsesAuth = config()->has('database.connections.mongodb.username') || config()->has('database.connections.mongodb.password');
+            if ($detectedThatConfigUsesAuth) {
                 $dsnBuilder = _SPACE .
                     self::$mongoConfig['driver'] . '://' .
                     self::$mongoConfig['username'] . ':' .
