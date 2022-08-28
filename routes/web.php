@@ -28,7 +28,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
     Route::get('/roms', [RomController::class, 'index'])->name('roms.index');
-    Route::get('/roms/create', [RomController::class, 'create'])->name('roms.create');
+    Route::get('/roms/create', [RomController::class, 'create'])->name('roms.create')->middleware('admin');
     Route::post('/roms/store', [RomController::class, 'store'])->name('roms.store');
     Route::get('/rom-files', [RomFileController::class, 'index'])->name('rom-files.index');
     Route::get('/rom-files/create', [RomFileController::class, 'create'])->name('rom-files.create');

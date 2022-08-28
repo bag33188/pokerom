@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateRomRequest;
 use App\Interfaces\RomRepositoryInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -47,9 +48,11 @@ class RomController extends Controller
      *
      * @param StoreRomRequest $request
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function store(StoreRomRequest $request)
     {
+        $this->authorize('create', Rom::class);
         $rom = Rom::create($request->all());
         return response()->redirectTo(route('roms.index'))->banner('Rom created successfully! ' . $rom->rom_name);
     }
