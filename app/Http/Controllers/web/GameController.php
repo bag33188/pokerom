@@ -7,7 +7,6 @@ use App\Http\Requests\StoreGameRequest;
 use App\Http\Requests\UpdateGameRequest;
 use App\Interfaces\GameRepositoryInterface;
 use App\Models\Game;
-use App\Models\Rom;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
