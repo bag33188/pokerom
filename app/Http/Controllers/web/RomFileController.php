@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use URL;
 
 
 class RomFileController extends Controller
@@ -39,17 +38,19 @@ class RomFileController extends Controller
         return view('rom-files.create', ['romFilesList' => $romFilesList]);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $romFilename = $request['rom_filename'];
         // todo: put this logic in its own repository
         RomFile::normalizeRomFilename($romFilename);
         ProcessRomFileUpload::dispatchSync($romFilename);
         $romFile = RomFile::where('filename', $romFilename)->first();
         RomFileCreated::dispatch($romFile);
-       return response()->redirectTo(route('rom-files.index'))->banner('Rom file uploaded successfully! ' . $romFile->filename);
+        return response()->redirectTo(route('rom-files.index'))->banner('Rom file uploaded successfully! ' . $romFile->filename);
     }
 
-    public function download(RomFile $romFile) {
+    public function download(RomFile $romFile)
+    {
         // todo: put this logic in its own repository
 
         $disposition = HeaderUtils::makeDisposition(
@@ -62,7 +63,7 @@ class RomFileController extends Controller
             $romFileId = $romFile->getObjectId();
             ProcessRomFileDownload::dispatchSync($romFileId);
             return $romFile;
-            }, HttpStatus::HTTP_ACCEPTED, [
+        }, HttpStatus::HTTP_ACCEPTED, [
             'Content-Type' => 'application/octet-stream',
             'Content-Transfer-Encoding' => 'chunked',
             'Content-Disposition' => $disposition
@@ -72,7 +73,7 @@ class RomFileController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\RomFile  $romFile
+     * @param \App\Models\RomFile $romFile
      * @return \Illuminate\Http\Response
      */
     public function show(RomFile $romFile)
@@ -83,7 +84,7 @@ class RomFileController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\RomFile  $romFile
+     * @param \App\Models\RomFile $romFile
      * @return \Illuminate\Http\Response
      */
     public function edit(RomFile $romFile)
@@ -94,8 +95,8 @@ class RomFileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\RomFile  $romFile
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\RomFile $romFile
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, RomFile $romFile)
@@ -106,7 +107,7 @@ class RomFileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\RomFile  $romFile
+     * @param \App\Models\RomFile $romFile
      * @return \Illuminate\Http\Response
      */
     public function destroy(RomFile $romFile)
