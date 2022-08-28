@@ -22,7 +22,7 @@ class GridFSServiceProvider extends ServiceProvider implements DeferrableProvide
         $this->app->scoped(RomFilesConnection::class, function (Application $app) {
             return new RomFilesConnection($app->make(RomFilesDatabase::class));
         });
-        // use singleton??
+        // use singleton?? better performance since scoped gets flushed after queue worker gets processed??
     }
 
     /**

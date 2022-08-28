@@ -55,8 +55,6 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
-        $gameType = \DB::selectOne(/** @lang MariaDB */ "SELECT HIGH_PRIORITY FORMAT_GAME_TYPE(?) AS `gameType`", [$game->game_type])->gameType;
-
 
     }
 
