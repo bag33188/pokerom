@@ -18,26 +18,26 @@
             </thead>
             <tbody>
             @foreach($roms as $rom)
-                <tr class="border odd:bg-white even:bg-gray-100">
+                <tr class="border odd:bg-white even:bg-gray-100" data-rom-id="{{ $rom->id }}">
                     <td class="px-6 py-4">{{ $rom->rom_name }}</td>
                     <td class="px-6 py-4">{{ $formatRomSize($rom->rom_size) }}</td>
                     <td class="px-6 py-4">{{ strtolower($rom->rom_type) }}</td>
                     <td class="px-6 py-4">
                         @if($rom->has_game)
-                            <span>{{ $rom->game->game_name }}</span>
+                            <span data-game-id="{{ $rom->game->id }}">{{ $rom->game->game_name }}</span>
                         @else
                             <span>N/A</span>
                         @endif</td>
                     <td class="px-6 py-4">
                         @if($rom->has_file)
-                            <form class="inline" method="GET" action="{{
-                                route('rom-files.download', ['romFile' => $rom->romFile])
-                            }}">
-                                @method('GET')
-                                @csrf
-
-                                <x-jet-button type="submit">Download!</x-jet-button>
-                            </form>
+                            <div class="inline-block" data-romFile-id="{{ $rom->romFile->_id }}">
+                                <form class="inline" method="GET"
+                                      action="{{ route('rom-files.download', ['romFile' => $rom->romFile]) }}">
+                                    @method('GET')
+                                    @csrf
+                                    <x-jet-button type="submit">Download!</x-jet-button>
+                                </form>
+                            </div>
                         @else
                             <span>No file yet!</span>
                         @endif
