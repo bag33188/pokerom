@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\web;
 
-use App\Events\RomFileCreated;
 use App\Http\Controllers\Controller;
-use App\Jobs\ProcessRomFileDownload;
-use App\Jobs\ProcessRomFileUpload;
+use App\Interfaces\RomFileRepositoryInterface;
 use App\Models\RomFile;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -20,6 +19,10 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class RomFileController extends Controller
 {
+    public function __construct(private readonly RomFileRepositoryInterface $romFileRepository)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,21 +41,19 @@ class RomFileController extends Controller
         return view('rom-files.create', ['romFilesList' => $romFilesList]);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function store(Request $request)
     {
-        $romFilename = $request['rom_filename'];
-        // todo: put this logic in its own repository
-        RomFile::normalizeRomFilename($romFilename);
-        ProcessRomFileUpload::dispatchSync($romFilename);
-        $romFile = RomFile::where('filename', $romFilename)->first();
-        RomFileCreated::dispatch($romFile);
+        $this->authorize('create', RomFile::class);
+        $romFilename = $request->get('rom_filename');
+        $romFile = $this->romFileRepository->uploadToGrid($romFilename);
         return response()->redirectTo(route('rom-files.index'))->banner('Rom file uploaded successfully! ' . $romFile->filename);
     }
 
     public function download(RomFile $romFile)
     {
-        // todo: put this logic in its own repository
-
         $disposition = HeaderUtils::makeDisposition(
             disposition: ResponseHeaderBag::DISPOSITION_ATTACHMENT,
             filename: $romFile->filename,
@@ -60,9 +61,7 @@ class RomFileController extends Controller
         );
 
         return new StreamedResponse(function () use ($romFile) {
-            $romFileId = $romFile->getObjectId();
-            ProcessRomFileDownload::dispatchSync($romFileId);
-            return $romFile;
+            $this->romFileRepository->downloadFromGrid($romFile);
         }, HttpStatus::HTTP_ACCEPTED, [
             'Content-Type' => 'application/octet-stream',
             'Content-Transfer-Encoding' => 'chunked',
