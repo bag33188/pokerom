@@ -10,6 +10,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 
 class RomController extends Controller
 {
@@ -21,7 +22,10 @@ class RomController extends Controller
     public function index()
     {
         $roms = Rom::with(['romFile', 'game'])->get();
-        return view('roms.index', ['roms' => $roms]);
+        return view('roms.index', [
+            'roms' => $roms,
+            'formatRomSize' => fn($size) => DB::selectOne(/** @lang MariaDB */ "SELECT HIGH_PRIORITY FORMAT_ROM_SIZE(?) as `romSize`", [$size])->romSize
+        ]);
     }
 
     /**
