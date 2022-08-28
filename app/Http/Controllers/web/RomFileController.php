@@ -4,6 +4,7 @@ namespace App\Http\Controllers\web;
 
 use App\Events\RomFileCreated;
 use App\Http\Controllers\Controller;
+use App\Jobs\ProcessRomFileDownload;
 use App\Jobs\ProcessRomFileUpload;
 use App\Models\RomFile;
 use Illuminate\Contracts\Foundation\Application;
@@ -11,6 +12,12 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Storage;
+use Symfony\Component\HttpFoundation\HeaderUtils;
+use Symfony\Component\HttpFoundation\Response as HttpStatus;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use URL;
+
 
 class RomFileController extends Controller
 {
@@ -34,11 +41,32 @@ class RomFileController extends Controller
 
     public function store(Request $request) {
         $romFilename = $request['rom_filename'];
+        // todo: put this logic in its own repository
         RomFile::normalizeRomFilename($romFilename);
         ProcessRomFileUpload::dispatchSync($romFilename);
         $romFile = RomFile::where('filename', $romFilename)->first();
         RomFileCreated::dispatch($romFile);
        return response()->redirectTo(route('rom-files.index'))->banner('Rom file uploaded successfully! ' . $romFile->filename);
+    }
+
+    public function download(RomFile $romFile) {
+        // todo: put this logic in its own repository
+
+        $disposition = HeaderUtils::makeDisposition(
+            disposition: ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            filename: $romFile->filename,
+            filenameFallback: uniqid(prefix: 'rom_file-', more_entropy: true)
+        );
+
+        return new StreamedResponse(function () use ($romFile) {
+            $romFileId = $romFile->getObjectId();
+            ProcessRomFileDownload::dispatchSync($romFileId);
+            return $romFile;
+            }, HttpStatus::HTTP_ACCEPTED, [
+            'Content-Type' => 'application/octet-stream',
+            'Content-Transfer-Encoding' => 'chunked',
+            'Content-Disposition' => $disposition
+        ]);
     }
 
     /**

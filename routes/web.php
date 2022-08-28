@@ -33,4 +33,5 @@ Route::middleware([
     Route::get('/rom-files', [RomFileController::class, 'index'])->name('rom-files.index');
     Route::get('/rom-files/create', [RomFileController::class, 'create'])->name('rom-files.create');
     Route::post('/rom-files/store', [RomFileController::class, 'store'])->name('rom-files.store');
+    Route::get('/rom-files/{romFile}/download', [RomFileController::class, 'download'])->name('rom-files.download');
 });
