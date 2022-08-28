@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Queries;
 
-use App\Interfaces\GameRepositoryInterface;
+use App\Interfaces\GameQueriesInterface;
 use App\Models\Rom;
-use DB;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
-class GameRepository implements GameRepositoryInterface
+class GameQueries implements GameQueriesInterface
 {
+
     public function formatGameTypeSQL(string $game_type): string
     {
         $sql = /** @lang MariaDB */

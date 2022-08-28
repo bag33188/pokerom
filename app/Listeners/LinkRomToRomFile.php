@@ -3,11 +3,10 @@
 namespace App\Listeners;
 
 use App\Events\AttemptRomLinkToRomFile;
-use App\Interfaces\RomRepositoryInterface;
+use App\Interfaces\RomQueriesInterface;
 use App\Models\RomFile;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Support\Facades\DB;
 
 class LinkRomToRomFile implements ShouldQueue
 {
@@ -18,16 +17,17 @@ class LinkRomToRomFile implements ShouldQueue
     /**
      * Create the event listener.
      *
+     * @param RomQueriesInterface $romQueries
      * @return void
      */
-    public function __construct(private readonly RomFile $romFile, private readonly RomRepositoryInterface $romRepository)
+    public function __construct(private readonly RomQueriesInterface $romQueries)
     {
         //
     }
 
     public function shouldQueue(AttemptRomLinkToRomFile $event): bool
     {
-        $romFile = $this->romFile->where('filename', $event->rom->getRomFileName())->first();
+        $romFile = RomFile::where('filename', $event->rom->getRomFileName())->first();
 
         $this->setMatchingRomFile($romFile);
 
@@ -47,6 +47,6 @@ class LinkRomToRomFile implements ShouldQueue
      */
     public function handle(AttemptRomLinkToRomFile $event): void
     {
-        $this->romRepository->updateRomFromRomFileDataSQL($event->rom, self::$matchingRomFile);
+        $this->romQueries->updateRomFromRomFileDataSQL($event->rom, self::$matchingRomFile);
     }
 }

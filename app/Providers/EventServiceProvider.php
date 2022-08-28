@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Events\RomFileCreated;
 use App\Events\RomFileDeleting;
 use App\Events\AttemptRomLinkToRomFile;
-use App\Interfaces\RomRepositoryInterface;
 use App\Listeners\LinkRomToRomFile;
 use App\Listeners\UnsetRomFileDataFromRom;
 use App\Listeners\UpdateMatchingRom;

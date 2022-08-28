@@ -5,7 +5,7 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGameRequest;
 use App\Http\Requests\UpdateGameRequest;
-use App\Interfaces\GameRepositoryInterface;
+use App\Interfaces\GameQueriesInterface;
 use App\Models\Game;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -13,7 +13,7 @@ use Illuminate\Contracts\View\View;
 
 class GameController extends Controller
 {
-    public function __construct(private readonly GameRepositoryInterface $gameRepository)
+    public function __construct(private readonly GameQueriesInterface $gameQueries)
     {
     }
 

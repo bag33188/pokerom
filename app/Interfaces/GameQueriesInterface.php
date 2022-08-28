@@ -4,7 +4,7 @@ namespace App\Interfaces;
 
 use Illuminate\Database\Eloquent\Collection;
 
-interface GameRepositoryInterface
+interface GameQueriesInterface
 {
     function formatGameTypeSQL(string $game_type): string;
 

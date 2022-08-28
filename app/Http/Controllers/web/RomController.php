@@ -5,7 +5,7 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRomRequest;
 use App\Http\Requests\UpdateRomRequest;
-use App\Interfaces\RomRepositoryInterface;
+use App\Interfaces\RomQueriesInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -21,12 +21,12 @@ class RomController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index(RomRepositoryInterface $romRepository)
+    public function index(RomQueriesInterface $romQueries)
     {
         $roms = Rom::with(['romFile', 'game'])->get();
         return view('roms.index', [
             'roms' => $roms,
-            'formatRomSize' => fn(int $rom_size): string => $romRepository->formatRomSizeSQL($rom_size),
+            'formatRomSize' => fn(int $rom_size): string => $romQueries->formatRomSizeSQL($rom_size),
             'tableColumns' => ['ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information'],
             'totalRomsSize' => RomFile::whereHas('rom')->sum('length'),
             'totalRomsCount' => Rom::all()->count(),

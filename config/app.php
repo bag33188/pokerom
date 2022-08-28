@@ -198,6 +198,7 @@ return [
         App\Providers\JetstreamServiceProvider::class,
         App\Providers\GridFSServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
+        App\Providers\QueryServiceProvider::class,
 
     ],
 

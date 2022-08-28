@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\RomFileCreated;
+use App\Interfaces\RomQueriesInterface;
 use App\Models\Rom;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -23,9 +24,10 @@ class UpdateMatchingRom implements ShouldQueue
     /**
      * Create the event listener.
      *
+     * @param RomQueriesInterface $romQueries
      * @return void
      */
-    public function __construct(private readonly Rom $rom)
+    public function __construct(private readonly RomQueriesInterface $romQueries)
     {
         //
     }
@@ -43,15 +45,7 @@ class UpdateMatchingRom implements ShouldQueue
 
     public function shouldQueue(RomFileCreated $event): bool
     {
-        list($romName, $romType) = explode('.', $event->romFile->filename, 2);
-
-        $matchingRom = $this->rom
-            ->where('rom_name', '=', $romName, 'and')
-            ->where('rom_type', '=', $romType, 'and')
-            ->where(function ($query) {
-                $query->where('has_file', '=', FALSE)
-                    ->orWhere('file_id', '=', NULL);
-            })->first();
+        $matchingRom = $this->romQueries->findRomMatchingRomFile($event->romFile);
 
         $this->setMatchingRom($matchingRom);
 
