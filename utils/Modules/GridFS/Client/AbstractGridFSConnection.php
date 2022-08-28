@@ -37,6 +37,7 @@ abstract class AbstractGridFSConnection extends GridFS
     /** @var Bucket $bucket gridfs bucket object */
     public readonly Bucket $bucket;
 
+    /** @var array $mongoConfig Configuration array for mongodb database */
     private static array $mongoConfig;
 
     public function __construct(private readonly AbstractGridFSDatabase $gridFSDatabase)
@@ -49,27 +50,24 @@ abstract class AbstractGridFSConnection extends GridFS
 
     public final function mongoURI(): string
     {
-        if ($this->useConfig === true) {
-            $detectedThatConfigUsesAuth = config()->has('database.connections.mongodb.username') || config()->has('database.connections.mongodb.password');
-            if ($detectedThatConfigUsesAuth) {
-                $dsnBuilder = _SPACE .
-                    self::$mongoConfig['driver'] . '://' .
-                    self::$mongoConfig['username'] . ':' .
-                    self::$mongoConfig['password'] . '@' .
-                    self::$mongoConfig['host'] . ':' .
-                    self::$mongoConfig['port'] . '/?' .
-                    'authMechanism=' . (@self::$mongoConfig['options']['authMechanism'] ?? 'DEFAULT') .
-                    '&authSource=' . (@self::$mongoConfig['options']['authSource'] ?? 'admin');
-            } else {
-                $dsnBuilder = _SPACE .
-                    self::$mongoConfig['driver'] . '://' .
-                    self::$mongoConfig['host'] . ':' .
-                    self::$mongoConfig['port'] . '/';
-            }
-            return ltrim($dsnBuilder, _SPACE);
+        $detectedThatConfigUsesAuth =
+            config()->has('database.connections.mongodb.username') or config()->has('database.connections.mongodb.password');
+        if ($detectedThatConfigUsesAuth) {
+            $dsnBuilder = _SPACE .
+                self::$mongoConfig['driver'] . '://' .
+                self::$mongoConfig['username'] . ':' .
+                self::$mongoConfig['password'] . '@' .
+                self::$mongoConfig['host'] . ':' .
+                self::$mongoConfig['port'] . '/?' .
+                'authMechanism=' . (@self::$mongoConfig['options']['authMechanism'] ?? 'DEFAULT') .
+                '&authSource=' . (@self::$mongoConfig['options']['authSource'] ?? 'admin');
         } else {
-            return '';
+            $dsnBuilder = _SPACE .
+                self::$mongoConfig['driver'] . '://' .
+                self::$mongoConfig['host'] . ':' .
+                self::$mongoConfig['port'] . '/';
         }
+        return ltrim($dsnBuilder, _SPACE);
     }
 
     protected function setConnectionValues(): void
@@ -82,7 +80,9 @@ abstract class AbstractGridFSConnection extends GridFS
 
     private function connectToMongoClient(): Database
     {
-        $db = $this->useConfig === true ? new MongoClient(uri: $this->dsn) : new MongoClient(uriOptions: $this->uriOptions);
+        $db = $this->useConfig === true
+            ? new MongoClient(uri: $this->dsn)
+            : new MongoClient(uriOptions: $this->uriOptions);
         return $db->selectDatabase($this->databaseName);
     }
 
