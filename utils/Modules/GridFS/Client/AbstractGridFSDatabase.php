@@ -11,16 +11,6 @@ abstract class AbstractGridFSDatabase extends GridFS
 {
     /** @var string[] */
     private static array $gfsConfig;
-    /** @var string[] */
-    private static array $mongoConfig;
-    /**
-     * specify whether to use authentication when connecting to mongodb.
-     *
-     * _note: only allows username/password auth_
-     *
-     * @var bool
-     */
-    protected bool $useAuth = false;
 
     public function __construct(string $databaseName = null, string $bucketName = null, int $chunkSize = null)
     {
@@ -39,26 +29,7 @@ abstract class AbstractGridFSDatabase extends GridFS
 
     private function setConfigVars(): void
     {
-        self::$gfsConfig = config('gridfs');
-        self::$mongoConfig = config('database.connections.mongodb');
+        self::$gfsConfig = config()->has('gridfs') ? config('gridfs') : [];
     }
 
-    public final function mongoURI(): string
-    {
-        // does not have compatibility with atlas
-        $dsnBuilder = _SPACE .
-            self::$mongoConfig['driver'] . '://' .
-            self::$mongoConfig['username'] . ':' .
-            self::$mongoConfig['password'] . '@' .
-            self::$mongoConfig['host'] . ':' .
-            self::$mongoConfig['port'] . '/';
-        if ($this->useAuth === true) {
-            $dsnBuilder .= '?' .
-                'authMechanism=' .
-                (@self::$mongoConfig['options']['authMechanism'] ?? 'DEFAULT') .
-                '&authSource=' .
-                (@self::$mongoConfig['options']['authSource'] ?? 'admin');
-        }
-        return ltrim($dsnBuilder, _SPACE);
-    }
 }

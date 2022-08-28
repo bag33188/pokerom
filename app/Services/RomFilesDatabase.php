@@ -6,9 +6,6 @@ use GridFS\Client\AbstractGridFSDatabase;
 
 class RomFilesDatabase extends AbstractGridFSDatabase
 {
-
-    protected bool $useAuth = true;
-
     protected string $databaseName = 'pokerom_files';
     protected string $bucketName = 'rom';
     protected int $chunkSize = 0xFF000; //! 1044480 / 1020 kibibytes

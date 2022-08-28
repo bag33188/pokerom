@@ -6,7 +6,9 @@ use GridFS\Client\AbstractGridFSConnection;
 
 class RomFilesConnection extends AbstractGridFSConnection
 {
-    protected string $connectionName = 'pokerom_files.mongo';
+    protected bool $useConfig = true;
+    protected bool $useAuth = true;
+    protected string $authMechanism = 'SCRAM-SHA-256';
 
     function __construct(RomFilesDatabase $romFilesDatabase)
     {

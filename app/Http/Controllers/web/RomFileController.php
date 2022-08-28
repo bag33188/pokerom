@@ -33,7 +33,7 @@ class RomFileController extends Controller
     }
 
     public function store(Request $request) {
-        $romFilename = $request->get('rom-filename');
+        $romFilename = $request['rom_filename'];
         RomFile::normalizeRomFilename($romFilename);
         ProcessRomFileUpload::dispatchSync($romFilename);
         $romFile = RomFile::where('filename', $romFilename)->first();
