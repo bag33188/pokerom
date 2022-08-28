@@ -14,7 +14,7 @@ if (!function_exists('dir_is_empty')) {
      *
      * ----
      *
-     * @link https://github.com/bag33188/pokerom_rebirth/blob/main/composer.json
+     * @link https://github.com/bag33188/new-pokerom/blob/main/composer.json
      * @param string $dir
      * @return bool
      */
