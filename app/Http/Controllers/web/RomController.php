@@ -11,7 +11,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
 
 class RomController extends Controller
 {
@@ -36,7 +35,7 @@ class RomController extends Controller
      */
     public function create()
     {
-        return view('roms.create');
+        return view('roms.create', ['romTypes' => ROM_TYPES]);
     }
 
     /**

@@ -41,7 +41,7 @@
             <div class="mt-2.5">
                 <label class="block font-medium text-sm text-gray-700" for="romType">ROM Type</label>
                 <select @class($formSelectClasses) name="rom_type" id="romType" required autofocus>
-                    @foreach(ROM_TYPES as $index => $romType)
+                    @foreach($romTypes as $index => $romType)
                         <option value="{{ $romType }}">{{ strtoupper($romType) }}</option>
                     @endforeach
                 </select>
