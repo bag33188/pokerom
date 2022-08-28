@@ -107,10 +107,13 @@ class RomFileController extends Controller
      * Remove the specified resource from storage.
      *
      * @param \App\Models\RomFile $romFile
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws AuthorizationException
      */
     public function destroy(RomFile $romFile)
     {
-        //
+        $this->authorize('delete', $romFile);
+        $this->romFileRepository->deleteFromGrid($romFile);
+        return response()->redirectTo(route('rom-files.index'))->banner('Rom file deleted successfully! ' . $romFile->filename);
     }
 }
