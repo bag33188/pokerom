@@ -11,7 +11,7 @@
             @method('PUT')
 
             <div class="mt-2.5">
-                <x-jet-label for="romName" value="Rom Name"/>
+                <x-jet-label for="romName" value="ROM Name"/>
                 <x-jet-input type="text" id="romName" name="rom_name"
                              class="block mt-1 w-full"
                              :value="$rom->rom_name"
@@ -24,12 +24,14 @@
                 <select @class($formSelectClasses) name="rom_type" id="romType" required autofocus>
                     @foreach($romTypes as $index => $romType)
                         <option
-                            value="{{ $romType }}" @selected(strtolower($rom->rom_type) == $romType)>{{ strtoupper($romType) }}</option>
+                            value="{{ $romType }}"
+                            @selected(strtolower($rom->rom_type) == $romType)
+                        >{{ strtoupper($romType) }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="mt-2.5">
-                <x-jet-label for="romSize" value="Rom Size"/>
+                <x-jet-label for="romSize" value="ROM Size"/>
                 <x-jet-input id="romSize"
                              name="rom_size"
                              :value="$rom->rom_size"

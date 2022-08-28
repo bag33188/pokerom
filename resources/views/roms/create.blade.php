@@ -11,7 +11,7 @@
             @method('POST')
 
             <div class="mt-2.5">
-                <x-jet-label for="romName" value="Rom Name"/>
+                <x-jet-label for="romName" value="ROM Name"/>
                 <x-jet-input type="text" id="romName" name="rom_name"
                              :value="old('rom_name')"
                              class="block mt-1 w-full"
@@ -30,7 +30,7 @@
                 </select>
             </div>
             <div class="mt-2.5">
-                <x-jet-label for="romSize" :value="__('Rom Size')"/>
+                <x-jet-label for="romSize" value="ROM Size"/>
                 <x-jet-input id="romSize"
                              name="rom_size"
                              :value="old('rom_size')"
