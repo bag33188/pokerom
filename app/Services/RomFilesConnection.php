@@ -6,7 +6,7 @@ use GridFS\Client\AbstractGridFSConnection;
 
 class RomFilesConnection extends AbstractGridFSConnection
 {
-    protected bool $loadConnectionInfoFromConfig = true;
+    protected bool $useConfig = true;
     protected bool $useAuth = true;
     protected string $authMechanism = 'SCRAM-SHA-256';
 

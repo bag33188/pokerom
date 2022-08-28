@@ -11,9 +11,6 @@ abstract class AbstractGridFSDatabase extends GridFS
 {
     /** @var string[] */
     private static array $gfsConfig;
-    /** @var string[] */
-    private static array $mongoConfig;
-
 
     public function __construct(string $databaseName = null, string $bucketName = null, int $chunkSize = null)
     {
@@ -32,8 +29,7 @@ abstract class AbstractGridFSDatabase extends GridFS
 
     private function setConfigVars(): void
     {
-        self::$gfsConfig = config('gridfs');
-        self::$mongoConfig = config('database.connections.mongodb');
+        self::$gfsConfig = config()->has('gridfs') ? config('gridfs') : [];
     }
 
 }

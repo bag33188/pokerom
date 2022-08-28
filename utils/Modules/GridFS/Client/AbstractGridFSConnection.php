@@ -14,10 +14,21 @@ use MongoDB\GridFS\Bucket;
  */
 abstract class AbstractGridFSConnection extends GridFS
 {
-    protected array $uriOptions;
-    protected bool $loadConnectionInfoFromConfig = true;
+    /**
+     * Use options defined in database.php config file
+     * @var bool
+     */
+    protected bool $useConfig = true;
+
     protected bool $useAuth = false;
     protected string $authMechanism;
+
+    /**
+     * MongoDB URI Options
+     * @link https://www.php.net/manual/en/mongodb-driver-manager.construct.php
+     * @var array
+     */
+    protected array $uriOptions;
 
     /**
      * MongoDB Connection String
@@ -29,7 +40,6 @@ abstract class AbstractGridFSConnection extends GridFS
     /** @var Bucket $bucket gridfs bucket object */
     public readonly Bucket $bucket;
 
-
     private static array $mongoConfig;
 
     public function __construct(private readonly AbstractGridFSDatabase $gridFSDatabase)
@@ -40,9 +50,9 @@ abstract class AbstractGridFSConnection extends GridFS
         $this->selectFileBucket();
     }
 
-    public final function mongoURI(): ?string
+    public final function mongoURI(): string
     {
-        if ($this->loadConnectionInfoFromConfig === true) {
+        if ($this->useConfig === true) {
             if ($this->useAuth === true) {
                 $dsnBuilder = _SPACE .
                     self::$mongoConfig['driver'] . '://' .
@@ -60,7 +70,7 @@ abstract class AbstractGridFSConnection extends GridFS
             }
             return ltrim($dsnBuilder, _SPACE);
         } else {
-            return null;
+            return '';
         }
     }
 
@@ -74,7 +84,7 @@ abstract class AbstractGridFSConnection extends GridFS
 
     private function connectToMongoClient(): Database
     {
-        $db = new MongoClient($this->loadConnectionInfoFromConfig === true ? $this->dsn : $this->uriOptions);
+        $db = new MongoClient($this->useConfig === true ? $this->dsn : $this->uriOptions);
         return $db->selectDatabase($this->databaseName);
     }
 
