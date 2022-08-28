@@ -70,7 +70,7 @@ class User extends Authenticatable
 
     public function isAdmin(): bool
     {
-        return $this->attributes['role'] == 'admin';
+        return $this->attributes['role'] === 'admin';
     }
 
     public function checkPassword(string $currentPassword): bool

@@ -4,9 +4,9 @@ namespace App\Providers;
 
 use App\Services\RomFilesConnection;
 use App\Services\RomFilesDatabase;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Contracts\Foundation\Application;
 
 
 class GridFSServiceProvider extends ServiceProvider implements DeferrableProvider
@@ -18,11 +18,15 @@ class GridFSServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register(): void
     {
-        // https://laravel.com/docs/9.x/container#binding-scoped
-        $this->app->scoped(RomFilesConnection::class, function (Application $app) {
+        # // https://laravel.com/docs/9.x/container#binding-scoped
+        # $this->app->scoped(RomFilesConnection::class, function (Application $app) {
+        #     return new RomFilesConnection($app->make(RomFilesDatabase::class));
+        # });
+        # // use singleton?? better performance since scoped gets flushed after queue worker gets processed??
+
+        $this->app->singleton(RomFilesConnection::class, function (Application $app) {
             return new RomFilesConnection($app->make(RomFilesDatabase::class));
         });
-        // use singleton?? better performance since scoped gets flushed after queue worker gets processed??
     }
 
     /**

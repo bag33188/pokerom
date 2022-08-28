@@ -65,9 +65,9 @@ class RomController extends Controller
      * @param \App\Models\Rom $rom
      * @return \Illuminate\Http\Response
      */
-    public function show(Rom $rom)
+    public function show(Rom $rom, RomQueriesInterface $romQueries)
     {
-        //
+        return view('roms.show', ['rom' => $rom, 'formatRomSize' => fn(int $rom_size): string => $romQueries->formatRomSizeSQL($rom_size)]);
     }
 
     /**
@@ -78,7 +78,7 @@ class RomController extends Controller
      */
     public function edit(Rom $rom)
     {
-        //
+        return view('roms.edit', ['rom' => $rom, 'romTypes' => ROM_TYPES]);
     }
 
     /**
@@ -90,7 +90,9 @@ class RomController extends Controller
      */
     public function update(UpdateRomRequest $request, Rom $rom)
     {
-        //
+        $this->authorize('update', $rom);
+        $rom->update($request->all());
+        return response()->redirectTo(route('roms.index'))->banner('Rom updated successfully! ' . $rom->rom_name);
     }
 
     /**
@@ -101,6 +103,8 @@ class RomController extends Controller
      */
     public function destroy(Rom $rom)
     {
-        //
+        $this->authorize('delete', $rom);
+        Rom::destroy($rom->id);
+        return response()->redirectTo(route('roms.index'))->banner('Rom deleted successfully!');
     }
 }

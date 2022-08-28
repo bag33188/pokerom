@@ -14,14 +14,21 @@ use MongoDB\GridFS\Bucket;
  */
 abstract class AbstractGridFSConnection extends GridFS
 {
+    /** @var string $connectionName Keep track of your connections by naming them */
+    protected string $connectionName;
+
     /**
-     * Use options defined in database.php config file
+     * Use options defined in `database.php` config file
+     *
      * @var bool
      */
     protected bool $useConfig = true;
 
     /**
      * MongoDB URI Options
+     *
+     * __ONLY NECESSARY IF `$useConfig = false`__
+     *
      * @link https://www.php.net/manual/en/mongodb-driver-manager.construct.php
      * @var array
      */

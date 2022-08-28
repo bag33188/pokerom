@@ -6,6 +6,7 @@ use App\Interfaces\RomQueriesInterface;
 use App\Models\Rom;
 use App\Models\RomFile;
 use Illuminate\Support\Facades\DB;
+use Jenssegers\Mongodb\Helpers\EloquentBuilder;
 
 class RomQueries implements RomQueriesInterface
 {
@@ -20,13 +21,14 @@ class RomQueries implements RomQueriesInterface
     {
         list($romName, $romType) = explode('.', $romFile->filename, 2);
 
+        // https://laravel.com/docs/9.x/queries#or-where-clauses
         return $this->rom
-            ->where('rom_name', '=', $romName, 'and')
-            ->where('rom_type', '=', $romType, 'and')
-            ->where(function ($query) {
+            ->where('rom_name', '=', $romName) // AND
+            ->where('rom_type', '=', $romType) // AND
+            ->where(function (EloquentBuilder $query) { // (
                 $query
-                    ->where('has_file', '=', FALSE)
-                    ->orWhere('file_id', '=', NULL);
+                    ->where('has_file', '=', FALSE) // OR
+                    ->orWhere('file_id', '=', NULL); // )
             })->first();
     }
 

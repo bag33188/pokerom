@@ -42,7 +42,7 @@
                             <span>No file yet!</span>
                         @endif
                     </td>
-                    <td class="px-6 py-4"></td>
+                    <td class="px-6 py-4"><a href="{{ route('roms.show', ['rom' => $rom]) }}">Get Info!</a></td>
                 </tr>
             @endforeach
             </tbody>
