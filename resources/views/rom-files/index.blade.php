@@ -7,5 +7,12 @@
 
             <button type="submit">download!</button>
         </form>
+        <form method="POST" action="{{route('rom-files.destroy', ['romFile' => $romFile])}}">
+            @method('DELETE')
+            @csrf
+
+            <button type="submit">delete!</button>
+            @csrf
+        </form>
     @endforeach
 </x-app-layout>
