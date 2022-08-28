@@ -19,12 +19,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::name('api.')->group(function () {
+    Route::post('/auth/login', [UserController::class, 'login'])->name('user.login');
 
-Route::post('/auth/login', [UserController::class, 'login']);
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/auth/logout', [UserController::class, 'logout'])->name('user.logout');
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/auth/logout', [UserController::class, 'logout']);
+        Route::get('/roms', [RomController::class, 'index'])->name('roms.index');
+        Route::get('/roms/{rom}', [RomController::class, 'show'])->name('roms.show');
+    });
 
-    Route::get('/roms', [RomController::class, 'index']);
-    Route::get('/roms/{rom}', [RomController::class, 'show']);
 });
