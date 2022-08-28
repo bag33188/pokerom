@@ -10,8 +10,8 @@ class UserController extends Controller
 {
     public function login(LoginRequest $request)
     {
-        $user = User::where('email', $request->input('email'))->firstOrFail();
-        if ($user->checkPassword($request->input('password'))) {
+        $user = User::where('email', $request->json('email'))->firstOrFail();
+        if ($user->checkPassword($request->json('password'))) {
             return response()->json([
                 'token' => $user->createToken(API_TOKEN_KEY)->plainTextToken,
                 'user' => $user,

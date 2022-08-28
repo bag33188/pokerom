@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RomCollection;
+use App\Http\Resources\RomResource;
 use App\Models\Rom;
 use Illuminate\Http\Request;
 
@@ -11,11 +13,12 @@ class RomController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return RomCollection
      */
     public function index()
     {
-        //
+        $roms = Rom::all();
+        return new RomCollection($roms);
     }
 
     /**
@@ -33,11 +36,12 @@ class RomController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Rom  $rom
-     * @return \Illuminate\Http\Response
+     * @return RomResource
      */
     public function show(Rom $rom)
     {
-        //
+        $rom = Rom::findOrFail($rom->id);
+        return new RomResource($rom);
     }
 
     /**
