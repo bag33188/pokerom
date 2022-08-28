@@ -84,7 +84,7 @@ abstract class AbstractGridFSConnection extends GridFS
 
     private function connectToMongoClient(): Database
     {
-        $db = new MongoClient($this->useConfig === true ? $this->dsn : $this->uriOptions);
+        $db = $this->useConfig === true ? new MongoClient($this->dsn) : new MongoClient($this->uriOptions);
         return $db->selectDatabase($this->databaseName);
     }
 
