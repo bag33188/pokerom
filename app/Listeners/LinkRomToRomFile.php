@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\AttemptRomLinkToRomFile;
+use App\Interfaces\RomRepositoryInterface;
 use App\Models\RomFile;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -19,7 +20,7 @@ class LinkRomToRomFile implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(private readonly RomFile $romFile)
+    public function __construct(private readonly RomFile $romFile, private readonly RomRepositoryInterface $romRepository)
     {
         //
     }
@@ -46,13 +47,6 @@ class LinkRomToRomFile implements ShouldQueue
      */
     public function handle(AttemptRomLinkToRomFile $event): void
     {
-        $sql = /** @lang MariaDB */
-            "CALL spUpdateRomFromRomFileData(:rom_file_id, :rom_file_size, :rom_id);";
-        $query = DB::raw($sql);
-        DB::statement($query, [
-            'rom_file_id' => self::$matchingRomFile->_id,
-            'rom_file_size' => self::$matchingRomFile->length,
-            'rom_id' => $event->rom->id,
-        ]);
+        $this->romRepository->updateRomFromRomFileDataSQL(self::$matchingRomFile, $event->rom);
     }
 }
