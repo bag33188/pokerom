@@ -16,19 +16,22 @@ use Illuminate\Http\RedirectResponse;
 
 class RomController extends Controller
 {
+    public function __construct(private readonly RomQueriesInterface $romQueries)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @param RomQueriesInterface $romQueries
      * @param RomFileQueriesInterface $romFileQueries
      * @return Application|Factory|View
      */
-    public function index(RomQueriesInterface $romQueries, RomFileQueriesInterface $romFileQueries)
+    public function index(RomFileQueriesInterface $romFileQueries)
     {
         $roms = Rom::with(['romFile', 'game'])->get();
         return view('roms.index', [
             'roms' => $roms,
-            'formatRomSize' => fn(int $rom_size): string => $romQueries->formatRomSizeSQL($rom_size),
+            'formatRomSize' => fn(int $rom_size): string => $this->romQueries->formatRomSizeSQL($rom_size),
             'tableColumns' => ['ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information'],
             'totalRomsSize' => $romFileQueries->getTotalSizeOfAllFilesThatHaveRoms(),
             'totalRomsCount' => Rom::all()->count(),
@@ -42,7 +45,21 @@ class RomController extends Controller
      */
     public function create()
     {
-        return view('roms.create', ['romTypes' => ROM_TYPES]);
+        return view('roms.create', [
+            'romTypes' => ROM_TYPES,
+            'formSelectClasses' => [
+                'border-gray-300',
+                'focus:border-indigo-300',
+                'focus:ring',
+                'focus:ring-indigo-200',
+                'focus:ring-opacity-50',
+                'rounded-md',
+                'shadow-sm',
+                'block',
+                'mt-1',
+                'w-full'
+            ]
+        ]);
     }
 
     /**
@@ -62,31 +79,38 @@ class RomController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Rom $rom
-     * @return \Illuminate\Http\Response
+     * @param Rom $rom
+     * @return Application|Factory|View
      */
-    public function show(Rom $rom, RomQueriesInterface $romQueries)
+    public function show(Rom $rom)
     {
-        return view('roms.show', ['rom' => $rom, 'formatRomSize' => fn(int $rom_size): string => $romQueries->formatRomSizeSQL($rom_size)]);
+        return view('roms.show', [
+            'rom' => $rom,
+            'formatRomSize' => fn(int $rom_size): string => $this->romQueries->formatRomSizeSQL($rom_size)
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Rom $rom
-     * @return \Illuminate\Http\Response
+     * @param Rom $rom
+     * @return Application|Factory|View
      */
     public function edit(Rom $rom)
     {
-        return view('roms.edit', ['rom' => $rom, 'romTypes' => ROM_TYPES]);
+        return view('roms.edit', [
+            'rom' => $rom,
+            'romTypes' => ROM_TYPES
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\UpdateRomRequest $request
-     * @param \App\Models\Rom $rom
-     * @return \Illuminate\Http\Response
+     * @param UpdateRomRequest $request
+     * @param Rom $rom
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function update(UpdateRomRequest $request, Rom $rom)
     {
@@ -98,13 +122,14 @@ class RomController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Rom $rom
-     * @return \Illuminate\Http\Response
+     * @param Rom $rom
+     * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function destroy(Rom $rom)
     {
         $this->authorize('delete', $rom);
         Rom::destroy($rom->id);
-        return response()->redirectTo(route('roms.index'))->banner('Rom deleted successfully!');
+        return response()->redirectTo(route('roms.index'))->banner('Rom deleted successfully! ' . $rom->rom_name);
     }
 }
