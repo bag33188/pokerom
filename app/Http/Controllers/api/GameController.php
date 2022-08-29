@@ -38,7 +38,7 @@ class GameController extends ApiController
         $romId = request()->query('rom_id');
         $rom = Rom::findOrFail($romId);
         $game = $rom->game()->create($request->all());
-        return (new GameResource($game->load('rom')))->response()->setStatusCode(HttpStatus::HTTP_CREATED);;
+        return (new GameResource($game->load('rom')))->response()->setStatusCode(HttpStatus::HTTP_CREATED);
     }
 
     /**

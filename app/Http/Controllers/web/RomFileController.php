@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller as ViewController;
 use App\Http\Requests\StoreRomFileRequest;
 use App\Interfaces\RomFileRepositoryInterface;
 use App\Models\RomFile;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -35,6 +37,7 @@ class RomFileController extends ViewController
         Gate::authorize('view-rom-files');
         return view('rom-files.index', [
             'romFiles' => RomFile::all(),
+            'formatUploadDate' => fn(string $uploadDate) => (new DateTime($uploadDate))->setTimezone(new DateTimeZone('PST8PDT'))->format('m-d-Y, h:i:s A (T, I)'),
         ]);
     }
 
@@ -66,17 +69,6 @@ class RomFileController extends ViewController
             'Content-Transfer-Encoding' => 'chunked',
             'Content-Disposition' => $disposition
         ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param RomFile $romFile
-     * @return \Illuminate\Http\Response
-     */
-    public function show(RomFile $romFile)
-    {
-        //
     }
 
     /**

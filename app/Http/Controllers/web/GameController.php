@@ -20,11 +20,14 @@ class GameController extends ViewController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
-        //
+        return view('games.index', [
+            'games' => Game::all(),
+            'formatGameType' => fn(string $game_type): string => $this->gameQueries->formatGameTypeSQL($game_type),
+        ]);
     }
 
     /**

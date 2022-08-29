@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\web\GameController;
 use App\Http\Controllers\web\RomController;
 use App\Http\Controllers\web\RomFileController;
 use Illuminate\Support\Facades\Route;
@@ -40,4 +41,6 @@ Route::middleware([
     Route::post('/rom-files/store', [RomFileController::class, 'store'])->name('rom-files.store');
     Route::get('/rom-files/{romFile}/download', [RomFileController::class, 'download'])->name('rom-files.download');
     Route::delete('/rom-files/{romFile}', [RomFileController::class, 'destroy'])->name('rom-files.destroy');
+
+    Route::get('/games', [GameController::class, 'index'])->name('games.index');
 });
