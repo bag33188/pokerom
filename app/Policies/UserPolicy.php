@@ -23,7 +23,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $this->authIdIsRequestedUserId($user, $model);
+        return $this->currentUserIdMatchesRequestedUserId($user, $model);
     }
 
     /**
@@ -35,7 +35,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $this->authIdIsRequestedUserId($user, $model);
+        return $this->currentUserIdMatchesRequestedUserId($user, $model);
     }
 
     /**
@@ -47,10 +47,10 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $this->authIdIsRequestedUserId($user, $model);
+        return $this->currentUserIdMatchesRequestedUserId($user, $model);
     }
 
-    private function authIdIsRequestedUserId(User $currentUser, User $requestedUser): bool
+    private function currentUserIdMatchesRequestedUserId(User $currentUser, User $requestedUser): bool
     {
         // note that:
         # request()->user() == auth()->user() && \Request::user() === \Auth::user()

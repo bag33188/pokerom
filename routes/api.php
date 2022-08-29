@@ -22,6 +22,8 @@ Route::name('api.')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/auth/me', [UserController::class, 'me'])->name('auth.me');
         Route::post('/auth/logout', [UserController::class, 'logout'])->name('auth.logout');
+        Route::post('/auth/register', [UserController::class, 'register'])->name('auth.register');
+
 
         Route::get('/roms', [RomController::class, 'index'])->name('roms.index');
         Route::get('/roms/{romId}', [RomController::class, 'show'])->name('roms.show');
@@ -31,7 +33,11 @@ Route::name('api.')->group(function () {
         Route::delete('/roms/{romId}', [RomController::class, 'destroy'])->name('roms.destroy');
         Route::patch('/roms/{romId}/link-file', [RomController::class, 'linkRomToRomFile'])->name('roms.link');
 
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::get('/users/{userId}', [UserController::class, 'show'])->name('users.show');
+        Route::put('/users/{userId}', [UserController::class, 'update'])->name('users.update');
+        Route::patch('/users/{userId}', [UserController::class, 'update'])->name('users.edit');
+        Route::delete('/users/{userId}', [UserController::class, 'destroy'])->name('users.destroy');
 
         Route::get('/games', [GameController::class, 'index'])->name('games.index');
         Route::get('/games/{gameId}', [GameController::class, 'show'])->name('games.show');

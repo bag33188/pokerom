@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller as ApiController;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
@@ -18,9 +19,18 @@ class UserController extends ApiController
     {
     }
 
-    public function me(Request $request)
+    public function me(Request $request): User
     {
         return $request->user();
+    }
+
+    /**
+     * @throws AuthorizationException
+     */
+    public function index(Request $request)
+    {
+        $this->authorize('viewAny', $request->user());
+        return new UserCollection(User::all());
     }
 
     public function register(RegisterUserRequest $request)
