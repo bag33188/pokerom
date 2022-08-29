@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller as ApiController;
-use App\Http\Requests\StoreRomFileRequest;
+use App\Http\Requests\UploadRomFileRequest;
 use App\Http\Resources\RomFileCollection;
 use App\Http\Resources\RomFileResource;
 use App\Interfaces\RomFileRepositoryInterface;
@@ -37,7 +37,7 @@ class RomFileController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function upload(StoreRomFileRequest $request)
+    public function upload(UploadRomFileRequest $request)
     {
         $this->authorize('create', RomFile::class);
         $romFileUpload = $this->romFileRepository->uploadToGrid($request->json('rom_filename'));

@@ -3,24 +3,24 @@
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">{{ $rom->rom_name }} Information</h2>
     </x-slot>
     <div class="py-12 px-10">
-        <ul class="bg-white rounded-lg border border-gray-200 text-gray-900">
-            <li class="px-6 py-2 border-b border-gray-200 w-full">ROM ID: {{ $rom->id }}</li>
-            <li class="px-6 py-2 border-b border-gray-200 w-full">ROM Name: {{ $rom->rom_name }}</li>
-            <li class="px-6 py-2 border-b border-gray-200 w-full">ROM Size: {{ $formatRomSize($rom->rom_size) }}</li>
-            <li class="px-6 py-2 border-b border-gray-200 w-full">ROM Type: {{ $rom->rom_type }}</li>
+        <x-list-group>
+            <x-list-item>ROM ID: {{ $rom->id }}</x-list-item>
+            <x-list-item>ROM Name: {{ $rom->rom_name }}</x-list-item>
+            <x-list-item>ROM Size: {{ $formatRomSize($rom->rom_size) }}</x-list-item>
+            <x-list-item>ROM Type: {{ $rom->rom_type }}</x-list-item>
             @if($rom->has_game)
-                <li class="px-6 py-2 border-b border-gray-200 w-full">Game ID: {{ $rom->game->id }}</li>
-                <li class="px-6 py-2 border-b border-gray-200 w-full">Game Name: {{ $rom->game->game_name }}</li>
-                <li class="px-6 py-2 border-b border-gray-200 w-full">Region: {{ $rom->game->region }}</li>
-                <li class="px-6 py-2 border-b border-gray-200 w-full">Release Date: {{ $rom->game->date_released->format('l, F jS, Y') }}</li>
+                <x-list-item>Game ID: {{ $rom->game->id }}</x-list-item>
+                <x-list-item>Game Name: {{ $rom->game->game_name }}</x-list-item>
+                <x-list-item>Region: {{ $rom->game->region }}</x-list-item>
+                <x-list-item>Release Date: {{ $rom->game->date_released->format('l, F jS, Y') }}</x-list-item>
             @endif
             @if($rom->has_file)
-                <li class="px-6 py-2 border-b border-gray-200 w-full">File ID: {{ $rom->romFile->_id }}</li>
-                <li class="px-6 py-2 border-b border-gray-200 w-full">File Name: {{ $rom->romFile->filename }}</li>
-                <li class="px-6 py-2 border-b border-gray-200 w-full">File Length: {{ $rom->romFile->length }} Bytes</li>
-                <li class="px-6 py-2 border-b border-gray-200 w-full">MD5 Hash: {{ $rom->romFile->md5 }}</li>
+                <x-list-item>File ID: {{ $rom->romFile->_id }}</x-list-item>
+                <x-list-item>File Name: {{ $rom->romFile->filename }}</x-list-item>
+                <x-list-item>File Length: {{ $rom->romFile->length }} Bytes</x-list-item>
+                <x-list-item>MD5 Hash: {{ $rom->romFile->md5 }}</x-list-item>
             @endif
-        </ul>
+        </x-list-group>
         @if(auth()->user()->isAdmin())
             <div class="flex flex-row justify-between">
                 <div class="mt-3">
@@ -32,7 +32,9 @@
                     </form>
                 </div>
                 <div class="mt-3">
-                    <x-jet-responsive-nav-link href="{{ route('roms.edit', ['rom' => $rom]) }}">Edit!</x-jet-responsive-nav-link>
+                    <x-jet-responsive-nav-link href="{{ route('roms.edit', ['rom' => $rom]) }}">
+                        Edit!
+                    </x-jet-responsive-nav-link>
                 </div>
             </div>
         @endif

@@ -7,7 +7,7 @@ use App\Rules\RomFilenameRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreRomFileRequest extends FormRequest
+class UploadRomFileRequest extends FormRequest
 {
     protected $stopOnFirstFailure = true;
     public function rules(): array

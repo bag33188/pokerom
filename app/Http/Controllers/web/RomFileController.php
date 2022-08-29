@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller as ViewController;
-use App\Http\Requests\StoreRomFileRequest;
+use App\Http\Requests\UploadRomFileRequest;
 use App\Interfaces\RomFileRepositoryInterface;
 use App\Models\RomFile;
 use DateTime;
@@ -47,7 +47,7 @@ class RomFileController extends ViewController
         return view('rom-files.create', ['romFilesList' => $romFilesList]);
     }
 
-    public function store(StoreRomFileRequest $request): RedirectResponse
+    public function store(UploadRomFileRequest $request): RedirectResponse
     {
         $romFilename = $request->get('rom_filename');
         $romFile = $this->romFileRepository->uploadToGrid($romFilename);

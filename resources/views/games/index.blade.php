@@ -6,27 +6,25 @@
         <div
             class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 justify-items-center my-1.5 pb-4">
             @foreach($games as $game)
-                <div class="p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md">
-                    <div class="w-full bg-white rounded-lg my-2.5">
-                        <ul class="divide-y-2 divide-gray-100">
-                            <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
-                                {{ $game->game_name }}&nbsp;Version
-                            </li>
-                            <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
-                                Generation {{ numberToRoman($game->generation) }}
-                            </li>
-                            <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
-                                {{ $game->region }} Region
-                            </li>
-                            <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
-                                {{ $formatGameType($game->game_type) }}
-                            </li>
-                            <li class="p-3 hover:bg-blue-600 hover:text-blue-200">
-                                Released on {{ $game->date_released->format('F jS, Y') }}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <x-card :game="$game" :title="$game->game_name">
+                    <x-list-group class="divide-y-2 divide-gray-100">
+                        <x-list-item class="p-3 hover:bg-blue-600 hover:text-blue-200">
+                            {{ $game->game_name }}&nbsp;Version
+                        </x-list-item>
+                        <x-list-item class="p-3 hover:bg-blue-600 hover:text-blue-200">
+                            Generation {{ numberToRoman($game->generation) }}
+                        </x-list-item>
+                        <x-list-item class="p-3 hover:bg-blue-600 hover:text-blue-200">
+                            {{ $game->region }} Region
+                        </x-list-item>
+                        <x-list-item class="p-3 hover:bg-blue-600 hover:text-blue-200">
+                            {{ $formatGameType($game->game_type) }}
+                        </x-list-item>
+                        <x-list-item class="p-3 hover:bg-blue-600 hover:text-blue-200">
+                            Released on {{ $game->date_released->format('F jS, Y') }}
+                        </x-list-item>
+                    </x-list-group>
+                </x-card>
             @endforeach
         </div>
     </div>
