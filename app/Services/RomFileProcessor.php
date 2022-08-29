@@ -8,8 +8,8 @@ class RomFileProcessor extends GridFSProcessor
 {
     protected string $gridFilesStoragePath = 'app/public/rom_files';
 
-    protected int $contentUploadSize = 0xFF000;
-    protected int $contentDownloadSize = 0xFF000;
+    protected int $contentUploadTransferSize = 0xFF000;
+    protected int $contentDownloadTransferSize = 0xFF000;
 
     /**
      * Create new GridFS Processor Instance
