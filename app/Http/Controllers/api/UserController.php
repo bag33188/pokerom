@@ -54,8 +54,9 @@ class UserController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function show(User $user)
+    public function show(int $userId)
     {
+        $user = User::findOrFail($userId);
         $this->authorize('view', $user);
         return new UserResource($user);
     }

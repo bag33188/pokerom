@@ -44,8 +44,9 @@ class RomController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function linkRomToRomFile(Rom $rom): JsonResponse
+    public function linkRomToRomFile(int $romId): JsonResponse
     {
+        $rom = Rom::findOrFail($romId);
         $this->authorize('update', $rom);
         AttemptRomLinkToRomFile::dispatchUnless($rom->has_file === TRUE, $rom);
         $rom->refresh();
@@ -64,12 +65,13 @@ class RomController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param Rom $rom
+     * @param int $romId
      * @return RomResource
      */
-    public function show(Rom $rom)
+    public function show(int $romId)
     {
-        $rom = Rom::findOrFail($rom->id);
+        $rom = Rom::findOrFail($romId);
+
         return new RomResource($rom);
     }
 
@@ -77,11 +79,12 @@ class RomController extends ApiController
      * Update the specified resource in storage.
      *
      * @param UpdateRomRequest $request
-     * @param Rom $rom
+     * @param int $romId
      * @return RomResource
      */
-    public function update(UpdateRomRequest $request, Rom $rom)
+    public function update(UpdateRomRequest $request, int $romId)
     {
+        $rom = Rom::findOrFail($romId);
         $rom->update($request->all());
         return new RomResource($rom);
     }
@@ -89,12 +92,13 @@ class RomController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param Rom $rom
+     * @param int $romId
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function destroy(Rom $rom)
+    public function destroy(int $romId)
     {
+        $rom = Rom::findOrFail($romId);
         $this->authorize('delete', $rom);
         $rom->delete();
         return response()->json([
