@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller as ApiController;
 use App\Http\Resources\RomCollection;
 use App\Http\Resources\RomResource;
 use App\Models\Rom;
 use Illuminate\Http\Request;
 
-class RomController extends Controller
+class RomController extends ApiController
 {
     /**
      * Display a listing of the resource.

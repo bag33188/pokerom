@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller as ApiController;
 use App\Http\Requests\LoginRequest;
 use App\Http\Resources\UserResource;
 use App\Interfaces\UserRepositoryInterface;
@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UserController extends ApiController
 {
     public function __construct(private readonly UserRepositoryInterface $userRepository)
     {

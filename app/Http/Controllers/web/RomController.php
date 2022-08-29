@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\web;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller as ViewController;
 use App\Http\Requests\StoreRomRequest;
 use App\Http\Requests\UpdateRomRequest;
 use App\Interfaces\RomFileQueriesInterface;
@@ -14,7 +14,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
-class RomController extends Controller
+class RomController extends ViewController
 {
     public function __construct(private readonly RomQueriesInterface $romQueries)
     {

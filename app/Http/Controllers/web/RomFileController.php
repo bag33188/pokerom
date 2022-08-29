@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\web;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller as ViewController;
 use App\Interfaces\RomFileRepositoryInterface;
 use App\Models\RomFile;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 
-class RomFileController extends Controller
+class RomFileController extends ViewController
 {
     public function __construct(private readonly RomFileRepositoryInterface $romFileRepository)
     {
