@@ -2,6 +2,8 @@
 
 namespace App\View\Components;
 
+use Closure;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class FormSelectLabel extends Component
@@ -19,13 +21,13 @@ class FormSelectLabel extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View|Closure|string
      */
-    public function render()
+    public function render(): View|string|Closure
     {
         return /** @lang InjectablePHP */ <<<'blade'
-            @props(['selectFieldId', 'text'])
-            <label class="block font-medium text-sm text-gray-700" for="{{ $selectFieldId }}">{{ $text }}</label>
+            @props(['text'])
+            <label {{ $attributes->merge(['class' => "block font-medium text-sm text-gray-700"]) }}>{{ $text }}</label>
         blade;
     }
 }

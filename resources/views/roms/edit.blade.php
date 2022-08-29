@@ -20,7 +20,7 @@
                              required autofocus/>
             </div>
             <div class="mt-2.5">
-                <x-form-select-label selectFieldId="romType" text="ROM Type"/>
+                <x-form-select-label for="romType" text="ROM Type"/>
                 <x-form-select name="rom_type" id="romType" required autofocus>
                     @foreach($romTypes as $index => $romType)
                         <option
