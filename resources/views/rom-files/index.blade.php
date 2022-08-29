@@ -9,20 +9,8 @@
                 <p class="inline-block">Filesize: {{ $romFile->length }} Bytes</p>
                 <p class="inline-block">Uploaded On: {{ $formatUploadDate($romFile->uploadDate) }}</p>
                 <div class="mt-2 inline-flex flex-row justify-between">
-                    <form class="inline" method="GET"
-                          action="{{ route('rom-files.download', ['romFile' => $romFile]) }}">
-                        @method('GET')
-                        @csrf
-
-                        <x-jet-button type="submit">Download</x-jet-button>
-                    </form>
-                    <form class="inline" method="POST"
-                          action="{{ route('rom-files.destroy', ['romFile' => $romFile]) }}">
-                        @method('DELETE')
-                        @csrf
-
-                        <x-jet-danger-button type="submit">DELETE</x-jet-danger-button>
-                    </form>
+                    <x-rom-file.download :romFile="$romFile"/>
+                    <x-rom-file.delete :romFile="$romFile"/>
                 </div>
             </x-tile>
         @endforeach
