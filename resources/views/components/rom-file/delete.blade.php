@@ -21,7 +21,7 @@
 @endphp
 <form {{ $attributes->merge(['class' => 'inline']) }} method="POST"
       action="{{ route('rom-files.destroy', ['romFile' => $romFile]) }}"
-      onsubmit="disableDeleteBtn('{{$deleteBtnId}}')">
+      onsubmit="disableDeleteBtn({{ Js::from($deleteBtnId) }})">
     @method('DELETE')
     @csrf
 
