@@ -34,11 +34,11 @@ class GameController extends ApiController
      */
     public function store(StoreGameRequest $request)
     {
-        if ($request->missing('romId')) self::throwNoRomIdQueryGivenException();
+        if ($request->missing('rom_id')) self::throwNoRomIdQueryGivenException();
         $romId = request()->query('rom_id');
         $rom = Rom::findOrFail($romId);
         $game = $rom->game()->create($request->all());
-        return new GameResource($game->with('rom')->first());
+        return new GameResource($game->load('rom'));
     }
 
     /**
