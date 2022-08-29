@@ -1,6 +1,6 @@
 @php
     function removeStoragePathFromFilename(string $value): string {
-        return str_replace(ROM_FILES_DIRNAME . '/', '', $value);
+        return str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $value);
     }
 @endphp
 @push('styles')
