@@ -4,6 +4,7 @@
     }
 @endphp
 @push('styles')
+    <!--suppress CssUnresolvedCustomProperty -->
     <style {!! 'type="text/css"'; !!}>
         .white-space-pre {
             white-space: pre;
