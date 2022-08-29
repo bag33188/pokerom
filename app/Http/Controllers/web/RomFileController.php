@@ -9,6 +9,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Storage;
@@ -29,7 +30,7 @@ class RomFileController extends ViewController
      *
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(): Application|Factory|View
     {
         Gate::authorize('view-rom-files');
         return view('rom-files.index', [
@@ -37,7 +38,7 @@ class RomFileController extends ViewController
         ]);
     }
 
-    public function create()
+    public function create(): Application|Factory|View
     {
         $romFilesList = Storage::disk('public')->files(ROM_FILES_DIRNAME);
         return view('rom-files.create', ['romFilesList' => $romFilesList]);
@@ -46,7 +47,7 @@ class RomFileController extends ViewController
     /**
      * @throws AuthorizationException
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $this->authorize('create', RomFile::class);
         $romFilename = $request->get('rom_filename');
@@ -74,7 +75,7 @@ class RomFileController extends ViewController
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\RomFile $romFile
+     * @param RomFile $romFile
      * @return \Illuminate\Http\Response
      */
     public function show(RomFile $romFile)
@@ -85,8 +86,8 @@ class RomFileController extends ViewController
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\RomFile $romFile
-     * @return \Illuminate\Http\RedirectResponse
+     * @param RomFile $romFile
+     * @return RedirectResponse
      * @throws AuthorizationException
      */
     public function destroy(RomFile $romFile)
