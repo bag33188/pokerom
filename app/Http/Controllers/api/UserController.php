@@ -4,6 +4,8 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller as ApiController;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
@@ -19,6 +21,18 @@ class UserController extends ApiController
     public function me(Request $request)
     {
         return $request->user();
+    }
+
+    public function register(RegisterUserRequest $request)
+    {
+        $user = User::create($request->all());
+        $bearerToken = $this->userRepository->generateApiToken($user);
+
+        return response()->json([
+            'user' => $user,
+            'token' => $bearerToken,
+            'success' => true
+        ]);
     }
 
     public function login(LoginRequest $request)
@@ -66,13 +80,25 @@ class UserController extends ApiController
         return new UserResource($user);
     }
 
-//    public function register(Request $request)
-//    {
-//        $user = User::create($request->all());
-//        return response()->json([
-//            'success' => true,
-//            'message' => 'User created successfully!',
-//            'user' => $user,
-//        ]);
-//    }
+    public function update(UpdateUserRequest $request, int $userId)
+    {
+        $user = User::findOrFail($userId);
+        $user->update($request->all());
+        return new UserResource($user);
+    }
+
+    /**
+     * @throws AuthorizationException
+     */
+    public function destroy(int $userId)
+    {
+        $user = User::findOrFail($userId);
+        $this->authorize('delete', $user);
+        $this->userRepository->revokeApiTokens($user);
+        $user->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'User successfully deleted! ' . $user->name
+        ]);
+    }
 }
