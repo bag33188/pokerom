@@ -83,29 +83,6 @@ class RomFileController extends ViewController
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\RomFile $romFile
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(RomFile $romFile)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\RomFile $romFile
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, RomFile $romFile)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param \App\Models\RomFile $romFile
