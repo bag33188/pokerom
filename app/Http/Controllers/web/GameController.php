@@ -22,7 +22,7 @@ class GameController extends ViewController
      *
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(): Application|Factory|View
     {
         return view('games.index', [
             'games' => Game::all(),
