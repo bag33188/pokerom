@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">
-            Update {{ $rom->rom_name }}
+            Edit {{ $rom->rom_name }}
         </h2>
     </x-slot>
     <div class="container mx-auto w-full">
@@ -35,7 +35,7 @@
                 <x-jet-input id="romSize"
                              name="rom_size"
                              :value="$rom->rom_size"
-                             data-description="rom size is measured in kibibytes (KiB)"
+                             placeholder="Note: `rom_size` is measured in kibibytes (KiB)"
                              class="block mt-1 w-full"
                              type="number"
                              min="{{ MIN_ROM_SIZE }}"

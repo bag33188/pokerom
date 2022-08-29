@@ -34,7 +34,7 @@
                 <x-jet-input id="romSize"
                              name="rom_size"
                              :value="old('rom_size')"
-                             data-description="rom size is measured in kibibytes (KiB)"
+                             placeholder="Note: `rom_size` is measured in kibibytes (KiB)"
                              class="block mt-1 w-full"
                              type="number"
                              min="{{ MIN_ROM_SIZE }}"
