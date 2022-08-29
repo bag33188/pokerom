@@ -31,19 +31,15 @@
                     <td class="px-6 py-4">
                         @if($rom->has_file)
                             <div class="inline-block" data-romFile-id="{{ $rom->romFile->_id }}">
-                                <form class="inline" method="GET"
-                                      action="{{ route('rom-files.download', ['romFile' => $rom->romFile]) }}">
-                                    @method('GET')
-                                    @csrf
-                                    <x-jet-button type="submit">Download!</x-jet-button>
-                                </form>
+                                <x-rom-file.download :romFile="$rom->romFile"/>
                             </div>
                         @else
                             <span>No file yet!</span>
                         @endif
                     </td>
                     <td class="px-6 py-4">
-                        <x-jet-responsive-nav-link href="{{ route('roms.show', ['rom' => $rom]) }}">Get Info!</x-jet-responsive-nav-link>
+                        <x-jet-responsive-nav-link href="{{ route('roms.show', ['rom' => $rom]) }}">Get Info!
+                        </x-jet-responsive-nav-link>
                     </td>
                 </tr>
             @endforeach
