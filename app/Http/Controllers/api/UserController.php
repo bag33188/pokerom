@@ -32,7 +32,7 @@ class UserController extends ApiController
             'user' => $user,
             'token' => $bearerToken,
             'success' => true
-        ]);
+        ], 201);
     }
 
     public function login(LoginRequest $request)
@@ -94,7 +94,6 @@ class UserController extends ApiController
     {
         $user = User::findOrFail($userId);
         $this->authorize('delete', $user);
-        $this->userRepository->revokeApiTokens($user);
         $user->delete();
         return response()->json([
             'success' => true,

@@ -30,7 +30,7 @@ class GameController extends ApiController
      * Store a newly created resource in storage.
      *
      * @param StoreGameRequest $request
-     * @return GameResource
+     * @return JsonResponse
      */
     public function store(StoreGameRequest $request)
     {
@@ -38,7 +38,7 @@ class GameController extends ApiController
         $romId = request()->query('rom_id');
         $rom = Rom::findOrFail($romId);
         $game = $rom->game()->create($request->all());
-        return new GameResource($game->load('rom'));
+        return (new GameResource($game->load('rom')))->response()->setStatusCode(HttpStatus::HTTP_CREATED);;
     }
 
     /**

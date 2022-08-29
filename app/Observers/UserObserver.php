@@ -17,4 +17,11 @@ class UserObserver
             $this->userRepository->revokeApiTokens($user);
         }
     }
+
+    public function deleted(User $user): void
+    {
+        if (request()->is('api/*')) {
+            $this->userRepository->revokeApiTokens($user);
+        }
+    }
 }
