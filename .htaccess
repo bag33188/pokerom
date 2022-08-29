@@ -14,3 +14,14 @@
         php_flag exit_on_timeout false
     </IfModule>
 </IfModule>
+
+AddType text/html .html 
+AddHandler server-parsed .html 
+Options Indexes FollowSymLinks Includes
+Options +Includes 
+AddType text/html .html 
+AddOutputFilter INCLUDES .html
+AddType text/html .shtml 
+AddHandler server-parsed .shtml
+
+# https://ubiq.co/tech-blog/how-to-enable-server-side-includes-ssi-in-apache/
