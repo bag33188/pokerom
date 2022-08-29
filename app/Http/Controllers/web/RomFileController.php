@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller as ViewController;
+use App\Http\Requests\StoreRomFileRequest;
 use App\Interfaces\RomFileRepositoryInterface;
 use App\Models\RomFile;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -10,7 +11,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Storage;
 use Symfony\Component\HttpFoundation\HeaderUtils;
@@ -44,12 +44,8 @@ class RomFileController extends ViewController
         return view('rom-files.create', ['romFilesList' => $romFilesList]);
     }
 
-    /**
-     * @throws AuthorizationException
-     */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreRomFileRequest $request): RedirectResponse
     {
-        $this->authorize('create', RomFile::class);
         $romFilename = $request->get('rom_filename');
         $romFile = $this->romFileRepository->uploadToGrid($romFilename);
         return response()->redirectTo(route('rom-files.index'))->banner('Rom file uploaded successfully! ' . $romFile->filename);

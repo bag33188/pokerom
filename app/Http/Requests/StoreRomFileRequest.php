@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\RomFile;
 use App\Rules\RomFilenameRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreRomFileRequest extends FormRequest
 {
@@ -12,7 +13,7 @@ class StoreRomFileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'rom_filename' => ['required', 'string', new RomFilenameRule],
+            'rom_filename' => ['required', 'string', new RomFilenameRule, Rule::unique(RomFile::class, 'filename')],
         ];
     }
 
