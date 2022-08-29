@@ -1,8 +1,3 @@
-@php
-    function removeStoragePathFromFilename(string $value): string {
-        return str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $value);
-    }
-@endphp
 @push('styles')
     <!--suppress CssUnresolvedCustomProperty -->
     <style {!! 'type="text/css"'; !!}>
@@ -72,6 +67,11 @@
         handleUploadRomFileForm();
     </script>
 @endpush
+@php
+    function removeStoragePathFromFilename(string $value): string {
+        return str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $value);
+    }
+@endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Upload a ROM File</h2>
