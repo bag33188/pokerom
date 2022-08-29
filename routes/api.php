@@ -27,6 +27,7 @@ Route::name('api.')->group(function () {
         Route::get('/roms/{romId}', [RomController::class, 'show'])->name('roms.show');
         Route::post('/roms', [RomController::class, 'store'])->name('roms.store');
         Route::put('/roms/{romId}', [RomController::class, 'update'])->name('roms.update');
+        Route::patch('/roms/{romId}', [RomController::class, 'update'])->name('roms.edit');
         Route::delete('/roms/{romId}', [RomController::class, 'destroy'])->name('roms.destroy');
         Route::patch('/roms/{romId}/link-file', [RomController::class, 'linkRomToRomFile'])->name('roms.link');
 
@@ -35,6 +36,7 @@ Route::name('api.')->group(function () {
         Route::get('/games', [GameController::class, 'index'])->name('games.index');
         Route::get('/games/{gameId}', [GameController::class, 'show'])->name('games.show');
         Route::put('/games/{gameId}', [GameController::class, 'update'])->name('games.update');
+        Route::patch('/games/{gameId}', [GameController::class, 'update'])->name('games.edit');
         Route::post('/games', [GameController::class, 'store'])->name('games.store');
         Route::delete('/games/{gameId}', [GameController::class, 'destroy'])->name('games.destroy');
     });

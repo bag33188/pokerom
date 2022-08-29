@@ -19,6 +19,7 @@ class UpdateRomRequest extends FormRequest
     {
         parent::__construct();
     }
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -26,7 +27,7 @@ class UpdateRomRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $rom = Rom::find($this->route('rom'));
+        $rom = Rom::find($this->route('rom') ?: $this->route('romId'));
         return $this->user()->can('update', $rom);
     }
 
@@ -38,7 +39,7 @@ class UpdateRomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'rom_name' => [$this->requiredIfPutRequest, 'string', new MinLengthRule(MIN_ROM_NAME_LENGTH), new MaxLengthRule(MAX_ROM_NAME_LENGTH), new RomNameRule(), Rule::unique('roms', 'rom_name')->ignore($this->route('rom'))],
+            'rom_name' => [$this->requiredIfPutRequest, 'string', new MinLengthRule(MIN_ROM_NAME_LENGTH), new MaxLengthRule(MAX_ROM_NAME_LENGTH), new RomNameRule(), Rule::unique('roms', 'rom_name')->ignore($this->route('rom'))->ignore($this->route('romId'))],
             'rom_size' => [$this->requiredIfPutRequest, 'integer', new MinSizeRule(MIN_ROM_SIZE), new MaxSizeRule(MAX_ROM_SIZE)],
             'rom_type' => [$this->requiredIfPutRequest, 'string', new MinLengthRule(MIN_ROM_TYPE_LENGTH), new MaxLengthRule(MAX_ROM_TYPE_LENGTH), new RomTypeRule()],
         ];
