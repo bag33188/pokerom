@@ -46,19 +46,7 @@ class RomController extends ViewController
     public function create()
     {
         return view('roms.create', [
-            'romTypes' => ROM_TYPES,
-            'formSelectClasses' => [
-                'border-gray-300',
-                'focus:border-indigo-300',
-                'focus:ring',
-                'focus:ring-indigo-200',
-                'focus:ring-opacity-50',
-                'rounded-md',
-                'shadow-sm',
-                'block',
-                'mt-1',
-                'w-full'
-            ]
+            'romTypes' => ROM_TYPES
         ]);
     }
 

@@ -21,13 +21,13 @@
             </div>
             <div class="mt-2.5">
                 <label class="block font-medium text-sm text-gray-700" for="romType">ROM Type</label>
-                <select @class($formSelectClasses) name="rom_type" id="romType" required autofocus>
+                <x-form-select name="rom_type" id="romType" required autofocus>
                     @foreach($romTypes as $index => $romType)
                         <option
                             value="{{ $romType }}"
                             @selected(strtolower(old('rom_type', $romTypes[0])) == $romType)>{{ strtoupper($romType) }}</option>
                     @endforeach
-                </select>
+                </x-form-select>
             </div>
             <div class="mt-2.5">
                 <x-jet-label for="romSize" value="ROM Size"/>

@@ -1,17 +1,4 @@
 @php
-    $formSelectClasses = [
-        'border-gray-300',
-        'focus:border-indigo-300',
-        'focus:ring',
-        'focus:ring-indigo-200',
-        'focus:ring-opacity-50',
-        'rounded-md',
-        'shadow-sm',
-        'block',
-        'mt-1',
-        'w-full'
-    ];
-
     function removeStoragePathFromFilename(string $value): string {
         return str_replace(ROM_FILES_DIRNAME . '/', '', $value);
     }
@@ -93,12 +80,12 @@
                     @method('POST')
                     <div class="flex flex-col">
                         <label class="block font-medium text-sm text-gray-700" for="romFile">Select ROM File</label>
-                        <select @class($formSelectClasses) name="rom_filename" id="romFile">
+                        <x-form-select name="rom_filename" id="romFile">
                             @for($i = 0; $i < count($romFilesList); $i++)
                                 @php $romFileItem = removeStoragePathFromFilename($romFilesList[$i]); @endphp
                                 <option value="{{ $romFileItem }}">{{ $romFileItem }}</option>
                             @endfor
-                        </select>
+                        </x-form-select>
                     </div>
                     <div class="my-4">
                         @include("ui.punch-button", ['btn_name' => 'submit-romFile-btn'])

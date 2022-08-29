@@ -1,17 +1,3 @@
-@php
-    $formSelectClasses = [
-        'border-gray-300',
-        'focus:border-indigo-300',
-        'focus:ring',
-        'focus:ring-indigo-200',
-        'focus:ring-opacity-50',
-        'rounded-md',
-        'shadow-sm',
-        'block',
-        'mt-1',
-        'w-full'
-    ];
-@endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">
@@ -35,14 +21,14 @@
             </div>
             <div class="mt-2.5">
                 <label class="block font-medium text-sm text-gray-700" for="romType">ROM Type</label>
-                <select @class($formSelectClasses) name="rom_type" id="romType" required autofocus>
+                <x-form-select name="rom_type" id="romType" required autofocus>
                     @foreach($romTypes as $index => $romType)
                         <option
                             value="{{ $romType }}"
                             @selected(strtolower($rom->rom_type) == $romType)
                         >{{ strtoupper($romType) }}</option>
                     @endforeach
-                </select>
+                </x-form-select>
             </div>
             <div class="mt-2.5">
                 <x-jet-label for="romSize" value="ROM Size"/>
@@ -58,7 +44,8 @@
             </div>
             <div class="mt-4 flex flex-row justify-between">
                 <x-jet-button type="submit">Update!</x-jet-button>
-                <x-jet-responsive-nav-link href="{{ route('roms.show', ['rom' => $rom]) }}">Cancel</x-jet-responsive-nav-link>
+                <x-jet-responsive-nav-link href="{{ route('roms.show', ['rom' => $rom]) }}">Cancel
+                </x-jet-responsive-nav-link>
             </div>
         </form>
     </div>
