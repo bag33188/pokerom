@@ -3,12 +3,17 @@
 namespace App\Queries;
 
 use App\Interfaces\GameQueriesInterface;
+use App\Models\Game;
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class GameQueries implements GameQueriesInterface
 {
+    public function __construct(private readonly Game $game)
+    {
+    }
+
     public function formatGameTypeSQL(string $game_type): string
     {
         $sql = /** @lang MariaDB */
