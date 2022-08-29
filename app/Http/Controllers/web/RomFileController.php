@@ -10,6 +10,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Storage;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
@@ -30,6 +31,7 @@ class RomFileController extends Controller
      */
     public function index()
     {
+        Gate::authorize('view-rom-files');
         return view('rom-files.index', [
             'romFiles' => RomFile::all(),
         ]);
