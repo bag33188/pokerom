@@ -1,6 +1,6 @@
 <form {{ $attributes->merge(['class' => 'inline']) }} method="GET"
       action="{{ route('rom-files.download', ['romFile' => $romFile]) }}"
-      name="download-romFile-{{ $romFile->_id }}{{-- -form --}}"
+      name="download-romFile-{{ $romFile->_id }}-form"
       enctype="multipart/form-data">
     @method('GET')
     @csrf
