@@ -1,4 +1,4 @@
-@push('styles')
+@pushOnce('styles')
     <style {!! 'type="text/css"' !!}>
         :root {
             --borderline-black: #111111;
@@ -107,5 +107,5 @@
         }
 
     </style>
-@endpush
+@endPushOnce
 <button class="punch" type="submit" data-name="{{ $btn_name }}">Upload!</button>

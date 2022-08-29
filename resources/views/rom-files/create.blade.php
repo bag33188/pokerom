@@ -13,12 +13,11 @@
             pointer-events: none;
         }
 
-        .bg-html-white-smoke {
-            background-color: #F5F5F5;
-        }
-
-        .border-crimson-solid {
-            border: 2px solid #DC143C !important;
+        .disabled-form-select {
+            --disabled-outline: #CCC;
+            --disabled-background: #EDEDED;
+            border: 2px solid var(--disabled-outline) !important;
+            background-color: var(--disabled-background);
         }
     </style>
 @endpush
@@ -42,8 +41,7 @@
 
             let romFilenameDisabledClasses = [
                 "no-pointer-events",
-                "bg-html-white-smoke",
-                "border-crimson-solid"
+                'disabled-form-select'
             ];
 
             // IMPORTANT!!!
