@@ -30,7 +30,8 @@ class RomFileController extends ApiController
     public function index()
     {
         Gate::authorize('viewAny-romFile');
-        return new RomFileCollection(RomFile::all());
+        $romFiles = RomFile::all();
+        return new RomFileCollection($romFiles);
     }
 
     /**

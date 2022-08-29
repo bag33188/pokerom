@@ -23,7 +23,8 @@ class GameController extends ApiController
      */
     public function index()
     {
-        return new GameCollection(Game::all());
+        $games = Game::all();
+        return new GameCollection($games);
     }
 
     /**
@@ -49,7 +50,8 @@ class GameController extends ApiController
      */
     public function show(int $gameId)
     {
-        return new GameResource(Game::findOrFail($gameId));
+        $game = Game::findOrFail($gameId);
+        return new GameResource($game);
     }
 
     /**
