@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\api\RomController;
 use App\Http\Controllers\api\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,15 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::name('api.')->group(function () {
-    Route::post('/auth/login', [UserController::class, 'login'])->name('user.login');
+    Route::post('/auth/login', [UserController::class, 'login'])->name('auth.login');
 
     Route::middleware('auth:sanctum')->group(function () {
-        Route::post('/auth/logout', [UserController::class, 'logout'])->name('user.logout');
+        Route::get('/auth/me', [UserController::class, 'me'])->name('auth.me');
+        Route::post('/auth/logout', [UserController::class, 'logout'])->name('auth.logout');
 
         Route::get('/roms', [RomController::class, 'index'])->name('roms.index');
         Route::get('/roms/{romId}/show', [RomController::class, 'show'])->name('roms.show');

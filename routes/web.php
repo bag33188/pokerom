@@ -36,7 +36,7 @@ Route::middleware([
     Route::delete('/roms/{rom}', [RomController::class, 'destroy'])->name('roms.destroy');
 
     Route::get('/rom-files', [RomFileController::class, 'index'])->name('rom-files.index');
-    Route::get('/rom-files/create', [RomFileController::class, 'create'])->name('rom-files.create');
+    Route::get('/rom-files/create', [RomFileController::class, 'create'])->name('rom-files.create')->middleware('admin');;
     Route::post('/rom-files/store', [RomFileController::class, 'store'])->name('rom-files.store');
     Route::get('/rom-files/{romFile}/download', [RomFileController::class, 'download'])->name('rom-files.download');
     Route::delete('/rom-files/{romFile}', [RomFileController::class, 'destroy'])->name('rom-files.destroy');

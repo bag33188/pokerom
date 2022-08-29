@@ -16,6 +16,11 @@ class UserController extends ApiController
     {
     }
 
+    public function me(Request $request)
+    {
+        return $request->user();
+    }
+
     public function login(LoginRequest $request)
     {
         $user = User::where('email', $request->json('email'))->firstOrFail();
