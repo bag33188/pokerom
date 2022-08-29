@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller as ApiController;
+use App\Models\Game;
 use Illuminate\Http\Request;
 
 class GameController extends ApiController
@@ -20,7 +21,7 @@ class GameController extends ApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -31,10 +32,10 @@ class GameController extends ApiController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Game $game
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($game)
     {
         //
     }
@@ -42,11 +43,11 @@ class GameController extends ApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param Game $game
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $game)
     {
         //
     }
@@ -54,10 +55,10 @@ class GameController extends ApiController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param Game $game
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($game)
     {
         //
     }
