@@ -101,7 +101,7 @@
                         </select>
                     </div>
                     <div class="my-4">
-                        <button class="punch" type="submit" data-name="submit-romFile-btn">Upload!</button>
+                        @include("ui.punch-button", ['btn_name' => 'submit-romFile-btn'])
                     </div>
                 </form>
             </div>
