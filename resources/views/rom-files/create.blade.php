@@ -12,7 +12,7 @@
         'w-full'
     ];
 
-    function removeRomFilesStoragePathFromFilename(string $value): string {
+    function removeStoragePathFromFilename(string $value): string {
         return str_replace(ROM_FILES_DIRNAME . '/', '', $value);
     }
 @endphp
@@ -95,7 +95,7 @@
                         <label class="block font-medium text-sm text-gray-700" for="romFile">Select ROM File</label>
                         <select @class($formSelectClasses) name="rom_filename" id="romFile">
                             @for($i = 0; $i < count($romFilesList); $i++)
-                                @php $romFileItem = removeRomFilesStoragePathFromFilename($romFilesList[$i]); @endphp
+                                @php $romFileItem = removeStoragePathFromFilename($romFilesList[$i]); @endphp
                                 <option value="{{ $romFileItem }}">{{ $romFileItem }}</option>
                             @endfor
                         </select>
