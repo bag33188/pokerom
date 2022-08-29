@@ -29,6 +29,7 @@
         .bg-html-white-smoke {
             background-color: #F5F5F5;
         }
+
         .border-crimson-solid {
             border: 2px solid #DC143C !important;
         }
@@ -57,6 +58,8 @@
                 "bg-html-white-smoke",
                 "border-crimson-solid"
             ];
+
+            // IMPORTANT!!!
             // cannot set disabled attribute on select element since it will nullify the data being sent to the server
             // bad: romFilenameField.disabled = true;
 
