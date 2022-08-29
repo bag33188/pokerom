@@ -51,12 +51,12 @@ class RomController extends ApiController
         AttemptRomLinkToRomFile::dispatchUnless($rom->has_file === TRUE, $rom);
         if ($rom->has_file === TRUE) {
             return Response::json([
-                'message' => "file found and linked! file id: " . $rom->romFile->_id,
-                'data' => $rom,
+                'message' => "ROM File found and linked! file id: " . $rom->romFile->_id,
+                'data' => $rom, // <== loads rom file too
                 'success' => true
             ], HttpStatus::HTTP_OK);
         } else return Response::json([
-            'message' => "File not found with name of {$rom->getRomFileName()}",
+            'message' => "ROM File not found with name of {$rom->getRomFileName()}",
             'success' => false
         ], HttpStatus::HTTP_NOT_FOUND);
     }
