@@ -42,7 +42,7 @@
                              required autofocus/>
             </div>
             <div class="mt-4">
-                <x-jet-button>Save!</x-jet-button>
+                <x-jet-button type="submit">Save!</x-jet-button>
             </div>
         </form>
     </div>

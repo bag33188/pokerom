@@ -22,13 +22,18 @@
             @endif
         </ul>
         @if(auth()->user()->isAdmin())
-            <div class="mt-3">
-                <form method="POST" action="{{ route('roms.destroy', ['rom' => $rom]) }}">
-                    @method('DELETE')
-                    @csrf
+            <div class="flex flex-row justify-between">
+                <div class="mt-3">
+                    <form method="POST" action="{{ route('roms.destroy', ['rom' => $rom]) }}">
+                        @method('DELETE')
+                        @csrf
 
-                    <x-jet-danger-button type="submit">Delete!</x-jet-danger-button>
-                </form>
+                        <x-jet-danger-button type="submit">Delete!</x-jet-danger-button>
+                    </form>
+                </div>
+                <div class="mt-3">
+                    <x-jet-responsive-nav-link href="{{ route('roms.edit', ['rom' => $rom]) }}">Edit!</x-jet-responsive-nav-link>
+                </div>
             </div>
         @endif
     </div>

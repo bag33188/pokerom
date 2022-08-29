@@ -42,7 +42,7 @@
                             <span>No file yet!</span>
                         @endif
                     </td>
-                    <td class="px-6 py-4"><a href="{{ route('roms.show', ['rom' => $rom]) }}">Get Info!</a></td>
+                    <td class="px-6 py-4"><x-jet-responsive-nav-link href="{{ route('roms.show', ['rom' => $rom]) }}">Get Info!</x-jet-responsive-nav-link></td>
                 </tr>
             @endforeach
             </tbody>

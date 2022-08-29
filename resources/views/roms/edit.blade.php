@@ -42,8 +42,9 @@
                              max="{{ MAX_ROM_SIZE }}"
                              required autofocus/>
             </div>
-            <div class="mt-4">
-                <x-jet-button>Update!</x-jet-button>
+            <div class="mt-4 flex flex-row justify-between">
+                <x-jet-button type="submit">Update!</x-jet-button>
+                <x-jet-responsive-nav-link href="{{ route('roms.show', ['rom' => $rom]) }}">Cancel</x-jet-responsive-nav-link>
             </div>
         </form>
     </div>
