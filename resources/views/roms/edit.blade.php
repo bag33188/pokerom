@@ -1,3 +1,17 @@
+@php
+    $formSelectClasses = [
+        'border-gray-300',
+        'focus:border-indigo-300',
+        'focus:ring',
+        'focus:ring-indigo-200',
+        'focus:ring-opacity-50',
+        'rounded-md',
+        'shadow-sm',
+        'block',
+        'mt-1',
+        'w-full'
+    ];
+@endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">
