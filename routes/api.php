@@ -48,6 +48,7 @@ Route::name('api.')->group(function () {
         Route::delete('/games/{gameId}', [GameController::class, 'destroy'])->name('games.destroy');
 
         Route::get('/rom-files', [RomFileController::class, 'index'])->name('rom-files.index');
+        Route::post('/rom-files/upload', [RomFileController::class, 'upload'])->name('rom-files.upload');
         Route::get('/rom-files/{romFileId}', [RomFileController::class, 'show'])->name('rom-files.show');
         Route::delete('/rom-files/{romFileId}', [RomFileController::class, 'destroy'])->name('rom-files.destroy');
         Route::get('/rom-files/{romFileId}/download', [RomFileController::class, 'download'])->name('rom-files.download');

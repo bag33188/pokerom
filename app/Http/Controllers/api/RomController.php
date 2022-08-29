@@ -48,11 +48,11 @@ class RomController extends ApiController
     {
         $rom = Rom::findOrFail($romId);
         $this->authorize('update', $rom);
-        AttemptRomLinkToRomFile::dispatchUnless($rom->has_file === TRUE, $rom);
+        AttemptRomLinkToRomFile::dispatchUnless($rom->has_file === TRUE, $rom); // <== auto refreshes rom resource
         if ($rom->has_file === TRUE) {
             return Response::json([
                 'message' => "ROM File found and linked! file id: " . $rom->romFile->_id,
-                'data' => $rom, // <== loads rom file too
+                'data' => $rom->load('romFile'),
                 'success' => true
             ], HttpStatus::HTTP_OK);
         } else return Response::json([

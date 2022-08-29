@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller as ApiController;
+use App\Http\Requests\StoreRomFileRequest;
 use App\Http\Resources\RomFileCollection;
 use App\Http\Resources\RomFileResource;
 use App\Interfaces\RomFileRepositoryInterface;
@@ -15,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class RomFileController extends Controller
+class RomFileController extends ApiController
 {
     public function __construct(private readonly RomFileRepositoryInterface $romFileRepository)
     {
@@ -30,6 +31,19 @@ class RomFileController extends Controller
     {
         Gate::authorize('viewAny-romFile');
         return new RomFileCollection(RomFile::all());
+    }
+
+    /**
+     * @throws AuthorizationException
+     */
+    public function upload(StoreRomFileRequest $request)
+    {
+        $this->authorize('create', RomFile::class);
+        $romFileUpload = $this->romFileRepository->uploadToGrid($request->json('rom_filename'));
+        return response()->json([
+            'message' => 'Rom file uploaded successfully!',
+            'rom_file' => $romFileUpload,
+        ], HttpStatus::HTTP_CREATED);
     }
 
     public function download(string $romFileId): StreamedResponse

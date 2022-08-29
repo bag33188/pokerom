@@ -12,6 +12,7 @@ use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response as HttpStatus;
 
 class UserController extends ApiController
 {
@@ -36,13 +37,12 @@ class UserController extends ApiController
     public function register(RegisterUserRequest $request)
     {
         $user = User::create($request->all());
-        $bearerToken = $this->userRepository->generateApiToken($user);
 
         return response()->json([
             'user' => $user,
-            'token' => $bearerToken,
-            'success' => true
-        ], 201);
+            'success' => true,
+            'message' => 'You have successfully registered! Now you can login.'
+        ], HttpStatus::HTTP_CREATED);
     }
 
     public function login(LoginUserRequest $request)

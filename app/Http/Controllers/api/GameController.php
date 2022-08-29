@@ -90,8 +90,8 @@ class GameController extends ApiController
             message: 'Error: No ROM ID was sent.',
             code: HttpStatus::HTTP_BAD_REQUEST,
             headers: [
-                'X-Request-Requirement' => 'A game resource MUST be constrained to a ROM resource in the database.',
-                'X-Request-Required-Action' => 'Add query parameter `romId` to request URI.'
+                'X-Http-Request-Requirement' => 'A game resource MUST be constrained to a ROM resource in the database.',
+                'X-Http-Request-Required-Action' => 'Add query parameter `rom_id` to request URI.'
             ]
         );
     }
