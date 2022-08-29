@@ -17,13 +17,13 @@
     @endpush
 @endonce
 @php
-    $deleteBtnId = sprintf("delete-romFile-btn-%s", $romFile->id);
+    $deleteRomFileBtnId = sprintf("delete-romFile-%s-btn", $romFile->_id);
 @endphp
 <form {{ $attributes->merge(['class' => 'inline']) }} method="POST"
       action="{{ route('rom-files.destroy', ['romFile' => $romFile]) }}"
-      onsubmit="disableDeleteBtn({{ Js::from($deleteBtnId) }})">
+      onsubmit="disableDeleteBtn({{ Js::from($deleteRomFileBtnId) }})">
     @method('DELETE')
     @csrf
 
-    <x-jet-danger-button type="submit" id="{{ $deleteBtnId }}">DELETE</x-jet-danger-button>
+    <x-jet-danger-button type="submit" id="{{ $deleteRomFileBtnId }}">DELETE</x-jet-danger-button>
 </form>
