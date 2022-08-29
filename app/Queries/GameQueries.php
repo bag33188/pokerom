@@ -10,8 +10,11 @@ use Illuminate\Support\Facades\DB;
 
 class GameQueries implements GameQueriesInterface
 {
-    public function __construct(private readonly Game $game)
+    private readonly Game $game;
+
+    public function __construct(Game $game)
     {
+        $this->game = $game;
     }
 
     public function formatGameTypeSQL(string $game_type): string
