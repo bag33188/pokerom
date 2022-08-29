@@ -5,13 +5,13 @@
             @method('GET')
             @csrf
 
-            <button type="submit">download!</button>
+            <x-jet-button type="submit">download!</x-jet-button>
         </form>
         <form method="POST" action="{{route('rom-files.destroy', ['romFile' => $romFile])}}">
             @method('DELETE')
             @csrf
 
-            <button type="submit">delete!</button>
+            <x-jet-danger-button type="submit">DELETE!</x-jet-danger-button>
         </form>
     @endforeach
 </x-app-layout>
