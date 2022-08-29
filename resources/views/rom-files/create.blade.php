@@ -79,7 +79,7 @@
                     @csrf
                     @method('POST')
                     <div class="flex flex-col">
-                        <label class="block font-medium text-sm text-gray-700" for="romFile">Select ROM File</label>
+                        <x-form-select-label selectFieldId="romFile" text="Select ROM File"/>
                         <x-form-select name="rom_filename" id="romFile">
                             @for($i = 0; $i < count($romFilesList); $i++)
                                 @php $romFileItem = removeStoragePathFromFilename($romFilesList[$i]); @endphp
