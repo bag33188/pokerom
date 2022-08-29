@@ -44,7 +44,8 @@
             </div>
             <div class="mt-4 flex flex-row justify-between">
                 <x-jet-button type="submit">Update!</x-jet-button>
-                <x-jet-responsive-nav-link href="{{ route('roms.show', ['rom' => $rom]) }}">Cancel
+                <x-jet-responsive-nav-link href="{{ route('roms.show', ['rom' => $rom]) }}">
+                    Cancel
                 </x-jet-responsive-nav-link>
             </div>
         </form>
