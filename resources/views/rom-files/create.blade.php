@@ -14,10 +14,17 @@
         }
 
         .disabled-form-select {
-            --disabled-outline: #CCC;
-            --disabled-background: #EDEDED;
-            border: 2px solid var(--disabled-outline) !important;
-            background-color: var(--disabled-background) !important;
+            --disabled-outline-color: #CCC;
+            --disabled-background-color: #EDEDED;
+            border: 2px solid var(--disabled-outline-color) !important;
+            background-color: var(--disabled-background-color) !important;
+        }
+
+        .inset-box-shadow {
+            --disabled-shadow-color: rgb(211, 211, 211);
+            -moz-box-shadow: inset 0 0 6px var(--disabled-shadow-color) !important;
+            -webkit-box-shadow: inset 0 0 6px var(--disabled-shadow-color) !important;
+            box-shadow: inset 0 0 6px var(--disabled-shadow-color) !important;
         }
     </style>
 @endpush
@@ -41,7 +48,8 @@
 
             let romFilenameDisabledClasses = [
                 "no-pointer-events",
-                'disabled-form-select'
+                'disabled-form-select',
+                "inset-box-shadow"
             ];
 
             // IMPORTANT!!!
