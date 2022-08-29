@@ -13,7 +13,7 @@
         <!--#echo var="DATE_LOCAL" -->
         <div>
             <ul>
-                <!--#include virtual="links.inc.html" -->
+                <!--#include virtual="links.inc.php" -->
             </ul>
         </div>
     </body>
