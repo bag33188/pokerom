@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use GridFS\Client\AbstractGridFSDatabase;
+use GridFS\Client\AbstractGridFSDatabase as GridFSDatabase;
 
-class RomFilesDatabase extends AbstractGridFSDatabase
+class RomFilesDatabase extends GridFSDatabase
 {
     protected string $databaseName = 'pokerom_files';
     protected string $bucketName = 'rom';

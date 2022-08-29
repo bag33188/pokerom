@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use GridFS\Client\AbstractGridFSConnection;
+use GridFS\Client\AbstractGridFSConnection as GridFSConnection;
 
-class RomFilesConnection extends AbstractGridFSConnection
+class RomFilesConnection extends GridFSConnection
 {
     protected string $connectionName = 'PokeROM Files GridFS Connection';
 
