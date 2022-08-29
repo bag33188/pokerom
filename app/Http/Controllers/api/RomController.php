@@ -49,7 +49,6 @@ class RomController extends ApiController
         $rom = Rom::findOrFail($romId);
         $this->authorize('update', $rom);
         AttemptRomLinkToRomFile::dispatchUnless($rom->has_file === TRUE, $rom);
-        $rom->refresh();
         if ($rom->has_file === TRUE) {
             return Response::json([
                 'message' => "file found and linked! file id: " . $rom->romFile->_id,

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\GameController;
 use App\Http\Controllers\api\RomController;
+use App\Http\Controllers\api\RomFileController;
 use App\Http\Controllers\api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,11 @@ Route::name('api.')->group(function () {
         Route::patch('/games/{gameId}', [GameController::class, 'update'])->name('games.edit');
         Route::post('/games', [GameController::class, 'store'])->name('games.store');
         Route::delete('/games/{gameId}', [GameController::class, 'destroy'])->name('games.destroy');
+
+        Route::get('/rom-files', [RomFileController::class, 'index'])->name('rom-files.index');
+        Route::get('/rom-files/{romFileId}', [RomFileController::class, 'show'])->name('rom-files.show');
+        Route::delete('/rom-files/{romFileId}', [RomFileController::class, 'destroy'])->name('rom-files.destroy');
+        Route::get('/rom-files/{romFileId}/download', [RomFileController::class, 'download'])->name('rom-files.download');
     });
 
 });
