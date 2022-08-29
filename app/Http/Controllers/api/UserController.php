@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller as ApiController;
-use App\Http\Requests\LoginRequest;
+use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
@@ -45,7 +45,7 @@ class UserController extends ApiController
         ], 201);
     }
 
-    public function login(LoginRequest $request)
+    public function login(LoginUserRequest $request)
     {
         $user = User::where('email', $request->json('email'))->firstOrFail();
         if ($user->checkPassword($request->json('password'))) {

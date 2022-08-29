@@ -6,7 +6,7 @@ use App\Rules\MaxLengthRule;
 use App\Rules\MinLengthRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class LoginUserRequest extends FormRequest
 {
     public function rules(): array
     {
