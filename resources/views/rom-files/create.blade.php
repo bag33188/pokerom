@@ -17,7 +17,7 @@
             --disabled-outline: #CCC;
             --disabled-background: #EDEDED;
             border: 2px solid var(--disabled-outline) !important;
-            background-color: var(--disabled-background);
+            background-color: var(--disabled-background) !important;
         }
     </style>
 @endpush
