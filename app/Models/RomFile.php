@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
 use MongoDB\BSON\ObjectId;
-use DateTimeInterface;
 use Utils\Classes\AbstractGridFSModel as GridFSModel;
 
 /** @mixin GridFSModel */
@@ -36,7 +36,7 @@ class RomFile extends MongoDbModel
 
     public function calculateRomSizeFromLength(): int
     {
-        return (int)ceil($this->attributes['length'] / DATA_BYTE_FACTOR);
+        return (int)ceil($this->attributes['length'] / 0x400 /* 1024 */);
     }
 
     protected function serializeDate(DateTimeInterface $date): string

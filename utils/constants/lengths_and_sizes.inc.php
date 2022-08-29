@@ -1,10 +1,10 @@
 <?php
 
 /*
- * Validation Length Values
+ * Validation Length/Size Values
  */
 
-// Validation //
+// LENGTHS //
 
 const MAX_GAME_NAME_LENGTH = 40;
 const MIN_GAME_NAME_LENGTH = 7;
@@ -27,9 +27,17 @@ const MIN_USER_EMAIL_LENGTH = NULL;
 const MAX_USER_PASSWORD_LENGTH = 50;
 const MIN_USER_PASSWORD_LENGTH = 8;
 
-
 const MIN_ROM_FILENAME_LENGTH = 3; // includes filename and extension
 const MAX_ROM_FILENAME_LENGTH = 32; // includes filename and extension
+
+// SIZES //
+
+/** Unit: _`KB/1024`_, value: **`17` Gibibytes** */
+const MAX_ROM_SIZE = 17825792;
+const MIN_ROM_SIZE = 1020;
+
+const MAX_GAME_GENERATION_VALUE = 9;
+const MIN_GAME_GENERATION_VALUE = 0;
 
 
 // Database //

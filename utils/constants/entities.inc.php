@@ -10,5 +10,10 @@ const ROM_FILES_DIRNAME = 'rom_files';
 const API_TOKEN_KEY = 'auth_token';
 /** concat: Pok, &eacute; ... output: Pok&eacute; */
 const POKE_EACUTE = "Pok" . _EACUTE;
-/** `1024` @var int */
-const DATA_BYTE_FACTOR = 0b010000000000; // 1024
+
+
+/** the special _**&eacute;**_ character in the Pokemon logo */
+const _EACUTE = "\u{00E9}";
+/** Unicode's entity for a space char */
+const _SPACE = "\u{0020}";
+

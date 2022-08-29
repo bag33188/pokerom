@@ -27,7 +27,7 @@ class FileUploader
      * @param string $filename
      * @param int $fileBufferSize
      */
-    public function __construct($fileStream, string $filename, int $fileBufferSize = 0x3FC00)
+    public function __construct($fileStream, string $filename, int $fileBufferSize = 0b00111111110000000000)
     {
         $this->fileStream = $fileStream;
         $this->fileHandle = self::openFileForBinaryReading($filename);
