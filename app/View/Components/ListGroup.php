@@ -24,7 +24,10 @@ class ListGroup extends Component
     public function render()
     {
         return /** @lang InjectablePHP */ <<<'blade'
-            <ul {{ $attributes->merge(['class' => "bg-white rounded-lg border border-gray-200 text-gray-900"]) }}>
+            @php
+                $listGroupClasses = ['bg-white', 'rounded-lg', 'border', 'border-gray-200', 'text-gray-900'];
+            @endphp
+            <ul {{ $attributes->merge(['class' => joinCssClasses($listGroupClasses)]) }}>
                 {{$slot}}
             </ul>
         blade;
