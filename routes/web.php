@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\web\GameController;
+use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\web\RomController;
 use App\Http\Controllers\web\RomFileController;
 use Illuminate\Support\Facades\Route;
@@ -25,9 +26,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', HomeController::class)->name('dashboard');
     Route::get('/roms', [RomController::class, 'index'])->name('roms.index');
     Route::get('/roms/{rom}/show', [RomController::class, 'show'])->name('roms.show');
     Route::get('/roms/create', [RomController::class, 'create'])->name('roms.create')->middleware('admin');
