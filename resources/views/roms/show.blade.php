@@ -4,10 +4,10 @@
     </x-slot>
     <div class="py-12 px-10">
         <ul class="bg-white rounded-lg border border-gray-200 text-gray-900">
-            <li class="px-6 py-2 border-b border-gray-200 w-full">Rom ID: {{ $rom->id }}</li>
-            <li class="px-6 py-2 border-b border-gray-200 w-full">Rom Name: {{ $rom->rom_name }}</li>
-            <li class="px-6 py-2 border-b border-gray-200 w-full">Rom Size: {{ $formatRomSize($rom->rom_size) }}</li>
-            <li class="px-6 py-2 border-b border-gray-200 w-full">Rom Type: {{ $rom->rom_type }}</li>
+            <li class="px-6 py-2 border-b border-gray-200 w-full">ROM ID: {{ $rom->id }}</li>
+            <li class="px-6 py-2 border-b border-gray-200 w-full">ROM Name: {{ $rom->rom_name }}</li>
+            <li class="px-6 py-2 border-b border-gray-200 w-full">ROM Size: {{ $formatRomSize($rom->rom_size) }}</li>
+            <li class="px-6 py-2 border-b border-gray-200 w-full">ROM Type: {{ $rom->rom_type }}</li>
             @if($rom->has_game)
                 <li class="px-6 py-2 border-b border-gray-200 w-full">Game ID: {{ $rom->game->id }}</li>
                 <li class="px-6 py-2 border-b border-gray-200 w-full">Game Name: {{ $rom->game->game_name }}</li>
