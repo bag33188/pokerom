@@ -20,10 +20,25 @@
                 </x-list-item>
             @endif
             @if($rom->has_file)
+                @php
+                    function determineConsole(\App\Models\RomFile $romFile): string {
+                        $fileType = $romFile->getRomFileType(includeFullStop: false);
+                        return match (strtoupper($fileType)) {
+                            'GB' => 'Gameboy',
+                            'GBC' => 'Gameboy Color',
+                            'GBA' => 'Gameboy Advance',
+                            'NDS' => 'Nintendo DS',
+                            '3DS' => 'Nintendo 3DS',
+                            'XCI' => 'Nintendo Switch',
+                            default => 'Unknown',
+                        };
+                    }
+                @endphp
                 <x-list-item><p class="mt-1.5 inline-block">File Info</p>
                     <x-list-group class="border-0 py-2">
                         <x-list-item class="border-0">File ID: {{ $rom->romFile->_id }}</x-list-item>
                         <x-list-item>File Name: {{ $rom->romFile->filename }}</x-list-item>
+                        <x-list-item>Designated Console: {{ determineConsole($rom->romFile) }}</x-list-item>
                         <x-list-item>File Length: {{ $rom->romFile->length }} Bytes</x-list-item>
                         <x-list-item class="border-0">MD5 Hash: {{ $rom->romFile->md5 }}</x-list-item>
                     </x-list-group>
