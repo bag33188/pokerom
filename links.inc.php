@@ -42,5 +42,6 @@ $anchors = array(
 );
 ?>
 <?php foreach ($anchors as $anchor): ?>
-    <li><a href="<?= $anchor['href']; ?>"><?= $anchor['text']; ?></a></li>
+    <?php $anchor = (object)$anchor; ?>
+    <li><a href="<?= $anchor->href; ?>"><?= $anchor->text; ?></a></li>
 <?php endforeach; ?>
