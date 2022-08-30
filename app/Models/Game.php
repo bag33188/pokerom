@@ -24,7 +24,7 @@ class Game extends Model
         'date_released',
         'region',
     ];
-    protected $casts = ['date_released' => 'date:Y-m-d'];
+    protected $casts = ['date_released' => 'date'/*:Y-m-d*/];
 
     public function rom(): BelongsTo
     {
@@ -56,20 +56,5 @@ class Game extends Model
         return Attribute::make(
             get: fn($value) => str_capitalize($value, true, '-', 2), set: fn($value) => strtolower($value)
         );
-    }
-
-    public function setRegionAttribute(string $value): void
-    {
-        $this->attributes['region'] = strtolower($value);
-    }
-
-    public function setGameNameAttribute(string $value): void
-    {
-        $this->attributes['game_name'] = preg_replace("/^(pok[\x{65}\x{45}\x{E9}\x{C9}]mon)/ui", 'Pokemon', $value);
-    }
-
-    public function setGameTypeAttribute(string $value): void
-    {
-        $this->attributes['game_type'] = strtolower($value);
     }
 }

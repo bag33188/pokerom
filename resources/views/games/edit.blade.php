@@ -62,7 +62,7 @@
                     </x-jet-button>
                 </div>
                 <div class="float-right">
-                    <x-anchor-button type="secondary" href="{{ route('games.index') }}">
+                    <x-anchor-button type="secondary" href="{{ route('games.show', ['game' => $game]) }}">
                         Cancel
                     </x-anchor-button>
                 </div>
