@@ -36,15 +36,15 @@ Route::middleware([
     Route::delete('/roms/{rom}', [RomController::class, 'destroy'])->name('roms.destroy');
 
     Route::get('/rom-files', [RomFileController::class, 'index'])->name('rom-files.index');
-    Route::get('/rom-files/create', [RomFileController::class, 'create'])->name('rom-files.create')->middleware('admin');;
+    Route::get('/rom-files/create', [RomFileController::class, 'create'])->name('rom-files.create')->middleware('admin');
     Route::post('/rom-files/store', [RomFileController::class, 'store'])->name('rom-files.store');
     Route::get('/rom-files/{romFile}/download', [RomFileController::class, 'download'])->name('rom-files.download');
     Route::delete('/rom-files/{romFile}', [RomFileController::class, 'destroy'])->name('rom-files.destroy');
 
     Route::get('/games', [GameController::class, 'index'])->name('games.index');
     Route::get('/games/{game}/show', [GameController::class, 'show'])->name('games.show');
-    Route::get('/games/create', [GameController::class, 'create'])->name('games.create');
-    Route::get('/games/{game}/edit', [GameController::class, 'edit'])->name('games.edit');
+    Route::get('/games/create', [GameController::class, 'create'])->name('games.create')->middleware('admin');
+    Route::get('/games/{game}/edit', [GameController::class, 'edit'])->name('games.edit')->middleware('admin');
     Route::post('/games/store', [GameController::class, 'store'])->name('games.store');
     Route::put('/games/{game}', [GameController::class, 'update'])->name('games.update');
     Route::delete('/games/{game}', [GameController::class, 'destroy'])->name('games.destroy');

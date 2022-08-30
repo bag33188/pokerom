@@ -12,6 +12,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class GameController extends ViewController
 {
@@ -27,7 +28,7 @@ class GameController extends ViewController
     public function index(): Application|Factory|View
     {
         return view('games.index', [
-            'games' => Game::all(),
+            'games' => Game::with('rom')->get(),
             'formatGameType' => fn(string $game_type): string => $this->gameQueries->formatGameTypeSQL($game_type),
         ]);
     }
@@ -45,12 +46,12 @@ class GameController extends ViewController
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\StoreGameRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param StoreGameRequest $request
+     * @return RedirectResponse
      */
     public function store(StoreGameRequest $request)
     {
-        $romId = $request['rom_id'];
+        $romId = $request->input('rom_id');
         $rom = Rom::findOrFail($romId);
         $game = $rom->game()->create($request->all());
         return response()->redirectTo(route('games.index'))->banner('Game created successfully! ' . $game->game_name);
@@ -59,7 +60,7 @@ class GameController extends ViewController
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Game $game
+     * @param Game $game
      * @return Application|Factory|View
      */
     public function show(Game $game)
@@ -73,22 +74,23 @@ class GameController extends ViewController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Game $game
+     * @param Game $game
      * @return Application|Factory|View
      */
     public function edit(Game $game)
     {
         return view('games.edit', [
-            'game' => $game
+            'game' => $game,
+            'removeEacute' => fn(string $value) => str_replace(_EACUTE, "\u{0065}", $value),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\UpdateGameRequest $request
-     * @param \App\Models\Game $game
-     * @return \Illuminate\Http\RedirectResponse
+     * @param UpdateGameRequest $request
+     * @param Game $game
+     * @return RedirectResponse
      */
     public function update(UpdateGameRequest $request, Game $game)
     {
@@ -99,8 +101,8 @@ class GameController extends ViewController
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Game $game
-     * @return \Illuminate\Http\RedirectResponse
+     * @param Game $game
+     * @return RedirectResponse
      * @throws AuthorizationException
      */
     public function destroy(Game $game)

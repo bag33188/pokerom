@@ -12,7 +12,7 @@
                 <x-jet-label for="gameName" :value="__('Game Name')"/>
                 <x-jet-input id="gameName" class="block mt-1 w-full" type="text"
                              name="game_name"
-                             :value="str_replace(_EACUTE, 'e', $game->game_name)"
+                             :value="$removeEacute($game->game_name)"
                              minlength="{{ MIN_GAME_NAME_LENGTH }}"
                              maxlength="{{ MAX_GAME_NAME_LENGTH }}"
                              required autofocus
@@ -23,7 +23,7 @@
                 <x-form-select name="game_type" id="gameType" required autofocus>
                     @foreach(GAME_TYPES as $index => $gameType)
                         <option value="{{ $gameType }}"
-                            @selected(strtoupper($game->game_type) == strtoupper($gameType))
+                            @selected(strtolower($game->game_type) == $gameType)
                         >{{ str_capitalize($gameType, true, '-', 2) }}</option>
                     @endforeach
                 </x-form-select>
@@ -34,7 +34,8 @@
                     name="region" id="gameRegion"
                     required autofocus>
                     @foreach(REGIONS as $index => $gameRegion)
-                        <option value="{{ $gameRegion }}" @selected(strtolower($game->region) == $gameRegion)
+                        <option value="{{ $gameRegion }}"
+                            @selected(strtolower($game->region) == $gameRegion)
                         >{{ ucfirst($gameRegion) }}</option>
                     @endforeach
                 </x-form-select>
