@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate;
 use App\Models\Game;
 use App\Models\Rom;
 use App\Models\RomFile;
@@ -12,6 +11,7 @@ use App\Policies\RomFilePolicy;
 use App\Policies\RomPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -42,7 +42,7 @@ class AuthServiceProvider extends ServiceProvider
 
         // give admin user complete access to all endpoints and actions
         Gate::before(function (User $user, string $ability) {
-            /* dd($ability); ddd($ability); */
+            # dd($ability); ddd($ability);
             if ($user->isAdmin()) {
                 return true;
             }

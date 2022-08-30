@@ -44,8 +44,8 @@ class RomFileRepository implements RomFileRepositoryInterface
             'GB' => 'Gameboy',
             'GBC' => 'Gameboy Color',
             'GBA' => 'Gameboy Advance',
-            'NDS' => 'Nintendo DS/DSI',
-            '3DS' => '[NEW] Nintendo 3DS',
+            'NDS' => 'Nintendo DS',
+            '3DS' => 'Nintendo 3DS',
             'XCI' => 'Nintendo Switch',
             default => 'Unknown',
         };
