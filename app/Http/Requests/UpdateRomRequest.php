@@ -27,7 +27,7 @@ class UpdateRomRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $rom = Rom::find($this->route('rom') ?: $this->route('romId'));
+        $rom = Rom::find($this->route($this->is('api/*') ? 'romId' : 'rom'));
         return $this->user()->can('update', $rom);
     }
 

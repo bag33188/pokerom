@@ -30,7 +30,7 @@ class UpdateGameRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $game = Game::find($this->route('game') ?: $this->route('gameId'));
+        $game = Game::find($this->route($this->is('api/*') ? 'gameId' : 'game'));
         return $this->user()->can('update', $game);
     }
 
@@ -39,7 +39,7 @@ class UpdateGameRequest extends FormRequest
         $this->merge([
             'slug' => Str::slug($this->input('game_name')),
             'date_released' => Date::create($this->input('date_released'))->format('Y-m-d'),
-            'game_name' => preg_replace("/[\x{e9}\x{c9}]/u", 'e', $this->input('game_name'))
+            'game_name' => preg_replace("/[\x{E9}\x{C9}]/u", 'e', $this->input('game_name'))
         ]);
     }
 
