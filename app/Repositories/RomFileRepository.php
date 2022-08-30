@@ -36,4 +36,18 @@ class RomFileRepository implements RomFileRepositoryInterface
         ProcessRomFileDeletion::dispatchSync($romFile->getObjectId());
         return $romFileClone;
     }
+
+    public function determineConsole(RomFile $romFile): string
+    {
+        $fileType = $romFile->getRomFileType(includeFullStop: false);
+        return match (strtoupper($fileType)) {
+            'GB' => 'Gameboy',
+            'GBC' => 'Gameboy Color',
+            'GBA' => 'Gameboy Advance',
+            'NDS' => 'Nintendo DS/DSI',
+            '3DS' => '[NEW] Nintendo 3DS',
+            'XCI' => 'Nintendo Switch',
+            default => 'Unknown',
+        };
+    }
 }

@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller as ViewController;
 use App\Http\Requests\StoreRomRequest;
 use App\Http\Requests\UpdateRomRequest;
 use App\Interfaces\RomFileQueriesInterface;
-use App\Interfaces\RomQueriesInterface;
 use App\Models\Rom;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
@@ -16,10 +15,6 @@ use Illuminate\Http\RedirectResponse;
 
 class RomController extends ViewController
 {
-    public function __construct(private readonly RomQueriesInterface $romQueries)
-    {
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +26,6 @@ class RomController extends ViewController
         $roms = Rom::with(['romFile', 'game'])->get();
         return view('roms.index', [
             'roms' => $roms,
-            'formatRomSize' => fn(int $rom_size): string => $this->romQueries->formatRomSizeSQL($rom_size),
             'tableColumns' => ['ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information'],
             'totalRomsSize' => $romFileQueries->getTotalSizeOfAllFilesThatHaveRoms(),
             'totalRomsCount' => Rom::all()->count(),
@@ -72,7 +66,6 @@ class RomController extends ViewController
     {
         return view('roms.show', [
             'rom' => $rom,
-            'formatRomSize' => fn(int $rom_size): string => $this->romQueries->formatRomSizeSQL($rom_size)
         ]);
     }
 

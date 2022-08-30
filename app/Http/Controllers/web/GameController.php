@@ -16,10 +16,6 @@ use Illuminate\Http\RedirectResponse;
 
 class GameController extends ViewController
 {
-    public function __construct(private readonly GameQueriesInterface $gameQueries)
-    {
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +25,6 @@ class GameController extends ViewController
     {
         return view('games.index', [
             'games' => Game::with('rom')->get(),
-            'formatGameType' => fn(string $game_type): string => $this->gameQueries->formatGameTypeSQL($game_type),
         ]);
     }
 
@@ -38,9 +33,9 @@ class GameController extends ViewController
      *
      * @return Application|Factory|View
      */
-    public function create()
+    public function create(GameQueriesInterface $gameQueries)
     {
-        return view('games.create', ['romsWithNoGame' => $this->gameQueries->getAllRomsWithNoGameSQL()]);
+        return view('games.create', ['romsWithNoGame' => $gameQueries->getAllRomsWithNoGameSQL()]);
     }
 
     /**
@@ -67,7 +62,7 @@ class GameController extends ViewController
     {
         return view('games.show', [
             'game' => $game,
-            'formatGameType' => fn(string $game_type): string => $this->gameQueries->formatGameTypeSQL($game_type),
+            'userIsAdmin' => auth()->user()->isAdmin(),
         ]);
     }
 

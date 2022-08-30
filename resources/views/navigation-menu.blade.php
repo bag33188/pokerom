@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 {!!'sticky top-0 shadow-sm'!!}">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -32,17 +32,17 @@
                     </x-jet-nav-link>
                 </div>
                 @if(auth()->user()->isAdmin())
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav-item-create">
                         <x-jet-nav-link href="{{ route('roms.create') }}" :active="request()->routeIs('roms.create')">
                             {{ __('Add ROM') }}
                         </x-jet-nav-link>
                     </div>
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav-item-create">
                         <x-jet-nav-link href="{{ route('games.create') }}" :active="request()->routeIs('games.create')">
                             {{ __('Add Game') }}
                         </x-jet-nav-link>
                     </div>
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav-item-create">
                         <x-jet-nav-link href="{{ route('rom-files.create') }}" :active="request()->routeIs('rom-files.create')">
                             {{ __('Upload ROM File') }}
                         </x-jet-nav-link>

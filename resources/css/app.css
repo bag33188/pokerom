@@ -1,3 +1,12 @@
+@import "scrollbar.module.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    @media only screen and (max-width: 1060px) {
+        .nav-item-create {
+            display: none !important;
+        }
+    }
+}

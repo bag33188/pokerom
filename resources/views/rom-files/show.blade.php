@@ -1,29 +1,16 @@
+@inject('romFileRepository', 'App\Interfaces\RomFileRepositoryInterface')
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">{{ $romFile->filename }}
             Information</h2>
     </x-slot>
     <div class="my-4 mx-3.5">
-        @php
-            function determineConsole(\App\Models\RomFile $romFile): string {
-                $fileType = $romFile->getRomFileType(includeFullStop: false);
-                return match (strtoupper($fileType)) {
-                    'GB' => 'Gameboy',
-                    'GBC' => 'Gameboy Color',
-                    'GBA' => 'Gameboy Advance',
-                    'NDS' => 'Nintendo DS',
-                    '3DS' => 'Nintendo 3DS',
-                    'XCI' => 'Nintendo Switch',
-                    default => 'Unknown',
-                };
-            }
-        @endphp
         <div class='flex flex-col'>
             <div class="order-0">
                 <x-list-group>
                     <x-list-item>File ID: {{ $romFile->_id }}</x-list-item>
                     <x-list-item>Filename: <code>{{ $romFile->filename }}</code></x-list-item>
-                    <x-list-item>Designated Console: <b>{{ determineConsole($romFile) }}</b>
+                    <x-list-item>Designated Console: <b>{{ $romFileRepository->determineConsole($romFile) }}</b>
                     </x-list-item>
                     <x-list-item>Content Length:
                         <data value="{{ $romFile->length }}">{{ $romFile->length }} Bytes</data>

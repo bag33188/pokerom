@@ -1,6 +1,4 @@
-@php
-    $userIsAdmin = auth()->user()->isAdmin();
-@endphp
+@inject('gameQueries', 'App\Interfaces\GameQueriesInterface')
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-center text-lg">{{ $game->game_name }} Information</h2>
@@ -19,10 +17,10 @@
                     Generation <span title="{{ $game->generation }}">{{ numberToRoman($game->generation) }}</span>
                 </x-list-item>
                 <x-list-item>{{ $game->region }} Region</x-list-item>
-                <x-list-item>Game Type: {{ $formatGameType($game->game_type) }}</x-list-item>
+                <x-list-item>Game Type: {{ $gameQueries->formatGameTypeSQL($game->game_type) }}</x-list-item>
                 <x-list-item>Released
                     on: {{ $game->date_released->format('l, F jS, Y') }}</x-list-item>
-                <x-list-item style="border-bottom: 0 !important;">
+                <x-list-item class="!border-b-0">
                     ROM: <span title="{{ $game->rom->id }}">{{ $game->rom->rom_name }}</span>
                 </x-list-item>
             </x-list-group>
@@ -31,6 +29,7 @@
                     <form class="inline" action="{{ route('games.destroy', ['game' => $game]) }}" method="POST">
                         @csrf
                         @method('DELETE')
+
                         <x-jet-danger-button type="submit">DELETE!</x-jet-danger-button>
                     </form>
                 </div>

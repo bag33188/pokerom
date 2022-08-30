@@ -1,3 +1,4 @@
+@inject('gameQueries', 'App\Interfaces\GameQueriesInterface')
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-center text-lg">Pok&eacute;mon Games Library</h2>
@@ -18,7 +19,7 @@
                             {{ $game->region }} Region
                         </x-list-item>
                         <x-list-item class="p-3 hover:bg-blue-600 hover:text-blue-200">
-                            {{ $formatGameType($game->game_type) }}
+                            {{ $gameQueries->formatGameTypeSQL($game->game_type) }}
                         </x-list-item>
                         <x-list-item class="p-3 hover:bg-blue-600 hover:text-blue-200">
                             Released on {{ $game->date_released->format('F jS, Y') }}
