@@ -10,7 +10,7 @@ use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
-    public function __construct(private readonly RequiredIfPutRequest $requiredIfPutRequest)
+    function __construct(private readonly RequiredIfPutRequest $requiredIfPutRequest)
     {
         parent::__construct();
     }

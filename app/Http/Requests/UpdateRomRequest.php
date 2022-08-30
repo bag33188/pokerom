@@ -20,7 +20,8 @@ class UpdateRomRequest extends FormRequest
     function __construct(private readonly RequiredIfPutRequest $requiredIfPutRequest)
     {
         parent::__construct();
-        $this->routeParamName = $this->is('api/*') ? 'romId' : 'rom';
+
+        $this->routeParamName = $this->routeIs('api.*') ? 'romId' : 'rom';
     }
 
     /**
