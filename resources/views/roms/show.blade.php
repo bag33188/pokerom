@@ -9,16 +9,26 @@
             <x-list-item>ROM Size: {{ $formatRomSize($rom->rom_size) }}</x-list-item>
             <x-list-item>ROM Type: {{ $rom->rom_type }}</x-list-item>
             @if($rom->has_game)
-                <x-list-item>Game ID: {{ $rom->game->id }}</x-list-item>
-                <x-list-item>Game Name: {{ $rom->game->game_name }}</x-list-item>
-                <x-list-item>Region: {{ $rom->game->region }}</x-list-item>
-                <x-list-item>Release Date: {{ $rom->game->date_released->format('l, F jS, Y') }}</x-list-item>
+                <x-list-item><p class="mt-1.5 inline-block">Game Info</p>
+                    <x-list-group class="border-0 py-2">
+                        <x-list-item class="border-0">Game ID: {{ $rom->game->id }}</x-list-item>
+                        <x-list-item>Game Name: {{ $rom->game->game_name }}</x-list-item>
+                        <x-list-item>Region: {{ $rom->game->region }}</x-list-item>
+                        <x-list-item class="border-0">Release
+                            Date: {{ $rom->game->date_released->format('l, F jS, Y') }}</x-list-item>
+                    </x-list-group>
+                </x-list-item>
             @endif
             @if($rom->has_file)
-                <x-list-item>File ID: {{ $rom->romFile->_id }}</x-list-item>
-                <x-list-item>File Name: {{ $rom->romFile->filename }}</x-list-item>
-                <x-list-item>File Length: {{ $rom->romFile->length }} Bytes</x-list-item>
-                <x-list-item>MD5 Hash: {{ $rom->romFile->md5 }}</x-list-item>
+                <x-list-item><p class="mt-1.5 inline-block">File Info</p>
+                    <x-list-group class="border-0 py-2">
+                        <x-list-item class="border-0">File ID: {{ $rom->romFile->_id }}</x-list-item>
+                        <x-list-item>File Name: {{ $rom->romFile->filename }}</x-list-item>
+                        <x-list-item>File Length: {{ $rom->romFile->length }} Bytes</x-list-item>
+                        <x-list-item class="border-0">MD5 Hash: {{ $rom->romFile->md5 }}</x-list-item>
+                    </x-list-group>
+                </x-list-item>
+
             @endif
         </x-list-group>
         @if(auth()->user()->isAdmin())
