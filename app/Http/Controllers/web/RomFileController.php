@@ -34,7 +34,7 @@ class RomFileController extends ViewController
     public function index(): Application|Factory|View
     {
         # Gate::authorize('view-romFile');
-        $romFiles = (auth()->user()->isAdmin()) ? RomFile::all() : RomFile::whereHas('rom')->get();
+        $romFiles = (auth()->user()->isAdmin()) ? RomFile::with('rom')->get() : RomFile::whereHas('rom')->get();
         return view('rom-files.index', [
             'romFiles' => $romFiles,
             'formatUploadDate' => fn(string $uploadDate) => (new DateTime($uploadDate))->setTimezone(new DateTimeZone('PST8PDT'))->format('m-d-Y, h:i:s A (T, I)'),
