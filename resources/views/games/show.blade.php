@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start">
                     <div class="my-2">
-                        <x-anchor-button btn-type="primary" href="{{ route('games.edit', ['game' => $game]) }}">Edit!</x-anchor-button>
+                        <x-anchor-button type="primary" href="{{ route('games.edit', ['game' => $game]) }}">Edit!</x-anchor-button>
                     </div>
                 </div>
             @endif

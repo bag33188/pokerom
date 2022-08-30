@@ -1,25 +1,26 @@
+@props(['type'])
 @php
     $anchorBtnClasses = [];
 @endphp
-@switch($btnType)
+@switch($type)
     @case('primary')
         @php
-            $anchorBtnClasses = $anchorPrimary;
+            $anchorBtnClasses = $anchorPrimaryClasses;
         @endphp
         @break
     @case('secondary')
         @php
-            $anchorBtnClasses = $anchorSecondary;
+            $anchorBtnClasses = $anchorSecondaryClasses;
         @endphp
         @break
     @case('danger')
         @php
-            $anchorBtnClasses = $anchorDanger;
+            $anchorBtnClasses = $anchorDangerClasses;
         @endphp
         @break
     @default
         @php
-            $anchorBtnClasses =  $anchorPrimary;
+            $anchorBtnClasses =  $anchorPrimaryClasses;
         @endphp
 @endswitch
 <a {{ $attributes->merge(['class' => joinCssClasses($anchorBtnClasses)]) }}>{{ $slot }}</a>
