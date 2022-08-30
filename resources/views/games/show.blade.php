@@ -23,7 +23,7 @@
                 <x-list-item>Released
                     on: {{ $game->date_released->format('l, F jS, Y') }}</x-list-item>
                 <x-list-item style="border-bottom: 0 !important;">
-                    ROM: {{ $game->rom->rom_name }}
+                    ROM: <span title="{{ $game->rom->id }}">{{ $game->rom->rom_name }}</span>
                 </x-list-item>
             </x-list-group>
             @if($userIsAdmin)

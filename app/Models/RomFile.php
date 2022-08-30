@@ -46,8 +46,13 @@ class RomFile extends MongoDbModel
 
     public function getRomFileType(bool $includeFullStop = true): string
     {
-        $romFileType = strtoupper(explode('.', $this->filename, 2)[1]);
+        $romFileType = explode('.', $this->attributes['filename'], 2)[1];
         return $includeFullStop === false ? $romFileType : "\u{2E}$romFileType";
+    }
+
+    public function getChunkSizeInBits(): int
+    {
+        return $this->attributes['chunkSize'] * 0x08;
     }
 
     public static function normalizeRomFilename(string &$romFilename): void
