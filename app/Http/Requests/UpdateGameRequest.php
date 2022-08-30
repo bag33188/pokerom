@@ -10,7 +10,6 @@ use App\Rules\MaxLengthRule;
 use App\Rules\MaxSizeRule;
 use App\Rules\MinLengthRule;
 use App\Rules\MinSizeRule;
-use App\Rules\RequiredIfPutRequest;
 use Date;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
@@ -18,9 +17,9 @@ use Illuminate\Validation\Rule;
 
 class UpdateGameRequest extends FormRequest
 {
-    protected string $routeParamName;
+    private string $routeParamName;
 
-    function __construct(private readonly RequiredIfPutRequest $requiredIfPutRequest)
+    function __construct()
     {
         parent::__construct();
 
@@ -56,12 +55,12 @@ class UpdateGameRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'game_name' => [$this->requiredIfPutRequest, 'string', new MinLengthRule(MIN_GAME_NAME_LENGTH), new MaxLengthRule(MAX_GAME_NAME_LENGTH), new GameNameRule()],
-            'game_type' => [$this->requiredIfPutRequest, 'string', new MinLengthRule(MIN_GAME_TYPE_LENGTH), new MaxLengthRule(MAX_GAME_TYPE_LENGTH), new GameTypeRule()],
-            'region' => [$this->requiredIfPutRequest, 'string', new MinLengthRule(MIN_GAME_REGION_LENGTH), new MaxLengthRule(MAX_GAME_REGION_LENGTH), new GameRegionRule()],
-            'date_released' => [$this->requiredIfPutRequest, 'date', 'after_or_equal:' . NOT_BEFORE_DATE_RELEASED, 'date_format:Y-m-d'],
-            'generation' => [$this->requiredIfPutRequest, 'integer', new MinSizeRule(MIN_GAME_GENERATION_VALUE), new MaxSizeRule(MAX_GAME_GENERATION_VALUE)],
-            'slug' => [Rule::unique('games', 'slug')->ignore($this->route($this->routeParamName))]
+            'game_name' => [Rule::requiredIf($this->isMethod('PUT')), 'string', new MinLengthRule(MIN_GAME_NAME_LENGTH), new MaxLengthRule(MAX_GAME_NAME_LENGTH), new GameNameRule()],
+            'game_type' => [Rule::requiredIf($this->isMethod('PUT')), 'string', new MinLengthRule(MIN_GAME_TYPE_LENGTH), new MaxLengthRule(MAX_GAME_TYPE_LENGTH), new GameTypeRule()],
+            'region' => [Rule::requiredIf($this->isMethod('PUT')), 'string', new MinLengthRule(MIN_GAME_REGION_LENGTH), new MaxLengthRule(MAX_GAME_REGION_LENGTH), new GameRegionRule()],
+            'date_released' => [Rule::requiredIf($this->isMethod('PUT')), 'date', 'after_or_equal:' . FIRST_POKEMON_GAME_RELEASE_DATE, 'date_format:Y-m-d'],
+            'generation' => [Rule::requiredIf($this->isMethod('PUT')), 'integer', new MinSizeRule(MIN_GAME_GENERATION_VALUE), new MaxSizeRule(MAX_GAME_GENERATION_VALUE)],
+            'slug' => ['string', Rule::unique('games', 'slug')->ignore($this->route($this->routeParamName))]
         ];
     }
 }

@@ -9,8 +9,8 @@
                 <p class="inline-block">File ID: {{ $romFile->_id }}</p>
                 <p class="inline-block">Filename: {{ $romFile->filename }}</p>
                 <p class="inline-block">Filesize: {{ $romFile->length }} Bytes</p>
-                <p class="inline-block">Uploaded
-                    On: {{ $formatUploadDate($romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'America/Los_Angeles') }}</p>
+                <p class="inline-block">Uploaded On:
+                    {{ $formatUploadDate($romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'America/Los_Angeles') }}</p>
                 <p class="inline-block">
                     ROM ID: {!!
                                 $romFile->rom
@@ -20,7 +20,8 @@
                 </p>
                 <div class="mt-2 inline-flex flex-row justify-between">
                     <x-rom-file.download :romFile="$romFile"/>
-                    <x-anchor-button href="{{ route('rom-files.show', ['romFile' => $romFile]) }}">Info!
+                    <x-anchor-button href="{{ route('rom-files.show', ['romFile' => $romFile]) }}">
+                        Info!
                     </x-anchor-button>
                 </div>
             </x-tile>

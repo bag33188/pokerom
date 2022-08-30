@@ -11,7 +11,7 @@ class LoginUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|string|email|max:' . MAX_USER_EMAIL_LENGTH,
+            'email' => ['required', 'string', 'email', new MaxLengthRule(MAX_USER_EMAIL_LENGTH)],
             'password' => ['required', 'string', new MinLengthRule(MIN_USER_PASSWORD_LENGTH), new MaxLengthRule(MAX_USER_PASSWORD_LENGTH)],
         ];
     }

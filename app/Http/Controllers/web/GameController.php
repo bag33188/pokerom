@@ -23,8 +23,9 @@ class GameController extends ViewController
      */
     public function index(): Application|Factory|View
     {
+        $games = Game::with('rom')->get();
         return view('games.index', [
-            'games' => Game::with('rom')->get(),
+            'games' => $games,
         ]);
     }
 
@@ -35,7 +36,8 @@ class GameController extends ViewController
      */
     public function create(GameQueriesInterface $gameQueries)
     {
-        return view('games.create', ['romsWithNoGame' => $gameQueries->getAllRomsWithNoGameSQL()]);
+        $romsWhereHasGameIsFalse = $gameQueries->getAllRomsWithNoGameSQL();
+        return view('games.create', ['romsWithNoGame' => $romsWhereHasGameIsFalse]);
     }
 
     /**
@@ -76,7 +78,7 @@ class GameController extends ViewController
     {
         return view('games.edit', [
             'game' => $game,
-            'removeEacute' => fn(string $value) => str_replace(_EACUTE, "\u{0065}", $value),
+            'removeEacute' => fn(string $value): string => str_replace(_EACUTE, "\u{0065}", $value),
         ]);
     }
 
