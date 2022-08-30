@@ -38,8 +38,8 @@
                         @endif
                     </td>
                     <td class="px-6 py-4">
-                        <x-jet-responsive-nav-link href="{{ route('roms.show', ['rom' => $rom]) }}">Get Info!
-                        </x-jet-responsive-nav-link>
+                        <x-anchor-button href="{{ route('roms.show', ['rom' => $rom]) }}">Get Info!
+                        </x-anchor-button>
                     </td>
                 </tr>
             @endforeach

@@ -61,9 +61,9 @@
                     </x-jet-button>
                 </div>
                 <div class="float-right">
-                    <x-jet-responsive-nav-link href="{{ route('games.index') }}">
+                    <x-anchor-button btn-type="secondary" href="{{ route('games.index') }}">
                         Cancel
-                    </x-jet-responsive-nav-link>
+                    </x-anchor-button>
                 </div>
             </div>
         </form>

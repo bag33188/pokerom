@@ -18,7 +18,7 @@
                 <x-list-item title="{{ $game->generation }}">
                     Generation {{ numberToRoman($game->generation) }}</x-list-item>
                 <x-list-item>{{ $game->region }} Region</x-list-item>
-                <x-list-item>{{ $formatGameType($game->game_type) }}</x-list-item>
+                <x-list-item>Game Type: {{ $formatGameType($game->game_type) }}</x-list-item>
                 <x-list-item style="border-bottom: 0 !important;">Released
                     on: {{ $game->date_released->format('l, F jS, Y') }}</x-list-item>
             </x-list-group>
@@ -32,8 +32,7 @@
                 </div>
                 <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start">
                     <div class="my-2">
-                        <x-jet-responsive-nav-link href="{{ route('games.edit', ['game' => $game]) }}">Edit!
-                        </x-jet-responsive-nav-link>
+                        <x-anchor-button btn-type="primary" href="{{ route('games.edit', ['game' => $game]) }}">Edit!</x-anchor-button>
                     </div>
                 </div>
             @endif

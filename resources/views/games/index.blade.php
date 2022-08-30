@@ -25,9 +25,9 @@
                         </x-list-item>
                     </x-list-group>
                     <div class="my-2 flex flex-row justify-center">
-                        <x-jet-responsive-nav-link href="{{ route('games.show', ['game' => $game]) }}">
+                        <x-anchor-button href="{{ route('games.show', ['game' => $game]) }}">
                             Get Info!
-                        </x-jet-responsive-nav-link>
+                        </x-anchor-button>
                     </div>
                 </x-card>
             @endforeach
