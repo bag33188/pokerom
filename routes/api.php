@@ -32,7 +32,7 @@ Route::name('api.')->group(function () {
         Route::put('/roms/{romId}', [RomController::class, 'update'])->name('roms.update');
         Route::patch('/roms/{romId}', [RomController::class, 'update'])->name('roms.edit');
         Route::delete('/roms/{romId}', [RomController::class, 'destroy'])->name('roms.destroy');
-        Route::patch('/roms/{romId}/link-file', [RomController::class, 'linkRomToRomFile'])->name('roms.link');
+        Route::patch('/roms/{romId}/link-file', [RomController::class, 'linkRomToRomFile'])->name('roms.linkFile');
 
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::get('/users/{userId}', [UserController::class, 'show'])->name('users.show');
