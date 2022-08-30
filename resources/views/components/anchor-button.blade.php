@@ -20,7 +20,7 @@
         @break
     @default
         @php
-            $anchorBtnClasses =  $anchorPrimaryClasses;
+            $anchorBtnClasses = $anchorPrimaryClasses;
         @endphp
 @endswitch
 <a {{ $attributes->merge(['class' => joinCssClasses($anchorBtnClasses)]) }}>{{ $slot }}</a>
