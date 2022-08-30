@@ -6,15 +6,15 @@
     <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mx-4 mb-4 mt-1 items-center">
         @foreach($romFiles as $romFile)
             <x-tile class="justify-self-center">
-                <p class="inline-block">{{ $romFile->_id }}</p>
+                <p class="inline-block">File ID: {{ $romFile->_id }}</p>
                 <p class="inline-block">Filename: {{ $romFile->filename }}</p>
                 <p class="inline-block">Filesize: {{ $romFile->length }} Bytes</p>
                 <p class="inline-block">Uploaded On: {{ $formatUploadDate($romFile->uploadDate) }}</p>
                 <p class="inline-block">
                     ROM ID: {!!
-                        $romFile->rom
-                            ? '<span class="font-bold">' . $romFile->rom->getKey() . "</span>"
-                            : '<span class="font-semibold">No Assoc. ROM</span>'
+                                $romFile->rom
+                                    ? '<span class="font-bold">' . $romFile->rom->getKey() . "</span>"
+                                    : '<span class="font-semibold">No Assoc. ROM</span>'
                             !!}
                 </p>
                 <div class="mt-2 inline-flex flex-row justify-between">

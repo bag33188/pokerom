@@ -46,7 +46,8 @@ class RomFile extends MongoDbModel
 
     public function getRomFileType(bool $includeFullStop = true): string
     {
-        return (($includeFullStop === true) ? "\u{2E}" : '') . strtoupper(explode('.', $this->filename, 2)[1]);
+        $romFileType = strtoupper(explode('.', $this->filename, 2)[1]);
+        return $includeFullStop === false ? $romFileType : "\u{2E}$romFileType";
     }
 
     public static function normalizeRomFilename(string &$romFilename): void

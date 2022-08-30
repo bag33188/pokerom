@@ -27,7 +27,7 @@
                     <x-list-item>Date Uploaded: {{ $formatUploadDate($romFile->uploadDate) }}</x-list-item>
                     <x-list-item>Content Hash (MD5): {{ $romFile->md5 }}</x-list-item>
                     <x-list-item>Content Length: {{ $romFile->length }} Bytes</x-list-item>
-                    <x-list-item>Content Chunk Size: {{ $romFile->chunkSize * 8 }} Bites</x-list-item>
+                    <x-list-item>Content Chunk Size: {{ $romFile->chunkSize * 0x08 }} Bits</x-list-item>
                 </x-list-group>
             </div>
             <div class="order-1 mt-2.5 inline-flex flex-row justify-between">
