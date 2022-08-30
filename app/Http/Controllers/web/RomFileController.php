@@ -71,6 +71,15 @@ class RomFileController extends ViewController
         ]);
     }
 
+    public function show(RomFile $romFile): Application|Factory|View
+    {
+        return view('rom-files.show', [
+            'romFile' => $romFile,
+            'formatUploadDate' => fn(string $uploadDate) => (new DateTime($uploadDate))->setTimezone(new DateTimeZone('PST8PDT'))->format('m-d-Y, h:i:s A (T, I)'),
+            'userIsAdmin' => auth()->user()->isAdmin(),
+        ]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

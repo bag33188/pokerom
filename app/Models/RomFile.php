@@ -44,6 +44,11 @@ class RomFile extends MongoDbModel
         return $date->format('Y-m-d H:i:s');
     }
 
+    public function getRomFileType(bool $includeFullStop = true): string
+    {
+        return (($includeFullStop === true) ? "\u{2E}" : '') . strtoupper(explode('.', $this->filename, 2)[1]);
+    }
+
     public static function normalizeRomFilename(string &$romFilename): void
     {
         list($name, $ext) = explode('.', $romFilename, 2);

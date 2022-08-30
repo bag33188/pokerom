@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">{{ $rom->rom_name }} Information</h2>
     </x-slot>
-    <div class="py-12 px-10">
+    <div class="py-6 px-5">
         <x-list-group>
             <x-list-item>ROM ID: {{ $rom->id }}</x-list-item>
             <x-list-item>ROM Name: {{ $rom->rom_name }}</x-list-item>
