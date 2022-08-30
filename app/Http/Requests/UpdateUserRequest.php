@@ -19,7 +19,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => [$this->requiredIfPutRequest, 'string', new MinLengthRule(MIN_USER_NAME_LENGTH), new MaxLengthRule(MAX_USER_NAME_LENGTH)],
-            'email' => [$this->requiredIfPutRequest, 'string', 'email', 'max:' . MAX_USER_EMAIL_LENGTH, Rule::unique('users')->ignore($this->route('userId'))],
+            'email' => [$this->requiredIfPutRequest, 'string', 'email', 'max:' . MAX_USER_EMAIL_LENGTH, Rule::unique('users')->ignore($this->route($this->is('api/*') ? 'userId' : 'user'))],
             'password' => [$this->requiredIfPutRequest, 'string', 'confirmed', new MinLengthRule(MIN_USER_PASSWORD_LENGTH), new MaxLengthRule(MAX_USER_PASSWORD_LENGTH)],
         ];
     }

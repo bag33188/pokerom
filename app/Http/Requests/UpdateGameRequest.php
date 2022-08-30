@@ -39,6 +39,7 @@ class UpdateGameRequest extends FormRequest
         $this->merge([
             'slug' => Str::slug($this->input('game_name')),
             'date_released' => Date::create($this->input('date_released'))->format('Y-m-d'),
+            'game_name' => preg_replace("/[\x{e9}\x{c9}]/u", 'e', $this->input('game_name'))
         ]);
     }
 
@@ -56,7 +57,7 @@ class UpdateGameRequest extends FormRequest
             'region' => [$this->requiredIfPutRequest, 'string', new MinLengthRule(MIN_GAME_REGION_LENGTH), new MaxLengthRule(MAX_GAME_REGION_LENGTH), new GameRegionRule()],
             'date_released' => [$this->requiredIfPutRequest, 'date', 'after_or_equal:1996-02-27', 'date_format:Y-m-d'],
             'generation' => [$this->requiredIfPutRequest, 'integer', new MinSizeRule(MIN_GAME_GENERATION_VALUE), new MaxSizeRule(MAX_GAME_GENERATION_VALUE)],
-            'slug' => [Rule::unique('games', 'slug')->ignore($this->route('game'))->ignore($this->route('gameId'))],
+            'slug' => [Rule::unique('games', 'slug')->ignore($this->route($this->is('api/*') ? 'gameId' : 'game'))],
         ];
     }
 }

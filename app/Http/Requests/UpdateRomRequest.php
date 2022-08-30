@@ -39,7 +39,7 @@ class UpdateRomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'rom_name' => [$this->requiredIfPutRequest, 'string', new MinLengthRule(MIN_ROM_NAME_LENGTH), new MaxLengthRule(MAX_ROM_NAME_LENGTH), new RomNameRule(), Rule::unique('roms', 'rom_name')->ignore($this->route('rom'))->ignore($this->route('romId'))],
+            'rom_name' => [$this->requiredIfPutRequest, 'string', new MinLengthRule(MIN_ROM_NAME_LENGTH), new MaxLengthRule(MAX_ROM_NAME_LENGTH), new RomNameRule(), Rule::unique('roms', 'rom_name')->ignore($this->route($this->is('api/*') ? 'romId' : 'rom'))],
             'rom_size' => [$this->requiredIfPutRequest, 'integer', new MinSizeRule(MIN_ROM_SIZE), new MaxSizeRule(MAX_ROM_SIZE)],
             'rom_type' => [$this->requiredIfPutRequest, 'string', new MinLengthRule(MIN_ROM_TYPE_LENGTH), new MaxLengthRule(MAX_ROM_TYPE_LENGTH), new RomTypeRule()],
         ];
