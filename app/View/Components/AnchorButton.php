@@ -19,12 +19,12 @@ class AnchorButton extends Component
     /**
      * Create a new component instance.
      *
-     * @param string $btnType
+     * @param string $anchorBtnType
      * @return void
      */
-    public function __construct(string $btnType = 'primary')
+    public function __construct(string $anchorBtnType = 'primary')
     {
-        $this->type = $btnType;
+        $this->type = $anchorBtnType;
     }
 
     /**

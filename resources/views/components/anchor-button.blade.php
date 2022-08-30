@@ -1,8 +1,8 @@
 @props(['type'])
 @php
-    $anchorBtnClasses = [];
+    $anchorBtnClasses = array();
 @endphp
-@switch($type)
+@switch(strtolower($type))
     @case('primary')
         @php
             $anchorBtnClasses = $anchorPrimaryClasses;
