@@ -13,6 +13,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Storage;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
@@ -76,7 +77,7 @@ class RomFileController extends ViewController
         return view('rom-files.show', [
             'romFile' => $romFile,
             'formatUploadDate' => fn(string $uploadDate) => (new DateTime($uploadDate))->setTimezone(new DateTimeZone('PST8PDT'))->format('m-d-Y, h:i:s A (T, I)'),
-            'userIsAdmin' => auth()->user()->isAdmin(),
+            'userIsAdmin' => Auth::user()->isAdmin(),
         ]);
     }
 
