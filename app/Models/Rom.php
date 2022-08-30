@@ -44,13 +44,8 @@ class Rom extends Model
     protected function romType(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => strtoupper($value)
+            get: fn($value) => strtoupper($value), set: fn($value) => strtolower($value)
         );
-    }
-
-    public function setRomTypeAttribute(string $value): void
-    {
-        $this->attributes['rom_type'] = strtolower($value);
     }
 
     public function getRomFileName(): string
