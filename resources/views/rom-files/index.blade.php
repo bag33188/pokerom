@@ -10,7 +10,7 @@
                 <p class="inline-block">Filename: {{ $romFile->filename }}</p>
                 <p class="inline-block">Filesize: {{ $romFile->length }} Bytes</p>
                 <p class="inline-block">Uploaded
-                    On: {{ $formatUploadDate($romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'PST8PDT') }}</p>
+                    On: {{ $formatUploadDate($romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'America/Los_Angeles') }}</p>
                 <p class="inline-block">
                     ROM ID: {!!
                                 $romFile->rom
