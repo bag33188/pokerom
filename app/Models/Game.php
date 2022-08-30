@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Game extends Model
 {
@@ -60,7 +60,7 @@ class Game extends Model
 
     public function setGameNameAttribute(string $value): void
     {
-        $this->attributes['game_name'] = preg_replace("/^(pok[e\x{e9}\x{c9}]mon)/ui", 'Pokemon', $value);
+        $this->attributes['game_name'] = preg_replace("/^(pok[\x{65}\x{45}\x{E9}\x{C9}]mon)/ui", 'Pokemon', $value);
     }
 
     public function setGameTypeAttribute(string $value): void
