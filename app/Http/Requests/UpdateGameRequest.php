@@ -20,7 +20,7 @@ class UpdateGameRequest extends FormRequest
 {
     protected string $routeParamName;
 
-    public function __construct(private readonly RequiredIfPutRequest $requiredIfPutRequest)
+    function __construct(private readonly RequiredIfPutRequest $requiredIfPutRequest)
     {
         parent::__construct();
         $this->routeParamName = $this->is('api/*') ? 'gameId' : 'game';
