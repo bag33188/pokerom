@@ -190,7 +190,7 @@ TRUNCATE TABLE `games`;
 --
 
 INSERT INTO `games` (`id`, `rom_id`, `game_name`, `game_type`, `date_released`, `generation`, `region`, `slug`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Pokemon Red', 'core', '2022-01-01', 2, 'kanto', 'pokemon-red', '2022-07-04 10:31:25', '2022-08-30 08:02:16'),
+(1, 1, 'Pokemon Red', 'core', '1998-09-28', 2, 'kanto', 'pokemon-red', '2022-07-04 10:31:25', '2022-08-30 08:02:16'),
 (2, 2, 'Pokemon Blue', 'core', '1998-09-28', 1, 'kanto', 'pokemon-blue', '2022-07-04 10:31:32', '2022-07-04 10:31:32'),
 (3, 3, 'Pokemon Green (JP)', 'core', '1996-02-27', 1, 'kanto', 'pokemon-green-jp', '2022-07-04 10:31:52', '2022-08-30 07:58:41'),
 (4, 4, 'Pokemon Yellow', 'core', '1999-10-18', 1, 'kanto', 'pokemon-yellow', '2022-07-04 10:32:14', '2022-07-04 10:32:14'),
