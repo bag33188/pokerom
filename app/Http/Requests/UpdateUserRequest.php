@@ -17,9 +17,10 @@ class UpdateUserRequest extends FormRequest
 
     public function rules(): array
     {
+        $routeParamName = $this->is('api/*') ? 'userId' : 'user';
         return [
             'name' => [$this->requiredIfPutRequest, 'string', new MinLengthRule(MIN_USER_NAME_LENGTH), new MaxLengthRule(MAX_USER_NAME_LENGTH)],
-            'email' => [$this->requiredIfPutRequest, 'string', 'email', 'max:' . MAX_USER_EMAIL_LENGTH, Rule::unique('users')->ignore($this->route($this->is('api/*') ? 'userId' : 'user'))],
+            'email' => [$this->requiredIfPutRequest, 'string', 'email', 'max:' . MAX_USER_EMAIL_LENGTH, Rule::unique('users')->ignore($this->route($routeParamName))],
             'password' => [$this->requiredIfPutRequest, 'string', 'confirmed', new MinLengthRule(MIN_USER_PASSWORD_LENGTH), new MaxLengthRule(MAX_USER_PASSWORD_LENGTH)],
         ];
     }
