@@ -4,5 +4,6 @@
       enctype="multipart/form-data">
     @method('GET')
     @csrf
+
     <x-jet-button type="submit" id="download-romFile-{{ $romFile->_id }}-btn">Download</x-jet-button>
 </form>

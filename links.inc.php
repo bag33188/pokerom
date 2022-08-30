@@ -43,5 +43,5 @@ $anchors = array(
 ?>
 <?php foreach ($anchors as $anchor): ?>
     <?php $anchor = (object)$anchor; ?>
-    <li><a href="<?= $anchor->href; ?>"><?= $anchor->text; ?></a></li>
+    <li><a href="<?= $anchor->href; ?>" target="_blank"><?= $anchor->text; ?></a></li>
 <?php endforeach; ?>
