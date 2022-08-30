@@ -20,6 +20,7 @@ return new class extends Migration
 //            $table->string('token');
 //            $table->timestamp('created_at')->nullable();
             $table->string('email')->index();
+            $table->foreign('email')->references('email')->on('users');
             $table->char('token', PASSWORD_RESET_TOKEN_LENGTH);
             $table->timestamp('created_at')->nullable();
         });
