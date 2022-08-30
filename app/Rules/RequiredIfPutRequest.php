@@ -18,6 +18,6 @@ class RequiredIfPutRequest extends RequiredIf
     {
         $this->condition = strtolower($request->method()) === 'put';
 
-        parent::__construct($this->condition);
+        parent::__construct(condition: $this->condition);
     }
 }
