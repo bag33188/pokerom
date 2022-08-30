@@ -47,8 +47,9 @@ class UserController extends ApiController
 
     public function login(LoginUserRequest $request)
     {
-        $user = User::where('email', $request->json('email'))->firstOrFail();
-        if ($user->checkPassword($request->json('password'))) {
+        list('email' => $email, 'password' => $password) = $request->only(['email', 'password']);
+        $user = User::where('email', $email)->firstOrFail();
+        if ($user->checkPassword($password)) {
             $bearerToken = $this->userRepository->generateApiToken($user);
             return response()->json([
                 'token' => $bearerToken,
