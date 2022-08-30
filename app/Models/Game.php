@@ -34,10 +34,6 @@ class Game extends Model
 
     protected function gameName(): Attribute
     {
-        // NOTE:
-        // the `set` IS ONLY FOR THE MUTATOR METHODS
-        // ex. $game->game_name = '.....'
-        // then it will apply, otherwise with form or api requests it does nothing
         return Attribute::make(
             get: fn($value) => preg_replace("/^(Poke)/i", POKE_EACUTE, $value),
             set: fn($value) => preg_replace("/^(pok[\x{65}\x{45}\x{E9}\x{C9}]mon)/ui", 'Pokemon', $value)
