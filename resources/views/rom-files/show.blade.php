@@ -20,7 +20,7 @@
                     </x-list-item>
                     <x-list-item>Date Uploaded:
                         <time
-                            datetime="{{ $formatUploadDate($romFile->uploadDate, DATE_W3C) }}">{{ $formatUploadDate($romFile->uploadDate) }}</time>
+                            datetime="{{ $formatUploadDate($romFile->uploadDate, DATE_W3C, 'PST8PDT') }}">{{ $formatUploadDate($romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'PST8PDT') }}</time>
                     </x-list-item>
                     <x-list-item>Content Hash (MD5):
                         <data value="{{ strtoupper($romFile->md5) }}">{{ $romFile->md5 }}</data>

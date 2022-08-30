@@ -38,7 +38,7 @@ class RomFileController extends ViewController
         $romFiles = (auth()->user()->isAdmin()) ? RomFile::with('rom')->get() : RomFile::whereHas('rom')->get();
         return view('rom-files.index', [
             'romFiles' => $romFiles,
-            'formatUploadDate' => fn(string $uploadDate) => (new DateTime($uploadDate))->setTimezone(new DateTimeZone('PST8PDT'))->format('m-d-Y, h:i:s A (T, I)'),
+            'formatUploadDate' => fn(string $uploadDate, string $dtFormat, string $timezone) => (new DateTime($uploadDate))->setTimezone(new DateTimeZone($timezone))->format($dtFormat),
         ]);
     }
 
@@ -76,7 +76,7 @@ class RomFileController extends ViewController
     {
         return view('rom-files.show', [
             'romFile' => $romFile,
-            'formatUploadDate' => fn(string $uploadDate, string $dtFormat = 'm-d-Y, h:i:s A (T, I)', string $timezone = 'PST8PDT') => (new DateTime($uploadDate))->setTimezone(new DateTimeZone($timezone))->format($dtFormat),
+            'formatUploadDate' => fn(string $uploadDate, string $dtFormat, string $timezone) => (new DateTime($uploadDate))->setTimezone(new DateTimeZone($timezone))->format($dtFormat),
             'userIsAdmin' => Auth::user()->isAdmin(),
         ]);
     }
