@@ -13,7 +13,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Gate;
 use Storage;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
@@ -34,9 +33,10 @@ class RomFileController extends ViewController
      */
     public function index(): Application|Factory|View
     {
-        Gate::authorize('view-rom-files');
+        # Gate::authorize('view-romFile');
+        $romFiles = (auth()->user()->isAdmin()) ? RomFile::all() : RomFile::whereHas('rom')->get();
         return view('rom-files.index', [
-            'romFiles' => RomFile::all(),
+            'romFiles' => $romFiles,
             'formatUploadDate' => fn(string $uploadDate) => (new DateTime($uploadDate))->setTimezone(new DateTimeZone('PST8PDT'))->format('m-d-Y, h:i:s A (T, I)'),
         ]);
     }

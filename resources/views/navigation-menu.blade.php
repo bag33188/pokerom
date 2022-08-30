@@ -26,6 +26,11 @@
                         {{ __('Games') }}
                     </x-jet-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('rom-files.index') }}" :active="request()->routeIs('rom-files.index')">
+                        {{ __('ROM Files') }}
+                    </x-jet-nav-link>
+                </div>
                 @if(auth()->user()->isAdmin())
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-jet-nav-link href="{{ route('roms.create') }}" :active="request()->routeIs('roms.create')">
@@ -33,13 +38,13 @@
                         </x-jet-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-jet-nav-link href="{{ route('rom-files.create') }}" :active="request()->routeIs('rom-files.create')">
-                            {{ __('Upload ROM File') }}
+                        <x-jet-nav-link href="{{ route('games.create') }}" :active="request()->routeIs('games.create')">
+                            {{ __('Add Game') }}
                         </x-jet-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-jet-nav-link href="{{ route('rom-files.index') }}" :active="request()->routeIs('rom-files.index')">
-                            {{ __('ROM Files') }}
+                        <x-jet-nav-link href="{{ route('rom-files.create') }}" :active="request()->routeIs('rom-files.create')">
+                            {{ __('Upload ROM File') }}
                         </x-jet-nav-link>
                     </div>
                 @endif
