@@ -42,4 +42,10 @@ Route::middleware([
     Route::delete('/rom-files/{romFile}', [RomFileController::class, 'destroy'])->name('rom-files.destroy');
 
     Route::get('/games', [GameController::class, 'index'])->name('games.index');
+    Route::get('/games/{game}/show', [GameController::class, 'show'])->name('games.show');
+    Route::get('/games/create', [GameController::class, 'create'])->name('games.create');
+    Route::get('/games/{game}/edit', [GameController::class, 'edit'])->name('games.edit');
+    Route::post('/games/store', [GameController::class, 'store'])->name('games.store');
+    Route::put('/games/{game}', [GameController::class, 'update'])->name('games.update');
+    Route::delete('/games/{game}', [GameController::class, 'destroy'])->name('games.destroy');
 });
