@@ -1,7 +1,5 @@
 <?php
 
-namespace Utils\Modules;
-
 /*
  * Custom module for uploading large files.
  *
@@ -10,6 +8,8 @@ namespace Utils\Modules;
  * useful links:
  * https://www.php.net/readfile
  */
+
+namespace Utils\Modules;
 
 class FileUploader
 {
