@@ -17,6 +17,6 @@ class RomFilenameRule implements Rule
 
     public function message(): string
     {
-        return 'The validation error message.';
+        return 'Invalid ROM Filename.';
     }
 }
