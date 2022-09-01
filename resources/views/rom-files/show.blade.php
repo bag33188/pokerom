@@ -7,7 +7,7 @@
     <div class="my-4 mx-3.5">
         <div class='flex flex-col'>
             <div class="order-0">
-                <x-list-group>
+                <x-list-group class="shadow">
                     <x-list-item>File ID: {{ $romFile->_id }}</x-list-item>
                     <x-list-item>Filename: <code>{{ $romFile->filename }}</code></x-list-item>
                     <x-list-item>Designated Console: <b>{{ $romFileRepository->determineConsole($romFile) }}</b>

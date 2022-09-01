@@ -5,7 +5,7 @@
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">{{ $rom->rom_name }} Information</h2>
     </x-slot>
     <div class="py-6 px-5">
-        <x-list-group class="shadow-md">
+        <x-list-group class="shadow">
             <x-list-item><p class="mt-1.5 inline-block">ROM Info</p>
                 <x-list-group class="border-0 py-2">
                     <x-list-item>ROM ID: {{ $rom->id }}</x-list-item>
