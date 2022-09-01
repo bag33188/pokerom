@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-center text-lg">Add Game</h2>
+        <h2 class="text-center text-lg font-semibold">Add Game</h2>
     </x-slot>
     <div class="container mx-auto w-full mt-3.5">
         @if(count($romsWithNoGame) > 0)
