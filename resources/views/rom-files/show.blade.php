@@ -40,6 +40,9 @@
                 <div class="inline-block order-0">
                     <x-rom-file.download :romFile="$romFile"/>
                 </div>
+                <div class="inline-block order-1">
+                    <x-anchor-button href="{{ route('rom-files.index') }}">Go Back!</x-anchor-button>
+                </div>
             </div>
         </div>
     </div>

@@ -1,7 +1,8 @@
 @inject('gameQueries', 'App\Interfaces\GameQueriesInterface')
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">{{ $game->game_name }} Information</h2>
+        <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">{{ $game->game_name }}
+            Information</h2>
     </x-slot>
     <div class="p-2.5">
         <div class="w-full h-full grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-4">
@@ -36,6 +37,10 @@
                 <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start">
                     <x-anchor-button type="primary" href="{{ route('games.edit', ['game' => $game]) }}">Edit!
                     </x-anchor-button>
+                </div>
+            @else
+                <div class="w-full float-left">
+                    <x-anchor-button type="primary" href="{{ route('games.index') }}">Go Back</x-anchor-button>
                 </div>
             @endif
         </div>
