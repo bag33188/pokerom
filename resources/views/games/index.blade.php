@@ -1,7 +1,7 @@
 @inject('gameQueries', 'App\Interfaces\GameQueriesInterface')
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-center text-lg font-semibold">Pok&eacute;mon Games Library</h2>
+        <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Pok&eacute;mon Games Library</h2>
     </x-slot>
     <div class="container mx-auto py-6">
         <div

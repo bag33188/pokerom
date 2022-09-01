@@ -1,7 +1,7 @@
 @inject('gameQueries', 'App\Interfaces\GameQueriesInterface')
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-center text-lg font-semibold">{{ $game->game_name }} Information</h2>
+        <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">{{ $game->game_name }} Information</h2>
     </x-slot>
     <div class="p-2.5">
         <div class="w-full h-full grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-4">

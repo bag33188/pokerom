@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-center text-lg font-semibold">Edit {{ $game->game_name }} Version</h2>
+        <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Edit {{ $game->game_name }} Version</h2>
     </x-slot>
     <div class="p-3">
         <x-jet-validation-errors class="mb-4"/>
