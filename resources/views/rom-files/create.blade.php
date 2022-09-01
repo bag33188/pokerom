@@ -68,8 +68,8 @@
     </script>
 @endpush
 @php
-    function removeStoragePathFromFilename(string $value): string {
-        return str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $value);
+    function removeStoragePathFromFilename(string &$value): void {
+        $value = str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $value);
     }
 @endphp
 <x-app-layout>
@@ -88,10 +88,10 @@
                     <div class="flex flex-col">
                         <x-form-select-label for="romFile" text="Select ROM File"/>
                         <x-form-select name="rom_filename" id="romFile">
-                            @for($i = 0; $i < count($romFilesList); $i++)
-                                @php $romFileItem = removeStoragePathFromFilename($romFilesList[$i]); @endphp
+                            @foreach($romFilesList as $romFileItem)
+                                @php removeStoragePathFromFilename($romFileItem); @endphp
                                 <option value="{{ $romFileItem }}">{{ $romFileItem }}</option>
-                            @endfor
+                            @endforeach
                         </x-form-select>
                     </div>
                     <div class="my-4">

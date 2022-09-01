@@ -50,7 +50,10 @@ class RomFileController extends ViewController
     public function create(): Application|Factory|View
     {
         $romFilesList = Storage::disk('public')->files(ROM_FILES_DIRNAME);
-        return view('rom-files.create', ['romFilesList' => $romFilesList]);
+        $removeStoragePathFromFilename = fn(string $filename): string => str_replace(ROM_FILES_DIRNAME . '/', '', $filename);
+        return view('rom-files.create', [
+            'romFilesList' => array_filter($romFilesList, fn(string $romFilename): false|int => preg_match(ROM_FILENAME_PATTERN, $removeStoragePathFromFilename($romFilename))),
+        ]);
     }
 
     public function store(UploadRomFileRequest $request): RedirectResponse
