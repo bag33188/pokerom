@@ -13,7 +13,7 @@ class UploadRomFileRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $romFilename = $this->str('rom_filename');
+        $romFilename = $this->string('rom_filename');
         RomFile::normalizeRomFilename($romFilename);
         $this->merge([
             'rom_filename' => $romFilename
