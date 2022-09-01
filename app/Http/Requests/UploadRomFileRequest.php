@@ -13,10 +13,10 @@ class UploadRomFileRequest extends FormRequest
 
     protected function prepareForValidation()
     {
-        $splitRomFilename = explode('.', $this->string('rom_filename'), 2);
-
+        $romFilename = $this->str('rom_filename');
+        RomFile::normalizeRomFilename($romFilename);
         $this->merge([
-            'rom_filename' => $splitRomFilename[0] . '.' . strtolower($splitRomFilename[1]),
+            'rom_filename' => $romFilename
         ]);
     }
 
