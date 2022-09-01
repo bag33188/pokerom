@@ -35,12 +35,12 @@
                     </form>
                 </div>
                 <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start">
-                    <x-anchor-button type="primary" href="{{ route('games.edit', ['game' => $game]) }}">Edit!
+                    <x-anchor-button type="primary" :href="route('games.edit', ['game' => $game])">Edit!
                     </x-anchor-button>
                 </div>
             @else
                 <div class="w-full float-left">
-                    <x-anchor-button type="primary" href="{{ route('games.index') }}">Go Back</x-anchor-button>
+                    <x-anchor-button type="primary" :href="route('games.index')">Go Back</x-anchor-button>
                 </div>
             @endif
         </div>

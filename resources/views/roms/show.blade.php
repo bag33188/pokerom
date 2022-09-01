@@ -26,12 +26,12 @@
                     <x-list-group class="border-0 py-2">
                         <x-list-item class="border-0">File ID: {{ $rom->romFile->_id }}</x-list-item>
                         <x-list-item>File Name: {{ $rom->romFile->filename }}</x-list-item>
-                        <x-list-item>Designated Console: {{ $romFileRepository->determineConsole($rom->romFile) }}</x-list-item>
+                        <x-list-item>Designated
+                            Console: {{ $romFileRepository->determineConsole($rom->romFile) }}</x-list-item>
                         <x-list-item>File Length: {{ $rom->romFile->length }} Bytes</x-list-item>
                         <x-list-item class="border-0">MD5 Hash: {{ $rom->romFile->md5 }}</x-list-item>
                     </x-list-group>
                 </x-list-item>
-
             @endif
         </x-list-group>
         @if(auth()->user()->isAdmin())
@@ -45,14 +45,14 @@
                     </form>
                 </div>
                 <div class="mt-3">
-                    <x-anchor-button href="{{ route('roms.edit', ['rom' => $rom]) }}">
+                    <x-anchor-button :href="route('roms.edit', ['rom' => $rom])">
                         Edit!
                     </x-anchor-button>
                 </div>
             </div>
         @else
             <div class="mt-3">
-                <x-anchor-button class="float-left" type="secondary" href="{{ route('roms.index') }}">Go Back!
+                <x-anchor-button class="float-left" type="secondary" :href="route('roms.index')">Go Back!
                 </x-anchor-button>
             </div>
         @endif
