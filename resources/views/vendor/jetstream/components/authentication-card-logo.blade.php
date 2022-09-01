@@ -9,6 +9,6 @@
          src="{{ Vite::asset('resources/images/app_logo.png') }}"
          alt="pokerom-app-logo"
          {{ $attributes->merge(['class' => "h-[60px] w-[168px]"]) }}
-         data-width.px="168" data-height.px="60"
+         data-height.px="60" data-width.px="168"
     />
 </a>
