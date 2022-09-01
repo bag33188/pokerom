@@ -39,7 +39,7 @@ class RomFileRepository implements RomFileRepositoryInterface
 
     public function determineConsole(RomFile $romFile): string
     {
-        $fileType = $romFile->getRomFileType(includeFullStop: false);
+        $fileType = $romFile->getFileType(includeFullStop: false);
         return match (strtoupper($fileType)) {
             'GB' => 'Gameboy',
             'GBC' => 'Gameboy Color',

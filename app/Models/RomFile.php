@@ -44,7 +44,7 @@ class RomFile extends MongoDbModel
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function getRomFileType(bool $includeFullStop = true): string
+    public function getFileType(bool $includeFullStop = true): string
     {
         $romFileType = explode('.', $this->attributes['filename'], 2)[1];
         return $includeFullStop === false ? $romFileType : "\u{2E}$romFileType";
