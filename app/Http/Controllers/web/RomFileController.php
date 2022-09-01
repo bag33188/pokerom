@@ -51,7 +51,7 @@ class RomFileController extends ViewController
     {
         $romFilesList = Storage::disk('public')->files(ROM_FILES_DIRNAME);
         return view('rom-files.create', [
-            'romFilesList' => array_filter($romFilesList, fn(string $romFilename): false|int => preg_match("/^(\w+\/)([\w\d\-_]{1,28})\.(3ds|xci|nds|gbc|gb|gba)$/i", $romFilename)),
+            'romFilesList' => array_filter($romFilesList, fn(string $romFilename): false|int => preg_match("/^([\w\-_]+\/)([\w\d\-_]{1,28})\.(3ds|xci|nds|gbc|gb|gba)$/i", $romFilename)),
         ]);
     }
 
