@@ -12,7 +12,7 @@ class RomFilenameRule implements Rule
 
     public function passes($attribute, $value): bool
     {
-        return preg_match(ROM_FILENAME_PATTERN, $value);
+        return preg_match(ROM_FILENAME_PATTERNS[0], $value);
     }
 
     public function message(): string
