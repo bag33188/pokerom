@@ -8,7 +8,7 @@
         <x-list-group class="shadow" x-data="{ open1: true, open2: true, open3: true }">
             <x-list-item class="pb-4"><p class="mt-1.5 mb-3 inline-block font-semibold" @click="open1 = !open1">ROM
                     Info</p>
-                <x-list-group class="!border-1 rounded-lg -border-gray-200 bg-gray-100" x-show="open1">
+                <x-list-group class="!border-1 rounded-lg -border-gray-200 bg-gray-100" x-show="open1 === true">
                     <x-list-item>ROM ID: {{ $rom->id }}</x-list-item>
                     <x-list-item>ROM Name: {{ $rom->rom_name }}</x-list-item>
                     <x-list-item>ROM Size: {{ $romQueries->formatRomSizeSQL($rom->rom_size) }}</x-list-item>
@@ -18,7 +18,7 @@
             @if($rom->has_game)
                 <x-list-item class="pb-4"><p class="mt-1.5 mb-3 inline-block font-semibold" @click="open2 = !open2">Game
                         Info</p>
-                    <x-list-group class="!border-1 rounded-lg -border-gray-200 bg-gray-100" x-show="open2">
+                    <x-list-group class="!border-1 rounded-lg -border-gray-200 bg-gray-100" x-show="open2 === true">
                         <x-list-item>Game ID: {{ $rom->game->id }}</x-list-item>
                         <x-list-item>Game Name: {{ $rom->game->game_name }} Version</x-list-item>
                         <x-list-item>Region: {{ $rom->game->region }}</x-list-item>
@@ -31,7 +31,7 @@
             @if($rom->has_file)
                 <x-list-item class="pb-4"><p class="mt-1.5 mb-3 inline-block font-semibold" @click="open3 = !open3">File
                         Info</p>
-                    <x-list-group class="!border-1 rounded-lg -border-gray-200 bg-gray-100" x-show="open3">
+                    <x-list-group class="!border-1 rounded-lg -border-gray-200 bg-gray-100" x-show="open3 === true">
                         <x-list-item>File ID: {{ $rom->romFile->_id }}</x-list-item>
                         <x-list-item>File Name: {{ $rom->romFile->filename }}</x-list-item>
                         <x-list-item>File Length: {{ $rom->romFile->length }} Bytes</x-list-item>
