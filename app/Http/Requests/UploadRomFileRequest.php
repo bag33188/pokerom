@@ -23,7 +23,11 @@ class UploadRomFileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'rom_filename' => ['required', 'string', new RomFilenameRule, Rule::unique(RomFile::class, 'filename')],
+            'rom_filename' => [
+                'required',
+                'string',
+                new RomFilenameRule,
+                Rule::unique(RomFile::class, 'filename')],
         ];
     }
 
