@@ -6,7 +6,7 @@
     </x-slot>
     <div class="py-6 px-5">
         <x-list-group class="shadow" x-data="{ open1: true, open2: true, open3: true }">
-            <x-list-item class="pb-4"><p class="mt-1.5 mb-3 inline-block font-semibold" @click="open1 = !open1">ROM
+            <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold" @click="open1 = !open1">ROM
                     Info</p>
                 <x-list-group class="!border-1 rounded-lg -border-gray-200 bg-gray-100" x-show="open1 === true">
                     <x-list-item>ROM ID: {{ $rom->id }}</x-list-item>
@@ -16,7 +16,7 @@
                 </x-list-group>
             </x-list-item>
             @if($rom->has_game)
-                <x-list-item class="pb-4"><p class="mt-1.5 mb-3 inline-block font-semibold" @click="open2 = !open2">Game
+                <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold" @click="open2 = !open2">Game
                         Info</p>
                     <x-list-group class="!border-1 rounded-lg -border-gray-200 bg-gray-100" x-show="open2 === true">
                         <x-list-item>Game ID: {{ $rom->game->id }}</x-list-item>
@@ -29,7 +29,7 @@
                 </x-list-item>
             @endif
             @if($rom->has_file)
-                <x-list-item class="pb-4"><p class="mt-1.5 mb-3 inline-block font-semibold" @click="open3 = !open3">File
+                <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold" @click="open3 = !open3">File
                         Info</p>
                     <x-list-group class="!border-1 rounded-lg -border-gray-200 bg-gray-100" x-show="open3 === true">
                         <x-list-item>File ID: {{ $rom->romFile->_id }}</x-list-item>
