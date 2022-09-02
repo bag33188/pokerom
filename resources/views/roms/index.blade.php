@@ -6,13 +6,33 @@
         }
     </style>
 @endpush
+@php
+    $btnClasses = [
+      'bg-emerald-500',
+      'hover:bg-emerald-600',
+      'text-white',
+      'font-bold',
+      'py-2',
+      'px-4',
+      'my-4',
+      'shadow-md',
+      'rounded'
+    ];
+@endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">ROMs</h2>
     </x-slot>
-    <div class="py-12">
+    <div x-data="{ open: true }">
+        <div class="w-full flex justify-center mb-1.5">
+            <button type="button" @class($btnClasses) @click="open = !open">
+                <span x-show="open">Hide</span>
+                <span x-show="!open" x-cloak>Show</span>
+                <span><!--&nbsp;-->ROMs</span>
+            </button>
+        </div>
         @unless(count($roms) === 0)
-            <table class="w-full test-sm text-left text-gray-800 table-auto">
+            <table class="w-full test-sm text-left text-gray-800 table-auto border-t-2" x-show="open === true">
                 <thead class="bg-gray-50">
                 @foreach($tableColumns as $columnName)
                     <th scope="col" class="px-6 py-3">{{ $columnName }}</th>
