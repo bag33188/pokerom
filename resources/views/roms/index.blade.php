@@ -7,7 +7,7 @@
     </style>
 @endpush
 @php
-    $btnClasses = [
+    $showHideBtnClasses = [
       'bg-emerald-500',
       'hover:bg-emerald-600',
       'text-white',
@@ -25,7 +25,7 @@
     </x-slot>
     <div x-data="{ open: true }">
         <div class="w-full flex justify-center mb-1.5">
-            <button type="button" @class($btnClasses) @click="open = !open">
+            <button type="button" @class($showHideBtnClasses) @click="open = !open">
                 <span x-show="open">Hide</span>
                 <span x-show="!open" x-cloak>Show</span>
                 <span><!--&nbsp;-->ROMs</span>
