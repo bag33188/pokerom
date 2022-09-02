@@ -7,7 +7,7 @@
     <div class="py-6 px-5">
         <x-list-group class="shadow">
             <x-list-item class="pb-4"><p class="mt-1.5 mb-3 inline-block font-semibold">ROM Info</p>
-                <x-list-group class="!border-1 rounded-lg !bg-gray-100">
+                <x-list-group class="!border-1 rounded-lg -border-gray-200 !bg-gray-100">
                     <x-list-item>ROM ID: {{ $rom->id }}</x-list-item>
                     <x-list-item>ROM Name: {{ $rom->rom_name }}</x-list-item>
                     <x-list-item>ROM Size: {{ $romQueries->formatRomSizeSQL($rom->rom_size) }}</x-list-item>
@@ -16,7 +16,7 @@
             </x-list-item>
             @if($rom->has_game)
                 <x-list-item class="pb-4"><p class="mt-1.5 mb-3 inline-block font-semibold">Game Info</p>
-                    <x-list-group class="!border-1 rounded-lg !bg-gray-100">
+                    <x-list-group class="!border-1 rounded-lg -border-gray-200 !bg-gray-100">
                         <x-list-item class="border-0">Game ID: {{ $rom->game->id }}</x-list-item>
                         <x-list-item>Game Name: {{ $rom->game->game_name }} Version</x-list-item>
                         <x-list-item>Region: {{ $rom->game->region }}</x-list-item>
@@ -28,7 +28,7 @@
             @endif
             @if($rom->has_file)
                 <x-list-item class="pb-4"><p class="mt-1.5 mb-3 inline-block font-semibold">File Info</p>
-                    <x-list-group class="!border-1 rounded-lg !bg-gray-100">
+                    <x-list-group class="!border-1 rounded-lg -border-gray-200 !bg-gray-100">
                         <x-list-item class="border-0">File ID: {{ $rom->romFile->_id }}</x-list-item>
                         <x-list-item>File Name: {{ $rom->romFile->filename }}</x-list-item>
                         <x-list-item>File Length: {{ $rom->romFile->length }} Bytes</x-list-item>
