@@ -27,7 +27,8 @@ class UploadRomFileRequest extends FormRequest
                 'required',
                 'string',
                 new RomFilenameRule,
-                Rule::unique(RomFile::class, 'filename')],
+                Rule::unique(RomFile::class, 'filename')
+            ],
         ];
     }
 
