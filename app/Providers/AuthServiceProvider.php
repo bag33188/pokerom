@@ -39,6 +39,7 @@ class AuthServiceProvider extends ServiceProvider
 
         // establish these as gates since multiple controllers will need to use them
         Gate::define('viewAny-romFile', fn(User $user) => $user->isAdmin());
+        Gate::define('viewAny-user', fn(User $user) => $user->isAdmin());
 
         // give admin user complete access to all endpoints and actions
         Gate::before(function (User $user, string $ability) {

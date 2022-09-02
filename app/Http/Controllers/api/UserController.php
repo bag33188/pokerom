@@ -12,6 +12,7 @@ use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 
 class UserController extends ApiController
@@ -25,13 +26,11 @@ class UserController extends ApiController
         return $request->user();
     }
 
-    /**
-     * @throws AuthorizationException
-     */
-    public function index(Request $request)
+    public function index()
     {
-        $this->authorize('viewAny', $request->user());
-        return new UserCollection(User::all());
+        Gate::authorize('viewAny-user');
+        $users = User::all();
+        return new UserCollection($users);
     }
 
     public function register(RegisterUserRequest $request)
