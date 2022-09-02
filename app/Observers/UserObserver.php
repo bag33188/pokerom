@@ -13,16 +13,12 @@ class UserObserver
 
     public function updated(User $user): void
     {
-        if ($this->isApiRequest()) {
-            $this->userRepository->revokeApiTokens($user);
-        }
+        $this->userRepository->revokeApiTokens($user);
     }
 
     public function deleted(User $user): void
     {
-        if ($this->isApiRequest()) {
-            $this->userRepository->revokeApiTokens($user);
-        }
+        $this->userRepository->revokeApiTokens($user);
     }
 
     private function isApiRequest(): bool
