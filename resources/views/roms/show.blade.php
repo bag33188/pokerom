@@ -18,8 +18,9 @@
                 <x-list-item class="pb-4"><p class="mt-1.5 mb-3 inline-block font-semibold">Game Info</p>
                     <x-list-group class="-border border-1 rounded-lg !bg-gray-100">
                         <x-list-item class="border-0">Game ID: {{ $rom->game->id }}</x-list-item>
-                        <x-list-item>Game Name: {{ $rom->game->game_name }}</x-list-item>
+                        <x-list-item>Game Name: {{ $rom->game->game_name }} Version</x-list-item>
                         <x-list-item>Region: {{ $rom->game->region }}</x-list-item>
+                        <x-list-item>Generation: {{ numberToRoman($rom->game->generation) }}</x-list-item>
                         <x-list-item class="!border-b-0">Release
                             Date: {{ $rom->game->date_released->format('l, F jS, Y') }}</x-list-item>
                     </x-list-group>
@@ -30,10 +31,9 @@
                     <x-list-group class="-border border-1 rounded-lg !bg-gray-100">
                         <x-list-item class="border-0">File ID: {{ $rom->romFile->_id }}</x-list-item>
                         <x-list-item>File Name: {{ $rom->romFile->filename }}</x-list-item>
-                        <x-list-item>Designated
-                            Console: {{ $romFileRepository->determineConsole($rom->romFile) }}</x-list-item>
                         <x-list-item>File Length: {{ $rom->romFile->length }} Bytes</x-list-item>
-                        <x-list-item class="!border-b-0">MD5 Hash: {{ $rom->romFile->md5 }}</x-list-item>
+                        <x-list-item class="!border-b-0">Designated
+                            Console: {{ $romFileRepository->determineConsole($rom->romFile) }}</x-list-item>
                     </x-list-group>
                 </x-list-item>
             @endif
