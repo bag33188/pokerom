@@ -74,20 +74,20 @@ class FileUploader
     }
 
     /**
-     * flush and send output buffer
-     * @return void
-     */
-    private static function flushBufferUpStream(): void
-    {
-        ob_flush();
-    }
-
-    /**
      * @param string $filename
      * @return resource
      */
     private static function openFileForBinaryReading(string $filename)
     {
         return fopen($filename, 'rb'); // `rb` mode = read binary
+    }
+
+    /**
+     * flush and send output buffer
+     * @return void
+     */
+    private static function flushBufferUpStream(): void
+    {
+        ob_flush();
     }
 }
