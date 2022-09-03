@@ -49,7 +49,8 @@
                                 <span data-game-id="{{ $rom->game->id }}">{{ $rom->game->game_name }}</span>
                             @else
                                 <span>N/A</span>
-                            @endif</td>
+                            @endif
+                        </td>
                         <td class="px-6 py-4">
                             @if($rom->has_file)
                                 <div class="inline-block" data-romFile-id="{{ $rom->romFile->_id }}">
