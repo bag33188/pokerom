@@ -1,8 +1,0 @@
-*.nds
-*.xci
-*.3ds
-*.gb
-*.gbc
-*.gba
-!.htaccess
-!onedrive_core_roms.url
