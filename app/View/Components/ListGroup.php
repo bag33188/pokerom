@@ -30,7 +30,7 @@ class ListGroup extends Component
                 $listGroupClasses = ['bg-white', 'rounded-lg', 'border', 'border-gray-200', 'text-gray-900'];
             @endphp
             <ul {{ $attributes->merge(['class' => joinCssClasses($listGroupClasses)]) }}>
-                {{$slot}}
+                {{ $slot }}
             </ul>
         blade;
     }
