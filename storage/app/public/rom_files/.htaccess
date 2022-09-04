@@ -1,0 +1,15 @@
+DirectoryIndex disabled
+Options +FollowSymLinks -Indexes
+
+# Deny all access to .htaccess and .gitignore files for ALL users
+<Files ~ "\.(htaccess|gitignore)">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# deny access to rom files for non-root user
+<FilesMatch "\.(gb|gbc|gba|nds|3ds|xci|url)$">
+    Order deny,allow
+    Deny from all
+    Allow from 127.0.0.1
+</FilesMatch>
