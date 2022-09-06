@@ -61,7 +61,8 @@
                             @endif
                         </td>
                         <td class="px-6 py-4">
-                            <x-anchor-button href="{{ route('roms.show', ['rom' => $rom]) }}">Get Info!
+                            <x-anchor-button href="{{ route('roms.show', ['rom' => $rom]) }}">
+                                Get Info!
                             </x-anchor-button>
                         </td>
                     </tr>
