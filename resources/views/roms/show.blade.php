@@ -44,12 +44,7 @@
         @if(auth()->user()->isAdmin())
             <div class="flex flex-row justify-between">
                 <div class="mt-3">
-                    <form method="POST" action="{{ route('roms.destroy', ['rom' => $rom]) }}">
-                        @method('DELETE')
-                        @csrf
-
-                        <x-jet-danger-button type="submit">Delete!</x-jet-danger-button>
-                    </form>
+                    @include('roms.delete', ['rom' => $rom])
                 </div>
                 <div class="mt-3">
                     <x-anchor-button :href="route('roms.edit', ['rom' => $rom])">
