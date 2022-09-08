@@ -10,7 +10,7 @@
                 <x-card :game="$game" :heading="$game->game_name">
                     <x-list-group class="divide-y-2 divide-gray-100 border">
                         <x-list-item class="p-3 hover:bg-blue-600 hover:text-blue-200 !border-b-0">
-                            {{ $game->game_name }}&nbsp;Version
+                            {{ $game->game_name }} Version
                         </x-list-item>
                         <x-list-item class="p-3 hover:bg-blue-600 hover:text-blue-200">
                             Generation {{ numberToRoman($game->generation) }}
