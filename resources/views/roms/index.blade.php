@@ -34,9 +34,9 @@
         @unless(count($roms) === 0)
             <table class="w-full test-sm text-left text-gray-800 table-auto border-t-2" x-show="open === true">
                 <thead class="bg-gray-50">
-                @foreach($tableColumns as $columnName)
-                    <th scope="col" class="px-6 py-3">{{ $columnName }}</th>
-                @endforeach
+                @for($i = 0; $i < count($tableColumns); $i++)
+                    <th scope="col" class="px-6 py-3">{{ $tableColumns[$i] }}</th>
+                @endfor
                 </thead>
                 <tbody>
                 @foreach($roms as $rom)
