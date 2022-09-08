@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Events\AttemptRomLinkToRomFile;
-use App\Http\Controllers\Controller as ViewController;
+use App\Http\Controllers\Controller as WebController;
 use App\Http\Requests\StoreRomRequest;
 use App\Http\Requests\UpdateRomRequest;
 use App\Interfaces\RomFileQueriesInterface;
@@ -14,7 +14,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
-class RomController extends ViewController
+class RomController extends WebController
 {
     /**
      * Display a listing of the resource.

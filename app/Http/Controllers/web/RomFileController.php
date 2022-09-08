@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\web;
 
-use App\Http\Controllers\Controller as ViewController;
+use App\Http\Controllers\Controller as WebController;
 use App\Http\Requests\UploadRomFileRequest;
 use App\Interfaces\RomFileRepositoryInterface;
 use App\Models\RomFile;
@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 
-class RomFileController extends ViewController
+class RomFileController extends WebController
 {
     private Closure $formatUploadDate;
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\web;
 
-use App\Http\Controllers\Controller as ViewController;
+use App\Http\Controllers\Controller as WebController;
 use App\Http\Requests\StoreGameRequest;
 use App\Http\Requests\UpdateGameRequest;
 use App\Interfaces\GameQueriesInterface;
@@ -14,7 +14,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
-class GameController extends ViewController
+class GameController extends WebController
 {
     /**
      * Display a listing of the resource.

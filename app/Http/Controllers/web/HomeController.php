@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\web;
 
-use App\Http\Controllers\Controller as ViewController;
+use App\Http\Controllers\Controller as WebController;
 
-class HomeController extends ViewController
+class HomeController extends WebController
 {
     public function __invoke()
     {
