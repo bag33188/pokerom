@@ -55,7 +55,8 @@
                     @if(!$rom->has_file)
                         <div class="mx-1 order-1"></div>
                         <form class="order-0" method="POST" action="{{ route('roms.link-file', ['rom' => $rom]) }}">
-                            @method("PATCH") @csrf
+                            @method('PATCH')
+                            @csrf
                             <x-jet-button type="submit">Link Rom To File If Exists</x-jet-button>
                         </form>
                     @endif
