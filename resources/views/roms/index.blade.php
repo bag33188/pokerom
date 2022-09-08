@@ -39,7 +39,7 @@
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">ROMs</h2>
     </x-slot:header>
     <div x-data="{ open: true }">
-        <div class="w-full flex justify-center mb-1.5">
+        <div class="w-full flex justify-center">
             <button type="button" @class($showHideBtnClasses) @click="open = toggleContent(open)">
                 <span x-show="open">Hide</span>
                 <span x-show="!open" x-cloak>Show</span>
