@@ -3,14 +3,14 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2022 at 07:42 AM
+-- Generation Time: Sep 08, 2022 at 05:00 AM
 -- Server version: 10.9.2-MariaDB
 -- PHP Version: 8.1.6
 
 --
 -- CREATE USER 'bag33188'@'%' IDENTIFIED VIA mysql_native_password USING '***';GRANT ALL PRIVILEGES ON *.* TO 'bag33188'@'%' REQUIRE NONE WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;CREATE DATABASE IF NOT EXISTS `bag33188`;GRANT ALL PRIVILEGES ON `bag33188`.* TO 'bag33188'@'%';GRANT ALL PRIVILEGES ON `bag33188\_%`.* TO 'bag33188'@'%';
 -- set autocommit = {0|1}
--- auto increment `roms` + `games` = 43,  auto increment `users` = 3, auto increment `personal_access_tokens` = 2, auto increment `migrations` = 10
+-- auto increment `roms` + `games` = 43,  auto increment `users` = 3, auto increment `personal_access_tokens` = 3, auto increment `migrations` = 10
 -- ALTER TABLE table_name AUTO_INCREMENT = value;
 --
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -63,6 +63,37 @@ CREATE DEFINER=`bag33188`@`%` PROCEDURE `spUpdateRomFromRomFileData` (IN `ROM_FI
 rom size is stored as Kibibytes (base 1024)
 mongodb stored as bytes
 */
+END$$
+
+DROP PROCEDURE IF EXISTS `uspSelectAllPokeROMData`$$
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `uspSelectAllPokeROMData` ()  READS SQL DATA SQL SECURITY INVOKER COMMENT 'Table Joins to select all PokeROM Data in the database.' BEGIN
+    SELECT
+        `roms`.`id` AS "rom_id",
+        `roms`.`rom_name` AS "rom_name",
+        `roms`.`rom_type` AS "rom_type",
+        `roms`.`rom_size` AS "rom_size", -- measured in kibibytes (base 1024)
+        `games`.`id` AS "game_id",
+        `games`.`game_name` AS "game_name",
+        `games`.`game_type` AS "game_type",
+        `games`.`region` AS "region",
+        `games`.`generation` AS "generation",
+        `games`.`date_released` AS "date_released",
+        `roms`.`file_id` AS "rom_file_id",
+        CONCAT(`roms`.`rom_name`, '.', UCASE(`roms`.`rom_type`)) AS "rom_filename",
+        (`roms`.`rom_size` * 1024) AS "rom_file_size" -- convert kibibytes to bytes
+    FROM
+        `roms`
+            RIGHT JOIN
+        `games`
+        ON `roms`.`id` = `games`.`rom_id`
+    WHERE
+        `roms`.`has_game` = TRUE AND
+        `roms`.`has_file` = TRUE AND
+        `roms`.`game_id` IS NOT NULL AND
+        `roms`.`file_id` IS NOT NULL
+    ORDER BY
+    `rom_id` DESC,
+    `generation` DESC;
 END$$
 
 --
@@ -121,6 +152,24 @@ MAX_ROM_SIZE_LENGTH = 9; // ex. '164.28 MB'
 */
 END$$
 
+DROP FUNCTION IF EXISTS `SPLIT_STRING`$$
+CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(256), `SEPARATOR` VARCHAR(1) CHARSET utf8, `POSITION` SMALLINT) RETURNS VARCHAR(128) CHARSET utf8mb4 DETERMINISTIC COMMENT 'splits a string based on delimiter ' BEGIN
+    DECLARE `max_results` SMALLINT;
+
+    -- get max number of items
+    SET `max_results` = LENGTH(`STR_VAL`) - LENGTH(REPLACE(`STR_VAL`, `SEPARATOR`, '')) + 1;
+
+    IF `POSITION` > `max_results` THEN
+        RETURN NULL;
+    ELSE
+        RETURN SUBSTRING_INDEX(SUBSTRING_INDEX(`STR_VAL`, `SEPARATOR`, `POSITION`), `SEPARATOR`, -1);
+    END IF;
+/* !important
+keep SEPARATOR as VARCHAR since if CHAR is used
+then a SPACE character will not work as a SEPARATOR
+*/
+END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -157,7 +206,7 @@ TRUNCATE TABLE `failed_jobs`;
 -- Table structure for table `games`
 --
 -- Creation: Aug 27, 2022 at 03:59 PM
--- Last update: Aug 30, 2022 at 05:26 AM
+-- Last update: Sep 08, 2022 at 02:39 AM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -190,10 +239,10 @@ TRUNCATE TABLE `games`;
 --
 
 INSERT INTO `games` (`id`, `rom_id`, `game_name`, `game_type`, `date_released`, `generation`, `region`, `slug`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Pokemon Red', 'core', '1998-09-28', 2, 'kanto', 'pokemon-red', '2022-07-04 10:31:25', '2022-08-30 08:02:16'),
+(1, 1, 'Pokemon Red', 'core', '1998-09-28', 1, 'kanto', 'pokemon-red', '2022-07-04 10:31:25', '2022-08-30 13:57:22'),
 (2, 2, 'Pokemon Blue', 'core', '1998-09-28', 1, 'kanto', 'pokemon-blue', '2022-07-04 10:31:32', '2022-07-04 10:31:32'),
 (3, 3, 'Pokemon Green (JP)', 'core', '1996-02-27', 1, 'kanto', 'pokemon-green-jp', '2022-07-04 10:31:52', '2022-08-30 07:58:41'),
-(4, 4, 'Pokemon Yellow', 'core', '1999-10-18', 1, 'kanto', 'pokemon-yellow', '2022-07-04 10:32:14', '2022-07-04 10:32:14'),
+(4, 4, 'Pokemon Yellow', 'core', '1999-10-18', 1, 'kanto', 'pokemon-yellow', '2022-07-04 10:32:14', '2022-08-30 13:25:56'),
 (5, 5, 'Pokemon Gold', 'core', '2000-10-15', 2, 'johto', 'pokemon-gold', '2022-07-04 10:32:40', '2022-07-04 10:32:40'),
 (6, 6, 'Pokemon Silver', 'core', '2000-10-15', 2, 'johto', 'pokemon-silver', '2022-07-04 10:32:49', '2022-07-04 10:32:49'),
 (7, 7, 'Pokemon Crystal', 'core', '2001-08-29', 2, 'johto', 'pokemon-crystal', '2022-07-04 10:33:03', '2022-07-04 10:33:03'),
@@ -360,20 +409,13 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 TRUNCATE TABLE `personal_access_tokens`;
---
--- Dumping data for table `personal_access_tokens`
---
-
-INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
-(4, 'App\\Models\\User', 1, 'auth_token', '07702c824a257a49b4e559f194734bb698e18d9c3cb2c556abdeae4cfaba3a9e', '[\"*\"]', '2022-08-30 12:26:12', NULL, '2022-08-29 01:49:41', '2022-08-30 12:26:12');
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `roms`
 --
 -- Creation: Aug 27, 2022 at 05:10 PM
--- Last update: Aug 30, 2022 at 04:54 AM
+-- Last update: Sep 08, 2022 at 03:00 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -406,7 +448,7 @@ TRUNCATE TABLE `roms`;
 --
 
 INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_type`, `has_game`, `has_file`, `created_at`, `updated_at`) VALUES
-(1, 'POKEMON_RED01', 1, '6305c27b4bc3e0c5dc0c46ef', 1024, 'gb', 1, 1, '2022-07-04 10:15:17', '2022-08-30 01:36:31'),
+(1, 'POKEMON_RED01', 1, '6305c27b4bc3e0c5dc0c46ef', 1024, 'gb', 1, 1, '2022-07-04 10:15:17', '2022-08-30 14:02:01'),
 (2, 'POKEMON_BLUE01', 2, '6305c2924bc3e0c5dc0c46f3', 1024, 'gb', 1, 1, '2022-07-04 10:15:28', '2022-08-24 20:17:54'),
 (3, 'POKEMON_GREEN01', 3, '6305c29a4bc3e0c5dc0c46f7', 1024, 'gb', 1, 1, '2022-07-04 10:15:39', '2022-08-24 20:18:02'),
 (4, 'POKEMON_YELLOW01', 4, '6305c2a04bc3e0c5dc0c46fa', 1024, 'gb', 1, 1, '2022-07-04 10:15:44', '2022-08-24 20:18:08'),
@@ -455,6 +497,7 @@ INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Aug 27, 2022 at 03:45 PM
+-- Last update: Sep 08, 2022 at 03:00 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -483,7 +526,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('2rPNl7okSe4FJdtByUdQbvLbFYXy5Ygikbwib4M6', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiSnhtamd2WnR6UHlwa2VmYUU3OUJvUzBWY1BaNFJrazFEWkl5YVBHayI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTk6Imh0dHA6Ly9wb2tlcm9tLnRlc3Qvcm9tLWZpbGVzLzYzMDVjMjkyNGJjM2UwYzVkYzBjNDZmMy9zaG93Ijt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCRjUjlURTB2bFdNTUhSM0NLa094cWJPdEwuOWtGYVV2SHpjbGFpTmI0OXZkMWo4VTlOVEVuUyI7fQ==', 1661837930);
+('pqp05LznbokrBSPFyJ7Gmffo6ewlCTauQQIzweJE', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiQTZLbkFlOXNqNTJBWmE0czAxYlZ3NFVDV1o4Ynp4cUxpZmF3Z1MxeiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR0VUdyZkhTLnRPNkFKLmlLTXV0d1MuajJxakZmUm1MU3NTNXN1bjZkSWc3ZEVIUVZYS1l1YSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjk6Imh0dHA6Ly9wb2tlcm9tLnRlc3Qvcm9tLWZpbGVzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1662606030);
 
 -- --------------------------------------------------------
 
@@ -491,7 +534,6 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- Table structure for table `users`
 --
 -- Creation: Aug 27, 2022 at 03:45 PM
--- Last update: Aug 30, 2022 at 01:24 AM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -526,7 +568,7 @@ TRUNCATE TABLE `users`;
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Brock Glatman', 'bglatman@outlook.com', NULL, '$2y$10$cR9TE0vlWMMHR3CKkOxqbOtL.9kFaUvHzclaiNb49vd1j8U9NTEnS', NULL, NULL, NULL, 'admin', NULL, NULL, NULL, '2022-08-27 23:17:24', '2022-08-27 23:17:24'),
+(1, 'Brock Glatman', 'bglatman@outlook.com', NULL, '$2y$10$tUGrfHS.tO6AJ.iKMutwS.j2qjFfRmLSsS5sun6dIg7dEHQVXKYua', NULL, NULL, NULL, 'admin', 'iCX3e9D1KZEjvhwPKiNRPLHuNKusOeApW59PM2QfxuwM1BQRbSbmW0Qco1wz', NULL, NULL, '2022-08-27 23:17:24', '2022-09-02 07:39:41'),
 (2, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$g4kXZ7ea8TNdwlySRo5bne1HoU6h/NOyRmul.J3fD5.5L5eu1sKBC', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-08-30 08:24:08', '2022-08-30 08:24:08');
 
 --
