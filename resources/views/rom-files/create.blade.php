@@ -75,6 +75,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Upload a ROM File</h2>
+        <h6 class="text-center">{{ count($romFilesList) }} selections</h6>
     </x-slot>
     <div class="container mx-auto w-full">
         @unless(count($romFilesList) === 0)
@@ -88,10 +89,13 @@
                     <div class="flex flex-col">
                         <x-form-select-label for="romFile" text="Select ROM File"/>
                         <x-form-select name="rom_filename" id="romFile">
-                            @foreach($romFilesList as $romFileItem)
-                                @php removeStoragePathFromFilename($romFileItem); @endphp
+                            @for($i = 0; $i < count($romFilesList); $i++)
+                                @php
+                                    $romFileItem = $romFilesList[$i];
+                                    removeStoragePathFromFilename($romFileItem);
+                                @endphp
                                 <option value="{{ $romFileItem }}">{{ $romFileItem }}</option>
-                            @endforeach
+                            @endfor
                         </x-form-select>
                     </div>
                     <div class="my-4">
