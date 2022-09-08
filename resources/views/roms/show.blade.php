@@ -32,6 +32,16 @@
         @endverbatim
     </script>
 @endpush
+@php
+    $userIsAdmin = auth()->user()->isAdmin();
+    $innerListGroupClasses = [
+      '!border-1',
+      'rounded-lg',
+      '-border-gray-200',
+      'bg-gray-100',
+      'shadow-inner' => !$userIsAdmin,
+    ];
+@endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900"
@@ -40,12 +50,11 @@
         </h2>
     </x-slot>
     <div class="py-6 px-5">
-        <x-list-group class="shadow no-select"
+        <x-list-group @class(['shadow', 'no-select' => !$userIsAdmin])
                       x-data="{ romInfoOpened: true, gameInfoOpened: true, romFileInfoOpened: true }">
             <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer"
                                          @click="romInfoOpened = toggleInfo(romInfoOpened)">ROM Info</p>
-                <x-list-group class="!border-1 rounded-lg -border-gray-200 bg-gray-100 shadow-inner"
-                              x-show="romInfoOpened === true">
+                <x-list-group @class($innerListGroupClasses) x-show="romInfoOpened === true">
                     <x-list-item>ROM ID: {{ $rom->id }}</x-list-item>
                     <x-list-item>ROM Name: {{ $rom->rom_name }}</x-list-item>
                     <x-list-item>ROM Size: {{ $romQueries->formatRomSizeSQL($rom->rom_size) }}</x-list-item>
@@ -56,15 +65,14 @@
             @if($rom->has_game)
                 <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer"
                                              @click="gameInfoOpened = toggleInfo(gameInfoOpened)">Game Info</p>
-                    <x-list-group
-                        class="!border-1 rounded-lg -border-gray-200 bg-gray-100 shadow-inner"
-                        x-show="gameInfoOpened === true">
+                    <x-list-group @class($innerListGroupClasses) x-show="gameInfoOpened === true">
                         <x-list-item>Game ID: {{ $rom->game->id }}</x-list-item>
                         <x-list-item>Game Name: {{ $rom->game->game_name }} Version</x-list-item>
                         <x-list-item>Region: {{ $rom->game->region }}</x-list-item>
                         <x-list-item>Generation: {{ numberToRoman($rom->game->generation) }}</x-list-item>
-                        <x-list-item class="-border-b border-b-0">Release
-                            Date: {{ $rom->game->date_released->format('l, F jS, Y') }}</x-list-item>
+                        <x-list-item class="-border-b border-b-0">
+                            Release Date: {{ $rom->game->date_released->format('l, F jS, Y') }}
+                        </x-list-item>
                     </x-list-group>
                     <p class="font-bold m-0 p-0 text-xl" x-show="!gameInfoOpened" x-cloak>...</p>
                 </x-list-item>
@@ -72,9 +80,7 @@
             @if($rom->has_file)
                 <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer"
                                              @click="romFileInfoOpened = toggleInfo(romFileInfoOpened)">File Info</p>
-                    <x-list-group
-                        class="!border-1 rounded-lg -border-gray-200 bg-gray-100 shadow-inner"
-                        x-show="romFileInfoOpened === true">
+                    <x-list-group @class($innerListGroupClasses) x-show="romFileInfoOpened === true">
                         <x-list-item>File ID: {{ $rom->romFile->_id }}</x-list-item>
                         <x-list-item>File Name: {{ $rom->romFile->filename }}</x-list-item>
                         <x-list-item>File Length: {{ $rom->romFile->length }} Bytes</x-list-item>
@@ -85,7 +91,7 @@
                 </x-list-item>
             @endif
         </x-list-group>
-        @if(auth()->user()->isAdmin())
+        @if($userIsAdmin)
             <div class="flex flex-row justify-between no-select">
                 <div class="mt-3">
                     @include('roms.delete', ['rom' => $rom])
