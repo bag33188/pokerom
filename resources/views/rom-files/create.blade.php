@@ -71,14 +71,16 @@
     function removeStoragePathFromFilename(string &$value): void {
         $value = str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $value);
     }
+    $romFilesListCount = count($romFilesList);
 @endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Upload a ROM File</h2>
-        <h6 class="text-center">{{ sizeof($romFilesList) }} selections</h6>
+        <h6 class="text-center">{{ $romFilesListCount }} selection<span
+                style="display: {!! $romFilesListCount > 1 ? 'inline' : 'none' !!}">s</span></h6>
     </x-slot>
     <div class="container mx-auto w-full">
-        @unless(count($romFilesList) === 0)
+        @unless($romFilesListCount === 0)
             <div class="p-6">
                 <x-jet-validation-errors class="mb-4" />
 
@@ -89,7 +91,7 @@
                     <div class="flex flex-col">
                         <x-form-select-label class="!font-semibold" for="romFile" text="Select ROM File" />
                         <x-form-select class="shadow" name="rom_filename" id="romFile">
-                            @for($i = 0; $i < count($romFilesList); $i++)
+                            @for($i = 0; $i < $romFilesListCount; $i++)
                                 @php
                                     $romFileItem = $romFilesList[$i];
                                     removeStoragePathFromFilename($romFileItem);
