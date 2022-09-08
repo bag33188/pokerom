@@ -7,8 +7,7 @@
     <div class="p-2.5">
         <div class="w-full h-full grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-4">
             <x-list-group @class([
-                'row-end-3' => ! $userIsAdmin,
-                'row-end-1' => $userIsAdmin,
+                'row-end-1',
                 'row-start-1',
                 'col-span-full',
                 'shadow'
@@ -39,11 +38,11 @@
                     </x-anchor-button>
                 </div>
             @else
-                <div class="w-full col-span-full row-start-2 row-end-2">
+                <div class="w-full col-span-full">
                     <x-anchor-button class="float-left" type="primary" :href="route('games.index')">
                         Go Back
                     </x-anchor-button>
-                    <x-anchor-button class="float-right" :href="route('roms.show', ['rom' => $game->rom]">
+                    <x-anchor-button class="float-right" :href="route('roms.show', ['rom' => $game->rom])">
                         Goto ROM Info
                     </x-anchor-button>
                 </div>
