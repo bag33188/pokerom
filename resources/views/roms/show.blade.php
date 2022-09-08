@@ -1,5 +1,19 @@
 @inject('romFileRepository', 'App\Interfaces\RomFileRepositoryInterface')
 @inject('romQueries', 'App\Interfaces\RomQueriesInterface')
+@push('styles')
+    <style>
+        .no-select {
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+            /* Non-prefixed version, currently
+                                             supported by Chrome, Edge, Opera and Firefox */
+        }
+    </style>
+@endpush
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900"
@@ -8,7 +22,8 @@
         </h2>
     </x-slot>
     <div class="py-6 px-5">
-        <x-list-group class="shadow" x-data="{ romInfoOpened: true, gameInfoOpened: true, romFileInfoOpened: true }">
+        <x-list-group class="shadow no-select"
+                      x-data="{ romInfoOpened: true, gameInfoOpened: true, romFileInfoOpened: true }">
             <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer"
                                          @click="romInfoOpened = !romInfoOpened">ROM
                     Info</p>
@@ -24,8 +39,9 @@
             @if($rom->has_game)
                 <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer"
                                              @click="gameInfoOpened = !gameInfoOpened">Game Info</p>
-                    <x-list-group class="!border-1 rounded-lg -border-gray-200 bg-gray-100 shadow-inner"
-                                  x-show="gameInfoOpened === true">
+                    <x-list-group
+                        class="!border-1 rounded-lg -border-gray-200 bg-gray-100 shadow-inner"
+                        x-show="gameInfoOpened === true">
                         <x-list-item>Game ID: {{ $rom->game->id }}</x-list-item>
                         <x-list-item>Game Name: {{ $rom->game->game_name }} Version</x-list-item>
                         <x-list-item>Region: {{ $rom->game->region }}</x-list-item>
@@ -39,8 +55,9 @@
             @if($rom->has_file)
                 <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer"
                                              @click="romFileInfoOpened = !romFileInfoOpened">File Info</p>
-                    <x-list-group class="!border-1 rounded-lg -border-gray-200 bg-gray-100 shadow-inner"
-                                  x-show="romFileInfoOpened === true">
+                    <x-list-group
+                        class="!border-1 rounded-lg -border-gray-200 bg-gray-100 shadow-inner"
+                        x-show="romFileInfoOpened === true">
                         <x-list-item>File ID: {{ $rom->romFile->_id }}</x-list-item>
                         <x-list-item>File Name: {{ $rom->romFile->filename }}</x-list-item>
                         <x-list-item>File Length: {{ $rom->romFile->length }} Bytes</x-list-item>
