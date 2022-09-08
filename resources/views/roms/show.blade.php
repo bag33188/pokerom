@@ -19,10 +19,17 @@
 @endpush
 @push('scripts')
     <script type="text/javascript">
+        @verbatim
+        /**
+         * @name toggleInfo
+         * @param {boolean} infoOpened
+         * @returns {boolean}
+         */
         function toggleInfo(infoOpened) {
             infoOpened = !infoOpened;
             return infoOpened;
         }
+        @endverbatim
     </script>
 @endpush
 <x-app-layout>
