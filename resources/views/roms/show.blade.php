@@ -107,7 +107,7 @@
         @else
             <div class="mt-3 no-select">
                 <x-anchor-button class="float-left" type="secondary" :href="route('roms.index')">
-                    Go Back!
+                    Go Back
                 </x-anchor-button>
                 <x-rom-file.download :romFile="$rom->romFile" class="float-right"/>
             </div>
