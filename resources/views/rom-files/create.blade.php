@@ -75,7 +75,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Upload a ROM File</h2>
-        <h6 class="text-center">{{ count($romFilesList) }} selections</h6>
+        <h6 class="text-center">{{ sizeof($romFilesList) }} selections</h6>
     </x-slot>
     <div class="container mx-auto w-full">
         @unless(count($romFilesList) === 0)
