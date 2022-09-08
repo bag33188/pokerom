@@ -8,6 +8,7 @@ use App\Http\Requests\StoreRomRequest;
 use App\Http\Requests\UpdateRomRequest;
 use App\Interfaces\RomFileQueriesInterface;
 use App\Models\Rom;
+use Auth;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -67,6 +68,7 @@ class RomController extends WebController
     {
         return view('roms.show', [
             'rom' => $rom,
+            'userIsAdmin' => Auth::user()->isAdmin(),
         ]);
     }
 

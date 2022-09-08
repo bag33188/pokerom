@@ -33,7 +33,6 @@
     </script>
 @endpush
 @php
-    $userIsAdmin = auth()->user()->isAdmin();
     $innerListGroupClasses = [
       '!border-1',
       'rounded-lg',
