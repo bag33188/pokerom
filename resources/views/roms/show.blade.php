@@ -16,7 +16,8 @@
                 </x-list-group>
             </x-list-item>
             @if($rom->has_game)
-                <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold" @click="open2 = !open2">Game
+                <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold" @click="open2 = !open2">
+                        Game
                         Info</p>
                     <x-list-group class="!border-1 rounded-lg -border-gray-200 bg-gray-100" x-show="open2 === true">
                         <x-list-item>Game ID: {{ $rom->game->id }}</x-list-item>
@@ -29,7 +30,8 @@
                 </x-list-item>
             @endif
             @if($rom->has_file)
-                <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold" @click="open3 = !open3">File
+                <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold" @click="open3 = !open3">
+                        File
                         Info</p>
                     <x-list-group class="!border-1 rounded-lg -border-gray-200 bg-gray-100" x-show="open3 === true">
                         <x-list-item>File ID: {{ $rom->romFile->_id }}</x-list-item>
@@ -46,15 +48,23 @@
                 <div class="mt-3">
                     @include('roms.delete', ['rom' => $rom])
                 </div>
-                <div class="mt-3">
-                    <x-anchor-button :href="route('roms.edit', ['rom' => $rom])">
+                <div class="mt-3 inline-flex flex-row">
+                    <x-anchor-button @class(["order-2" => !$rom->has_file]) :href="route('roms.edit', ['rom' => $rom])">
                         Edit!
                     </x-anchor-button>
+                    @if(!$rom->has_file)
+                        <div class="mx-1 order-1"></div>
+                        <form class="order-0" method="POST" action="{{ route('roms.link-file', ['rom' => $rom]) }}">
+                            @method("PATCH") @csrf
+                            <x-jet-button type="submit">Link Rom To File If Exists</x-jet-button>
+                        </form>
+                    @endif
                 </div>
             </div>
         @else
             <div class="mt-3">
-                <x-anchor-button class="float-left" type="secondary" :href="route('roms.index')">Go Back!
+                <x-anchor-button class="float-left" type="secondary" :href="route('roms.index')">
+                    Go Back!
                 </x-anchor-button>
             </div>
         @endif

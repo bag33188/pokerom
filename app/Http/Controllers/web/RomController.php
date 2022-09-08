@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\web;
 
+use App\Events\AttemptRomLinkToRomFile;
 use App\Http\Controllers\Controller as ViewController;
 use App\Http\Requests\StoreRomRequest;
 use App\Http\Requests\UpdateRomRequest;
@@ -108,5 +109,15 @@ class RomController extends ViewController
         $this->authorize('delete', $rom);
         Rom::destroy($rom->id);
         return response()->redirectTo(route('roms.index'))->banner('Rom deleted successfully! ' . $rom->rom_name);
+    }
+
+    public function linkFile(Rom $rom)
+    {
+        AttemptRomLinkToRomFile::dispatchUnless($rom->has_file === TRUE, $rom);
+        if (!empty($rom->fild_id)) {
+            return response()->redirectTo(route('roms.index'))->banner('Rom file linked successfully! ' . $rom->getRomFileName());
+        } else {
+            return response()->redirectTo(route('roms.show', ['rom' => $rom]))->dangerBanner('Rom file link failed! ' . $rom->getRomFileName());
+        }
     }
 }

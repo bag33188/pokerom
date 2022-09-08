@@ -33,6 +33,7 @@ Route::middleware([
     Route::post('/roms/store', [RomController::class, 'store'])->name('roms.store');
     Route::put('/roms/{rom}', [RomController::class, 'update'])->name('roms.update');
     Route::delete('/roms/{rom}', [RomController::class, 'destroy'])->name('roms.destroy');
+    Route::patch('/roms/{rom}/link-file', [RomController::class, 'linkFile'])->name('roms.link-file');
 
     Route::get('/rom-files', [RomFileController::class, 'index'])->name('rom-files.index');
     Route::get('/rom-files/{romFile}/show', [RomFileController::class, 'show'])->name('rom-files.show');
