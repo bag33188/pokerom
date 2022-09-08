@@ -51,7 +51,7 @@ class RomFileController extends WebController
     {
         $romFilesList = Storage::disk('public')->files(ROM_FILES_DIRNAME);
         return view('rom-files.create', [
-            'romFilesList' => array_values(array_filter($romFilesList, fn(string $romFilename): false|int => preg_match(ROM_FILENAME_PATTERNS[1], $romFilename), ARRAY_FILTER_USE_KEY)),
+            'romFilesList' => array_values(array_filter($romFilesList, fn(string $romFilename): false|int => preg_match(ROM_FILENAME_PATTERNS[1], $romFilename), ARRAY_FILTER_USE_BOTH)),
         ]);
     }
 
