@@ -43,8 +43,7 @@
         <x-list-group class="shadow no-select"
                       x-data="{ romInfoOpened: true, gameInfoOpened: true, romFileInfoOpened: true }">
             <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer"
-                                         @click="romInfoOpened = toggleInfo(romInfoOpened)">ROM
-                    Info</p>
+                                         @click="romInfoOpened = toggleInfo(romInfoOpened)">ROM Info</p>
                 <x-list-group class="!border-1 rounded-lg -border-gray-200 bg-gray-100 shadow-inner"
                               x-show="romInfoOpened === true">
                     <x-list-item>ROM ID: {{ $rom->id }}</x-list-item>
