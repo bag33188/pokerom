@@ -25,12 +25,12 @@
                     <form class="inline" action="{{ route('games.destroy', ['game' => $game]) }}" method="POST">
                         @csrf
                         @method('DELETE')
-
                         <x-jet-danger-button type="submit">DELETE!</x-jet-danger-button>
                     </form>
                 </div>
                 <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start">
-                    <x-anchor-button type="primary" :href="route('games.edit', ['game' => $game])">Edit!
+                    <x-anchor-button type="primary" :href="route('games.edit', ['game' => $game])">
+                        Edit!
                     </x-anchor-button>
                 </div>
             @else
