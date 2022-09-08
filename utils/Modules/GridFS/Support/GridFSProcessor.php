@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Utils\Modules\FileDownloader;
 use Utils\Modules\FileUploader;
 
-class GridFSProcessor extends GridFS implements GridFSProcessorInterface
+class GridFSProcessor extends GridFS implements GridFSProcessorFactory
 {
 
     protected string $gridFilesStoragePath;

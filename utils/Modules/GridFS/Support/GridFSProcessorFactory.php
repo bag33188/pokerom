@@ -4,7 +4,7 @@ namespace GridFS\Support;
 
 use MongoDB\BSON\ObjectId;
 
-interface GridFSProcessorInterface
+interface GridFSProcessorFactory
 {
     function upload(string $filename): void;
 
