@@ -105,7 +105,6 @@
             0 2px 0 darkgray, 0 4px 3px 0 black !important;
             border: 1px solid black !important;
         }
-
     </style>
 @endPushOnce
 <button class="punch" type="submit" data-name="{{ $btn_name }}">Upload!</button>
