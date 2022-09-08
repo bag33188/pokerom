@@ -20,9 +20,9 @@
     ];
 @endphp
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot:header>
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">ROMs</h2>
-    </x-slot>
+    </x-slot:header>
     <div x-data="{ open: true }">
         <div class="w-full flex justify-center mb-1.5">
             <button type="button" @class($showHideBtnClasses) @click="open = !open">
