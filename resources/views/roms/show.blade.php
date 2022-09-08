@@ -50,8 +50,9 @@
         </h2>
     </x-slot>
     <div class="py-6 px-5">
-        <x-list-group @class(['shadow', 'no-select' => !$userIsAdmin])
-                      x-data="{ romInfoOpened: true, gameInfoOpened: true, romFileInfoOpened: true }">
+        <x-list-group
+            @class(['shadow', 'no-select' => !$userIsAdmin])
+            x-data="{ romInfoOpened: true, gameInfoOpened: true, romFileInfoOpened: true }">
             <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer"
                                          @click="romInfoOpened = toggleInfo(romInfoOpened)">ROM Info</p>
                 <x-list-group @class($innerListGroupClasses) x-show="romInfoOpened === true">
