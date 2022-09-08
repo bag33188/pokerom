@@ -4,19 +4,19 @@
     </x-slot>
     <div class="container mx-auto w-full mt-3.5">
         @if(count($romsWithNoGame) > 0)
-            <x-jet-validation-errors class="mb-4"/>
+            <x-jet-validation-errors class="mb-4" />
             <form method="POST" action="{{ route('games.store') }}">
                 @method('POST')
                 @csrf
 
-                <x-form-select-label text="Assoc. ROM" for="availableRoms"/>
+                <x-form-select-label text="Assoc. ROM" for="availableRoms" />
                 <x-form-select id="availableRoms" name="rom_id" autofocus required>
                     @foreach($romsWithNoGame as $rom)
                         <option value="{{ $rom->id }}">{{ $rom->rom_name }}</option>
                     @endforeach
                 </x-form-select>
                 <div class="mt-2.5">
-                    <x-jet-label for="gameName" :value="__('Game Name')"/>
+                    <x-jet-label for="gameName" :value="__('Game Name')" />
                     <x-jet-input id="gameName" class="block mt-1 w-full" type="text"
                                  name="game_name"
                                  minlength="{{ MIN_GAME_NAME_LENGTH }}"
@@ -25,7 +25,7 @@
                     />
                 </div>
                 <div class="mt-2.5">
-                    <x-jet-label for="gameType" :value="__('Game Type')"/>
+                    <x-jet-label for="gameType" :value="__('Game Type')" />
                     <x-form-select name="game_type" id="gameType" required autofocus>
                         <option value="" selected>Select Game Type</option>
                         @foreach(GAME_TYPES as $index => $gameType)
@@ -35,7 +35,7 @@
                     </x-form-select>
                 </div>
                 <div class="mt-2.5">
-                    <x-jet-label for="gameRegion" :value="__('Region')"/>
+                    <x-jet-label for="gameRegion" :value="__('Region')" />
                     <x-form-select
                         name="region" id="gameRegion"
                         required autofocus>
@@ -46,17 +46,17 @@
                     </x-form-select>
                 </div>
                 <div class="mt-2.5">
-                    <x-jet-label for="dateReleased" :value="__('Date Released')"/>
+                    <x-jet-label for="dateReleased" :value="__('Date Released')" />
                     <x-jet-input type="date"
                                  class="block mt-1 w-full"
-                                 id="dateReleased" name="date_released" required autofocus/>
+                                 id="dateReleased" name="date_released" required autofocus />
                 </div>
                 <div class="mt-2.5">
-                    <x-jet-label for="generation" :value="__('Generation')"/>
+                    <x-jet-label for="generation" :value="__('Generation')" />
                     <x-jet-input type="number" id="generation" name="generation"
                                  class="block mt-1 w-full"
                                  min="{{ MIN_GAME_GENERATION_VALUE }}" max="{{ MAX_GAME_GENERATION_VALUE }}" required
-                                 autofocus/>
+                                 autofocus />
                 </div>
                 <div class="mt-4">
                     <x-jet-button class="float-right" type="submit">
@@ -65,13 +65,10 @@
                 </div>
             </form>
         @else
-            <div class="my-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center"
-                 role="alert">
-                <p class="sm:inline text-lg">
-                    <strong class="font-bold">Sorry!</strong>
-                    <span class="block">There are no available roms to add a game to :(</span>
-                </p>
-            </div>
+            <x-alert type="error">
+                <x-slot name="heading">Sorry!</x-slot>
+                <x-slot name="message">There are no available roms to add a game to :(</x-slot>
+            </x-alert>
         @endif
     </div>
 </x-app-layout>

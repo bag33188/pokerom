@@ -35,13 +35,10 @@
                 @endforeach
             </div>
         @else
-            <div class="my-6 mx-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center"
-                 role="alert">
-                <p class="sm:inline text-lg">
-                    <strong class="font-bold">Sorry!</strong>
-                    <span class="block">No Games in database</span>
-                </p>
-            </div>
+            <x-alert type="error">
+                <x-slot:heading>Sorry!</x-slot:heading>
+                <x-slot:message>No Games in database</x-slot:message>
+            </x-alert>
         @endunless
     </div>
 </x-app-layout>

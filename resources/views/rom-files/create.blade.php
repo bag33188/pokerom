@@ -44,7 +44,7 @@
 
             let romFilenameDisabledClasses = [
                 "no-pointer-events",
-                'disabled-form-select',
+                "disabled-form-select",
                 "inset-box-shadow"
             ];
 
@@ -54,10 +54,10 @@
 
             // remove all pointer events instead
             romFilenameField.classList.add(...romFilenameDisabledClasses);
-        }
+        };
 
-        let handleUploadRomFileForm = function () {
-            uploadRomFileForm.addEventListener("submit", function () {
+        let handleUploadRomFileForm = function() {
+            uploadRomFileForm.addEventListener("submit", function() {
                 tempDisableUploadBtn();
                 tempDisableRomFilesFormSelect();
             });
@@ -80,14 +80,14 @@
     <div class="container mx-auto w-full">
         @unless(count($romFilesList) === 0)
             <div class="p-6">
-                <x-jet-validation-errors class="mb-4"/>
+                <x-jet-validation-errors class="mb-4" />
 
                 <form name="upload-romFile-form" method="POST" action="{{ route('rom-files.store') }}"
                       enctype="multipart/form-data">
                     @csrf
                     @method('POST')
                     <div class="flex flex-col">
-                        <x-form-select-label class="!font-semibold" for="romFile" text="Select ROM File"/>
+                        <x-form-select-label class="!font-semibold" for="romFile" text="Select ROM File" />
                         <x-form-select class="shadow" name="rom_filename" id="romFile">
                             @for($i = 0; $i < count($romFilesList); $i++)
                                 @php
@@ -104,13 +104,10 @@
                 </form>
             </div>
         @else
-            <div class="my-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center"
-                 role="alert">
-                <p class="sm:inline text-lg">
-                    <strong class="font-bold">Sorry!</strong>
-                    <span class="block">No ROM Files found in <samp>{{ ROM_FILES_DIRNAME }}</samp> folder</span>
-                </p>
-            </div>
+            <x-alert type="error">
+                <x-slot name="heading">Sorry!</x-slot>
+                <x-slot name="message">No ROM Files found in <samp>{{ ROM_FILES_DIRNAME }}</samp> folder</x-slot>
+            </x-alert>
         @endunless
     </div>
 </x-app-layout>
