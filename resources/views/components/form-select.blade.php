@@ -12,6 +12,6 @@
         'w-full'
     ];
 @endphp
-<select @class($formSelectClasses) {{ $attributes }}>
+<select {{ $attributes->merge(['class' => joinCssClasses($formSelectClasses)]) }}>
     {{ $slot }}
 </select>
