@@ -39,7 +39,7 @@
                     </x-anchor-button>
                 </div>
             @else
-                <div class="w-full col-span-full">
+                <div class="w-full col-span-full row-start-2 row-end-2">
                     <x-anchor-button class="float-left" type="primary" :href="route('games.index')">
                         Go Back
                     </x-anchor-button>
