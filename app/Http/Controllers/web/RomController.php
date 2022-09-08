@@ -114,10 +114,8 @@ class RomController extends ViewController
     public function linkFile(Rom $rom)
     {
         AttemptRomLinkToRomFile::dispatchUnless($rom->has_file === TRUE, $rom);
-        if (!empty($rom->fild_id)) {
-            return response()->redirectTo(route('roms.index'))->banner('Rom file linked successfully! ' . $rom->getRomFileName());
-        } else {
-            return response()->redirectTo(route('roms.show', ['rom' => $rom]))->dangerBanner('Rom file link failed! ' . $rom->getRomFileName());
-        }
+        return !empty($rom->fild_id)
+            ? response()->redirectTo(route('roms.index'))->banner('ROM File linked successfully! ' . $rom->getRomFileName())
+            : response()->redirectTo(route('roms.show', ['rom' => $rom]))->dangerBanner('ROM File link failed! ' . $rom->getRomFileName());
     }
 }
