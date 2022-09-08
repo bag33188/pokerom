@@ -2,7 +2,10 @@
 @inject('romQueries', 'App\Interfaces\RomQueriesInterface')
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">{{ $rom->rom_name }} Information</h2>
+        <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900"
+            {!! $rom->has_game === TRUE ? 'title="' . $rom->game->game_name . '"' : '' !!}>
+            {{ $rom->rom_name }} Information
+        </h2>
     </x-slot>
     <div class="py-6 px-5">
         <x-list-group class="shadow" x-data="{ open1: true, open2: true, open3: true }">
