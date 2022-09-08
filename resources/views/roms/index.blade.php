@@ -69,7 +69,7 @@
                         <td class="px-6 py-4">
                             @if($rom->has_file)
                                 <div class="inline-block" data-romFile-id="{{ $rom->romFile->_id }}">
-                                    <x-rom-file.download :romFile="$rom->romFile"/>
+                                    <x-rom-file.download :romFile="$rom->romFile" />
                                 </div>
                             @else
                                 <span>No file yet!</span>
@@ -91,7 +91,13 @@
                 </tfoot>
             </table>
         @else
-            <h2 class="text-center text-lg mt-7">No ROMs Currently Exist in the Database</h2>
+            <div class="my-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center"
+                 role="alert">
+                <p class="sm:inline text-lg">
+                    <strong class="font-bold">Sorry!</strong>
+                    <span class="block">No ROMs Currently Exist in the Database</span>
+                </p>
+            </div>
         @endunless
     </div>
 </x-app-layout>
