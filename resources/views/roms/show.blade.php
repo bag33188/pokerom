@@ -17,6 +17,14 @@
         }
     </style>
 @endpush
+@push('scripts')
+    <script type="text/javascript">
+        function toggleInfo(infoOpened) {
+            infoOpened = !infoOpened;
+            return infoOpened;
+        }
+    </script>
+@endpush
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900"
@@ -28,7 +36,7 @@
         <x-list-group class="shadow no-select"
                       x-data="{ romInfoOpened: true, gameInfoOpened: true, romFileInfoOpened: true }">
             <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer"
-                                         @click="romInfoOpened = !romInfoOpened">ROM
+                                         @click="romInfoOpened = toggleInfo(romInfoOpened)">ROM
                     Info</p>
                 <x-list-group class="!border-1 rounded-lg -border-gray-200 bg-gray-100 shadow-inner"
                               x-show="romInfoOpened === true">
@@ -41,7 +49,7 @@
             </x-list-item>
             @if($rom->has_game)
                 <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer"
-                                             @click="gameInfoOpened = !gameInfoOpened">Game Info</p>
+                                             @click="gameInfoOpened = toggleInfo(gameInfoOpened)">Game Info</p>
                     <x-list-group
                         class="!border-1 rounded-lg -border-gray-200 bg-gray-100 shadow-inner"
                         x-show="gameInfoOpened === true">
@@ -57,7 +65,7 @@
             @endif
             @if($rom->has_file)
                 <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer"
-                                             @click="romFileInfoOpened = !romFileInfoOpened">File Info</p>
+                                             @click="romFileInfoOpened = toggleInfo(romFileInfoOpened)">File Info</p>
                     <x-list-group
                         class="!border-1 rounded-lg -border-gray-200 bg-gray-100 shadow-inner"
                         x-show="romFileInfoOpened === true">
