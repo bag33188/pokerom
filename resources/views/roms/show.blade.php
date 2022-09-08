@@ -109,7 +109,7 @@
                 <x-anchor-button class="float-left" type="secondary" :href="route('roms.index')">
                     Go Back
                 </x-anchor-button>
-                <x-rom-file.download :romFile="$rom->romFile" class="float-right"/>
+                <x-rom-file.download :romFile="$rom->romFile" class="float-right" :title="$rom->romFile->filename"/>
             </div>
         @endif
     </div>
