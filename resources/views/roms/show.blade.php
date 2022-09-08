@@ -1,7 +1,11 @@
 @inject('romFileRepository', 'App\Interfaces\RomFileRepositoryInterface')
 @inject('romQueries', 'App\Interfaces\RomQueriesInterface')
 @push('styles')
-    <style>
+    <style {!! 'type="text/css"'; !!}>
+        [x-cloak] {
+            display: none;
+        }
+
         .no-select {
             -webkit-touch-callout: none; /* iOS Safari */
             -webkit-user-select: none; /* Safari */
@@ -34,7 +38,7 @@
                     <x-list-item>ROM Size: {{ $romQueries->formatRomSizeSQL($rom->rom_size) }}</x-list-item>
                     <x-list-item class="-border-b border-b-0">ROM Type: {{ $rom->rom_type }}</x-list-item>
                 </x-list-group>
-                <p class="font-bold m-0 p-0 text-xl" x-show="!romInfoOpened">...</p>
+                <p class="font-bold m-0 p-0 text-xl" x-show="!romInfoOpened" x-cloak>...</p>
             </x-list-item>
             @if($rom->has_game)
                 <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer"
@@ -49,7 +53,7 @@
                         <x-list-item class="-border-b border-b-0">Release
                             Date: {{ $rom->game->date_released->format('l, F jS, Y') }}</x-list-item>
                     </x-list-group>
-                    <p class="font-bold m-0 p-0 text-xl" x-show="!gameInfoOpened">...</p>
+                    <p class="font-bold m-0 p-0 text-xl" x-show="!gameInfoOpened" x-cloak>...</p>
                 </x-list-item>
             @endif
             @if($rom->has_file)
@@ -64,12 +68,12 @@
                         <x-list-item class="-border-b border-b-0">Designated
                             Console: {{ $romFileRepository->determineConsole($rom->romFile) }}</x-list-item>
                     </x-list-group>
-                    <p class="font-bold m-0 p-0 text-xl" x-show="!romFileInfoOpened">...</p>
+                    <p class="font-bold m-0 p-0 text-xl" x-show="!romFileInfoOpened" x-cloak>...</p>
                 </x-list-item>
             @endif
         </x-list-group>
         @if(auth()->user()->isAdmin())
-            <div class="flex flex-row justify-between">
+            <div class="flex flex-row justify-between no-select">
                 <div class="mt-3">
                     @include('roms.delete', ['rom' => $rom])
                 </div>
@@ -88,10 +92,11 @@
                 </div>
             </div>
         @else
-            <div class="mt-3">
+            <div class="mt-3 no-select">
                 <x-anchor-button class="float-left" type="secondary" :href="route('roms.index')">
                     Go Back!
                 </x-anchor-button>
+                <x-rom-file.download :romFile="$rom->romFile" class="float-right"/>
             </div>
         @endif
     </div>
