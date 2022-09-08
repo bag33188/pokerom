@@ -6,6 +6,21 @@
         }
     </style>
 @endpush
+@push('scripts')
+    <script type="text/javascript">
+        @verbatim
+        /**
+         * @name toggleContent
+         * @param {boolean} contentOpened
+         * @returns {boolean}
+         */
+        function toggleContent(contentOpened) {
+            contentOpened = !contentOpened;
+            return contentOpened;
+        }
+        @endverbatim
+    </script>
+@endpush
 @php
     $showHideBtnClasses = [
       'bg-emerald-500',
@@ -25,7 +40,7 @@
     </x-slot:header>
     <div x-data="{ open: true }">
         <div class="w-full flex justify-center mb-1.5">
-            <button type="button" @class($showHideBtnClasses) @click="open = !open">
+            <button type="button" @class($showHideBtnClasses) @click="open = toggleContent(open)">
                 <span x-show="open">Hide</span>
                 <span x-show="!open" x-cloak>Show</span>
                 <span><!--&nbsp;-->ROMs</span>
