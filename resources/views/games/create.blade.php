@@ -65,7 +65,13 @@
                 </div>
             </form>
         @else
-            <h2 class="text-center text-lg mt-7">Sorry, there are no available roms to add a game to :(</h2>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center"
+                 role="alert">
+                <p class="sm:inline text-lg">
+                    <strong class="font-bold">Sorry!</strong>
+                    <span class="block">There are no available roms to add a game to :(</span>
+                </p>
+            </div>
         @endif
     </div>
 </x-app-layout>
