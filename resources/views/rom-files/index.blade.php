@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot:header>
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Pok&eacute;mon ROM Files</h2>
-        <h6 class="text-center font-semibold">{{ sizeof($romFiles) }}</h6>
+        <!--<h6 class="text-center font-semibold">{{ sizeof($romFiles) }}</h6>-->
     </x-slot:header>
     <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mx-4 mb-4 mt-3.5 items-center">
         @foreach($romFiles as $romFile)
