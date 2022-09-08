@@ -104,7 +104,7 @@
                 </form>
             </div>
         @else
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center"
+            <div class="my-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative text-center"
                  role="alert">
                 <p class="sm:inline text-lg">
                     <strong class="font-bold">Sorry!</strong>
