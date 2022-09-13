@@ -27,7 +27,15 @@ class FormSelectLabel extends Component
     {
         return /** @lang InjectablePHP */ <<<'blade'
             @props(['text'])
-            <label {{ $attributes->merge(['class' => "block font-medium text-sm text-gray-700"]) }}>{{ $text }}</label>
+            @php
+                $formSelectLabelClasses = array(
+                    'block',
+                    'text-sm',
+                    'font-medium',
+                    'text-gray-700'
+                );
+            @endphp
+            <label {{ $attributes->merge(['class' => joinCssClasses($formSelectLabelClasses)]) }}>{{ $text }}</label>
         blade;
     }
 }
