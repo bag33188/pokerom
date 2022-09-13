@@ -107,4 +107,4 @@
         }
     </style>
 @endPushOnce
-<button class="punch" type="submit" data-name="{{ $btn_name }}">Upload!</button>
+<button class="punch" type="submit" data-name="{{ $btn_name ?? 'punch-btn' }}">Upload!</button>
