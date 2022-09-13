@@ -56,8 +56,8 @@
             romFilenameField.classList.add(...romFilenameDisabledClasses);
         };
 
-        let handleUploadRomFileForm = function () {
-            uploadRomFileForm.addEventListener("submit", function () {
+        let handleUploadRomFileForm = function() {
+            uploadRomFileForm.addEventListener("submit", function() {
                 tempDisableUploadBtn();
                 tempDisableRomFilesFormSelect();
             });
@@ -75,20 +75,26 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Upload a ROM File</h2>
-        <h6 class="text-center">{{ $romFilesListCount }} selection<span
-                style="display: {!! $romFilesListCount > 1 ? 'inline' : 'none' !!}">s</span></h6>
+        <h6 class="text-center">
+            <span>{{ $romFilesListCount }}</span>
+            @if($romFilesListCount > 1)
+                <span>Selections</span>
+            @else
+                <span>Selection</span>
+            @endif
+        </h6>
     </x-slot>
     <div class="container mx-auto w-full">
         @unless($romFilesListCount === 0)
             <div class="p-6">
-                <x-jet-validation-errors class="mb-4"/>
+                <x-jet-validation-errors class="mb-4" />
 
                 <form name="upload-romFile-form" method="POST" action="{{ route('rom-files.store') }}"
                       enctype="multipart/form-data">
                     @csrf
                     @method('POST')
                     <div class="flex flex-col">
-                        <x-form-select-label class="!font-semibold" for="romFile" text="Select ROM File"/>
+                        <x-form-select-label class="!font-semibold" for="romFile" text="Select ROM File" />
                         <x-form-select class="shadow" name="rom_filename" id="romFile">
                             @for($i = 0; $i < $romFilesListCount; $i++)
                                 @php
