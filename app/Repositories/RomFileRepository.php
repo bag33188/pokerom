@@ -24,7 +24,7 @@ class RomFileRepository implements RomFileRepositoryInterface
     public function downloadFromGrid(RomFile $romFile): RomFile
     {
         $romFileId = $romFile->getObjectId();
-        ProcessRomFileDownload::dispatchSync($romFileId);
+        ProcessRomFileDownload::dispatchNow($romFileId);
         return $romFile;
     }
 
