@@ -56,8 +56,8 @@
             romFilenameField.classList.add(...romFilenameDisabledClasses);
         };
 
-        let handleUploadRomFileForm = function() {
-            uploadRomFileForm.addEventListener("submit", function() {
+        let handleUploadRomFileForm = function () {
+            uploadRomFileForm.addEventListener("submit", function () {
                 tempDisableUploadBtn();
                 tempDisableRomFilesFormSelect();
             });
@@ -88,14 +88,14 @@
     <div class="container mx-auto w-full">
         @unless($romFilesListCount === 0)
             <div class="p-6">
-                <x-jet-validation-errors class="mb-4" />
+                <x-jet-validation-errors class="mb-4"/>
 
                 <form name="upload-romFile-form" method="POST" action="{{ route('rom-files.store') }}"
                       enctype="multipart/form-data">
                     @csrf
                     @method('POST')
                     <div class="flex flex-col">
-                        <x-form-select-label class="!font-semibold" for="romFile" text="Select ROM File" />
+                        <x-form-select-label class="!font-semibold" for="romFile" text="Select ROM File"/>
                         <x-form-select class="shadow" name="rom_filename" id="romFile">
                             @for($i = 0; $i < $romFilesListCount; $i++)
                                 @php
