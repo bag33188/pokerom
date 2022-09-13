@@ -108,4 +108,4 @@
     </style>
 @endPushOnce
 <button class="punch" type="{{ $btn_type ?? 'submit' }}"
-        data-name="{{ $btn_name ?? 'punch-btn' }}">{!! $text ?? 'Upload!' !!}</button>
+        data-name="{{ $btn_name ?? 'punch-btn' }}">{!! $text ?? 'Submit!' !!}</button>

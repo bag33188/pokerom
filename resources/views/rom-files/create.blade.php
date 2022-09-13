@@ -107,7 +107,7 @@
                         </x-form-select>
                     </div>
                     <div class="my-4">
-                        @include("ui.punch-button", ['btn_name' => 'submit-romFile-btn'])
+                        @include("ui.punch-button", ['btn_name' => 'submit-romFile-btn', 'text' => 'Upload!', 'type' => 'submit'])
                     </div>
                 </form>
             </div>
