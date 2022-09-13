@@ -72,7 +72,7 @@
         $value = str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $value);
     }
 
-    usort($romFilesList, function($a, $b) {
+    usort($romFilesList, function(string $a, string $b): int|bool {
         return strlen($a) <=> strlen($b);
     });
 
