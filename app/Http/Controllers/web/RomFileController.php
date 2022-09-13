@@ -49,9 +49,12 @@ class RomFileController extends WebController
 
     public function create(): Application|Factory|View
     {
-        $romFilesList = Storage::disk('public')->files(ROM_FILES_DIRNAME);
+        $storageRomFilesList = Storage::disk('public')->files(ROM_FILES_DIRNAME);
+        $romFilesList = array_values(array_filter($storageRomFilesList, fn(string $romFilename): false|int => preg_match(ROM_FILENAME_PATTERNS[1], $romFilename), ARRAY_FILTER_USE_BOTH));
+        usort($romFilesList, fn(string $a, string $b): int => strlen($a) <=> strlen($b));
         return view('rom-files.create', [
-            'romFilesList' => array_values(array_filter($romFilesList, fn(string $romFilename): false|int => preg_match(ROM_FILENAME_PATTERNS[1], $romFilename), ARRAY_FILTER_USE_BOTH)),
+            'romFilesList' => $romFilesList,
+            'romFilesListCount' => count($romFilesList),
         ]);
     }
 
