@@ -108,8 +108,8 @@
                     </div>
                     <div class="my-4">
                         @include("ui.punch-button", [
-                            'btn_type' => 'submit',
                             'btn_text' => 'Upload!',
+                            'btn_type' => 'submit',
                             'btn_name' => 'submit-romFile-btn',
                         ])
                     </div>
