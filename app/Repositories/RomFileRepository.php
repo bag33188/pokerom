@@ -15,7 +15,7 @@ class RomFileRepository implements RomFileRepositoryInterface
     public function uploadToGrid(string $romFilename): RomFile
     {
         RomFile::normalizeRomFilename($romFilename);
-        ProcessRomFileUpload::dispatchSync($romFilename);
+        ProcessRomFileUpload::dispatch($romFilename);
         $romFile = RomFile::where('filename', $romFilename)->first();
         RomFileCreated::dispatch($romFile);
         return $romFile;
