@@ -111,11 +111,11 @@
                 </div>
             </div>
         @else
-            <div class="mt-3 no-select">
-                <x-anchor-button class="float-left" type="secondary" :href="route('roms.index')">
+            <div class="mt-3 no-select inline-flex flex-row justify-between w-full">
+                <x-anchor-button class="order-0" type="secondary" :href="route('roms.index')">
                     Go Back
                 </x-anchor-button>
-                <x-rom-file.download :romFile="$rom->romFile" class="float-right" :title="$rom->romFile->filename"/>
+                <x-rom-file.download :romFile="$rom->romFile" class="order-1" :title="$rom->romFile->filename" />
             </div>
         @endif
     </div>

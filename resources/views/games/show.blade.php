@@ -34,11 +34,11 @@
                     </x-anchor-button>
                 </div>
             @else
-                <div class="w-full col-span-full">
-                    <x-anchor-button class="float-left" type="primary" :href="route('games.index')">
+                <div class="w-full col-span-full flex flex-row justify-between">
+                    <x-anchor-button class="order-0" type="primary" :href="route('games.index')">
                         Go Back
                     </x-anchor-button>
-                    <x-anchor-button class="float-right" :href="route('roms.show', ['rom' => $game->rom])">
+                    <x-anchor-button class="order-1" :href="route('roms.show', ['rom' => $game->rom])">
                         Goto ROM Info
                     </x-anchor-button>
                 </div>
