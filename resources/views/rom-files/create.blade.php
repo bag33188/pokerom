@@ -76,11 +76,12 @@
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Upload a ROM File</h2>
         <h6 class="text-center">
-            <span>{{ $romFilesListCount }}</span>
             @if($romFilesListCount > 1)
-                <span>Selections</span>
+                <span>{{ $romFilesListCount }} Selections</span>
+            @elseif($romFilesListCount === 1)
+                <span>1 Selection</span>
             @else
-                <span>Selection</span>
+                <span>No Selections</span>
             @endif
         </h6>
     </x-slot>
