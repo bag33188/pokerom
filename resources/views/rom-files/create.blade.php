@@ -71,10 +71,12 @@
     function removeStoragePathFromFilename(string &$value): void {
         $value = str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $value);
     }
-    $romFilesListCount = count($romFilesList);
+
     usort($romFilesList, function($a, $b) {
         return strlen($a) <=> strlen($b);
     });
+
+    $romFilesListCount = count($romFilesList);
 @endphp
 <x-app-layout>
     <x-slot name="header">
