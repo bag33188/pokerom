@@ -78,4 +78,9 @@ class User extends Authenticatable
     {
         return Hash::check($currentPassword, $this->attributes['password']);
     }
+
+    # public function setPasswordAttribute(string $password): void
+    # {
+    #     $this->attributes['password'] = Hash::make($password);
+    # }
 }
