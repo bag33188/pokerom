@@ -1,5 +1,5 @@
 <?php
-echo /** @lang HTML */
+$old_anchors_str = /** @lang HTML */
 <<<'html'
 <!--<li><a href="https://www.pokemon.com/us/strategy/the-details-of-discovering-pokemon-eggs">The Details of Discovering Pokémon Eggs</a></li>-->
 <!--<li><a href="https://www.pokemon.com/us/strategy/raising-battle-ready-pokemon/">Raising Battle-Ready Pokémon!</a></li>-->
@@ -9,6 +9,8 @@ echo /** @lang HTML */
 <!--<li><a href="https://www.pokemon.com/us/pokemon-video-games/pokemon-platinum-version/">Pokémon Platinum Version</a></li>-->
 <!--<li><a href="https://projectpokemon.org/home/tutorials/save-editing/using-pkhex/">Using PKHeX</a></li>-->
 html;
+
+# print $old_anchors_str;
 
 $anchors = array(
     [
