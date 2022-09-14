@@ -20,9 +20,12 @@
             </div>
             <div>
                 <!--#include virtual="list_routes.inc.php" -->
-                <hr />
+            </div>
+            <hr />
+            <div>
                 <!--#set var="name" value="Brock" -->
                 <!--#config timefmt="%Y" -->
+                <a href="./info.php" target="_self">PHP Info</a>
                 <p>&copy;&nbsp;<!--#echo var="name" -->&nbsp;<!--#echo var="DATE_LOCAL" --></p>
             </div>
         </div>
