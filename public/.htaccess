@@ -36,3 +36,12 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+AddType text/html .html
+AddHandler server-parsed .html
+Options Indexes FollowSymLinks Includes
+Options +Includes
+AddType text/html .html
+AddOutputFilter INCLUDES .html
+AddType text/html .shtml
+AddHandler server-parsed .shtml

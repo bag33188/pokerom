@@ -115,7 +115,7 @@
                 <x-anchor-button class="order-0" type="secondary" :href="route('roms.index')">
                     Go Back
                 </x-anchor-button>
-                <x-rom-file.download :romFile="$rom->romFile" class="order-1" :title="$rom->romFile->filename" />
+                <x-rom-file.download :romFile="$rom->romFile" class="order-1" :title="$rom->romFile->filename"/>
             </div>
         @endif
     </div>
