@@ -90,7 +90,9 @@
             <div class="p-6">
                 <x-jet-validation-errors class="mb-4"/>
 
-                <form name="upload-romFile-form" method="POST" action="{{ route('rom-files.store') }}"
+                <form name="upload-romFile-form"
+                      method="POST"
+                      action="{{ route('rom-files.store') }}"
                       enctype="multipart/form-data">
                     @csrf
                     @method('POST')
