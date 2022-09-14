@@ -11,14 +11,14 @@
     </head>
     <body>
         <div>
-            <!--#echo var="DATE_LOCAL" -->
+            <!--#echo var="DATE_LOCAL"-->
             <div>
                 <ul>
-                    <!--#include virtual="links.inc.php" -->
+                    <!--#include virtual="links.inc.php"-->
                 </ul>
             </div>
             <div>
-                <!--#include virtual="list_routes.inc.php" -->
+                <!--#include virtual="list_routes.inc.php"-->
             </div>
         </div>
     </body>
