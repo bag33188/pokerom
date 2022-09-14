@@ -31,7 +31,6 @@ class Game extends Model
         return $this->belongsTo(Rom::class, 'rom_id', 'id');
     }
 
-
     protected function gameName(): Attribute
     {
         return Attribute::make(

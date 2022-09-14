@@ -13,7 +13,7 @@ const ROM_FILENAME_PATTERNS = array(
 );
 /** game name regular expression */
 const GAME_NAME_PATTERN = /** @lang RegExp */
-"/^Pokemon\s.+$/";
+"/^Pokemon\s.+$/i";
 /** rom name regular expression */
 const ROM_NAME_PATTERN = /** @lang RegExp */
 "/^[\w\d_\-]+$/i";
