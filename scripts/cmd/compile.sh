@@ -38,6 +38,8 @@ compile() {
     npm install && npm update
     npm run build
 
+    node scripts/helpers/seeds.test.js
+
     git status
     git add . && git commit -m "update code base" && git push
 
