@@ -23,7 +23,7 @@
     </style>
 @endpush
 @push('scripts')
-    <script src="{{ Vite::asset('resources/js/angular.min.js') }}"></script>
+    <script type="text/javascript" src="{{ Vite::asset('resources/js/angular.min.js') }}"></script>
     <script type="text/javascript">
         @verbatim
         /**
