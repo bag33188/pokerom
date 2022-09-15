@@ -54,8 +54,8 @@
         <div style="display: none;" ng-app>
             <div>
                 <label for="yourName">Name:</label>
-                <input id="yourName" type="text" ng-model="yourName" placeholder="Enter a name here">
-                <hr>
+                <input id="yourName" type="text" ng-model="yourName" placeholder="Enter a name here"/>
+                <hr/>
                 <h1>Hello {{yourName}}!</h1>
             </div>
         </div>
