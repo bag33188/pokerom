@@ -18,6 +18,7 @@
     </style>
 @endpush
 @push('scripts')
+    <script src="{{ Vite::asset('resources/js/angular.min.js') }}"></script>
     <script type="text/javascript">
         @verbatim
         /**
@@ -48,6 +49,16 @@
             {{ $rom->rom_name }} Information
         </h2>
     </x-slot>
+    @verbatim
+        <div style="display: none;" ng-app>
+            <div>
+                <label for="yourName">Name:</label>
+                <input id="yourName" type="text" ng-model="yourName" placeholder="Enter a name here">
+                <hr>
+                <h1>Hello {{yourName}}!</h1>
+            </div>
+        </div>
+    @endverbatim
     <div class="py-6 px-5">
         <x-list-group
             @class(['shadow', 'no-select' => !$userIsAdmin])
