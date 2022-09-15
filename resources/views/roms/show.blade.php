@@ -50,6 +50,7 @@
         </h2>
     </x-slot>
     @verbatim
+        <!-- angularjs -->
         <div style="display: none;" ng-app>
             <div>
                 <label for="yourName">Name:</label>
@@ -58,6 +59,7 @@
                 <h1>Hello {{yourName}}!</h1>
             </div>
         </div>
+        <!-- // angularjs -->
     @endverbatim
     <div class="py-6 px-5">
         <x-list-group
