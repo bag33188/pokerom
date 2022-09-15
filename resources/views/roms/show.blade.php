@@ -6,6 +6,11 @@
             display: none;
         }
 
+        [ng\:cloak], [ng-cloak], .ng-cloak {
+            display: none;
+        }
+    </style>
+    <style {!! 'type="text/css"'; !!}>
         .no-select {
             -webkit-touch-callout: none; /* iOS Safari */
             -webkit-user-select: none; /* Safari */
