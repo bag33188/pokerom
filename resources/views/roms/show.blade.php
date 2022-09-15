@@ -78,8 +78,8 @@
                 </x-list-item>
             @endif
             @if($rom->has_file)
-                <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer"
-                                             @click="romFileInfoOpened = toggleInfo(romFileInfoOpened) no-select">File
+                <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer no-select"
+                                             @click="romFileInfoOpened = toggleInfo(romFileInfoOpened)">File
                         Info</p>
                     <x-list-group @class($innerListGroupClasses) x-show="romFileInfoOpened === true">
                         <x-list-item>File ID: {{ $rom->romFile->_id }}</x-list-item>
