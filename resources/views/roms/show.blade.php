@@ -23,7 +23,9 @@
     </style>
 @endpush
 @push('scripts')
-    <script type="text/javascript" src="{{ Vite::asset('resources/js/angular.min.js') }}"></script>
+    @if($userIsAdmin)
+        <script type="text/javascript" src="{{ Vite::asset('resources/js/angular.min.js') }}"></script>
+    @endif
     <script type="text/javascript">
         @verbatim
         /**
@@ -54,18 +56,20 @@
             {{ $rom->rom_name }} Information
         </h2>
     </x-slot>
-    @verbatim
-        <!-- angularjs -->
-        <div style="display: none;" ng-app>
-            <div ng-cloak>
-                <label for="yourName">Name:</label>
-                <input id="yourName" type="text" ng-model="yourName" placeholder="Enter a name here"/>
-                <hr/>
-                <h1>Hello {{yourName}}!</h1>
+    @if($userIsAdmin)
+        @verbatim
+            <!-- angularjs -->
+            <div style="display: none;" ng-app>
+                <div ng-cloak>
+                    <label for="yourName">Name:</label>
+                    <input id="yourName" type="text" ng-model="yourName" placeholder="Enter a name here"/>
+                    <hr/>
+                    <h1>Hello {{yourName}}!</h1>
+                </div>
             </div>
-        </div>
-        <!-- // angularjs -->
-    @endverbatim
+            <!-- // angularjs -->
+        @endverbatim
+    @endif
     <div class="py-6 px-5">
         <x-list-group
             @class(['shadow', 'no-select' => !$userIsAdmin])
