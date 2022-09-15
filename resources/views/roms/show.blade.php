@@ -57,7 +57,7 @@
     @verbatim
         <!-- angularjs -->
         <div style="display: none;" ng-app>
-            <div>
+            <div ng-cloak>
                 <label for="yourName">Name:</label>
                 <input id="yourName" type="text" ng-model="yourName" placeholder="Enter a name here"/>
                 <hr/>
