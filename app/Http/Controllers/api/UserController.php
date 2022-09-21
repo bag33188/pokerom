@@ -11,6 +11,7 @@ use App\Http\Resources\UserResource;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
@@ -21,9 +22,15 @@ class UserController extends ApiController
     {
     }
 
-    public function me(Request $request): User
+    public function me(Request $request): JsonResponse
     {
-        return $request->user();
+        $authToken = $this->userRepository->getCurrentUserBearerToken();
+        $currentUser = $request->user();
+        return response()->json([
+            'success' => true,
+            'user' => $currentUser,
+            'token' => $authToken
+        ]);
     }
 
     public function index()
