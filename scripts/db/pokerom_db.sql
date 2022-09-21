@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2022 at 05:12 AM
+-- Generation Time: Sep 21, 2022 at 05:17 AM
 -- Server version: 10.9.2-MariaDB
 -- PHP Version: 8.1.6
 
@@ -381,7 +381,6 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Sep 21, 2022 at 03:06 AM
--- Last update: Sep 21, 2022 at 03:12 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -496,7 +495,6 @@ INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Aug 27, 2022 at 03:45 PM
--- Last update: Sep 21, 2022 at 03:12 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -526,7 +524,6 @@ TRUNCATE TABLE `sessions`;
 -- Table structure for table `users`
 --
 -- Creation: Sep 08, 2022 at 05:16 AM
--- Last update: Sep 21, 2022 at 03:12 AM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -601,7 +598,8 @@ ALTER TABLE `password_resets`
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`),
+  ADD KEY `personal_access_tokens_tokenable_id_foreign` (`tokenable_id`);
 
 --
 -- Indexes for table `roms`
@@ -653,7 +651,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roms`
@@ -682,6 +680,12 @@ ALTER TABLE `games`
 --
 ALTER TABLE `password_resets`
   ADD CONSTRAINT `password_resets_email_foreign` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD CONSTRAINT `personal_access_tokens_tokenable_id_foreign` FOREIGN KEY (`tokenable_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `sessions`
@@ -866,7 +870,6 @@ TRUNCATE TABLE `pma__relation`;
 --
 
 INSERT INTO `pma__relation` (`master_db`, `master_table`, `master_field`, `foreign_db`, `foreign_table`, `foreign_field`) VALUES
-('pokerom_db', 'personal_access_tokens', 'tokenable_id', 'pokerom_db', 'users', 'id'),
 ('pokerom_db', 'roms', 'game_id', 'pokerom_db', 'games', 'id');
 
 --

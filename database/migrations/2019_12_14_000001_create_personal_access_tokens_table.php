@@ -1,11 +1,11 @@
 <?php
 
+use App\Enums\ForeignKeyConstraintOptionEnum as ConstraintOption;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     protected $connection = 'mysql';
     public $withinTransaction = true;
 
@@ -28,6 +28,7 @@ return new class extends Migration
 //            $table->timestamps();
             $table->id();
             $table->morphs('tokenable');
+            $table->foreign('tokenable_id')->references('id')->on('users')->onDelete(ConstraintOption::NO_ACTION->value)->onUpdate(ConstraintOption::NO_ACTION->value);
             $table->string('name');
             $table->char('token', PERSONAL_ACCESS_TOKEN_LENGTH)->unique();
             $table->text('abilities')->nullable();
