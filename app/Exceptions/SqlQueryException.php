@@ -22,7 +22,7 @@ class SqlQueryException extends ApplicationException
             return redirect()->to(url()->previous())->dangerBanner($this->getMessage());
         } else if ($this->isApiRequest()) {
             return response()->json(
-                ['success' => false, 'db' => 'pokerom_db', 'message' => $this->getMessage()],
+                ['success' => false, 'db' => config('database.connections.mysql.database'), 'message' => $this->getMessage()],
                 $this->getCode(),
                 $this->headers
             );
