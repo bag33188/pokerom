@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Config;
 use JetBrains\PhpStorm\ArrayShape;
 
 class FarewellNotification extends Notification
@@ -13,6 +14,8 @@ class FarewellNotification extends Notification
     use Queueable;
 
     public User $user;
+    private static string $appName;
+
 
     /**
      * Create a new notification instance.
@@ -21,6 +24,8 @@ class FarewellNotification extends Notification
      */
     public function __construct(User $user)
     {
+        self::$appName = preg_replace("/^Poke/", POKE_EACUTE, ucfirst(Config::get('app.name')));
+
         $this->user = $user;
     }
 
@@ -45,8 +50,9 @@ class FarewellNotification extends Notification
     {
         return (new MailMessage)
             ->subject("I guess it's goodbye for now...")
+            ->from(config('mail.from.address'), self::$appName)
             ->line("{$this->user->name}, we're sad to see you leave.")
-            ->line(sprintf("Thank you for using %s!", config('app.name')));
+            ->line(sprintf("Thank you for using %s!", self::$appName));
     }
 
     /**
@@ -55,13 +61,14 @@ class FarewellNotification extends Notification
      * @param mixed $notifiable
      * @return array
      */
-    #[ArrayShape(['subject' => "string", 'line1' => "string", 'line2' => "string"])]
+    #[ArrayShape(['subject' => "string", 'from' => "\Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed", 'line1' => "string", 'line2' => "string"])]
     public function toArray(mixed $notifiable): array
     {
         return [
             'subject' => "I guess it's goodbye for now...",
+            'from' => config('mail.from.address'),
             'line1' => "{$this->user->name}, we're sad to see you leave.",
-            'line2' => 'Thank you for using ' . config('app.name') . '!'
+            'line2' => 'Thank you for using ' . self::$appName . '!'
         ];
     }
 }
