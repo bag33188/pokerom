@@ -26,6 +26,8 @@ class RegisterUserRequest extends FormRequest
     // https://stackoverflow.com/a/68647440
     protected function passedValidation(): void
     {
-        $this->merge(['password' => Hash::make($this->string('password'))]);
+        $this->merge([
+            'password' => Hash::make($this->string('password'))
+        ]);
     }
 }
