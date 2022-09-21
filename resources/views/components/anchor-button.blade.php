@@ -1,44 +1,30 @@
 @props(['type'])
-@once
-    @php
-        enum AnchorTypes: string {
-            case PRIMARY = 'primary';
-            case SECONDARY = 'secondary';
-            case DANGER = 'danger';
-        }
-    @endphp
-@endonce
 @php
-    if (empty($type)) {
-        $type = AnchorTypes::PRIMARY->value;
-    } else if (!in_array($type, $getEnumValuesAsArray(AnchorTypes::cases()))) {
-        $type = 'primary';
-    } else {
-        $type = strtolower($type);
-    }
+
+    $resolveAnchorBtnType(btnType: $type, defaultTypeValue: \App\Enums\AnchorTypesEnum::PRIMARY->value, btnTypeEnumCases: \App\Enums\AnchorTypesEnum::cases());
 
     $conditionalAnchorBtnClasses = [
-        'bg-red-600' => $type == AnchorTypes::DANGER->value,
-        'text-white' => $type == AnchorTypes::DANGER->value || $type == AnchorTypes::PRIMARY->value,
-        'hover:bg-red-500' => $type == AnchorTypes::DANGER->value,
-        'active:bg-red-600' => $type == AnchorTypes::DANGER->value,
-        'border-transparent' => $type == AnchorTypes::DANGER->value || $type == AnchorTypes::PRIMARY->value,
-        'focus:ring-red-200' => $type == AnchorTypes::DANGER->value,
-        'focus:border-red-700' => $type == AnchorTypes::DANGER->value,
-        'bg-white' => $type == AnchorTypes::SECONDARY->value,
-        'shadow-sm' => $type == AnchorTypes::SECONDARY->value,
-        'text-gray-700' => $type == AnchorTypes::SECONDARY->value,
-        'border-gray-300' => $type == AnchorTypes::SECONDARY->value,
-        'active:bg-gray-50' => $type == AnchorTypes::SECONDARY->value,
-        'hover:text-gray-500' => $type == AnchorTypes::SECONDARY->value,
-        'focus:ring-blue-200' => $type == AnchorTypes::SECONDARY->value,
-        'active:text-gray-800' => $type == AnchorTypes::SECONDARY->value,
-        'focus:border-blue-300' => $type == AnchorTypes::SECONDARY->value,
-        'hover:bg-gray-700' => $type == AnchorTypes::PRIMARY->value,
-        'active:bg-gray-900' => $type == AnchorTypes::PRIMARY->value,
-        'focus:ring-gray-300' => $type == AnchorTypes::PRIMARY->value,
-        'focus:border-gray-900' => $type == AnchorTypes::PRIMARY->value,
-        'bg-gray-800' => $type == AnchorTypes::PRIMARY->value,
+        'bg-red-600' => $type == \App\Enums\AnchorTypesEnum::DANGER->value,
+        'text-white' => $type == \App\Enums\AnchorTypesEnum::DANGER->value || $type == \App\Enums\AnchorTypesEnum::PRIMARY->value,
+        'hover:bg-red-500' => $type == \App\Enums\AnchorTypesEnum::DANGER->value,
+        'active:bg-red-600' => $type == \App\Enums\AnchorTypesEnum::DANGER->value,
+        'border-transparent' => $type == \App\Enums\AnchorTypesEnum::DANGER->value || $type == \App\Enums\AnchorTypesEnum::PRIMARY->value,
+        'focus:ring-red-200' => $type == \App\Enums\AnchorTypesEnum::DANGER->value,
+        'focus:border-red-700' => $type == \App\Enums\AnchorTypesEnum::DANGER->value,
+        'bg-white' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
+        'shadow-sm' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
+        'text-gray-700' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
+        'border-gray-300' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
+        'active:bg-gray-50' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
+        'hover:text-gray-500' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
+        'focus:ring-blue-200' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
+        'active:text-gray-800' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
+        'focus:border-blue-300' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
+        'hover:bg-gray-700' => $type == \App\Enums\AnchorTypesEnum::PRIMARY->value,
+        'active:bg-gray-900' => $type == \App\Enums\AnchorTypesEnum::PRIMARY->value,
+        'focus:ring-gray-300' => $type == \App\Enums\AnchorTypesEnum::PRIMARY->value,
+        'focus:border-gray-900' => $type == \App\Enums\AnchorTypesEnum::PRIMARY->value,
+        'bg-gray-800' => $type == \App\Enums\AnchorTypesEnum::PRIMARY->value,
     ];
 
     $universalAnchorCssClasses = [

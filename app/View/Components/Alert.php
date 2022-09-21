@@ -27,8 +27,17 @@ class Alert extends Component
      */
     public function render(): View|string|Closure
     {
+        $getEnumValuesAsArray = fn(array $enumCases): array => array_column($enumCases, 'value');
         return view('components.alert', [
-            'getEnumValuesAsArray' => fn(array $enumCases) => array_column($enumCases, 'value')
+            'resolveAlertType' => function (string &$alertType, string $defaultTypeValue, array $alertTypeEnumCases) use ($getEnumValuesAsArray): void {
+                if (empty($alertType)) {
+                    $alertType = strtolower($defaultTypeValue);
+                } else if (!in_array($alertType, $getEnumValuesAsArray($alertTypeEnumCases))) {
+                    $alertType = strtolower($defaultTypeValue);
+                } else {
+                    $alertType = strtolower($alertType);
+                }
+            }
         ]);
     }
 }
