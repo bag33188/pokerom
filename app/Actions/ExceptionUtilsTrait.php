@@ -22,7 +22,7 @@ trait ExceptionUtilsTrait
         if ($e instanceof HttpException) {
             // if `getCode` method returns any status (int value) at all, then use that method, else use the `getStatusCode` method's value (int value)
             return $e->getCode() != 0 ? $e->getCode() : $e->getStatusCode();
-        } else if ($e instanceof PDOException) {
+        } else if ($e instanceof PDOException) { // PDOException returns a string value for the error code
             return (gettype($e->getCode()) == 'string') ? (int)$e->getCode() : ($e->getCode() ?: HttpStatus::HTTP_INTERNAL_SERVER_ERROR);
         } else {
             return $e->getCode() ?: HttpStatus::HTTP_INTERNAL_SERVER_ERROR;
