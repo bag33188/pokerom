@@ -101,7 +101,8 @@
                     </div>
                     @if(!$rom->has_file)
                         <div class="mx-1 order-1"></div>
-                        <form class="order-0" method="POST" action="{{ route('roms.link-file', ['rom' => $rom]) }}">
+                        <form class="order-0 block" method="POST"
+                              action="{{ route('roms.link-file', ['rom' => $rom]) }}">
                             @method('PATCH')
                             @csrf
                             <x-jet-button type="submit">Link Rom To File If Exists</x-jet-button>
@@ -110,13 +111,15 @@
                 </div>
             </div>
         @else
-            <div class="mt-3 no-select inline-flex flex-row justify-between w-full">
-                <div class="inline-block order-0">
+            <div class="mt-3 no-select flex flex-row justify-between w-full">
+                <div class="order-1">
                     <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY" :href="route('roms.index')">
                         Go Back
                     </x-anchor-button>
                 </div>
-                <x-rom-file.download :romFile="$rom->romFile" class="order-1" :title="$rom->romFile->filename"/>
+                <div class="order-0">
+                    <x-rom-file.download :romFile="$rom->romFile" class="order-1" :title="$rom->romFile->filename"/>
+                </div>
             </div>
         @endif
     </div>
