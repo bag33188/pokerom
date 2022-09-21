@@ -82,6 +82,8 @@ class Handler extends ExceptionHandler
             return false;
         });
 
+
+        // handle generic \Symfony\Component\HttpKernel\Exception\HttpException
         $this->renderable(function (HttpException $e, Request $request): JsonResponse|false {
 
             // if `getCode` method returns any status (int value) at all, then use that method, else use the `getStatusCode` method's value (int value)

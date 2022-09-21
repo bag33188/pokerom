@@ -10,12 +10,9 @@ const _EACUTE = "\u{00E9}";
 const _SPACE = "\u{0020}";
 
 
-
 /** directory that contains all bin rom files */
 const ROM_FILES_DIRNAME = 'rom_files';
 /** the key name for sanctum personal access token */
 const API_TOKEN_KEY = 'auth_token';
 /** concat: Pok, &eacute; ... output: Pok&eacute; */
 const POKE_EACUTE = "Pok" . _EACUTE;
-
-
