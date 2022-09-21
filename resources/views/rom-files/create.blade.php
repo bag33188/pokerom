@@ -1,6 +1,3 @@
-@php
-    use App\Enums\AlertTypeEnum as AlertType;
-@endphp
 @push('styles')
     <!--suppress CssUnresolvedCustomProperty -->
     <style {!! 'type="text/css"'; !!}>
@@ -116,7 +113,7 @@
                 </form>
             </div>
         @else
-            <x-alert :alertType="AlertType::ERROR">
+            <x-alert :alertType="\App\Enums\AlertTypeEnum::ERROR">
                 <x-slot name="heading">Sorry!</x-slot>
                 <x-slot name="message">No ROM Files found in <samp>{{ ROM_FILES_DIRNAME }}</samp> folder</x-slot>
             </x-alert>

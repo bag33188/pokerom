@@ -1,7 +1,3 @@
-@php
-    use App\Enums\AlertTypeEnum as AlertType;
-    use App\Enums\AnchorButtonTypeEnum as AnchorBtnType;
-@endphp
 @inject('gameQueries', 'App\Interfaces\GameQueriesInterface')
 <x-app-layout>
     <x-slot name="header">
@@ -33,7 +29,7 @@
                         </x-list-group>
                         <div class="my-2 flex flex-row justify-center">
                             <x-anchor-button
-                                :btn-type="AnchorBtnType::INFO"
+                                :btn-type="\App\Enums\AnchorButtonTypeEnum::INFO"
                                 :href="route('games.show', ['game' => $game])">
                                 Get Info!
                             </x-anchor-button>
@@ -42,7 +38,7 @@
                 @endforeach
             </div>
         @else
-            <x-alert :alertType="AlertType::ERROR">
+            <x-alert :alertType="\App\Enums\AlertTypeEnum::ERROR">
                 <x-slot:heading>Sorry!</x-slot:heading>
                 <x-slot:message>No Games in database</x-slot:message>
             </x-alert>

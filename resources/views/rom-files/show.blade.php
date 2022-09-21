@@ -1,6 +1,3 @@
-@php
-    use App\Enums\AnchorButtonTypeEnum as AnchorBtnType;
-@endphp
 @inject('romFileRepository', 'App\Interfaces\RomFileRepositoryInterface')
 <x-app-layout>
     <x-slot name="header">
@@ -36,7 +33,7 @@
                         <x-rom-file.delete class="order-1" :romFile="$romFile"/>
                     @else
                         <div class="inline-block order-1">
-                            <x-anchor-button :btn-type="AnchorBtnType::SECONDARY" :href="route('rom-files.index')">
+                            <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY" :href="route('rom-files.index')">
                                 Go Back!
                             </x-anchor-button>
                         </div>

@@ -1,6 +1,3 @@
-@php
-    use App\Enums\AnchorButtonTypeEnum as AnchorBtnType;
-@endphp
 @inject('romFileRepository', 'App\Interfaces\RomFileRepositoryInterface')
 @inject('romQueries', 'App\Interfaces\RomQueriesInterface')
 @push('styles')
@@ -115,7 +112,7 @@
         @else
             <div class="mt-3 no-select inline-flex flex-row justify-between w-full">
                 <div class="inline-block order-0">
-                    <x-anchor-button :btn-type="AnchorBtnType::SECONDARY" :href="route('roms.index')">
+                    <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY" :href="route('roms.index')">
                         Go Back
                     </x-anchor-button>
                 </div>

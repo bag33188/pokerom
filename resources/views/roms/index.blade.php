@@ -1,6 +1,3 @@
-@php
-    use App\Enums\AlertTypeEnum as AlertType;
-@endphp
 @inject('romQueries', 'App\Interfaces\RomQueriesInterface')
 @push('scripts')
     <script type="text/javascript">
@@ -88,7 +85,7 @@
                 </tfoot>
             </table>
         @else
-            <x-alert :alertType="AlertType::ERROR">
+            <x-alert :alertType="\App\Enums\AlertTypeEnum::ERROR">
                 <x-slot name="heading">Sorry!</x-slot>
                 <x-slot:message>No ROMs Currently Exist in the Database</x-slot:message>
             </x-alert>

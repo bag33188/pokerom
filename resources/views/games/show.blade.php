@@ -1,6 +1,3 @@
-@php
-    use App\Enums\AnchorButtonTypeEnum as AnchorBtnType;
-@endphp
 @inject('gameQueries', 'App\Interfaces\GameQueriesInterface')
 <x-app-layout>
     <x-slot name="header">
@@ -28,14 +25,14 @@
                     @include('games.delete', ['game' => $game])
                 </div>
                 <div class="col-start-1 col-end-1 row-start-2 row-end-2 justify-self-start">
-                    <x-anchor-button :btn-type="AnchorBtnType::PRIMARY" :href="route('games.edit', ['game' => $game])">
+                    <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::PRIMARY" :href="route('games.edit', ['game' => $game])">
                         Edit!
                     </x-anchor-button>
                 </div>
             @else
                 <div class="w-full col-span-full flex flex-row justify-between">
                     <div class="inline-block order-0">
-                        <x-anchor-button :btn-type="AnchorBtnType::SECONDARY" :href="route('games.index')">
+                        <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY" :href="route('games.index')">
                             Go Back
                         </x-anchor-button>
                     </div>

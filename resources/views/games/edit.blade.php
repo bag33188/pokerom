@@ -1,6 +1,3 @@
-@php
-    use App\Enums\AnchorButtonTypeEnum as AnchorBtnType;
-@endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Edit {{ $game->game_name }}
@@ -66,7 +63,7 @@
                     </x-jet-button>
                 </div>
                 <div class="order-1 inline-block">
-                    <x-anchor-button :btn-type="AnchorBtnType::SECONDARY" href="{{ route('games.show', ['game' => $game]) }}">
+                    <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY" href="{{ route('games.show', ['game' => $game]) }}">
                         Cancel
                     </x-anchor-button>
                 </div>
