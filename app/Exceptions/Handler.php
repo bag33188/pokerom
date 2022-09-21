@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Actions\ApiUtilsTrait;
+use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -10,13 +11,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Response;
 use MongoDB\Driver\Exception\BulkWriteException;
+use PDOException;
 use Psr\Log\LogLevel;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
-use PDOException;
-use Utils\Classes\AbstractApplicationException as ApplicationException;
 
 class Handler extends ExceptionHandler
 {
@@ -74,12 +74,12 @@ class Handler extends ExceptionHandler
         $this->renderable(fn(AuthenticationException $e) => throw App::make(ApiAuthException::class));
 
         $this->renderable(fn(NotFoundHttpException $e) => throw App::make(RouteNotFoundException::class,
-            ['message' => $e->getMessage(), 'code' => ApplicationException::getErrorCodeFromException($e)]));
+            ['message' => $e->getMessage(), 'code' => self::getErrorCodeFromException($e)]));
 
         // handle generic \Symfony\Component\HttpKernel\Exception\HttpException
         $this->renderable(function (HttpException $e): JsonResponse|false {
 
-            $statusCode = ApplicationException::getErrorCodeFromException($e);
+            $statusCode = self::getErrorCodeFromException($e);
 
             // set default message value to message of exception being thrown by request/response
             $message = $e->getMessage();
@@ -103,7 +103,7 @@ class Handler extends ExceptionHandler
             // if `getCode` method returns any status (int value) at all, then use that method, else use the `getStatusCode` method's value (int value)
             return $e->getCode() != 0 ? $e->getCode() : $e->getStatusCode();
         } else if ($e instanceof PDOException) {
-            return (gettype($e->getCode()) == 'string') ? (int)$e->getCode() : HttpStatus::HTTP_INTERNAL_SERVER_ERROR;
+            return (gettype($e->getCode()) == 'string') ? (int)$e->getCode() : ($e->getCode() ?: HttpStatus::HTTP_INTERNAL_SERVER_ERROR);
         } else {
             return $e->getCode() ?: HttpStatus::HTTP_INTERNAL_SERVER_ERROR;
         }
