@@ -58,6 +58,9 @@
             margin: .4rem 0;
         }
 
+        #name {
+            border-radius: 5px;
+        }
     </style>
 @endpush
 @push('scripts')
@@ -95,16 +98,16 @@
         </h2>
     </x-slot>
     @if($userIsAdmin)
-        <div class="mx-2 my-2 border border-gray-900 p-1.5 rounded-2xl"
-             style="width: fit-content !important;"
-             x-data="{ show_ng: false }">
-            <button type="button" class="button" @click="show_ng = !show_ng;">Toggle&nbsp;<code>ng-app</code></button>
+        <div class="mx-2 my-2 border border-gray-900 p-1.5 rounded-2xl h-fit" x-data="{ show_ng: false }">
+            <button type="button" class="button" @click="show_ng = toggleInfo(show_ng)">
+                Toggle&nbsp;<code>ng-app</code>
+            </button>
             <!-- angularjs -->
-            <div ng-app x-show="show_ng === true;" class="mt-1.5">
+            <div ng-app x-show="show_ng === true" class="mt-1.5">
                 <div ng-cloak>
                     <label for="name">Name:</label>
                     <input id="name" type="text" ng-model="name" placeholder="Enter a name here"/>
-                    <hr/>
+                    <hr class="my-2.5 bg-black border-none h-px"/>
                     <h1>Hello @{{name}}!</h1>
                 </div>
             </div>
