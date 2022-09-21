@@ -19,7 +19,7 @@ class WelcomeNotification extends Notification
 
     private readonly string $subject;
     private readonly string $welcomeMessage;
-    private readonly string $salutation;
+    private readonly string $closer;
     #[ArrayShape(['address' => "string", 'name' => "string"])] private readonly array $from;
     #[ArrayShape(['text' => "string", 'url' => "string"])] private readonly array $action;
 
@@ -42,7 +42,7 @@ class WelcomeNotification extends Notification
         $this->welcomeMessage = sprintf("Hello %s, welcome to the world of %s!", $this->user->name, self::$appName);
         $this->from = ['address' => Config::get('mail.from.address'), 'name' => self::$appName];
         $this->action = ['text' => 'Check it out!', 'url' => route('roms.index')];
-        $this->salutation = 'Enjoy!';
+        $this->closer = 'Enjoy!';
     }
 
     /**
@@ -69,7 +69,7 @@ class WelcomeNotification extends Notification
             ->from(...array_values($this->from))
             ->line($this->welcomeMessage)
             ->action(...array_values($this->action))
-            ->line($this->salutation);
+            ->line($this->closer);
     }
 
     /**
@@ -85,7 +85,7 @@ class WelcomeNotification extends Notification
             'from' => $this->from,
             'message' => $this->welcomeMessage,
             'action' => $this->action,
-            'salutation' => $this->salutation
+            'closer' => $this->closer
         ];
     }
 }
