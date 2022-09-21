@@ -10,12 +10,13 @@
 
         a.punch,
         button.punch {
+            --deep-navy: #1f2d4d;
             display: inline-block !important;
             background: #4162a8 !important;
             border-top: 1px solid #38538c !important;
-            border-right: 1px solid #1f2d4d !important;
+            border-right: 1px solid var(--deep-navy) !important;
             border-bottom: 1px solid #151e33 !important;
-            border-left: 1px solid #1f2d4d !important;
+            border-left: 1px solid var(--deep-navy) !important;
             -webkit-border-radius: 4px !important;
             -moz-border-radius: 4px !important;
             -ms-border-radius: 4px !important;
