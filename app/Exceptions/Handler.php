@@ -3,7 +3,6 @@
 namespace App\Exceptions;
 
 use App\Actions\ApiUtilsTrait;
-use Config;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -16,11 +15,12 @@ use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
-use URL;
 
 class Handler extends ExceptionHandler
 {
-    use ApiUtilsTrait;
+    use ApiUtilsTrait {
+        isApiRequest as private;
+    }
 
     /**
      * A list of exception types with their corresponding custom log levels.
@@ -68,24 +68,11 @@ class Handler extends ExceptionHandler
         $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
             ['message' => $e->getMessage(), 'code' => HttpStatus::HTTP_CONFLICT]));
 
-        /*! make sure correct JSON response is returned during an API request */
 
-        // handle \Illuminate\Auth\AuthenticationException
-        $this->renderable(function (AuthenticationException $e): JsonResponse|false {
-            if ($this->requestExpectsJson()) {
-                return Response::json(
-                    ['message' => 'Error: Unauthenticated.', 'success' => false], # $e->getTraceAsString();
-                    HttpStatus::HTTP_UNAUTHORIZED,
-                    [
-                        'X-Http-Auth-Exception-Original-Message' => $e->getMessage(),
-                    ]
-                );
-            }
-            // don't use custom rendering if request is not an API request
-            return false;
-        });
+        $this->renderable(fn(AuthenticationException $e) => throw App::make(ApiAuthException::class));
 
-        $this->renderable(fn(NotFoundHttpException $e) => throw App::make(HttpRouteNotFoundException::class));
+        $this->renderable(fn(NotFoundHttpException $e) => throw App::make(RouteNotFoundException::class,
+            ['message' => $e->getMessage(), 'code' => $e->getCode() != 0 ? $e->getCode() : $e->getStatusCode()]));
 
         // handle generic \Symfony\Component\HttpKernel\Exception\HttpException
         $this->renderable(function (HttpException $e): JsonResponse|false {
@@ -96,13 +83,7 @@ class Handler extends ExceptionHandler
             // set default message value to message of exception being thrown by request/response
             $message = $e->getMessage();
 
-            if ($this->isApiRequest()) {
-                $currentErrorRoute = str_replace(Config::get('app.url') . '/', '/', URL::current());
-
-                $responseErrorsIsRouteNotFound = fn() => $statusCode === HttpStatus::HTTP_NOT_FOUND && strlen($message) === 0;
-
-                if ($responseErrorsIsRouteNotFound()) $message = "Route not found: $currentErrorRoute";
-
+            if ($this->isApiRequest() || $this->requestExpectsJson()) {
                 return Response::json(
                     ['message' => $message, 'success' => false], # $e->getTrace();
                     $statusCode,
@@ -113,4 +94,5 @@ class Handler extends ExceptionHandler
             return false;
         });
     }
+
 }
