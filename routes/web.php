@@ -32,8 +32,8 @@ Route::middleware([
     Route::controller(RomController::class)->prefix('roms')->name('roms.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/{rom}/show', 'show')->name('show');
-        Route::get('/create', 'create')->name('create')->middleware('admin');
-        Route::get('/{rom}/edit', 'edit')->name('edit')->middleware('admin');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/{rom}/edit', 'edit')->name('edit');
         Route::post('/store', 'store')->name('store');
         Route::put('/{rom}', 'update')->name('update');
         Route::delete('/{rom}', 'destroy')->name('destroy');
@@ -43,8 +43,8 @@ Route::middleware([
     Route::controller(GameController::class)->prefix('games')->name('games.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/{game}/show', 'show')->name('show');
-        Route::get('/create', 'create')->name('create')->middleware('admin');
-        Route::get('/{game}/edit', 'edit')->name('edit')->middleware('admin');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/{game}/edit', 'edit')->name('edit');
         Route::post('/store', 'store')->name('store');
         Route::put('/{game}', 'update')->name('update');
         Route::delete('/{game}', 'destroy')->name('destroy');

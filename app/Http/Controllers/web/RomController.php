@@ -17,6 +17,11 @@ use Illuminate\Http\RedirectResponse;
 
 class RomController extends WebController
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->only('create', 'edit');
+    }
+
     /**
      * Display a listing of the resource.
      *

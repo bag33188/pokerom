@@ -16,6 +16,11 @@ use Illuminate\Http\RedirectResponse;
 
 class GameController extends WebController
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->only(['create', 'edit']);
+    }
+
     /**
      * Display a listing of the resource.
      *
