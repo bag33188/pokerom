@@ -99,13 +99,10 @@
                     <div class="flex flex-col">
                         <x-form-select-label class="!font-semibold" for="romFile" text="Select ROM File"/>
                         <x-form-select class="shadow" name="rom_filename" id="romFile">
-                            @for($i = 0; $i < $romFilesListCount; $i++)
-                                @php
-                                    $romFileItem = $romFilesList[$i];
-                                    removeStoragePathFromFilename($romFileItem);
-                                @endphp
-                                <option value="{{ $romFileItem }}">{{ $romFileItem }}</option>
-                            @endfor
+                            @foreach($romFilesList as $romFileListing)
+                                @php removeStoragePathFromFilename($romFileListing); @endphp
+                                <option value="{{ $romFileListing }}">{{ $romFileListing }}</option>
+                            @endforeach
                         </x-form-select>
                     </div>
                     <div class="my-4">
