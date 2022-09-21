@@ -19,6 +19,8 @@ class RomFile extends MongoDbModel
     protected $table = 'rom.files'; /*! <- don't delete!! use for eloquent helper code */
     protected $primaryKey = '_id';
     protected $keyType = 'string';
+    public $incrementing = false;
+    public $timestamps = false;
 
     protected $casts = [
         'uploadDate' => 'datetime'
