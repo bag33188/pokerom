@@ -14,7 +14,9 @@ use Illuminate\Queue\SerializesModels;
 class RomFileDeleting
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
     public RomFile $romFile;
+
     /**
      * Create a new event instance.
      *
