@@ -4,7 +4,7 @@
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Pok&eacute;mon Games Library</h2>
     </x-slot>
     <div class="container mx-auto py-6">
-        @unless(count($games) < 1)
+        @unless($games->count() < 1)
             <div
                 class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 justify-items-center my-1.5 pb-4">
                 @foreach($games as $game)

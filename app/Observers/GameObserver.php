@@ -14,6 +14,10 @@ class GameObserver
      */
     public bool $afterCommit = false;
 
+    /**
+     * use database triggers instead of ORM logic
+     * @var bool
+     */
     private bool $useDbLogic = true;
 
     public function creating(Game $game): void

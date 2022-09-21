@@ -7,6 +7,10 @@ use App\Models\Rom;
 
 class RomObserver
 {
+    /**
+     * use database triggers instead of ORM logic
+     * @var bool
+     */
     private bool $useDbLogic = true;
 
     /**

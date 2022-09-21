@@ -15,10 +15,10 @@ class UserObserver
 
     public function updated(User $user): void
     {
-        $isApiRequest = $this->request->is('api/*');
+        $requestIsApiEndpoint = $this->request->is('api/*');
         $passwordHasChanged = $user->isDirty('password');
 
-        if ($passwordHasChanged || $isApiRequest) $this->userRepository->revokeApiTokens($user);
+        if ($passwordHasChanged || $requestIsApiEndpoint) $this->userRepository->revokeApiTokens($user);
     }
 
     public function deleted(User $user): void

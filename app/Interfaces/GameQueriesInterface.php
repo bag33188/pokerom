@@ -9,4 +9,6 @@ interface GameQueriesInterface
     function formatGameTypeSQL(string $game_type): string;
 
     function getAllRomsWithNoGameSQL(): Collection;
+
+    function getAllGamesThatAreROMHacks(): Collection;
 }
