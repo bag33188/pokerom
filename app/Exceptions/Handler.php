@@ -14,6 +14,7 @@ use MongoDB\Driver\Exception\BulkWriteException;
 use Psr\Log\LogLevel;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 use URL;
 
@@ -84,6 +85,7 @@ class Handler extends ExceptionHandler
             return false;
         });
 
+        $this->renderable(fn(NotFoundHttpException $e) => throw App::make(HttpRouteNotFoundException::class));
 
         // handle generic \Symfony\Component\HttpKernel\Exception\HttpException
         $this->renderable(function (HttpException $e): JsonResponse|false {
