@@ -1,4 +1,4 @@
-// noinspection DuplicatedCode
+// noinspection DuplicatedCode,JSUnresolvedFunction,JSUnresolvedVariable
 
 const mongoURI = // DSN
     "mongodb://brock:3931Sunflower!@localhost:27017/?authSource=admin&authMechanism=SCRAM-SHA-256";
