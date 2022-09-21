@@ -3,14 +3,14 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2022 at 05:00 AM
+-- Generation Time: Sep 21, 2022 at 05:12 AM
 -- Server version: 10.9.2-MariaDB
 -- PHP Version: 8.1.6
 
 --
 -- CREATE USER 'bag33188'@'%' IDENTIFIED VIA mysql_native_password USING '***';GRANT ALL PRIVILEGES ON *.* TO 'bag33188'@'%' REQUIRE NONE WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;CREATE DATABASE IF NOT EXISTS `bag33188`;GRANT ALL PRIVILEGES ON `bag33188`.* TO 'bag33188'@'%';GRANT ALL PRIVILEGES ON `bag33188\_%`.* TO 'bag33188'@'%';
 -- set autocommit = {0|1}
--- auto increment `roms` + `games` = 43,  auto increment `users` = 3, auto increment `personal_access_tokens` = 3, auto increment `migrations` = 10
+-- auto increment `roms` + `games` = 43,  auto increment `users` = 3, auto increment `personal_access_tokens` = 1, auto increment `migrations` = 10
 -- ALTER TABLE table_name AUTO_INCREMENT = value;
 --
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -205,8 +205,7 @@ TRUNCATE TABLE `failed_jobs`;
 --
 -- Table structure for table `games`
 --
--- Creation: Aug 27, 2022 at 03:59 PM
--- Last update: Sep 08, 2022 at 02:39 AM
+-- Creation: Sep 08, 2022 at 05:16 AM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -317,7 +316,7 @@ DELIMITER ;
 --
 -- Table structure for table `migrations`
 --
--- Creation: Aug 27, 2022 at 03:45 PM
+-- Creation: Sep 08, 2022 at 05:16 AM
 --
 
 DROP TABLE IF EXISTS `migrations`;
@@ -381,7 +380,8 @@ TRUNCATE TABLE `password_resets`;
 --
 -- Table structure for table `personal_access_tokens`
 --
--- Creation: Aug 27, 2022 at 03:45 PM
+-- Creation: Sep 21, 2022 at 03:06 AM
+-- Last update: Sep 21, 2022 at 03:12 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -414,8 +414,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 -- Table structure for table `roms`
 --
--- Creation: Aug 27, 2022 at 05:10 PM
--- Last update: Sep 08, 2022 at 03:00 AM
+-- Creation: Sep 21, 2022 at 03:01 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -497,7 +496,7 @@ INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Aug 27, 2022 at 03:45 PM
--- Last update: Sep 08, 2022 at 03:00 AM
+-- Last update: Sep 21, 2022 at 03:12 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -521,19 +520,13 @@ CREATE TABLE `sessions` (
 --
 
 TRUNCATE TABLE `sessions`;
---
--- Dumping data for table `sessions`
---
-
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('pqp05LznbokrBSPFyJ7Gmffo6ewlCTauQQIzweJE', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiQTZLbkFlOXNqNTJBWmE0czAxYlZ3NFVDV1o4Ynp4cUxpZmF3Z1MxeiI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR0VUdyZkhTLnRPNkFKLmlLTXV0d1MuajJxakZmUm1MU3NTNXN1bjZkSWc3ZEVIUVZYS1l1YSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjk6Imh0dHA6Ly9wb2tlcm9tLnRlc3Qvcm9tLWZpbGVzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1662606030);
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
 --
--- Creation: Aug 27, 2022 at 03:45 PM
+-- Creation: Sep 08, 2022 at 05:16 AM
+-- Last update: Sep 21, 2022 at 03:12 AM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -568,7 +561,7 @@ TRUNCATE TABLE `users`;
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Brock Glatman', 'bglatman@outlook.com', NULL, '$2y$10$tUGrfHS.tO6AJ.iKMutwS.j2qjFfRmLSsS5sun6dIg7dEHQVXKYua', NULL, NULL, NULL, 'admin', 'iCX3e9D1KZEjvhwPKiNRPLHuNKusOeApW59PM2QfxuwM1BQRbSbmW0Qco1wz', NULL, NULL, '2022-08-27 23:17:24', '2022-09-02 07:39:41'),
+(1, 'Brock Glatman', 'bglatman@outlook.com', NULL, '$2y$10$tUGrfHS.tO6AJ.iKMutwS.j2qjFfRmLSsS5sun6dIg7dEHQVXKYua', NULL, NULL, NULL, 'admin', '1PsODdSPPZZliuAOZaHdOV5tV98YDQ4BDaM8al5s25Tuat2vIxyMgdGOvB9Q', NULL, NULL, '2022-08-27 23:17:24', '2022-09-02 07:39:41'),
 (2, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$g4kXZ7ea8TNdwlySRo5bne1HoU6h/NOyRmul.J3fD5.5L5eu1sKBC', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-08-30 08:24:08', '2022-08-30 08:24:08');
 
 --
@@ -660,7 +653,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `roms`
