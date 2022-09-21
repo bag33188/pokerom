@@ -46,9 +46,7 @@ class RomController extends WebController
      */
     public function create()
     {
-        return view('roms.create', [
-            'romTypes' => ROM_TYPES
-        ]);
+        return view('roms.create');
     }
 
     /**
@@ -86,8 +84,7 @@ class RomController extends WebController
     public function edit(Rom $rom)
     {
         return view('roms.edit', [
-            'rom' => $rom,
-            'romTypes' => ROM_TYPES
+            'rom' => $rom
         ]);
     }
 

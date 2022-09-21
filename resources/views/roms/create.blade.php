@@ -22,10 +22,10 @@
             <div class="mt-2.5">
                 <x-form-select-label for="romType" text="ROM Type"/>
                 <x-form-select name="rom_type" id="romType" required autofocus>
-                    @foreach($romTypes as $index => $romType)
+                    @foreach(ROM_TYPES as $index => $romType)
                         <option
                             value="{{ $romType }}"
-                            @selected(strtolower(old('rom_type', $romTypes[0])) == $romType)>{{ strtoupper($romType) }}</option>
+                            @selected(strtolower(old('rom_type', ROM_TYPES[0])) == $romType)>{{ strtoupper($romType) }}</option>
                     @endforeach
                 </x-form-select>
             </div>
