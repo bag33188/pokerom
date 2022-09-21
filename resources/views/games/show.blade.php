@@ -31,12 +31,16 @@
                 </div>
             @else
                 <div class="w-full col-span-full flex flex-row justify-between">
-                    <x-anchor-button class="order-0" type="primary" :href="route('games.index')">
-                        Go Back
-                    </x-anchor-button>
-                    <x-anchor-button class="order-1" :href="route('roms.show', ['rom' => $game->rom])">
-                        Goto ROM Info
-                    </x-anchor-button>
+                    <div class="inline-block order-0">
+                        <x-anchor-button type="primary" :href="route('games.index')">
+                            Go Back
+                        </x-anchor-button>
+                    </div>
+                    <div class="inline-block order-1">
+                        <x-anchor-button :href="route('roms.show', ['rom' => $game->rom])">
+                            Goto ROM Info
+                        </x-anchor-button>
+                    </div>
                 </div>
             @endif
         </div>

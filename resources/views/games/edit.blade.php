@@ -62,7 +62,7 @@
                         Save!
                     </x-jet-button>
                 </div>
-                <div class="order-1">
+                <div class="order-1 inline-block">
                     <x-anchor-button type="secondary" href="{{ route('games.show', ['game' => $game]) }}">
                         Cancel
                     </x-anchor-button>

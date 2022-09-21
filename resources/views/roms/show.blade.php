@@ -94,9 +94,11 @@
                     @include('roms.delete', ['rom' => $rom])
                 </div>
                 <div class="mt-3 inline-flex flex-row">
-                    <x-anchor-button @class(["order-2" => !$rom->has_file]) :href="route('roms.edit', ['rom' => $rom])">
-                        Edit!
-                    </x-anchor-button>
+                    <div @class(["order-2" => !$rom->has_file, 'inline-block'])>
+                        <x-anchor-button :href="route('roms.edit', ['rom' => $rom])">
+                            Edit!
+                        </x-anchor-button>
+                    </div>
                     @if(!$rom->has_file)
                         <div class="mx-1 order-1"></div>
                         <form class="order-0" method="POST" action="{{ route('roms.link-file', ['rom' => $rom]) }}">
@@ -109,9 +111,11 @@
             </div>
         @else
             <div class="mt-3 no-select inline-flex flex-row justify-between w-full">
-                <x-anchor-button class="order-0" type="secondary" :href="route('roms.index')">
-                    Go Back
-                </x-anchor-button>
+                <div class="inline-block order-0">
+                    <x-anchor-button type="secondary" :href="route('roms.index')">
+                        Go Back
+                    </x-anchor-button>
+                </div>
                 <x-rom-file.download :romFile="$rom->romFile" class="order-1" :title="$rom->romFile->filename"/>
             </div>
         @endif

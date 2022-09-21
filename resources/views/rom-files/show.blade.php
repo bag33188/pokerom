@@ -32,9 +32,11 @@
                     @if($userIsAdmin)
                         <x-rom-file.delete class="order-1" :romFile="$romFile"/>
                     @else
-                        <x-anchor-button class="order-1" type="secondary" :href="route('rom-files.index')">
-                            Go Back!
-                        </x-anchor-button>
+                        <div class="inline-block order-1">
+                            <x-anchor-button type="secondary" :href="route('rom-files.index')">
+                                Go Back!
+                            </x-anchor-button>
+                        </div>
                     @endif
                 </div>
                 <div class="inline-block order-0">

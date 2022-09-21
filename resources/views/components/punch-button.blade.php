@@ -1,3 +1,4 @@
+@props(['btn_name', 'btn_text', 'btn_type'])
 @pushOnce('styles')
     <style {!! 'type="text/css"' !!}>
         :root {

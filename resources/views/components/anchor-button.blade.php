@@ -1,30 +1,46 @@
 @props(['type'])
 @php
-    $anchorBtnClasses = array();
-    $anchorPrimaryCss = ['inline-flex', 'items-center', 'px-4', 'py-2', 'bg-gray-800', 'border', 'border-transparent', 'rounded-md', 'font-semibold', 'text-xs', 'text-white', 'uppercase', 'tracking-widest', 'hover:bg-gray-700', 'active:bg-gray-900', 'focus:outline-none', 'focus:border-gray-900', 'focus:ring', 'focus:ring-gray-300', 'disabled:opacity-25', 'transition'];
-    $anchorSecondaryCss = ['inline-flex', 'items-center', 'px-4', 'py-2', 'bg-white', 'border', 'border-gray-300', 'rounded-md', 'font-semibold', 'text-xs', 'text-gray-700', 'uppercase', 'tracking-widest', 'shadow-sm', 'hover:text-gray-500', 'focus:outline-none', 'focus:border-blue-300', 'focus:ring', 'focus:ring-blue-200', 'active:text-gray-800', 'active:bg-gray-50', 'disabled:opacity-25', 'transition'];
-    $anchorDangerCss = ['inline-flex', 'items-center', 'px-4', 'py-2', 'bg-gray-800', 'border', 'border-transparent', 'rounded-md', 'font-semibold', 'text-xs', 'text-white', 'uppercase', 'tracking-widest', 'hover:bg-gray-700', 'active:bg-gray-900', 'focus:outline-none', 'focus:border-gray-900', 'focus:ring', 'focus:ring-gray-300', 'disabled:opacity-25', 'transition'];
+    if(empty($type)) {
+        $type = 'primary';
+    }
+    $anchorBtnClasses = [
+        'bg-red-600' => $type == 'danger',
+        'text-white' => $type == 'danger' || $type == 'primary',
+        'hover:bg-red-500' => $type == 'danger',
+        'active:bg-red-600' => $type == 'danger',
+        'border-transparent' => $type == 'danger' || $type == 'primary',
+        'focus:ring-red-200' => $type == 'danger',
+        'focus:border-red-700' => $type == 'danger',
+        'bg-white' => $type == 'secondary',
+        'shadow-sm' => $type == 'secondary',
+        'text-gray-700' => $type == 'secondary',
+        'border-gray-300' => $type == 'secondary',
+        'active:bg-gray-50' => $type == 'secondary',
+        'hover:text-gray-500' => $type == 'secondary',
+        'focus:ring-blue-200' => $type == 'secondary',
+        'active:text-gray-800' => $type == 'secondary',
+        'focus:border-blue-300' => $type == 'secondary',
+        'hover:bg-gray-700' => $type == 'primary',
+        'active:bg-gray-900' => $type == 'primary',
+        'focus:ring-gray-300' => $type == 'primary',
+        'focus:border-gray-900' => $type == 'primary',
+        'bg-gray-800' => $type == 'primary',
+        'focus:outline-none',
+        'disabled:opacity-25',
+        'px-4',
+        'py-2',
+        'border',
+        'text-xs',
+        'uppercase',
+        'rounded-md',
+        'focus:ring',
+        'transition',
+        'inline-flex',
+        'items-center',
+        'font-semibold',
+        'tracking-widest',
+        'focus:outline-none',
+        'disabled:opacity-25',
+    ];
 @endphp
-@switch(strtolower($type ?? 'unset'))
-    @case('primary')
-        @php
-            $anchorBtnClasses = $anchorPrimaryCss;
-        @endphp
-        @break
-    @case('secondary')
-        @php
-            $anchorBtnClasses = $anchorSecondaryCss;
-        @endphp
-        @break
-    @case('danger')
-        @php
-            $anchorBtnClasses = $anchorDangerCss;
-        @endphp
-        @break
-    @default
-        @php
-            // default is primary btn type
-            $anchorBtnClasses = $anchorPrimaryCss;
-        @endphp
-@endswitch
-<a {{ $attributes->merge(['class' => joinCssClasses($anchorBtnClasses)]) }}>{{ $slot }}</a>
+<a {{ $attributes }} @class($anchorBtnClasses)>{{ $slot }}</a>
