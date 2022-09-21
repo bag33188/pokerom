@@ -76,9 +76,10 @@ class GameController extends WebController
      */
     public function edit(Game $game)
     {
+        $replaceEacuteUnicodeCharWithTheLetterE = fn(string $value): string => str_replace(_EACUTE, "\u{0065}" /* the letter `e` */, $value);
         return view('games.edit', [
             'game' => $game,
-            'removeEacute' => fn(string $value): string => str_replace(_EACUTE, "\u{0065}", $value),
+            'replaceEacuteWithE' => $replaceEacuteUnicodeCharWithTheLetterE,
         ]);
     }
 

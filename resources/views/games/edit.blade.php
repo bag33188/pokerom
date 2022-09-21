@@ -4,23 +4,23 @@
             Version</h2>
     </x-slot>
     <div class="p-3">
-        <x-jet-validation-errors class="mb-4" />
+        <x-jet-validation-errors class="mb-4"/>
         <form method="POST" action="{{ route('games.update', ['game' => $game]) }}">
             @method('PUT')
             @csrf
 
             <div class="mt-2.5">
-                <x-jet-label for="gameName" :value="__('Game Name')" />
+                <x-jet-label for="gameName" :value="__('Game Name')"/>
                 <x-jet-input id="gameName" class="block mt-1 w-full" type="text"
                              name="game_name"
-                             :value="$removeEacute($game->game_name)"
+                             :value="$replaceEacuteWithE($game->game_name)"
                              minlength="{{ MIN_GAME_NAME_LENGTH }}"
                              maxlength="{{ MAX_GAME_NAME_LENGTH }}"
                              required autofocus
                 />
             </div>
             <div class="mt-2.5">
-                <x-jet-label for="gameType" :value="__('Game Type')" />
+                <x-jet-label for="gameType" :value="__('Game Type')"/>
                 <x-form-select name="game_type" id="gameType" required autofocus>
                     @foreach(GAME_TYPES as $index => $gameType)
                         <option value="{{ $gameType }}"
@@ -30,7 +30,7 @@
                 </x-form-select>
             </div>
             <div class="mt-2.5">
-                <x-jet-label for="gameRegion" :value="__('Region')" />
+                <x-jet-label for="gameRegion" :value="__('Region')"/>
                 <x-form-select
                     name="region" id="gameRegion"
                     required autofocus>
@@ -42,19 +42,19 @@
                 </x-form-select>
             </div>
             <div class="mt-2.5">
-                <x-jet-label for="dateReleased" :value="__('Date Released')" />
+                <x-jet-label for="dateReleased" :value="__('Date Released')"/>
                 <x-jet-input type="date"
                              :value="$game->date_released->format('Y-m-d')"
                              class="block mt-1 w-full"
-                             id="dateReleased" name="date_released" required autofocus />
+                             id="dateReleased" name="date_released" required autofocus/>
             </div>
             <div class="mt-2.5">
-                <x-jet-label for="generation" :value="__('Generation')" />
+                <x-jet-label for="generation" :value="__('Generation')"/>
                 <x-jet-input type="number" id="generation" name="generation"
                              :value="$game->generation"
                              class="block mt-1 w-full"
                              min="{{ MIN_GAME_GENERATION_VALUE }}" max="{{ MAX_GAME_GENERATION_VALUE }}" required
-                             autofocus />
+                             autofocus/>
             </div>
             <div class="mt-4 inline-flex flex-row justify-between w-full">
                 <div class="order-0">
