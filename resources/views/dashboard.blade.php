@@ -1,11 +1,12 @@
 @push('scripts')
     <script type="text/javascript">
-        const currentYear = new Date().getFullYear();
-        const copyrightYearElement = document.getElementById('copyright-year');
-        copyrightYearElement.textContent = currentYear.valueOf().toString();
-    </script>
-    <script>
-        let loadEmulatorLinks = () => {
+        const loadCopyrightYear = () => {
+            const currentYear = (new Date()).getFullYear();
+            const copyrightYearElement = document.getElementById('copyright-year');
+            copyrightYearElement.textContent = currentYear.toString();
+        };
+
+        const loadEmulatorLinks = () => {
             /** @type HTMLUListElement */
             const emulatorLinksList = document.getElementById("emulator-links");
 
@@ -17,15 +18,7 @@
              * @name anchorClasses
              * @type {string[]}
              */
-            const anchorClasses = [
-                @php
-                    for($i = 0; $i < count($emulatorLinkListAnchorClasses); $i++) {
-                        echo Js::from($emulatorLinkListAnchorClasses[$i]),
-                            ($i + 1) == sizeof($emulatorLinkListAnchorClasses) ? '' : ',',
-                            "\n";
-                    }
-                @endphp
-            ];
+            const anchorClasses = ["underline", "text-blue-400", "hover:text-blue-500"];
 
             /**
              * @name emulators
@@ -70,22 +63,26 @@
             emulators.forEach((emulator, index) => {
                 let listItemElement = document.createElement("li");
                 let emulatorLinkElement = document.createElement("a");
-                listItemElement.id = `emulator-${index + 1}`;
+                listItemElement.id = `emulator-${(index + 1).valueOf().toString()}`;
 
-                emulatorLinkElement.id = `${emulator.name}-emu`;
+                emulatorLinkElement.id = `${emulator.name}-emulator-url`;
                 emulatorLinkElement.href = emulator.href;
                 emulatorLinkElement.text = emulator.text;
                 emulatorLinkElement.target = emulator.target;
+                emulatorLinkElement.rel = "noreferrer";
+                emulatorLinkElement.setAttribute('data-platform', emulator.platform);
 
                 if (emulators[index].hasOwnProperty('title'))
                     emulatorLinkElement.title = emulator['title'];
 
                 emulatorLinkElement.classList.add(...anchorClasses);
-                emulatorLinkElement.setAttribute("rel", "noreferrer");
                 listItemElement.appendChild(emulatorLinkElement);
                 emulatorLinksList.appendChild(listItemElement);
             });
         };
+    </script>
+    <script type="text/javascript">
+        loadCopyrightYear();
         loadEmulatorLinks();
     </script>
 @endpush
@@ -94,7 +91,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <div class="flex flex-row w-full justify-between">
                 <span class="order-0" id="home-page-name">{{ __('Dashboard') }}</span>
-                <span class="order-1" id="welcome-username">Welcome, {{ auth()->user()->name }}!</span>
+                <span class="order-1" id="welcome-username">Welcome, {{ $userFirstName }}!</span>
             </div>
         </h2>
     </x-slot>
@@ -130,7 +127,7 @@
                                     <wbr/>
                                     This databank contains
                                     <span
-                                        id="adv-count"><!--more than-->{{\App\Models\Rom::count() - 3}}+</span>
+                                        id="adv-count"><!--more than-->{{ $romsDisplayCount }}+</span>
                                     ROMs, including all 33 of the core Pok&#233;mon ROMs.
                                 </p>
                                 <br/>
