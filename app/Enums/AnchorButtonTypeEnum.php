@@ -11,4 +11,6 @@ enum AnchorButtonTypeEnum: string
     case PRIMARY = 'primary';
     case SECONDARY = 'secondary';
     case DANGER = 'danger';
+    case INFO = 'info';
+    case CAUTION = 'caution';
 }

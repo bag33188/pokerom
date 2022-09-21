@@ -22,10 +22,11 @@
 
     $conditionalAnchorBtnClasses = [
         'bg-red-600' => $btnType == AnchorBtnType::DANGER,
-        'text-white' => $btnType == AnchorBtnType::DANGER || $btnType == AnchorBtnType::PRIMARY,
+        'text-white' => $btnType == AnchorBtnType::DANGER || $btnType == AnchorBtnType::PRIMARY || $btnType == AnchorBtnType::INFO,
         'hover:bg-red-500' => $btnType == AnchorBtnType::DANGER,
         'active:bg-red-600' => $btnType == AnchorBtnType::DANGER,
-        'border-transparent' => $btnType == AnchorBtnType::DANGER || $btnType == AnchorBtnType::PRIMARY,
+        // todo: find a cleaner way to do this
+        'border-transparent' => $btnType == AnchorBtnType::DANGER || $btnType == AnchorBtnType::PRIMARY || $btnType == AnchorBtnType::CAUTION,
         'focus:ring-red-200' => $btnType == AnchorBtnType::DANGER,
         'focus:border-red-700' => $btnType == AnchorBtnType::DANGER,
         'bg-white' => $btnType == AnchorBtnType::SECONDARY,
@@ -42,6 +43,16 @@
         'focus:ring-gray-300' => $btnType == AnchorBtnType::PRIMARY,
         'focus:border-gray-900' => $btnType == AnchorBtnType::PRIMARY,
         'bg-gray-800' => $btnType == AnchorBtnType::PRIMARY,
+        'hover:bg-blue-700' => $btnType == AnchorBtnType::INFO,
+        'active:bg-blue-900' => $btnType == AnchorBtnType::INFO,
+        'focus:ring-blue-300' => $btnType == AnchorBtnType::INFO,
+        'focus:border-blue-900' => $btnType == AnchorBtnType::INFO,
+        'bg-blue-800' => $btnType == AnchorBtnType::INFO,
+        'hover:bg-yellow-500' => $btnType == AnchorBtnType::CAUTION,
+        'active:bg-yellow-600' => $btnType == AnchorBtnType::CAUTION,
+        'focus:ring-yellow-300' => $btnType == AnchorBtnType::CAUTION,
+        'focus:border-yellow-700' => $btnType == AnchorBtnType::CAUTION,
+        'bg-yellow-400' => $btnType == AnchorBtnType::CAUTION,
     ];
 @endphp
 <a {{ $attributes }}
