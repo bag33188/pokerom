@@ -1,3 +1,4 @@
+@inject('romFileRepository', 'App\Interfaces\RomFileRepositoryInterface')
 <x-app-layout>
     <x-slot:header>
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Pok&eacute;mon ROM Files</h2>
@@ -11,7 +12,7 @@
                     <p class="inline-block">Filename: {{ $romFile->filename }}</p>
                     <p class="inline-block">Filesize: {{ $romFile->length }} Bytes</p>
                     <p class="inline-block">Uploaded On:
-                        {{ $formatUploadDate($romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'America/Los_Angeles') }}</p>
+                        {{ $romFileRepository->formatUploadDate($romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'America/Los_Angeles') }}</p>
                     <p class="inline-block">
                         ROM ID: {!!
                                     $romFile->rom
@@ -20,7 +21,7 @@
                                  !!}
                     </p>
                     <div class="mt-2 inline-flex flex-row justify-between">
-                        <x-rom-file.download :romFile="$romFile" />
+                        <x-rom-file.download :romFile="$romFile"/>
                         <x-anchor-button href="{{ route('rom-files.show', ['romFile' => $romFile]) }}">
                             Info!
                         </x-anchor-button>

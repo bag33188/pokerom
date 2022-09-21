@@ -6,9 +6,6 @@ use App\Http\Controllers\Controller as WebController;
 use App\Http\Requests\UploadRomFileRequest;
 use App\Interfaces\RomFileRepositoryInterface;
 use App\Models\RomFile;
-use Closure;
-use DateTime;
-use DateTimeZone;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -24,12 +21,8 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class RomFileController extends WebController
 {
-    private Closure $formatUploadDate;
-
     public function __construct(private readonly RomFileRepositoryInterface $romFileRepository)
     {
-        $this->formatUploadDate =
-            fn(string $uploadDate, string $dtFormat, string $timezone): string => (new DateTime($uploadDate))->setTimezone(new DateTimeZone($timezone))->format($dtFormat);
     }
 
     /**
@@ -42,8 +35,7 @@ class RomFileController extends WebController
         # Gate::authorize('view-romFile');
         $romFiles = (auth()->user()->isAdmin()) ? RomFile::with('rom')->get() : RomFile::whereHas('rom')->get();
         return view('rom-files.index', [
-            'romFiles' => $romFiles,
-            'formatUploadDate' => $this->formatUploadDate,
+            'romFiles' => $romFiles
         ]);
     }
 
@@ -86,7 +78,6 @@ class RomFileController extends WebController
     {
         return view('rom-files.show', [
             'romFile' => $romFile,
-            'formatUploadDate' => $this->formatUploadDate,
             'userIsAdmin' => Auth::user()->isAdmin(),
         ]);
     }

@@ -9,6 +9,9 @@ use App\Jobs\ProcessRomFileDeletion;
 use App\Jobs\ProcessRomFileDownload;
 use App\Jobs\ProcessRomFileUpload;
 use App\Models\RomFile;
+use DateTime;
+use DateTimeZone;
+use Exception;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
@@ -49,5 +52,14 @@ class RomFileRepository implements RomFileRepositoryInterface
             'XCI' => 'Nintendo Switch',
             default => 'Unknown Console',
         };
+    }
+
+    public function formatUploadDate(string $uploadDate, string $dtFormat, string $timezone): string
+    {
+        try {
+            return (new DateTime($uploadDate))->setTimezone(new DateTimeZone($timezone))->format($dtFormat);
+        } catch (Exception $e) {
+            return $e->getMessage() ?? 'Invalid date/datetime';
+        }
     }
 }
