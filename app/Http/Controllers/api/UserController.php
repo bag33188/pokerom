@@ -66,7 +66,7 @@ class UserController extends ApiController
             return response()->json([
                 'success' => false,
                 'message' => 'Invalid credentials',
-            ], 401);
+            ], HttpStatus::HTTP_UNAUTHORIZED);
         }
     }
 
@@ -84,7 +84,7 @@ class UserController extends ApiController
             return response()->json([
                 'success' => false,
                 'message' => 'You are not logged in!'
-            ], 401);
+            ], HttpStatus::HTTP_UNAUTHORIZED);
         }
     }
 
