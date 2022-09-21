@@ -18,11 +18,11 @@ class ApiAuthException extends AbstractApplicationException
     {
         if ($this->isApiRequest()) {
             return Response::json(
-                ['message' => 'Error: Unauthenticated.', 'success' => false], # $e->getTraceAsString();
+                ['message' => 'Error: Unauthenticated.', 'success' => false],
                 HttpStatus::HTTP_UNAUTHORIZED
             );
         }
-        // don't use custom rendering if request is not an API request
+
         return false;
     }
 

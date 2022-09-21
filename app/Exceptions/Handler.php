@@ -73,19 +73,19 @@ class Handler extends ExceptionHandler
         $this->renderable(fn(AuthenticationException $e) => throw App::make(ApiAuthException::class));
 
         $this->renderable(fn(NotFoundHttpException $e) => throw App::make(RouteNotFoundException::class,
-            ['message' => $e->getMessage(), 'code' => self::getErrorCode($e)]));
+            ['message' => $e->getMessage(), 'code' => self::getErrorCodeFromException($e)]));
 
         // handle generic \Symfony\Component\HttpKernel\Exception\HttpException
         $this->renderable(function (HttpException $e): JsonResponse|false {
 
-            $statusCode = self::getErrorCode($e);
+            $statusCode = self::getErrorCodeFromException($e);
 
             // set default message value to message of exception being thrown by request/response
             $message = $e->getMessage();
 
             if ($this->isApiRequest() || $this->requestExpectsJson()) {
                 return Response::json(
-                    ['message' => $message, 'success' => false], # $e->getTrace();
+                    ['message' => $message, 'success' => false], # $e->getTrace(); $e->getTraceAsString();
                     $statusCode,
                     [...$e->getHeaders()]
                 );
@@ -95,7 +95,7 @@ class Handler extends ExceptionHandler
         });
     }
 
-    private static function getErrorCode(Exception $e)
+    private static function getErrorCodeFromException(Exception $e)
     {
         // the `getStatusCode` method only exists on Exceptions that are instances of HttpException
         if ($e instanceof HttpException) {
