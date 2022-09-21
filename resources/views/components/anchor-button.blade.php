@@ -1,7 +1,7 @@
 @php
     use App\Enums\AnchorButtonTypeEnum as AnchorBtnType;
 
-    $universalAnchorCssClasses = [
+    $universalAnchorBtnCssClasses = [
         'focus:outline-none',
         'disabled:opacity-25',
         'px-4',
@@ -61,7 +61,7 @@
     ];
 @endphp
 <a {{ $attributes }}
-   @class(array_merge($conditionalAnchorBtnClasses, $universalAnchorCssClasses))
+   @class(array_merge($conditionalAnchorBtnClasses, $universalAnchorBtnCssClasses))
    role="button"
    type="{{ $btnType->value }}">
     {{ $slot }}
