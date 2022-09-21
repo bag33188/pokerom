@@ -12,11 +12,13 @@ use Utils\Classes\AbstractApplicationException;
 
 class ApiAuthException extends AbstractApplicationException
 {
-    use ApiUtilsTrait;
+    use ApiUtilsTrait {
+        requestExpectsJson as private;
+    }
 
     public function render(Request $request): false|JsonResponse|RedirectResponse
     {
-        if ($this->isApiRequest()) {
+        if ($this->requestExpectsJson()) {
             return Response::json(
                 ['message' => 'Error: Unauthenticated.', 'success' => false],
                 HttpStatus::HTTP_UNAUTHORIZED

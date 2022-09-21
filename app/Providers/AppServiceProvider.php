@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         if (self::$useIdeHelper === true) {
-            if (App::isLocal()) {
+            if (App::environment('local')) {
                 App::register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
             }
         }
@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer('*', function ($view) {
+        View::composer('*', function (\Illuminate\View\View $view) {
             $view_name = str_replace('.', '-', $view->getName());
             View::share('view_name', $view_name);
         });

@@ -20,10 +20,7 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
-    use ApiUtilsTrait {
-        isApiRequest as private;
-        requestExpectsJson as private;
-    }
+    use ApiUtilsTrait;
 
     /**
      * A list of exception types with their corresponding custom log levels.
@@ -71,19 +68,28 @@ class Handler extends ExceptionHandler
         $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
             ['message' => $e->getMessage(), 'code' => HttpStatus::HTTP_CONFLICT]));
 
-        $this->renderable(fn(AuthenticationException $e) => throw App::make(ApiAuthException::class));
-
-        $this->renderable(fn(NotFoundHttpException $e) => throw App::make(RouteNotFoundException::class,
-            ['message' => $e->getMessage(), 'code' => self::getErrorCodeFromException($e)]));
-
+        if ($this->isApiRequest() && !$this->isLivewireRequest()) {
+            $this->renderable(fn(AuthenticationException $e) => throw App::make(ApiAuthException::class, [
+                'message' => $e->getMessage(),
+                'code' => HttpStatus::HTTP_UNAUTHORIZED,
+            ]));
+            $this->renderable(fn(NotFoundHttpException $e) => throw App::make(RouteNotFoundException::class,
+                ['message' => $e->getMessage(), 'code' => self::getErrorCodeFromException($e)]));
+        }
+        
         // handle generic \Symfony\Component\HttpKernel\Exception\HttpException
         $this->renderable(function (HttpException $e): JsonResponse|false {
             $httpErrorCode = self::getErrorCodeFromException($e);
+            $formatStackTrace = fn(string $trace): string => trim(preg_replace("/[\r\n]/", _SPACE . '|' . _SPACE, $trace));
             if ($this->isApiRequest() || $this->requestExpectsJson()) {
+                $errorTraceStr = $formatStackTrace($e->getTraceAsString());
                 return Response::json(
                     ['message' => $e->getMessage(), 'success' => false],
                     $httpErrorCode,
-                    [...$e->getHeaders()] # $e->getTrace(); $e->getTraceAsString();
+                    array(
+                        ...$e->getHeaders(), // populate original headers
+                        'X-Stack-Trace' => (App::isLocal() ? (sprintf("[%u] : %s", strlen($errorTraceStr), $errorTraceStr)) : 'null')
+                    ) # $e->getTrace();
                 );
             }
             // don't use custom rendering if request is not an API request

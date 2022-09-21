@@ -16,7 +16,6 @@ use Utils\Classes\AbstractApplicationException;
 class RouteNotFoundException extends AbstractApplicationException
 {
     use ApiUtilsTrait {
-        isApiRequest as private;
         requestExpectsJson as private;
     }
 
@@ -27,7 +26,7 @@ class RouteNotFoundException extends AbstractApplicationException
 
     public function render(Request $request): false|JsonResponse|RedirectResponse
     {
-        if ($this->isApiRequest() || $this->requestExpectsJson()) {
+        if ($this->requestExpectsJson()) {
             $currentErrorRoute = str_replace(Config::get('app.url') . '/', '/', URL::current());
 
             $errorIsHttpNotFound = $this->code === HttpStatus::HTTP_NOT_FOUND && strlen($this->message) === 0;
