@@ -8,6 +8,8 @@ class HomeController extends WebController
 {
     public function __invoke()
     {
-        return view('dashboard');
+        return view('dashboard', [
+            'emulatorLinkListAnchorClasses' => ["underline", "text-blue-400", "hover:text-blue-500"]
+        ]);
     }
 }

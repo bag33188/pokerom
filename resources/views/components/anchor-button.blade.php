@@ -23,6 +23,7 @@
         @break
     @default
         @php
+            // default is primary btn type
             $anchorBtnClasses = $anchorPrimaryCss;
         @endphp
 @endswitch

@@ -17,7 +17,15 @@
              * @name anchorClasses
              * @type {string[]}
              */
-            const anchorClasses = ["underline", "text-blue-400", "hover:text-blue-500"];
+            const anchorClasses = [
+                @php
+                    for($i = 0; $i < count($emulatorLinkListAnchorClasses); $i++) {
+                        echo Js::from($emulatorLinkListAnchorClasses[$i]),
+                            ($i + 1) == sizeof($emulatorLinkListAnchorClasses) ? '' : ',',
+                            "\n";
+                    }
+                @endphp
+            ];
 
             /**
              * @name emulators
