@@ -26,9 +26,9 @@ class PunchButton extends Component
      */
     public function render(): View|string|Closure
     {
-        $randomDomainWord = Factory::create('en_US')->domainWord;
+        $randomWord = Factory::create('en_US')->word;
         return view('components.punch-button', [
-            'fallbackBtnName' => "$randomDomainWord-punch-btn"
+            'fallbackBtnName' => "$randomWord-punch-btn",
         ]);
     }
 }
