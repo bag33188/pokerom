@@ -3,17 +3,14 @@
 namespace App\Exceptions;
 
 use App\Actions\ApiUtilsTrait;
-use Exception;
+use App\Actions\ExceptionUtilsTrait;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\URL;
 use MongoDB\Driver\Exception\BulkWriteException;
-use PDOException;
 use Psr\Log\LogLevel;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -22,7 +19,7 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
-    use ApiUtilsTrait;
+    use ApiUtilsTrait, ExceptionUtilsTrait;
 
     /**
      * A list of exception types with their corresponding custom log levels.
@@ -85,7 +82,7 @@ class Handler extends ExceptionHandler
                 ]
             ]));
             $this->renderable(fn(NotFoundHttpException $e) => throw App::make(RouteNotFoundException::class,
-                ['message' => $e->getMessage(), 'code' => self::determineErrorCodeFromException($e), 'headers' => [
+                ['message' => $e->getMessage(), 'code' => $this->determineErrorCodeFromException($e), 'headers' => [
                     ...$e->getHeaders(),
                     'X-Attempted-URL' => $this->getCurrentErrorUrl(),
                     'X-Stack-Trace' => $this->formatErrorTraceString($e)
@@ -94,7 +91,7 @@ class Handler extends ExceptionHandler
 
         // handle generic \Symfony\Component\HttpKernel\Exception\HttpException
         $this->renderable(function (HttpException $e): JsonResponse|false {
-            $httpErrorCode = self::determineErrorCodeFromException($e);
+            $httpErrorCode = $this->determineErrorCodeFromException($e);
             if ($this->isApiRequest() or $this->requestExpectsJson()) {
                 return Response::json(
                     ['message' => $e->getMessage(), 'success' => false],
@@ -111,30 +108,4 @@ class Handler extends ExceptionHandler
         });
     }
 
-    private static function determineErrorCodeFromException(Exception $e)
-    {
-        // the `getStatusCode` method only exists on Exceptions that are instances of HttpException
-        if ($e instanceof HttpException) {
-            // if `getCode` method returns any status (int value) at all, then use that method, else use the `getStatusCode` method's value (int value)
-            return $e->getCode() != 0 ? $e->getCode() : $e->getStatusCode();
-        } else if ($e instanceof PDOException) {
-            return (gettype($e->getCode()) == 'string') ? (int)$e->getCode() : ($e->getCode() ?: HttpStatus::HTTP_INTERNAL_SERVER_ERROR);
-        } else {
-            return $e->getCode() ?: HttpStatus::HTTP_INTERNAL_SERVER_ERROR;
-        }
-    }
-
-    private function getCurrentErrorUrl(): string
-    {
-        return (string)str_replace(Config::get("app.url") . '/', '/', URL::current());
-    }
-
-    private function formatErrorTraceString(Exception $e): string
-    {
-        $replaceLineBreaksInString = fn(string $subject, string $replace): string => preg_replace("/[\r\n]/", $replace, $subject);
-        $trace = trim($e->getTraceAsString(), "\t\0\x0B");
-        $modifiedStackTraceString = $replaceLineBreaksInString($trace, _SPACE . '|' . _SPACE);
-        $modifiedStackTraceLength = strlen($modifiedStackTraceString);
-        return App::isLocal() ? sprintf('[%u] : %s', $modifiedStackTraceLength, $modifiedStackTraceString) : 'null';
-    }
 }
