@@ -30,9 +30,8 @@
 @endpush
 @php
     $innerListGroupClasses = [
-      '!border-1',
+      'border-1',
       'rounded-lg',
-      '-border-gray-200',
       'bg-gray-100',
       'shadow-inner' => !$userIsAdmin,
     ];
@@ -45,28 +44,29 @@
         </h2>
     </x-slot>
     <div class="py-6 px-5">
-        <x-list-group
-            @class(['shadow', 'no-select' => !$userIsAdmin])
-            x-data="{ romInfoOpened: true, gameInfoOpened: true, romFileInfoOpened: true }">
-            <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer no-select"
-                                         @click="romInfoOpened = toggleInfo(romInfoOpened)">ROM Info</p>
+        <x-list-group @class(['shadow', 'no-select' => !$userIsAdmin])
+                      x-data="{ romInfoOpened: true, gameInfoOpened: true, romFileInfoOpened: true }">
+            <x-list-item class="pb-4">
+                <p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer no-select"
+                   @click="romInfoOpened = toggleInfo(romInfoOpened)">ROM Info</p>
                 <x-list-group @class($innerListGroupClasses) x-show="romInfoOpened === true">
                     <x-list-item>ROM ID: {{ $rom->id }}</x-list-item>
                     <x-list-item>ROM Name: {{ $rom->rom_name }}</x-list-item>
                     <x-list-item>ROM Size: {{ $romQueries->formatRomSizeSQL($rom->rom_size) }}</x-list-item>
-                    <x-list-item class="-border-b border-b-0">ROM Type: {{ $rom->rom_type }}</x-list-item>
+                    <x-list-item class="border-b-0">ROM Type: {{ $rom->rom_type }}</x-list-item>
                 </x-list-group>
                 <p class="font-bold m-0 p-0 text-xl" x-show="!romInfoOpened" x-cloak>...</p>
             </x-list-item>
             @if($rom->has_game)
-                <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer no-select"
-                                             @click="gameInfoOpened = toggleInfo(gameInfoOpened)">Game Info</p>
+                <x-list-item class="pb-4">
+                    <p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer no-select"
+                       @click="gameInfoOpened = toggleInfo(gameInfoOpened)">Game Info</p>
                     <x-list-group @class($innerListGroupClasses) x-show="gameInfoOpened === true">
                         <x-list-item>Game ID: {{ $rom->game->id }}</x-list-item>
                         <x-list-item>Game Name: {{ $rom->game->game_name }} Version</x-list-item>
                         <x-list-item>Region: {{ $rom->game->region }}</x-list-item>
                         <x-list-item>Generation: {{ numberToRoman($rom->game->generation) }}</x-list-item>
-                        <x-list-item class="-border-b border-b-0">
+                        <x-list-item class="border-b-0">
                             Release Date: {{ $rom->game->date_released->format('l, F jS, Y') }}
                         </x-list-item>
                     </x-list-group>
@@ -74,14 +74,16 @@
                 </x-list-item>
             @endif
             @if($rom->has_file)
-                <x-list-item class="pb-4"><p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer no-select"
-                                             @click="romFileInfoOpened = toggleInfo(romFileInfoOpened)">File
-                        Info</p>
+                <x-list-item class="pb-4">
+                    <p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer no-select"
+                       @click="romFileInfoOpened = toggleInfo(romFileInfoOpened)">
+                        File Info
+                    </p>
                     <x-list-group @class($innerListGroupClasses) x-show="romFileInfoOpened === true">
                         <x-list-item>File ID: {{ $rom->romFile->_id }}</x-list-item>
                         <x-list-item>File Name: {{ $rom->romFile->filename }}</x-list-item>
                         <x-list-item>File Length: {{ $rom->romFile->length }} Bytes</x-list-item>
-                        <x-list-item class="-border-b border-b-0">Designated
+                        <x-list-item class="border-b-0">Designated
                             Console: {{ $romFileRepository->determineConsole($rom->romFile) }}</x-list-item>
                     </x-list-group>
                     <p class="font-bold m-0 p-0 text-xl" x-show="!romFileInfoOpened" x-cloak>...</p>
