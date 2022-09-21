@@ -98,7 +98,7 @@
         </h2>
     </x-slot>
     @if($userIsAdmin)
-        <div class="mx-2 my-2 border border-gray-900 p-1.5 rounded-2xl h-fit" x-data="{ show_ng: false }">
+        <div class="mx-2 my-2 border border-gray-900 p-1.5 rounded-2xl w-fit" x-data="{ show_ng: false }">
             <button type="button" class="button" @click="show_ng = toggleInfo(show_ng)">
                 Toggle&nbsp;<code>ng-app</code>
             </button>
