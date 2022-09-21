@@ -7,15 +7,14 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Config;
-use JetBrains\PhpStorm\ArrayShape;
 
 class WelcomeNotification extends Notification
 {
     use Queueable;
 
     public User $user;
-    private string $welcomeMessage;
     private static string $appName;
+    private string $welcomeMessage;
 
     /**
      * Create a new notification instance.
@@ -62,12 +61,11 @@ class WelcomeNotification extends Notification
      * @param mixed $notifiable
      * @return array
      */
-    #[ArrayShape(['subject' => "string", 'from' => "\Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed", 'line1' => "array|string|string[]", 'action' => "array", 'line2' => "string"])]
     public function toArray(mixed $notifiable): array
     {
         return [
             'subject' => 'Thank you for joining ' . self::$appName . '!!',
-            'from' => config('mail.from.address'),
+            'from' => [config('mail.from.address'), self::$appName],
             'line1' => $this->welcomeMessage,
             'action' => [
                 'actionText' => 'Check it out!',

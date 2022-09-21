@@ -7,7 +7,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Config;
-use JetBrains\PhpStorm\ArrayShape;
 
 class FarewellNotification extends Notification
 {
@@ -62,12 +61,11 @@ class FarewellNotification extends Notification
      * @param mixed $notifiable
      * @return array
      */
-    #[ArrayShape(['subject' => "string", 'from' => "\Illuminate\Config\Repository|\Illuminate\Contracts\Foundation\Application|mixed", 'line1' => "string", 'line2' => "string"])]
     public function toArray(mixed $notifiable): array
     {
         return [
             'subject' => "I guess it's goodbye for now...",
-            'from' => config('mail.from.address'),
+            'from' => [config('mail.from.address'), self::$appName],
             'line1' => $this->farewellMessage,
             'line2' => 'Thank you for using ' . self::$appName . '!'
         ];
