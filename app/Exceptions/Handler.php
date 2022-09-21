@@ -78,17 +78,12 @@ class Handler extends ExceptionHandler
 
         // handle generic \Symfony\Component\HttpKernel\Exception\HttpException
         $this->renderable(function (HttpException $e): JsonResponse|false {
-
-            $statusCode = self::getErrorCodeFromException($e);
-
-            // set default message value to message of exception being thrown by request/response
-            $message = $e->getMessage();
-
+            $httpErrorCode = self::getErrorCodeFromException($e);
             if ($this->isApiRequest() || $this->requestExpectsJson()) {
                 return Response::json(
-                    ['message' => $message, 'success' => false], # $e->getTrace(); $e->getTraceAsString();
-                    $statusCode,
-                    [...$e->getHeaders()]
+                    ['message' => $e->getMessage(), 'success' => false],
+                    $httpErrorCode,
+                    [...$e->getHeaders()] # $e->getTrace(); $e->getTraceAsString();
                 );
             }
             // don't use custom rendering if request is not an API request
