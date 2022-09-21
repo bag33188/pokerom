@@ -14,7 +14,7 @@ class Alert extends Component
      *
      * @return void
      */
-    public function __construct(string $type = 'error')
+    public function __construct(string $type = 'default')
     {
         $this->type = $type;
     }
