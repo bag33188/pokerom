@@ -30,8 +30,8 @@ class RouteNotFoundException extends AbstractApplicationException
         if ($this->isApiRequest() || $this->requestExpectsJson()) {
             $currentErrorRoute = str_replace(Config::get('app.url') . '/', '/', URL::current());
 
-            $responseErrorIsRouteNotFound = $this->code === HttpStatus::HTTP_NOT_FOUND && strlen($this->message) === 0;
-            if ($responseErrorIsRouteNotFound) {
+            $errorIsHttpNotFound = $this->code === HttpStatus::HTTP_NOT_FOUND && strlen($this->message) === 0;
+            if ($errorIsHttpNotFound) {
                 return Response::json(
                     ['message' => "Route not found: $currentErrorRoute", 'success' => false], # $e->getTrace();
                     $this->code
