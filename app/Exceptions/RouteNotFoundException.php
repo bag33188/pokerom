@@ -26,10 +26,7 @@ class RouteNotFoundException extends ApplicationException
                 return Response::json(
                     ['message' => "Route not found: {self::getCurrentErrorUrl()}", 'success' => false],
                     $this->code,
-                    [
-                        'X-Attempted-URL' => self::getCurrentErrorUrl(),
-                        'X-Stack-Trace' => self::formatErrorTraceString($this->getTraceAsString())
-                    ]
+                    $this->headers
                 );
             }
         }

@@ -24,10 +24,7 @@ class SqlQueryException extends ApplicationException
             return response()->json(
                 ['success' => false, 'message' => $this->getMessage()],
                 $this->getCode(),
-                [
-                    'X-Attempted-URL' => self::getCurrentErrorUrl(),
-                    'X-Stack-Trace' => self::formatErrorTraceString($this->getTraceAsString())
-                ]
+                $this->headers
             );
         } else return false;
     }
