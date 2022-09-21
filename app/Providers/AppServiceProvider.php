@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\View as ViewFactory;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer('*', function (\Illuminate\View\View $view) {
+        View::composer('*', function (ViewFactory $view) {
             $view_name = str_replace('.', '-', $view->getName());
             View::share('view_name', $view_name);
         });

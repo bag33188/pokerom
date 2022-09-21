@@ -31,7 +31,7 @@ abstract class AbstractApplicationException extends Exception
 
     public static final function formatErrorTraceString(string $trace): string
     {
-        $trimAndReplaceLinkBreaksInString = fn(string $subject, string $replace): string => trim(preg_replace("/[\r\n]/", $replace, $subject));
+        $trimAndReplaceLinkBreaksInString = fn(string $subject, string $replace): string => addslashes(strip_tags(trim(preg_replace("/[\r\n]/", $replace, $subject))));
         $modifiedStackTraceString = $trimAndReplaceLinkBreaksInString($trace, _SPACE . '|' . _SPACE);
         $modifiedStackTraceLength = strlen($modifiedStackTraceString);
         return App::isLocal() ? sprintf('[%u] : %s', $modifiedStackTraceLength, $modifiedStackTraceString) : 'null';
