@@ -13,7 +13,6 @@ use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 
 class UserController extends ApiController
@@ -33,14 +32,17 @@ class UserController extends ApiController
         ]);
     }
 
-    public function index()
+    /**
+     * @throws AuthorizationException
+     */
+    public function index(): UserCollection
     {
-        Gate::authorize('viewAny-user');
+        $this->authorize('viewAny', User::class);
         $users = User::all();
         return new UserCollection($users);
     }
 
-    public function register(RegisterUserRequest $request)
+    public function register(RegisterUserRequest $request): JsonResponse
     {
         $user = User::create($request->all());
 
@@ -51,7 +53,7 @@ class UserController extends ApiController
         ], HttpStatus::HTTP_CREATED);
     }
 
-    public function login(LoginUserRequest $request)
+    public function login(LoginUserRequest $request): JsonResponse
     {
         $user = $request->input('user');
         $newBearerToken = $this->userRepository->generateApiToken($user);
@@ -62,7 +64,7 @@ class UserController extends ApiController
         ]);
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse
     {
         $user = $request->user();
         $userFirstName = explode(_SPACE, $user->name, 3)[0];
@@ -93,7 +95,7 @@ class UserController extends ApiController
     /**
      * @throws AuthorizationException
      */
-    public function destroy(int $userId)
+    public function destroy(int $userId): JsonResponse
     {
         $user = User::findOrFail($userId);
         $this->authorize('delete', $user);
