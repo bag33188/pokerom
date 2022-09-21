@@ -22,7 +22,7 @@ class SqlQueryException extends ApplicationException
             return redirect()->to(url()->previous())->dangerBanner($this->getMessage());
         } else if ($this->isApiRequest()) {
             return response()->json(
-                ['message' => $this->getMessage(), 'success' => false],
+                ['success' => false, 'message' => $this->getMessage()],
                 $this->getCode(),
                 [
                     'X-Attempted-URL' => self::getCurrentErrorUrl(),
