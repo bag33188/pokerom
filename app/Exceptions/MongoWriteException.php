@@ -11,8 +11,11 @@ use Utils\Classes\AbstractApplicationException as ApplicationException;
 /** Handled when there is an error querying `MongoDB` */
 class MongoWriteException extends ApplicationException
 {
-    use ApiUtilsTrait;
-    
+    use ApiUtilsTrait {
+        isApiRequest as private;
+        isLivewireRequest as private;
+    }
+
     public function render(Request $request): false|JsonResponse|RedirectResponse
     {
         if (!$this->isApiRequest() and !$this->isLivewireRequest()) {

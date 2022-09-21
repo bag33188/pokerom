@@ -16,7 +16,7 @@ class ApiAuthException extends AbstractApplicationException
 
     public function render(Request $request): false|JsonResponse|RedirectResponse
     {
-        if ($this->requestExpectsJson() || $this->isApiRequest()) {
+        if ($this->isApiRequest()) {
             return Response::json(
                 ['message' => 'Error: Unauthenticated.', 'success' => false], # $e->getTraceAsString();
                 HttpStatus::HTTP_UNAUTHORIZED

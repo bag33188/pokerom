@@ -15,7 +15,10 @@ use Utils\Classes\AbstractApplicationException;
 
 class RouteNotFoundException extends AbstractApplicationException
 {
-    use ApiUtilsTrait;
+    use ApiUtilsTrait {
+        isApiRequest as private;
+        requestExpectsJson as private;
+    }
 
     public function __construct(string $message = "", int $code = 0, ?Throwable $previous = null)
     {

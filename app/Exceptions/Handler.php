@@ -20,6 +20,7 @@ class Handler extends ExceptionHandler
 {
     use ApiUtilsTrait {
         isApiRequest as private;
+        requestExpectsJson as private;
     }
 
     /**
