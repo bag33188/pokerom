@@ -1,4 +1,23 @@
 @php
+    $universalAnchorCssClasses = [
+        'focus:outline-none',
+        'disabled:opacity-25',
+        'px-4',
+        'py-2',
+        'border',
+        'text-xs',
+        'uppercase',
+        'rounded-md',
+        'focus:ring',
+        'transition',
+        'inline-flex',
+        'items-center',
+        'font-semibold',
+        'tracking-widest',
+        'focus:outline-none',
+        'disabled:opacity-25',
+    ];
+
     $conditionalAnchorBtnClasses = [
         'bg-red-600' => $btnType == \App\Enums\AnchorTypesEnum::DANGER,
         'text-white' => $btnType == \App\Enums\AnchorTypesEnum::DANGER || $btnType == \App\Enums\AnchorTypesEnum::PRIMARY,
@@ -22,27 +41,10 @@
         'focus:border-gray-900' => $btnType == \App\Enums\AnchorTypesEnum::PRIMARY,
         'bg-gray-800' => $btnType == \App\Enums\AnchorTypesEnum::PRIMARY,
     ];
-
-    $universalAnchorCssClasses = [
-        'focus:outline-none',
-        'disabled:opacity-25',
-        'px-4',
-        'py-2',
-        'border',
-        'text-xs',
-        'uppercase',
-        'rounded-md',
-        'focus:ring',
-        'transition',
-        'inline-flex',
-        'items-center',
-        'font-semibold',
-        'tracking-widest',
-        'focus:outline-none',
-        'disabled:opacity-25',
-    ];
 @endphp
 <a {{ $attributes }}
    @class(array_merge($conditionalAnchorBtnClasses, $universalAnchorCssClasses))
    role="button"
-   type="{{ $btnType->value }}">{{ $slot }}</a>
+   type="{{ $btnType->value }}">
+    {{ $slot }}
+</a>

@@ -1,5 +1,6 @@
-@props(['btn_name', 'btn_text', 'btn_type'])
+@props(['btn_name', 'btn_text'])
 @pushOnce('styles')
+    <!--suppress CssUnresolvedCustomProperty -->
     <style {!! 'type="text/css"' !!}>
         :root {
             --borderline-black: #111111;
@@ -109,5 +110,8 @@
         }
     </style>
 @endPushOnce
-<button class="punch" type="{{ $btn_type ?? 'submit' }}"
-        data-name="{{ $btn_name ?? 'punch-btn' }}">{!! $btn_text ?? 'Submit!' !!}</button>
+<button class="punch"
+    {{ $attributes->merge(['data-name' => ($btn_name ?? 'punch-btn')]) }}
+    {{ $attributes->has('disabled') ? 'disabled' : '' }}>
+    {!! $btn_text ?? 'Submit!' !!}
+</button>
