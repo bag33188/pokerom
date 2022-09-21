@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Actions\ApiUtilsTrait;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
 use App\Notifications\FarewellNotification;
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\Notification;
 
 class UserObserver
 {
+    use ApiUtilsTrait;
+
     protected bool $afterCommit = true;
 
     public function __construct(private readonly UserRepositoryInterface $userRepository,
@@ -25,7 +28,7 @@ class UserObserver
 
     public function updated(User $user): void
     {
-        $requestIsApiEndpoint = $this->request->is("api/*");
+        $requestIsApiEndpoint = $this->isApiRequest();
         $passwordHasChanged = $user->isDirty("password");
 
         if ($passwordHasChanged || $requestIsApiEndpoint) $this->userRepository->revokeApiTokens($user);

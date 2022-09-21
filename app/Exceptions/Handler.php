@@ -2,12 +2,12 @@
 
 namespace App\Exceptions;
 
+use App\Actions\ApiUtilsTrait;
 use Config;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Response;
 use MongoDB\Driver\Exception\BulkWriteException;
@@ -19,6 +19,8 @@ use URL;
 
 class Handler extends ExceptionHandler
 {
+    use ApiUtilsTrait;
+
     /**
      * A list of exception types with their corresponding custom log levels.
      *
@@ -68,8 +70,8 @@ class Handler extends ExceptionHandler
         /*! make sure correct JSON response is returned during an API request */
 
         // handle \Illuminate\Auth\AuthenticationException
-        $this->renderable(function (AuthenticationException $e, Request $request): JsonResponse|false {
-            if ($request->expectsJson()) {
+        $this->renderable(function (AuthenticationException $e): JsonResponse|false {
+            if ($this->requestExpectsJson()) {
                 return Response::json(
                     ['message' => 'Error: Unauthenticated.', 'success' => false], # $e->getTraceAsString();
                     HttpStatus::HTTP_UNAUTHORIZED,
@@ -84,7 +86,7 @@ class Handler extends ExceptionHandler
 
 
         // handle generic \Symfony\Component\HttpKernel\Exception\HttpException
-        $this->renderable(function (HttpException $e, Request $request): JsonResponse|false {
+        $this->renderable(function (HttpException $e): JsonResponse|false {
 
             // if `getCode` method returns any status (int value) at all, then use that method, else use the `getStatusCode` method's value (int value)
             $statusCode = $e->getCode() != 0 ? $e->getCode() : $e->getStatusCode();
@@ -92,7 +94,7 @@ class Handler extends ExceptionHandler
             // set default message value to message of exception being thrown by request/response
             $message = $e->getMessage();
 
-            if ($request->is("api/*")) {
+            if ($this->isApiRequest()) {
                 $currentErrorRoute = str_replace(Config::get('app.url') . '/', '/', URL::current());
 
                 $responseErrorsIsRouteNotFound = fn() => $statusCode === HttpStatus::HTTP_NOT_FOUND && strlen($message) === 0;
