@@ -13,6 +13,7 @@ class WelcomeNotification extends Notification
 {
     use Queueable;
 
+    public User $user;
     private string $welcomeMessage;
     private static string $appName;
 
@@ -21,8 +22,9 @@ class WelcomeNotification extends Notification
      *
      * @return void
      */
-    public function __construct(public User $user)
+    public function __construct(User $user)
     {
+        $this->user = $user;
         self::$appName = preg_replace("/^Poke/", POKE_EACUTE, ucfirst(Config::get('app.name')));
         $this->welcomeMessage = sprintf("Hello %s, welcome to the world of %s!", $this->user->name, self::$appName);
     }
