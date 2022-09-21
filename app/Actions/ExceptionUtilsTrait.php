@@ -25,10 +25,10 @@ trait ExceptionUtilsTrait
     protected function getFormattedErrorTraceStringFromException(Exception $e): string
     {
         $replaceLineBreaksInString = fn(string $subject, string $replace): string => preg_replace("/[\r\n]/", $replace, $subject);
-        $stripAllWhitespaceFromString = fn(string $string): string => trim($string, "\x20\r\n\t\v\xA0\x0B\0");
+        $stripAllSurroundingWhitespaceFromString = fn(string $string): string => trim($string, "\x20\r\n\t\v\xA0\x0B\0");
 
         $modifiedStackTraceString =
-            $replaceLineBreaksInString($stripAllWhitespaceFromString($e->getTraceAsString()), _SPACE . '|' . _SPACE);
+            $replaceLineBreaksInString($stripAllSurroundingWhitespaceFromString($e->getTraceAsString()), _SPACE . '|' . _SPACE);
         $modifiedStackTraceLength = strlen($modifiedStackTraceString);
 
         return App::isLocal() ? sprintf('[%u] : %s', $modifiedStackTraceLength, $modifiedStackTraceString) : 'null';
