@@ -132,7 +132,7 @@ class Handler extends ExceptionHandler
     private function formatErrorTraceString(Exception $e): string
     {
         $replaceLineBreaksInString = fn(string $subject, string $replace): string => preg_replace("/[\r\n]/", $replace, $subject);
-        $trace = trim($e->getTraceAsString());
+        $trace = trim($e->getTraceAsString(), "\t\0\x0B");
         $modifiedStackTraceString = $replaceLineBreaksInString($trace, _SPACE . '|' . _SPACE);
         $modifiedStackTraceLength = strlen($modifiedStackTraceString);
         return App::isLocal() ? sprintf('[%u] : %s', $modifiedStackTraceLength, $modifiedStackTraceString) : 'null';
