@@ -68,8 +68,8 @@
     </script>
 @endpush
 @php
-    function removeStoragePathFromFilename(string &$value): void {
-        $value = str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $value);
+    function removeStoragePathFromFilename(string &$filename): void {
+        $filename = str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $filename);
     }
 @endphp
 <x-app-layout>
