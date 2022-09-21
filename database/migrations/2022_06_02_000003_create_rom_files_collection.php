@@ -19,8 +19,9 @@ return new class extends Migration {
     {
         if (self::$_ALLOW_MIGRATIONS === true) {
             $filename_length = MAX_ROM_FILENAME_LENGTH - 4;
+            $rom_filetypes = array_merge(ROM_TYPES, FILE_TYPES);
 
-            Schema::connection($this->connection)->create('rom_files', function (Blueprint $collection) use ($filename_length) {
+            Schema::connection($this->connection)->create('rom_files', function (Blueprint $collection) use ($filename_length, $rom_filetypes) {
                 $collection->index(
                     columns: ['filename', 'filetype'],
                     name: 'filename_1_filetype_1',
@@ -33,7 +34,7 @@ return new class extends Migration {
                     ]
                 );
                 $collection->string('filename', $filename_length);
-                $collection->enum('filetype', FILE_TYPES);
+                $collection->enum('filetype', $rom_filetypes);
                 $collection->unsignedBigInteger('filesize', autoIncrement: false);
             });
         }
