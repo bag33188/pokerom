@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Notification;
 
 class UserObserver
 {
+    protected bool $afterCommit = true;
+
     public function __construct(private readonly UserRepositoryInterface $userRepository,
                                 private readonly Request                 $request)
     {
@@ -32,6 +34,7 @@ class UserObserver
     public function deleted(User $user): void
     {
         $this->userRepository->revokeApiTokens($user);
-        $user->notify(new FarewellNotification($user));
+
+        if (!$user->isAdmin()) $user->notify(new FarewellNotification($user));
     }
 }
