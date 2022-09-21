@@ -62,27 +62,44 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(fn(BulkWriteException $e) => throw App::make(MongoWriteException::class,
-            ['message' => $e->getMessage(), 'code' => HttpStatus::HTTP_CONFLICT, 'headers' => [
-                'X-Attempted-URL' => $this->getCurrentErrorUrl()
-            ]]));
+            [
+                'message' => $e->getMessage(),
+                'code' => HttpStatus::HTTP_CONFLICT,
+                'headers' => [
+                    'X-Attempted-URL' => $this->getCurrentErrorUrl()
+                ]
+            ]
+        ));
 
         $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
-            ['message' => $e->getMessage(), 'code' => HttpStatus::HTTP_CONFLICT, 'headers' => [
-                'X-Attempted-URL' => $this->getCurrentErrorUrl()
-            ]]));
+            [
+                'message' => $e->getMessage(),
+                'code' => HttpStatus::HTTP_CONFLICT,
+                'headers' => [
+                    'X-Attempted-URL' => $this->getCurrentErrorUrl()
+                ]
+            ]
+        ));
 
         if ($this->isApiRequest() and !$this->isLivewireRequest()) {
             $this->renderable(fn(AuthenticationException $e) => throw App::make(ApiAuthException::class, [
-                'message' => $e->getMessage(),
-                'code' => HttpStatus::HTTP_UNAUTHORIZED, 'headers' => [
-                    'X-Attempted-URL' => $this->getCurrentErrorUrl()
+                    'message' => $e->getMessage(),
+                    'code' => HttpStatus::HTTP_UNAUTHORIZED,
+                    'headers' => [
+                        'X-Attempted-URL' => $this->getCurrentErrorUrl()
+                    ]
                 ]
-            ]));
+            ));
             $this->renderable(fn(NotFoundHttpException $e) => throw App::make(RouteNotFoundException::class,
-                ['message' => $e->getMessage(), 'code' => $this->determineErrorCodeFromException($e), 'headers' => [
-                    ...$e->getHeaders(),
-                    'X-Attempted-URL' => $this->getCurrentErrorUrl()
-                ]]));
+                [
+                    'message' => $e->getMessage(),
+                    'code' => $this->determineErrorCodeFromException($e),
+                    'headers' => [
+                        ...$e->getHeaders(),
+                        'X-Attempted-URL' => $this->getCurrentErrorUrl()
+                    ]
+                ]
+            ));
         }
 
         // handle generic \Symfony\Component\HttpKernel\Exception\HttpException
@@ -92,10 +109,10 @@ class Handler extends ExceptionHandler
                 return Response::json(
                     ['message' => $e->getMessage(), 'success' => false],
                     $httpErrorCode,
-                    array(
+                    [
                         ...$e->getHeaders(),
                         'X-Attempted-URL' => $this->getCurrentErrorUrl()
-                    )
+                    ]
                 );
             }
             // don't use custom rendering if request is not an API request

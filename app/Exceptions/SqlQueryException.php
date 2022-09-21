@@ -21,8 +21,14 @@ class SqlQueryException extends ApplicationException
         if (!$this->isApiRequest() and !$this->isLivewireRequest()) {
             return redirect()->to(url()->previous())->dangerBanner($this->getMessage());
         } else if ($this->isApiRequest()) {
+            $mariadb = config('database.connections.mysql');
             return response()->json(
-                ['success' => false, 'db' => config('database.connections.mysql.database'), 'message' => $this->getMessage()],
+                [
+                    'success' => false,
+                    'database' => $mariadb['database'],
+                    'driver' => $mariadb['driver'],
+                    'message' => $this->getMessage(),
+                ],
                 $this->getCode(),
                 $this->headers
             );

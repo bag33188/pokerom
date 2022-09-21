@@ -21,8 +21,14 @@ class MongoWriteException extends ApplicationException
         if (!$this->isApiRequest() and !$this->isLivewireRequest()) {
             return redirect()->to(url()->previous())->dangerBanner($this->getMessage());
         } else if ($this->isApiRequest()) {
+            $gridfs = config('database.connections.mongodb');
             return response()->json(
-                ['success' => false, 'db' => config('database.connections.mongodb.database'), 'message' => $this->getMessage()],
+                [
+                    'success' => false,
+                    'database' => $gridfs['database'],
+                    'driver' => $gridfs['driver'],
+                    'message' => $this->getMessage()
+                ],
                 $this->getCode(),
                 $this->headers
             );
