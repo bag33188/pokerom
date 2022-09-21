@@ -12,8 +12,11 @@ use Throwable;
 
 abstract class AbstractApplicationException extends Exception
 {
-    public function __construct(string $message = "", int $code = 0, protected array $headers = [], ?Throwable $previous = null)
+    protected array $headers = [];
+
+    function __construct(string $message = "", int $code = 0, array $headers = [], ?Throwable $previous = null)
     {
+        $this->headers = $headers;
         parent::__construct($message, $code, $previous);
     }
 
