@@ -8,9 +8,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
-use Utils\Classes\AbstractApplicationException;
+use Utils\Classes\AbstractApplicationException as ApplicationException;
 
-class ApiAuthException extends AbstractApplicationException
+class ApiAuthException extends ApplicationException
 {
     use ApiUtilsTrait {
         requestExpectsJson as private;

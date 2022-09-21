@@ -11,17 +11,12 @@ use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Throwable;
 use URL;
-use Utils\Classes\AbstractApplicationException;
+use Utils\Classes\AbstractApplicationException as ApplicationException;
 
-class RouteNotFoundException extends AbstractApplicationException
+class RouteNotFoundException extends ApplicationException
 {
     use ApiUtilsTrait {
         requestExpectsJson as private;
-    }
-
-    public function __construct(string $message = "", int $code = 0, ?Throwable $previous = null)
-    {
-        parent::__construct($message, $code, $previous);
     }
 
     public function render(Request $request): false|JsonResponse|RedirectResponse

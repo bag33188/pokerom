@@ -68,7 +68,7 @@ class Handler extends ExceptionHandler
         $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
             ['message' => $e->getMessage(), 'code' => HttpStatus::HTTP_CONFLICT]));
 
-        if ($this->isApiRequest() && !$this->isLivewireRequest()) {
+        if ($this->isApiRequest() and !$this->isLivewireRequest()) {
             $this->renderable(fn(AuthenticationException $e) => throw App::make(ApiAuthException::class, [
                 'message' => $e->getMessage(),
                 'code' => HttpStatus::HTTP_UNAUTHORIZED,
@@ -76,12 +76,12 @@ class Handler extends ExceptionHandler
             $this->renderable(fn(NotFoundHttpException $e) => throw App::make(RouteNotFoundException::class,
                 ['message' => $e->getMessage(), 'code' => self::getErrorCodeFromException($e)]));
         }
-        
+
         // handle generic \Symfony\Component\HttpKernel\Exception\HttpException
         $this->renderable(function (HttpException $e): JsonResponse|false {
             $httpErrorCode = self::getErrorCodeFromException($e);
             $formatStackTrace = fn(string $trace): string => trim(preg_replace("/[\r\n]/", _SPACE . '|' . _SPACE, $trace));
-            if ($this->isApiRequest() || $this->requestExpectsJson()) {
+            if ($this->isApiRequest() or $this->requestExpectsJson()) {
                 $errorTraceStr = $formatStackTrace($e->getTraceAsString());
                 return Response::json(
                     ['message' => $e->getMessage(), 'success' => false],
