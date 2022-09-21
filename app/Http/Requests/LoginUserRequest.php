@@ -2,12 +2,17 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use App\Rules\MaxLengthRule;
 use App\Rules\MinLengthRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Validator;
 
 class LoginUserRequest extends FormRequest
 {
+    private ?User $requestUser = null;
+
     public function rules(): array
     {
         return [
@@ -19,5 +24,30 @@ class LoginUserRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param Validator $validator
+     * @return void
+     */
+    public function withValidator(Validator $validator): void
+    {
+        // checks user current password
+        // before making changes
+        $validator->after(function (Validator $validator) {
+            $this->requestUser = User::where('email', $this->string('email'))->firstOrFail();
+            if (!Hash::check($this->string('password'), $this->requestUser->password)) {
+                $validator->errors()->add('password', 'The password you entered is incorrect.');
+            }
+        });
+    }
+
+    public function passedValidation(): void
+    {
+        $this->merge([
+            'user' => $this->requestUser
+        ]);
     }
 }

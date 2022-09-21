@@ -53,39 +53,24 @@ class UserController extends ApiController
 
     public function login(LoginUserRequest $request)
     {
-        list('email' => $email, 'password' => $password) = $request->only(['email', 'password']);
-        $user = User::where('email', $email)->firstOrFail();
-        if ($user->checkPassword($password)) {
-            $newBearerToken = $this->userRepository->generateApiToken($user);
-            return response()->json([
-                'token' => $newBearerToken,
-                'user' => $user,
-                'success' => true,
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Invalid credentials',
-            ], HttpStatus::HTTP_UNAUTHORIZED);
-        }
+        $user = $request->input('user');
+        $newBearerToken = $this->userRepository->generateApiToken($user);
+        return response()->json([
+            'token' => $newBearerToken,
+            'user' => $user,
+            'success' => true,
+        ]);
     }
 
     public function logout(Request $request)
     {
         $user = $request->user();
         $userFirstName = explode(_SPACE, $user->name, 3)[0];
-        if ($user) {
-            $this->userRepository->revokeApiTokens($user);
-            return response()->json([
-                'success' => true,
-                'message' => "$userFirstName, You have been logged out!"
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'You are not logged in!'
-            ], HttpStatus::HTTP_UNAUTHORIZED);
-        }
+        $this->userRepository->revokeApiTokens($user);
+        return response()->json([
+            'success' => true,
+            'message' => "$userFirstName, You have been logged out!"
+        ]);
     }
 
     /**
