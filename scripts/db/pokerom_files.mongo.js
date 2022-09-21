@@ -141,3 +141,5 @@ db.rom.files.aggregate([
 // db.rom_files.reIndex();
 // db.rom.files.reIndex();
 // db.rom.chunks.reIndex();
+
+/*db.rom.chunks.countDocuments() == 88628*/
