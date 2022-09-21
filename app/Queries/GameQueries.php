@@ -36,16 +36,8 @@ class GameQueries implements GameQueriesInterface
     public function getAllGamesThatAreROMHacksSQL(): Collection
     {
         $sql = /** @lang MariaDB */
-            "SELECT * FROM `games` WHERE `game_type` = :rom_hack OR `generation` = 0 ORDER BY `date_released` DESC LIMIT :limit_results_to;";
+            "CALL spSelectGamesThatAreROMHacks;";
         $query = DB::raw($sql);
-        return $this->game->fromQuery($query, [
-            'rom_hack' => GAME_TYPES[self::findRomHackStringEntityIndexOfGameTypes()],
-            'limit_results_to' => 10
-        ]);
-    }
-
-    private static function findRomHackStringEntityIndexOfGameTypes(): int
-    {
-        return array_search('hack', GAME_TYPES, false);
+        return $this->game->fromQuery($query);
     }
 }

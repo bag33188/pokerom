@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2022 at 05:17 AM
+-- Generation Time: Sep 21, 2022 at 07:02 AM
 -- Server version: 10.9.2-MariaDB
 -- PHP Version: 8.1.6
 
@@ -33,6 +33,13 @@ DELIMITER $$
 --
 -- Procedures
 --
+DROP PROCEDURE IF EXISTS `spSelectGamesThatAreROMHacks`$$
+CREATE DEFINER=`bag33188`@`%` PROCEDURE `spSelectGamesThatAreROMHacks` ()  SQL SECURITY INVOKER BEGIN
+	SELECT * FROM `games`
+    WHERE `game_type` = 'hack' OR `generation` = 0
+    ORDER BY `date_released` DESC;
+END$$
+
 DROP PROCEDURE IF EXISTS `spSelectRomsWithNoGame`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `spSelectRomsWithNoGame` ()  READS SQL DATA BEGIN
     SELECT
@@ -65,42 +72,11 @@ mongodb stored as bytes
 */
 END$$
 
-DROP PROCEDURE IF EXISTS `uspSelectAllPokeROMData`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `uspSelectAllPokeROMData` ()  READS SQL DATA SQL SECURITY INVOKER COMMENT 'Table Joins to select all PokeROM Data in the database.' BEGIN
-    SELECT
-        `roms`.`id` AS "rom_id",
-        `roms`.`rom_name` AS "rom_name",
-        `roms`.`rom_type` AS "rom_type",
-        `roms`.`rom_size` AS "rom_size", -- measured in kibibytes (base 1024)
-        `games`.`id` AS "game_id",
-        `games`.`game_name` AS "game_name",
-        `games`.`game_type` AS "game_type",
-        `games`.`region` AS "region",
-        `games`.`generation` AS "generation",
-        `games`.`date_released` AS "date_released",
-        `roms`.`file_id` AS "rom_file_id",
-        CONCAT(`roms`.`rom_name`, '.', UCASE(`roms`.`rom_type`)) AS "rom_filename",
-        (`roms`.`rom_size` * 1024) AS "rom_file_size" -- convert kibibytes to bytes
-    FROM
-        `roms`
-            RIGHT JOIN
-        `games`
-        ON `roms`.`id` = `games`.`rom_id`
-    WHERE
-        `roms`.`has_game` = TRUE AND
-        `roms`.`has_file` = TRUE AND
-        `roms`.`game_id` IS NOT NULL AND
-        `roms`.`file_id` IS NOT NULL
-    ORDER BY
-    `rom_id` DESC,
-    `generation` DESC;
-END$$
-
 --
 -- Functions
 --
 DROP FUNCTION IF EXISTS `FORMAT_GAME_TYPE`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_GAME_TYPE` (`GAME_TYPE` ENUM('core','hack','spin-off')) RETURNS VARCHAR(21) CHARSET utf8mb4 SQL SECURITY INVOKER BEGIN
+CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_GAME_TYPE` (`GAME_TYPE` ENUM('core','hack','spin-off')) RETURNS VARCHAR(21) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER BEGIN
     SET @`eacute` = CAST(CONVERT(x'E9' USING ucs2) AS char(1));
     CASE `GAME_TYPE`
         WHEN 'core' THEN RETURN CONCAT('Core Pok', @`eacute`, 'mon Game'); -- Core Pokemon Game
@@ -116,7 +92,7 @@ MAX_GAME_TYPE_LENGTH = 21;
 END$$
 
 DROP FUNCTION IF EXISTS `FORMAT_ROM_SIZE`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_SIZE` BIGINT UNSIGNED) RETURNS VARCHAR(9) CHARSET utf8mb4 SQL SECURITY INVOKER COMMENT 'conversion issues get fixed in this function' BEGIN
+CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_SIZE` BIGINT UNSIGNED) RETURNS VARCHAR(9) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER COMMENT 'conversion issues get fixed in this function' BEGIN
     -- size entity values
     DECLARE `size_num` FLOAT UNSIGNED;
     DECLARE `size_unit` CHAR(2);
@@ -153,7 +129,7 @@ MAX_ROM_SIZE_LENGTH = 9; // ex. '164.28 MB'
 END$$
 
 DROP FUNCTION IF EXISTS `SPLIT_STRING`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(256), `SEPARATOR` VARCHAR(1) CHARSET utf8, `POSITION` SMALLINT) RETURNS VARCHAR(128) CHARSET utf8mb4 DETERMINISTIC COMMENT 'splits a string based on delimiter ' BEGIN
+CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(256), `SEPARATOR` VARCHAR(1), `POSITION` SMALLINT) RETURNS VARCHAR(128) CHARSET utf8mb4 COMMENT 'splits a string based on delimiter ' BEGIN
     DECLARE `max_results` SMALLINT;
 
     -- get max number of items
@@ -558,7 +534,7 @@ TRUNCATE TABLE `users`;
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Brock Glatman', 'bglatman@outlook.com', NULL, '$2y$10$tUGrfHS.tO6AJ.iKMutwS.j2qjFfRmLSsS5sun6dIg7dEHQVXKYua', NULL, NULL, NULL, 'admin', '1PsODdSPPZZliuAOZaHdOV5tV98YDQ4BDaM8al5s25Tuat2vIxyMgdGOvB9Q', NULL, NULL, '2022-08-27 23:17:24', '2022-09-02 07:39:41'),
+(1, 'Brock Glatman', 'bglatman@outlook.com', NULL, '$2y$10$tUGrfHS.tO6AJ.iKMutwS.j2qjFfRmLSsS5sun6dIg7dEHQVXKYua', NULL, NULL, NULL, 'admin', '7GiJxvCVLIX1xNvAjuDjHDURb5UuYzNIlHMsOfWa6IxWN9aL9eWsRDUtzG23', NULL, NULL, '2022-08-27 23:17:24', '2022-09-02 07:39:41'),
 (2, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$g4kXZ7ea8TNdwlySRo5bne1HoU6h/NOyRmul.J3fD5.5L5eu1sKBC', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-08-30 08:24:08', '2022-08-30 08:24:08');
 
 --
