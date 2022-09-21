@@ -1,0 +1,11 @@
+/* alpinejs */
+[x-cloak] {
+    display: none;
+}
+
+/* angularjs */
+[ng\:cloak],
+[ng-cloak],
+.ng-cloak {
+    display: none;
+}

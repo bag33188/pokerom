@@ -1,11 +1,4 @@
 @inject('romQueries', 'App\Interfaces\RomQueriesInterface')
-@push('styles')
-    <style {!! 'type="text/css"'; !!}>
-        [x-cloak] {
-            display: none;
-        }
-    </style>
-@endpush
 @push('scripts')
     <script type="text/javascript">
         @verbatim

@@ -2,15 +2,6 @@
 @inject('romQueries', 'App\Interfaces\RomQueriesInterface')
 @push('styles')
     <style {!! 'type="text/css"'; !!}>
-        [x-cloak] {
-            display: none;
-        }
-
-        [ng\:cloak], [ng-cloak], .ng-cloak {
-            display: none;
-        }
-    </style>
-    <style {!! 'type="text/css"'; !!}>
         .no-select {
             -webkit-touch-callout: none; /* iOS Safari */
             -webkit-user-select: none; /* Safari */
@@ -20,53 +11,9 @@
             user-select: none;
             /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
         }
-
-        .button {
-            border: 0;
-            line-height: 2.5;
-            padding: 0 20px;
-            font-size: 1rem;
-            text-align: center;
-            color: #fff;
-            text-shadow: 1px 1px 1px #000;
-            border-radius: 10px;
-            background-color: rgba(220, 0, 0, 1);
-            background-image: linear-gradient(to top left,
-            rgba(0, 0, 0, .2),
-            rgba(0, 0, 0, .2) 30%,
-            rgba(0, 0, 0, 0));
-            box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
-            inset -2px -2px 3px rgba(0, 0, 0, .6);
-        }
-
-        .button:hover {
-            background-color: rgba(255, 0, 0, 1);
-        }
-
-        .button:active {
-            box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
-            inset 2px 2px 3px rgba(0, 0, 0, .6);
-        }
-
-        label[for="name"] {
-            display: block;
-            font: 1rem 'Fira Sans', sans-serif;
-        }
-
-        #name,
-        label[for="name"] {
-            margin: .4rem 0;
-        }
-
-        #name {
-            border-radius: 5px;
-        }
     </style>
 @endpush
 @push('scripts')
-    @if($userIsAdmin)
-        <script type="text/javascript" src="{{ Vite::asset('resources/js/angular.min.js') }}"></script>
-    @endif
     <script type="text/javascript">
         @verbatim
         /**
@@ -97,23 +44,6 @@
             {{ $rom->rom_name }} Information
         </h2>
     </x-slot>
-    @if($userIsAdmin)
-        <div class="mx-2 my-2 border border-gray-900 p-1.5 rounded-2xl w-fit" x-data="{ show_ng: false }">
-            <button type="button" class="button" @click="show_ng = toggleInfo(show_ng)">
-                Toggle&nbsp;<code>ng-app</code>
-            </button>
-            <!-- angularjs -->
-            <div ng-app x-show="show_ng === true" class="mt-1.5">
-                <div ng-cloak>
-                    <label for="name">Name:</label>
-                    <input id="name" type="text" ng-model="name" placeholder="Enter a name here"/>
-                    <hr class="my-2.5 bg-black border-none h-px"/>
-                    <h1>Hello @{{name}}!</h1>
-                </div>
-            </div>
-            <!-- // angularjs -->
-        </div>
-    @endif
     <div class="py-6 px-5">
         <x-list-group
             @class(['shadow', 'no-select' => !$userIsAdmin])
