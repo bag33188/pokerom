@@ -1,4 +1,7 @@
 {
+    "name": "pokerom",
+    "license": "GPL-2.0-only",
+    "version": "4.7.5",
     "private": true,
     "scripts": {
         "dev": "vite",
