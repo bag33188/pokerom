@@ -17,7 +17,7 @@ class FarewellNotification extends Notification
 
     private static string $appName;
 
-    private readonly string $farewellMessage;
+    private readonly string $messageBody;
     private readonly string $subject;
     private readonly string $closer;
     #[ArrayShape(['address' => "string", 'name' => "string"])] private readonly array $from;
@@ -37,7 +37,7 @@ class FarewellNotification extends Notification
 
     private function setMailProps(): void
     {
-        $this->farewellMessage = "{$this->user->name}, we're sad to see you leave.";
+        $this->messageBody = "{$this->user->name}, we're sad to see you leave.";
         $this->from = ['address' => Config::get('mail.from.address'), 'name' => self::$appName];
         $this->closer = sprintf("Thank you for using %s!", self::$appName);
         $this->subject = "I guess it's goodbye for now...";
@@ -65,7 +65,7 @@ class FarewellNotification extends Notification
         return (new MailMessage)
             ->subject($this->subject)
             ->from(...array_values($this->from))
-            ->line($this->farewellMessage)
+            ->line($this->messageBody)
             ->line($this->closer);
     }
 
@@ -80,7 +80,7 @@ class FarewellNotification extends Notification
         return [
             'subject' => $this->subject,
             'from' => $this->from,
-            'message' => $this->farewellMessage,
+            'body' => $this->messageBody,
             'closer' => $this->closer
         ];
     }

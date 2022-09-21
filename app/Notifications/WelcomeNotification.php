@@ -18,7 +18,7 @@ class WelcomeNotification extends Notification
     private static string $appName;
 
     private readonly string $subject;
-    private readonly string $welcomeMessage;
+    private readonly string $messageBody;
     private readonly string $closer;
     #[ArrayShape(['address' => "string", 'name' => "string"])] private readonly array $from;
     #[ArrayShape(['text' => "string", 'url' => "string"])] private readonly array $action;
@@ -39,7 +39,7 @@ class WelcomeNotification extends Notification
     private function setMailProps(): void
     {
         $this->subject = sprintf("Thank you for joining %s!!", self::$appName);
-        $this->welcomeMessage = sprintf("Hello %s, welcome to the world of %s!", $this->user->name, self::$appName);
+        $this->messageBody = sprintf("Hello %s, welcome to the world of %s!", $this->user->name, self::$appName);
         $this->from = ['address' => Config::get('mail.from.address'), 'name' => self::$appName];
         $this->action = ['text' => 'Check it out!', 'url' => route('roms.index')];
         $this->closer = 'Enjoy!';
@@ -67,7 +67,7 @@ class WelcomeNotification extends Notification
         return (new MailMessage)
             ->subject($this->subject)
             ->from(...array_values($this->from))
-            ->line($this->welcomeMessage)
+            ->line($this->messageBody)
             ->action(...array_values($this->action))
             ->line($this->closer);
     }
@@ -83,7 +83,7 @@ class WelcomeNotification extends Notification
         return [
             'subject' => $this->subject,
             'from' => $this->from,
-            'message' => $this->welcomeMessage,
+            'body' => $this->messageBody,
             'action' => $this->action,
             'closer' => $this->closer
         ];
