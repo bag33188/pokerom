@@ -2,11 +2,11 @@
 
 namespace App\Enums;
 
-use App\Actions\EnumMethodsTrait;
+use App\Actions\EnumMethodsTrait as EnumMethods;
 
 enum AnchorButtonTypeEnum: string
 {
-    use EnumMethodsTrait;
+    use EnumMethods;
 
     case PRIMARY = 'primary';
     case SECONDARY = 'secondary';

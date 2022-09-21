@@ -2,14 +2,14 @@
 
 namespace App\Enums;
 
-use App\Actions\EnumMethodsTrait;
+use App\Actions\EnumMethodsTrait as EnumMethods;
 
 enum AlertTypeEnum: string
 {
-    use EnumMethodsTrait;
+    use EnumMethods;
 
     case SUCCESS = 'success';
     case ERROR = 'error';
     case WARNING = 'warning';
-    case DEFAULT = 'default';
+    case INFO = 'info';
 }
