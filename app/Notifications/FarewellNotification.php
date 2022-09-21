@@ -38,7 +38,7 @@ class FarewellNotification extends Notification
     private function setMailProps(): void
     {
         $this->farewellMessage = "{$this->user->name}, we're sad to see you leave.";
-        $this->from = ['address' => config('mail.from.address'), 'name' => self::$appName];
+        $this->from = ['address' => Config::get('mail.from.address'), 'name' => self::$appName];
         $this->salutation = sprintf("Thank you for using %s!", self::$appName);
         $this->subject = "I guess it's goodbye for now...";
     }
@@ -80,8 +80,8 @@ class FarewellNotification extends Notification
         return [
             'subject' => $this->subject,
             'from' => $this->from,
-            'line1' => $this->farewellMessage,
-            'line2' => $this->salutation
+            'message' => $this->farewellMessage,
+            'salutation' => $this->salutation
         ];
     }
 }

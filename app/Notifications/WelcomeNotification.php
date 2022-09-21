@@ -40,7 +40,7 @@ class WelcomeNotification extends Notification
     {
         $this->subject = sprintf("Thank you for joining %s!!", self::$appName);
         $this->welcomeMessage = sprintf("Hello %s, welcome to the world of %s!", $this->user->name, self::$appName);
-        $this->from = ['address' => config('mail.from.address'), 'name' => self::$appName];
+        $this->from = ['address' => Config::get('mail.from.address'), 'name' => self::$appName];
         $this->action = ['text' => 'Check it out!', 'url' => route('roms.index')];
         $this->salutation = 'Enjoy!';
     }
@@ -68,7 +68,7 @@ class WelcomeNotification extends Notification
             ->subject($this->subject)
             ->from(...array_values($this->from))
             ->line($this->welcomeMessage)
-            ->action($this->action['text'], $this->action['url'])
+            ->action(...array_values($this->action))
             ->line($this->salutation);
     }
 
@@ -83,9 +83,9 @@ class WelcomeNotification extends Notification
         return [
             'subject' => $this->subject,
             'from' => $this->from,
-            'line1' => $this->welcomeMessage,
+            'message' => $this->welcomeMessage,
             'action' => $this->action,
-            'line2' => $this->salutation
+            'salutation' => $this->salutation
         ];
     }
 }
