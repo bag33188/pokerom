@@ -88,7 +88,7 @@ class Handler extends ExceptionHandler
                     array(
                         ...$e->getHeaders(),
                         'X-Attempted-URL' => ApplicationException::getCurrentErrorUrl(),
-                        'X-Stack-Trace' => ApplicationException::getFormattedErrorTraceString($e->getTraceAsString())
+                        'X-Stack-Trace' => ApplicationException::formatErrorTraceString($e->getTraceAsString())
                     )
                 );
             }

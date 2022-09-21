@@ -28,7 +28,7 @@ class RouteNotFoundException extends ApplicationException
                     $this->code,
                     [
                         'X-Attempted-URL' => self::getCurrentErrorUrl(),
-                        'X-Stack-Trace' => self::getFormattedErrorTraceString($this->getTraceAsString())
+                        'X-Stack-Trace' => self::formatErrorTraceString($this->getTraceAsString())
                     ]
                 );
             }

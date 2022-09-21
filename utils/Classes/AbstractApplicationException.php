@@ -29,7 +29,7 @@ abstract class AbstractApplicationException extends Exception
         return (string)str_replace(Config::get('app.url') . '/', '/', URL::current());
     }
 
-    public static final function getFormattedErrorTraceString(string $trace): string
+    public static final function formatErrorTraceString(string $trace): string
     {
         $stackTraceAsCleanString = trim(preg_replace("/[\r\n]/", _SPACE . '|' . _SPACE, $trace));
         $stackTraceLength = strlen($stackTraceAsCleanString);

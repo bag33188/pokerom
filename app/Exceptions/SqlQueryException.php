@@ -26,7 +26,7 @@ class SqlQueryException extends ApplicationException
                 $this->getCode(),
                 [
                     'X-Attempted-URL' => self::getCurrentErrorUrl(),
-                    'X-Stack-Trace' => self::getFormattedErrorTraceString($this->getTraceAsString())
+                    'X-Stack-Trace' => self::formatErrorTraceString($this->getTraceAsString())
                 ]
             );
         } else return false;

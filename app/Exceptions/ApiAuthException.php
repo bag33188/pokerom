@@ -25,7 +25,7 @@ class ApiAuthException extends ApplicationException
                 HttpStatus::HTTP_UNAUTHORIZED,
                 [
                     'X-Attempted-URL' => self::getCurrentErrorUrl(),
-                    'X-Stack-Trace' => self::getFormattedErrorTraceString($this->getTraceAsString())
+                    'X-Stack-Trace' => self::formatErrorTraceString($this->getTraceAsString())
                 ]
             );
         }
