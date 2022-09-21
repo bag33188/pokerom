@@ -109,7 +109,11 @@
                         </x-form-select>
                     </div>
                     <div class="my-4">
-                        <x-punch-button btn_name="submit-romFile-btn" btn_text="Upload!"/>
+                        <x-punch-button id="upload-romFile"
+                                        type="submit"
+                                        btn_name="submit-romFile-btn"
+                        >Upload!
+                        </x-punch-button>
                     </div>
                 </form>
             </div>

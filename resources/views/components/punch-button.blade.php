@@ -1,4 +1,4 @@
-@props(['btn_name', 'btn_text'])
+@props(['btn_name'])
 @pushOnce('styles')
     <!--suppress CssUnresolvedCustomProperty -->
     <style {!! 'type="text/css"' !!}>
@@ -110,8 +110,12 @@
         }
     </style>
 @endPushOnce
-<button class="punch"
-    {{ $attributes->merge(['data-name' => ($btn_name ?? 'punch-btn')]) }}
+<button @class(['punch' => true])
+    {{ $attributes->merge([
+        'data-name' => ($btn_name ?? (
+            (Faker\Factory::create())->domainWord . '-punch-btn')
+        )
+    ]) }}
     {{ $attributes->has('disabled') ? 'disabled' : '' }}>
-    {!! $btn_text ?? 'Submit!' !!}
+    {{ $slot }}
 </button>
