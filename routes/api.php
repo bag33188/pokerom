@@ -49,39 +49,39 @@ Route::name('api.')->group(function () {
             Route::post('/logout', [UserController::class, 'logout'])->name('logout');
         });
 
-        Route::prefix('users')->name('users.')->group(function () {
-            Route::get('/', [UserController::class, 'index'])->name('index');
-            Route::get('/{userId}', [UserController::class, 'show'])->name('show');
-            Route::put('/{userId}', [UserController::class, 'update'])->name('update');
-            Route::patch('/{userId}', [UserController::class, 'update'])->name('edit');
-            Route::delete('/{userId}', [UserController::class, 'destroy'])->name('destroy');
+        Route::controller(UserController::class)->prefix('users')->name('users.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/{userId}', 'show')->name('show');
+            Route::put('/{userId}', 'update')->name('update');
+            Route::patch('/{userId}', 'update')->name('edit');
+            Route::delete('/{userId}', 'destroy')->name('destroy');
         });
 
-        Route::prefix('roms')->name('roms.')->group(function () {
-            Route::get('/', [RomController::class, 'index'])->name('index');
-            Route::get('/{romId}', [RomController::class, 'show'])->name('show');
-            Route::post('/', [RomController::class, 'store'])->name('store');
-            Route::put('/{romId}', [RomController::class, 'update'])->name('update');
-            Route::patch('/{romId}', [RomController::class, 'update'])->name('edit');
-            Route::delete('/{romId}', [RomController::class, 'destroy'])->name('destroy');
-            Route::patch('/{romId}/link-file', [RomController::class, 'linkRomToRomFile'])->name('linkFile');
+        Route::controller(RomController::class)->prefix('roms')->name('roms.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/{romId}', 'show')->name('show');
+            Route::post('/', 'store')->name('store');
+            Route::put('/{romId}', 'update')->name('update');
+            Route::patch('/{romId}', 'update')->name('edit');
+            Route::delete('/{romId}', 'destroy')->name('destroy');
+            Route::patch('/{romId}/link-file', 'linkRomToRomFile')->name('linkFile');
         });
 
-        Route::prefix('games')->name('games.')->group(function () {
-            Route::get('/', [GameController::class, 'index'])->name('index');
-            Route::get('/{gameId}', [GameController::class, 'show'])->name('show');
-            Route::put('/{gameId}', [GameController::class, 'update'])->name('update');
-            Route::patch('/{gameId}', [GameController::class, 'update'])->name('edit');
-            Route::post('/', [GameController::class, 'store'])->name('store');
-            Route::delete('/{gameId}', [GameController::class, 'destroy'])->name('destroy');
+        Route::controller(GameController::class)->prefix('games')->name('games.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/{gameId}', 'show')->name('show');
+            Route::put('/{gameId}', 'update')->name('update');
+            Route::patch('/{gameId}', 'update')->name('edit');
+            Route::post('/', 'store')->name('store');
+            Route::delete('/{gameId}', 'destroy')->name('destroy');
         });
 
-        Route::prefix('rom-files')->name('rom-files.')->group(function () {
-            Route::get('/', [RomFileController::class, 'index'])->name('index');
-            Route::post('/upload', [RomFileController::class, 'upload'])->name('upload');
-            Route::get('/{romFileId}', [RomFileController::class, 'show'])->name('show');
-            Route::delete('/{romFileId}', [RomFileController::class, 'destroy'])->name('destroy');
-            Route::get('/{romFileId}/download', [RomFileController::class, 'download'])->name('download');
+        Route::controller(RomFileController::class)->prefix('rom-files')->name('rom-files.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/upload', 'upload')->name('upload');
+            Route::get('/{romFileId}', 'show')->name('show');
+            Route::delete('/{romFileId}', 'destroy')->name('destroy');
+            Route::get('/{romFileId}/download', 'download')->name('download');
         });
 
     });
