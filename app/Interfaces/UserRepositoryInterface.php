@@ -6,7 +6,7 @@ use App\Models\User;
 
 interface UserRepositoryInterface
 {
-    function revokeApiTokens(User $user): void;
+    function revokeApiTokens(User $user): int;
 
     function generateApiToken(User $user): string;
 

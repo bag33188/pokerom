@@ -4,13 +4,17 @@ namespace App\Repositories;
 
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class UserRepository implements UserRepositoryInterface
 {
-    public function revokeApiTokens(User $user): void
+    function __construct(private readonly Request $request)
     {
-        $user->tokens()->delete();
+    }
+
+    public function revokeApiTokens(User $user): int
+    {
+        return $user->tokens()->delete();
     }
 
     public function generateApiToken(User $user): string
@@ -20,6 +24,6 @@ class UserRepository implements UserRepositoryInterface
 
     public function getCurrentUserBearerToken(): ?string
     {
-        return Request::bearerToken();
+        return $this->request->bearerToken();
     }
 }

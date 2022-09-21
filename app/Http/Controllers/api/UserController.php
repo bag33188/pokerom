@@ -73,12 +73,12 @@ class UserController extends ApiController
     public function logout(Request $request)
     {
         $user = $request->user();
-        $userName = $user->name;
+        $userFirstName = explode(_SPACE, $user->name, 3)[0];
         if ($user) {
             $this->userRepository->revokeApiTokens($user);
             return response()->json([
                 'success' => true,
-                'message' => "$userName, You have been logged out!"
+                'message' => "$userFirstName, You have been logged out!"
             ]);
         } else {
             return response()->json([
