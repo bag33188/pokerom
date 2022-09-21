@@ -57,18 +57,16 @@
         </h2>
     </x-slot>
     @if($userIsAdmin)
-        @verbatim
-            <!-- angularjs -->
-            <div style="display: none;" ng-app>
-                <div ng-cloak>
-                    <label for="yourName">Name:</label>
-                    <input id="yourName" type="text" ng-model="yourName" placeholder="Enter a name here"/>
-                    <hr/>
-                    <h1>Hello {{yourName}}!</h1>
-                </div>
+        <!-- angularjs -->
+        <div style="display: none;" ng-app>
+            <div ng-cloak>
+                <label for="yourName">Name:</label>
+                <input id="yourName" type="text" ng-model="yourName" placeholder="Enter a name here"/>
+                <hr/>
+                <h1>Hello @{{yourName}}!</h1>
             </div>
-            <!-- // angularjs -->
-        @endverbatim
+        </div>
+        <!-- // angularjs -->
     @endif
     <div class="py-6 px-5">
         <x-list-group
