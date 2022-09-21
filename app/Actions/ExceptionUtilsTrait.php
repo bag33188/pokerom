@@ -22,7 +22,7 @@ trait ExceptionUtilsTrait
      * @param Exception $e
      * @return string
      */
-    protected function formatErrorTraceString(Exception $e): string
+    protected function getFormattedErrorTraceStringFromException(Exception $e): string
     {
         $replaceLineBreaksInString = fn(string $subject, string $replace): string => preg_replace("/[\r\n]/", $replace, $subject);
         $trimExtraneousCharsFromString = fn(string $string): string => trim($string, "\x20\r\n\t\xA0\x0B\0");
