@@ -17,8 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', fn() => response()->redirectTo(route('welcome')))->middleware('guest');
-Route::get('/welcome', fn() => view('welcome'))->middleware('guest')->name('welcome');
+Route::middleware('guest')->group(function () {
+    Route::get('/', fn() => response()->redirectTo(route('welcome')));
+    Route::get('/welcome', fn() => view('welcome'))->name('welcome');
+});
 
 Route::middleware([
     'auth:sanctum',

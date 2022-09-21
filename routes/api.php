@@ -20,13 +20,14 @@ use Symfony\Component\HttpFoundation\Response as HttpStatus;
 
 Route::name('api.')->group(function () {
     Route::get('/version', fn() => response()->json(['success' => true, 'version' => config('app.version')], HttpStatus::HTTP_OK))->name('version');
-    
+
     Route::name('auth.')->prefix('auth')->group(function () {
         Route::post('/login', [UserController::class, 'login'])->name('login');
         Route::post('/register', [UserController::class, 'register'])->name('register');
     });
 
     Route::middleware('auth:sanctum')->group(function () {
+
         Route::name('auth.')->prefix('auth')->group(function () {
             Route::get('/me', [UserController::class, 'me'])->name('me');
             Route::post('/logout', [UserController::class, 'logout'])->name('logout');
