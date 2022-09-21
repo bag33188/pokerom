@@ -13,18 +13,18 @@
     ];
 
     $conditionalAlertCssClasses = [
-        'bg-green-100' => $alertType === \App\Enums\AlertTypesEnum::SUCCESS,
-        'border-green-400' => $alertType === \App\Enums\AlertTypesEnum::SUCCESS,
-        'text-green-700' => $alertType === \App\Enums\AlertTypesEnum::SUCCESS,
-        'bg-red-100' => $alertType === \App\Enums\AlertTypesEnum::ERROR,
-        'border-red-400' => $alertType === \App\Enums\AlertTypesEnum::ERROR,
-        'text-red-700' => $alertType === \App\Enums\AlertTypesEnum::ERROR,
-        'bg-yellow-100' => $alertType === \App\Enums\AlertTypesEnum::WARNING,
-        'border-yellow-400' => $alertType === \App\Enums\AlertTypesEnum::WARNING,
-        'text-yellow-700' => $alertType === \App\Enums\AlertTypesEnum::WARNING,
-        'bg-blue-100' => $alertType === \App\Enums\AlertTypesEnum::DEFAULT,
-        'border-blue-400' => $alertType === \App\Enums\AlertTypesEnum::DEFAULT,
-        'text-blue-700' => $alertType === \App\Enums\AlertTypesEnum::DEFAULT,
+        'bg-green-100' => $alertType === \App\Enums\AlertTypeEnum::SUCCESS,
+        'border-green-400' => $alertType === \App\Enums\AlertTypeEnum::SUCCESS,
+        'text-green-700' => $alertType === \App\Enums\AlertTypeEnum::SUCCESS,
+        'bg-red-100' => $alertType === \App\Enums\AlertTypeEnum::ERROR,
+        'border-red-400' => $alertType === \App\Enums\AlertTypeEnum::ERROR,
+        'text-red-700' => $alertType === \App\Enums\AlertTypeEnum::ERROR,
+        'bg-yellow-100' => $alertType === \App\Enums\AlertTypeEnum::WARNING,
+        'border-yellow-400' => $alertType === \App\Enums\AlertTypeEnum::WARNING,
+        'text-yellow-700' => $alertType === \App\Enums\AlertTypeEnum::WARNING,
+        'bg-blue-100' => $alertType === \App\Enums\AlertTypeEnum::DEFAULT,
+        'border-blue-400' => $alertType === \App\Enums\AlertTypeEnum::DEFAULT,
+        'text-blue-700' => $alertType === \App\Enums\AlertTypeEnum::DEFAULT,
     ];
 @endphp
 <div @class(array_merge($universalAlertCssClasses, $conditionalAlertCssClasses))

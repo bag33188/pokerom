@@ -65,7 +65,7 @@
                 </div>
             </form>
         @else
-            <x-alert :alertType="\App\Enums\AlertTypesEnum::ERROR">
+            <x-alert :alertType="\App\Enums\AlertTypeEnum::ERROR">
                 <x-slot name="heading">Sorry!</x-slot>
                 <x-slot name="message">There are no available roms to add a game to :(</x-slot>
             </x-alert>

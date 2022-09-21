@@ -2,21 +2,21 @@
 
 namespace App\View\Components;
 
-use App\Enums\AlertTypesEnum;
+use App\Enums\AlertTypeEnum as AlertType;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class Alert extends Component
 {
-    public AlertTypesEnum $alertType;
+    public AlertType $alertType;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(AlertTypesEnum $alertType = AlertTypesEnum::DEFAULT)
+    public function __construct(AlertType $alertType = AlertType::DEFAULT)
     {
         $this->alertType = $alertType;
     }

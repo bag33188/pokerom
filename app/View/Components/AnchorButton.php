@@ -2,21 +2,21 @@
 
 namespace App\View\Components;
 
-use App\Enums\AnchorTypesEnum;
+use App\Enums\AnchorTypeEnum as AnchorBtnType;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class AnchorButton extends Component
 {
-    public AnchorTypesEnum $btnType;
+    public AnchorBtnType $btnType;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(AnchorTypesEnum $btnType = AnchorTypesEnum::PRIMARY)
+    public function __construct(AnchorBtnType $btnType = AnchorBtnType::PRIMARY)
     {
         $this->btnType = $btnType;
     }

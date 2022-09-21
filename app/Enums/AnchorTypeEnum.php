@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use App\Actions\EnumUtilsTrait;
 
-enum AnchorTypesEnum: string
+enum AnchorTypeEnum: string
 {
     use EnumUtilsTrait;
 

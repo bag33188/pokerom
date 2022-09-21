@@ -36,7 +36,7 @@
                 @endforeach
             </div>
         @else
-            <x-alert :alertType="\App\Enums\AlertTypesEnum::ERROR">
+            <x-alert :alertType="\App\Enums\AlertTypeEnum::ERROR">
                 <x-slot:heading>Sorry!</x-slot:heading>
                 <x-slot:message>No Games in database</x-slot:message>
             </x-alert>

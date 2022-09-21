@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use App\Actions\EnumUtilsTrait;
 
-enum AlertTypesEnum: string
+enum AlertTypeEnum: string
 {
     use EnumUtilsTrait;
 
