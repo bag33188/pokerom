@@ -33,7 +33,7 @@ class GameQueries implements GameQueriesInterface
         return Rom::fromQuery($query);
     }
 
-    public function getAllGamesThatAreROMHacks(): Collection
+    public function getAllGamesThatAreROMHacksSQL(): Collection
     {
         $sql = /** @lang MariaDB */
             "SELECT * FROM `games` WHERE `game_type` = :rom_hack OR `generation` = 0 ORDER BY `date_released` DESC LIMIT :limit_results_to;";
