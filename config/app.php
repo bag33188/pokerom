@@ -16,7 +16,8 @@ return [
     */
 
     'name' => env('APP_NAME', 'Pok&eacute;ROM'),
-    'version' => (float)env('APP_VERSION', '1.0'),
+
+    'version' => env('APP_VERSION', '1.1'),
 
     /*
     |--------------------------------------------------------------------------
