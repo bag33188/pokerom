@@ -35,13 +35,13 @@ Route::name('api.')->group(function () {
         )
     )->name('version');
 
-    // NON-AUTH ROUTES
+    // NON-PROTECTED ROUTES
     Route::prefix('auth')->name('auth.')->group(function () {
         Route::post('/login', [UserController::class, 'login'])->name('login');
         Route::post('/register', [UserController::class, 'register'])->name('register');
     });
 
-    // AUTH ROUTES
+    // PROTECTED ROUTES
     Route::middleware('auth:sanctum')->group(function () {
 
         Route::controller(UserController::class)->group(function () {
