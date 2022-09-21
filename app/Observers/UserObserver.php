@@ -17,6 +17,7 @@ class UserObserver
     {
         $isApiRequest = $this->request->is('api/*');
         $passwordHasChanged = $user->isDirty('password');
+
         if ($passwordHasChanged || $isApiRequest) $this->userRepository->revokeApiTokens($user);
     }
 
