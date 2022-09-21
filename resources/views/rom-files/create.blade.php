@@ -32,7 +32,7 @@
 
         let tempDisableUploadBtn = () => {
             const uploadBtn = document.querySelector(
-                "button[data-name=submit-romFile-btn]"
+                "button[data-name=upload-romFile-btn]"
             );
             uploadBtn.classList.add("white-space-pre");
             uploadBtn.disabled = true;
@@ -109,10 +109,8 @@
                         </x-form-select>
                     </div>
                     <div class="my-4">
-                        <x-punch-button id="upload-romFile"
-                                        type="submit"
-                                        btn_name="submit-romFile-btn"
-                        >Upload!
+                        <x-punch-button id="submit-romFile-btn" type="submit" btn_name="upload-romFile-btn">
+                            <span class="uppercase">Upload!</span>
                         </x-punch-button>
                     </div>
                 </form>
