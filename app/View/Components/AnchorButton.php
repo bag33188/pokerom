@@ -9,13 +9,16 @@ use Illuminate\View\Component;
 
 class AnchorButton extends Component
 {
+    public AnchorTypesEnum $btnType;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct(public AnchorTypesEnum $btnType = AnchorTypesEnum::PRIMARY)
+    public function __construct(AnchorTypesEnum $btnType = AnchorTypesEnum::PRIMARY)
     {
+        $this->btnType = $btnType;
     }
 
     /**

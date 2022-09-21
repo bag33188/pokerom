@@ -42,5 +42,7 @@
         'disabled:opacity-25',
     ];
 @endphp
-<a {{ $attributes }} @class(array_merge($conditionalAnchorBtnClasses, $universalAnchorCssClasses)) role="button"
+<a {{ $attributes }}
+   @class(array_merge($conditionalAnchorBtnClasses, $universalAnchorCssClasses))
+   role="button"
    type="{{ $btnType->value }}">{{ $slot }}</a>
