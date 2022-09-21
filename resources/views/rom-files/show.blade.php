@@ -1,8 +1,9 @@
 @inject('romFileRepository', 'App\Interfaces\RomFileRepositoryInterface')
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">{{ $romFile->filename }}
-            Information</h2>
+        <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">
+            {{ $romFile->filename }} Information
+        </h2>
     </x-slot>
     <div class="my-4 mx-3.5">
         <div class='flex flex-col'>
@@ -28,17 +29,19 @@
                 </x-list-group>
             </div>
             <div class="order-1 mt-2.5 inline-flex flex-row justify-between">
-                <div class="inline-block order-1">
-                    @if(!$userIsAdmin)
+                @if($userIsAdmin)
+                    <div class="inline-block order-1">
+
                         <x-rom-file.delete class="order-1" :romFile="$romFile"/>
-                    @else
-                        <div class="inline-block order-1">
-                            <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY" :href="route('rom-files.index')">
-                                Go Back!
-                            </x-anchor-button>
-                        </div>
-                    @endif
-                </div>
+                    </div>
+                @else
+                    <div class="inline-block order-1">
+                        <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY"
+                                         :href="route('rom-files.index')">
+                            Go Back!
+                        </x-anchor-button>
+                    </div>
+                @endif
                 <div class="inline-block order-0">
                     <x-rom-file.download :romFile="$romFile"/>
                 </div>
