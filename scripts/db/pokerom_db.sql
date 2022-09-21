@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2022 at 07:02 AM
+-- Generation Time: Sep 21, 2022 at 09:07 AM
 -- Server version: 10.9.2-MariaDB
 -- PHP Version: 8.1.6
 
@@ -330,7 +330,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 -- Table structure for table `password_resets`
 --
--- Creation: Aug 27, 2022 at 03:45 PM
+-- Creation: Sep 21, 2022 at 07:03 AM
 --
 
 DROP TABLE IF EXISTS `password_resets`;
@@ -356,7 +356,7 @@ TRUNCATE TABLE `password_resets`;
 --
 -- Table structure for table `personal_access_tokens`
 --
--- Creation: Sep 21, 2022 at 03:06 AM
+-- Creation: Sep 21, 2022 at 07:06 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -470,7 +470,8 @@ INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_typ
 --
 -- Table structure for table `sessions`
 --
--- Creation: Aug 27, 2022 at 03:45 PM
+-- Creation: Sep 21, 2022 at 07:05 AM
+-- Last update: Sep 21, 2022 at 07:06 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -500,6 +501,7 @@ TRUNCATE TABLE `sessions`;
 -- Table structure for table `users`
 --
 -- Creation: Sep 08, 2022 at 05:16 AM
+-- Last update: Sep 21, 2022 at 07:06 AM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -534,7 +536,7 @@ TRUNCATE TABLE `users`;
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Brock Glatman', 'bglatman@outlook.com', NULL, '$2y$10$tUGrfHS.tO6AJ.iKMutwS.j2qjFfRmLSsS5sun6dIg7dEHQVXKYua', NULL, NULL, NULL, 'admin', '7GiJxvCVLIX1xNvAjuDjHDURb5UuYzNIlHMsOfWa6IxWN9aL9eWsRDUtzG23', NULL, NULL, '2022-08-27 23:17:24', '2022-09-02 07:39:41'),
+(1, 'Brock Glatman', 'bglatman@outlook.com', NULL, '$2y$10$tUGrfHS.tO6AJ.iKMutwS.j2qjFfRmLSsS5sun6dIg7dEHQVXKYua', NULL, NULL, NULL, 'admin', 'zCgafosXGVFVwu8US36zWq1wTqivd5dc8jEjsfmXcgCZ99lPq4Qxpy5SKY5u', NULL, NULL, '2022-08-27 23:17:24', '2022-09-02 07:39:41'),
 (2, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$g4kXZ7ea8TNdwlySRo5bne1HoU6h/NOyRmul.J3fD5.5L5eu1sKBC', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-08-30 08:24:08', '2022-08-30 08:24:08');
 
 --
@@ -655,19 +657,19 @@ ALTER TABLE `games`
 -- Constraints for table `password_resets`
 --
 ALTER TABLE `password_resets`
-  ADD CONSTRAINT `password_resets_email_foreign` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `password_resets_email_foreign` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  ADD CONSTRAINT `personal_access_tokens_tokenable_id_foreign` FOREIGN KEY (`tokenable_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `personal_access_tokens_tokenable_id_foreign` FOREIGN KEY (`tokenable_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `sessions`
 --
 ALTER TABLE `sessions`
-  ADD CONSTRAINT `sessions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `sessions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 
 --

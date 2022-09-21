@@ -25,7 +25,7 @@ return new class extends Migration {
             #$table->longText('payload');
             #$table->integer('last_activity')->index();
             $table->char('id', SESSION_ID_LENGTH)->primary();
-            $table->foreignId('user_id')->nullable()->index()->references('id')->on('users')->onDelete(ConstraintOption::NO_ACTION->value)->onUpdate(ConstraintOption::NO_ACTION->value);
+            $table->foreignId('user_id')->nullable()->index()->references('id')->on('users')->onDelete(ConstraintOption::CASCADE->value)->onUpdate(ConstraintOption::RESTRICT->value);
             $table->string('ip_address', IP_ADDRESS_LENGTH)->nullable();
             $table->text('user_agent')->nullable();
             $table->longText('payload');

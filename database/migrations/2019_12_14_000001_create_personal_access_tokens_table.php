@@ -28,7 +28,7 @@ return new class extends Migration {
 //            $table->timestamps();
             $table->id();
             $table->morphs('tokenable');
-            $table->foreign('tokenable_id')->references('id')->on('users')->onDelete(ConstraintOption::NO_ACTION->value)->onUpdate(ConstraintOption::NO_ACTION->value);
+            $table->foreign('tokenable_id')->references('id')->on('users')->cascadeOnDelete()->onUpdate(ConstraintOption::RESTRICT->value);
             $table->string('name');
             $table->char('token', PERSONAL_ACCESS_TOKEN_LENGTH)->unique();
             $table->text('abilities')->nullable();
