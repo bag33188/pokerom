@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Pok&eacute;ROM'),
 
     /*
     |--------------------------------------------------------------------------
@@ -215,6 +215,9 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'GameQueries' => \App\Facades\GameQueriesFacade::class,
+        'RomQueries' => \App\Facades\RomQueriesFacade::class,
+        'RomFileQueries' => \App\Facades\RomFileQueriesFacade::class,
     ])->toArray(),
 
 ];
