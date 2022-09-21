@@ -46,11 +46,12 @@
                 <span><!--&nbsp;-->ROMs</span>
             </button>
         </div>
-        @unless(count($roms) === 0)
+        @unless($roms->count() === 0)
             <table class="w-full test-sm text-left text-gray-800 table-auto border-t-2" x-show="open === true">
                 <thead class="bg-gray-50">
-                @for($i = 0; $i < count($tableColumns); $i++)
-                    <th scope="col" class="px-6 py-3">{{ $tableColumns[$i] }}</th>
+                @for($i = 0; $i < count($htmlRomTableColumns); $i++)
+                    @php $columnName = $htmlRomTableColumns[$i]; @endphp
+                    <th scope="col" class="px-6 py-3">{{ $columnName }}</th>
                 @endfor
                 </thead>
                 <tbody>
@@ -69,7 +70,7 @@
                         <td class="px-6 py-4">
                             @if($rom->has_file)
                                 <div class="inline-block" data-romFile-id="{{ $rom->romFile->_id }}">
-                                    <x-rom-file.download :romFile="$rom->romFile" />
+                                    <x-rom-file.download :romFile="$rom->romFile"/>
                                 </div>
                             @else
                                 <span>No file yet!</span>

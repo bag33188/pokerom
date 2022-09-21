@@ -3,7 +3,7 @@
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Add Game</h2>
     </x-slot>
     <div class="container mx-auto w-full mt-3.5">
-        @if($romsWithNoGame->count() > 0)
+        @if($romsWithNoAssocGame->count() > 0)
             <x-jet-validation-errors class="mb-4"/>
             <form method="POST" action="{{ route('games.store') }}">
                 @method('POST')
@@ -11,7 +11,7 @@
 
                 <x-form-select-label text="Assoc. ROM" for="availableRoms"/>
                 <x-form-select id="availableRoms" name="rom_id" autofocus required>
-                    @foreach($romsWithNoGame as $rom)
+                    @foreach($romsWithNoAssocGame as $rom)
                         <option value="{{ $rom->id }}">{{ $rom->rom_name }}</option>
                     @endforeach
                 </x-form-select>

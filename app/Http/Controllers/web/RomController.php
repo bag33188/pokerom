@@ -28,7 +28,7 @@ class RomController extends WebController
         $roms = Rom::with(['romFile', 'game'])->get();
         return view('roms.index', [
             'roms' => $roms,
-            'tableColumns' => ['ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information'],
+            'htmlRomTableColumns' => ['ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information'],
             'totalRomsSize' => $romFileQueries->getTotalSizeOfAllFilesThatHaveRoms(),
             'totalRomsCount' => Rom::all()->count(),
         ]);
