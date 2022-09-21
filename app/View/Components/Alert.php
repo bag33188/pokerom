@@ -9,6 +9,7 @@ use Illuminate\View\Component;
 class Alert extends Component
 {
     public string $type;
+
     /**
      * Create a new component instance.
      *
@@ -26,6 +27,8 @@ class Alert extends Component
      */
     public function render(): View|string|Closure
     {
-        return view('components.alert');
+        return view('components.alert', [
+            'getEnumValuesAsArray' => fn(array $enumCases) => array_column($enumCases, 'value')
+        ]);
     }
 }

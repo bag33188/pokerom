@@ -9,14 +9,12 @@
     @endphp
 @endonce
 @php
-    if(isset($type)) {
-        $type = strtolower($type);
-    } else {
+    if (empty($type)) {
         $type = AnchorTypes::PRIMARY->value;
-    }
-
-    if(!in_array($type, array_column(AnchorTypes::cases(), 'value'))) {
+    } else if (!in_array($type, $getEnumValuesAsArray(AnchorTypes::cases()))) {
         $type = 'primary';
+    } else {
+        $type = strtolower($type);
     }
 
     $conditionalAnchorBtnClasses = [

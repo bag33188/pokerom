@@ -25,6 +25,8 @@ class AnchorButton extends Component
      */
     public function render(): View|string|Closure
     {
-        return view('components.anchor-button');
+        return view('components.anchor-button', [
+            'getEnumValuesAsArray' => fn(array $enumCases) => array_column($enumCases, 'value')
+        ]);
     }
 }
