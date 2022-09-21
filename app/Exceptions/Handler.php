@@ -80,16 +80,17 @@ class Handler extends ExceptionHandler
         // handle generic \Symfony\Component\HttpKernel\Exception\HttpException
         $this->renderable(function (HttpException $e): JsonResponse|false {
             $httpErrorCode = self::getErrorCodeFromException($e);
-            $formatStackTrace = fn(string $trace): string => trim(preg_replace("/[\r\n]/", _SPACE . '|' . _SPACE, $trace));
+            $stringifyErrorTraceValue = fn(string $trace): string => trim(preg_replace("/[\r\n]/", _SPACE . '|' . _SPACE, $trace)); # $e->getTrace();
             if ($this->isApiRequest() or $this->requestExpectsJson()) {
-                $errorTraceStr = $formatStackTrace($e->getTraceAsString());
+                $errorTraceStr = $stringifyErrorTraceValue($e->getTraceAsString());
+                $formattedStackTraceStr = sprintf("[%u] : %s", strlen($errorTraceStr), $errorTraceStr);
                 return Response::json(
                     ['message' => $e->getMessage(), 'success' => false],
                     $httpErrorCode,
                     array(
                         ...$e->getHeaders(), // populate original headers
-                        'X-Stack-Trace' => (App::isLocal() ? (sprintf("[%u] : %s", strlen($errorTraceStr), $errorTraceStr)) : 'null')
-                    ) # $e->getTrace();
+                        'X-Stack-Trace' => (App::isLocal() ? $formattedStackTraceStr : 'null')
+                    )
                 );
             }
             // don't use custom rendering if request is not an API request
