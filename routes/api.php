@@ -44,17 +44,18 @@ Route::name('api.')->group(function () {
     // AUTH ROUTES
     Route::middleware('auth:sanctum')->group(function () {
 
-        Route::prefix('auth')->name('auth.')->group(function () {
-            Route::get('/me', [UserController::class, 'me'])->name('me');
-            Route::post('/logout', [UserController::class, 'logout'])->name('logout');
-        });
-
-        Route::controller(UserController::class)->prefix('users')->name('users.')->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('/{userId}', 'show')->name('show');
-            Route::put('/{userId}', 'update')->name('update');
-            Route::patch('/{userId}', 'update')->name('edit');
-            Route::delete('/{userId}', 'destroy')->name('destroy');
+        Route::controller(UserController::class)->group(function () {
+            Route::prefix('auth')->name('auth.')->group(function () {
+                Route::get('/me', 'me')->name('me');
+                Route::post('/logout', 'logout')->name('logout');
+            });
+            Route::prefix('users')->name('users.')->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/{userId}', 'show')->name('show');
+                Route::put('/{userId}', 'update')->name('update');
+                Route::patch('/{userId}', 'update')->name('edit');
+                Route::delete('/{userId}', 'destroy')->name('destroy');
+            });
         });
 
         Route::controller(RomController::class)->prefix('roms')->name('roms.')->group(function () {
