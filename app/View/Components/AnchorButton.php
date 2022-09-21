@@ -2,7 +2,7 @@
 
 namespace App\View\Components;
 
-use App\Enums\AnchorTypeEnum as AnchorBtnType;
+use App\Enums\AnchorButtonTypeEnum as AnchorBtnType;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;

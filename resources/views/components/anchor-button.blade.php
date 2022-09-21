@@ -1,5 +1,5 @@
 @php
-    use App\Enums\AnchorTypeEnum as AnchorBtnType;
+    use App\Enums\AnchorButtonTypeEnum as AnchorBtnType;
 
     $universalAnchorCssClasses = [
         'focus:outline-none',
