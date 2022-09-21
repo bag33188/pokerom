@@ -18,9 +18,7 @@ class MongoWriteException extends ApplicationException
             return response()->json([
                 'message' => $this->getMessage(), 'success' => false,
             ], $this->getCode());
-        } else {
-            return false;
-        }
+        } else return false;
     }
 
     public function report(): ?bool

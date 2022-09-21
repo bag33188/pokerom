@@ -18,11 +18,19 @@ abstract class AbstractApplicationException extends Exception
         parent::__construct($message, $code, $previous);
     }
 
+    /**
+     * Determine if request is an API request (ie. made from an API endpoint).
+     * @return bool
+     */
     protected final function isApiRequest(): bool
     {
         return $this->request->is("api/*");
     }
 
+    /**
+     * Determine if request was made by Livewire AJAX call.
+     * @return bool
+     */
     protected final function isLivewireRequest(): bool
     {
         $livewireHttpHeader = $this->request->header('X-Livewire');

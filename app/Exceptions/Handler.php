@@ -9,6 +9,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Response;
 use MongoDB\Driver\Exception\BulkWriteException;
 use Psr\Log\LogLevel;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
@@ -64,9 +65,12 @@ class Handler extends ExceptionHandler
         $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
             ['message' => $e->getMessage(), 'code' => HttpStatus::HTTP_CONFLICT]));
 
+        /*! make sure correct JSON response is returned during an API request */
+
+        // handle \Illuminate\Auth\AuthenticationException
         $this->renderable(function (AuthenticationException $e, Request $request): JsonResponse|false {
             if ($request->expectsJson()) {
-                return response()->json(
+                return Response::json(
                     ['message' => 'Error: Unauthenticated.', 'success' => false], # $e->getTraceAsString();
                     HttpStatus::HTTP_UNAUTHORIZED,
                     [
@@ -79,19 +83,21 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (HttpException $e, Request $request): JsonResponse|false {
-            $currentErrorRoute = str_replace(Config::get('app.url') . '/', '/', URL::current());
+
+            // if `getCode` method returns any status (int value) at all, then use that method, else use the `getStatusCode` method's value (int value)
+            $statusCode = $e->getCode() != 0 ? $e->getCode() : $e->getStatusCode();
+
+            // set default message value to message of exception being thrown by request/response
+            $message = $e->getMessage();
+
             if ($request->is("api/*")) {
+                $currentErrorRoute = str_replace(Config::get('app.url') . '/', '/', URL::current());
 
-                // if `getCode` method returns any status at all, then use that method, else use the `getStatusCode` method
-                $statusCode = $e->getCode() != 0 ? $e->getCode() : $e->getStatusCode();
+                $responseErrorsIsRouteNotFound = fn() => $statusCode === HttpStatus::HTTP_NOT_FOUND && strlen($message) === 0;
 
-                $message = $e->getMessage();
+                if ($responseErrorsIsRouteNotFound()) $message = "Route not found: $currentErrorRoute";
 
-                if ($statusCode === HttpStatus::HTTP_NOT_FOUND && strlen($message) === 0) {
-                    $message = "Route not found: $currentErrorRoute";
-                }
-
-                return response()->json(
+                return Response::json(
                     ['message' => $message, 'success' => false], # $e->getTrace();
                     $statusCode,
                     [...$e->getHeaders()]
