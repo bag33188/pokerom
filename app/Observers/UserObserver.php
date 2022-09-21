@@ -18,13 +18,13 @@ class UserObserver
 
     public function created(User $user): void
     {
-        $user->notify(new WelcomeNotification($user));
+        Notification::send($user, new WelcomeNotification($user));
     }
 
     public function updated(User $user): void
     {
-        $requestIsApiEndpoint = $this->request->is('api/*');
-        $passwordHasChanged = $user->isDirty('password');
+        $requestIsApiEndpoint = $this->request->is("api/*");
+        $passwordHasChanged = $user->isDirty("password");
 
         if ($passwordHasChanged || $requestIsApiEndpoint) $this->userRepository->revokeApiTokens($user);
     }
@@ -32,6 +32,6 @@ class UserObserver
     public function deleted(User $user): void
     {
         $this->userRepository->revokeApiTokens($user);
-        Notification::send($user, new FarewellNotification($user));
+        $user->notify(new FarewellNotification($user));
     }
 }
