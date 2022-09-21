@@ -36,7 +36,7 @@ Route::name('api.')->group(function () {
     )->name('version');
 
     // NON-AUTH ROUTES
-    Route::name('auth.')->prefix('auth')->group(function () {
+    Route::prefix('auth')->name('auth.')->group(function () {
         Route::post('/login', [UserController::class, 'login'])->name('login');
         Route::post('/register', [UserController::class, 'register'])->name('register');
     });
@@ -44,7 +44,7 @@ Route::name('api.')->group(function () {
     // AUTH ROUTES
     Route::middleware('auth:sanctum')->group(function () {
 
-        Route::name('auth.')->prefix('auth')->group(function () {
+        Route::prefix('auth')->name('auth.')->group(function () {
             Route::get('/me', [UserController::class, 'me'])->name('me');
             Route::post('/logout', [UserController::class, 'logout'])->name('logout');
         });

@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('guest')->group(function () {
-    Route::get('/', fn() => response()->redirectTo(route('welcome')));
     Route::get('/welcome', fn() => view('welcome'))->name('welcome');
+    Route::get('/', fn() => response()->redirectTo(route('welcome')));
 });
 
 Route::middleware([
