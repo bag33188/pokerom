@@ -111,11 +111,7 @@
     </style>
 @endPushOnce
 <button @class(['punch' => true])
-    {{ $attributes->merge([
-        'data-name' => ($btn_name ?? (
-            (Faker\Factory::create())->domainWord . '-punch-btn')
-        )
-    ]) }}
+    {{ $attributes->merge(['data-name' => ($btn_name ?? ((Faker\Factory::create('en_US'))->domainWord . '-punch-btn'))]) }}
     {{ $attributes->has('disabled') ? 'disabled' : '' }}>
     {{ $slot }}
 </button>
