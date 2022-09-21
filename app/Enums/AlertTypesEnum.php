@@ -2,7 +2,12 @@
 
 namespace App\Enums;
 
-enum AlertTypesEnum: string {
+use App\Actions\EnumUtilsTrait;
+
+enum AlertTypesEnum: string
+{
+    use EnumUtilsTrait;
+
     case SUCCESS = 'success';
     case ERROR = 'error';
     case WARNING = 'warning';

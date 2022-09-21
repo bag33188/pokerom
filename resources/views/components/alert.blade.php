@@ -1,7 +1,7 @@
 @props(['heading', 'message'])
 
 @php
-    $resolveAlertType(alertType: $type, defaultTypeValue: \App\Enums\AlertTypesEnum::DEFAULT->value, alertTypeEnumCases: \App\Enums\AlertTypesEnum::cases());
+    $resolveAlertType(alertType: $type, defaultValue: \App\Enums\AlertTypesEnum::DEFAULT->value, alertTypeEnumValues: \App\Enums\AlertTypesEnum::values());
 
     $universalAlertCssClasses = [
         'my-6',

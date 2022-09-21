@@ -1,7 +1,7 @@
 @props(['type'])
 @php
 
-    $resolveAnchorBtnType(btnType: $type, defaultTypeValue: \App\Enums\AnchorTypesEnum::PRIMARY->value, btnTypeEnumCases: \App\Enums\AnchorTypesEnum::cases());
+    $resolveAnchorBtnType(btnType: $type, defaultValue: \App\Enums\AnchorTypesEnum::PRIMARY->value, btnTypeEnumValues: \App\Enums\AnchorTypesEnum::values());
 
     $conditionalAnchorBtnClasses = [
         'bg-red-600' => $type == \App\Enums\AnchorTypesEnum::DANGER->value,
