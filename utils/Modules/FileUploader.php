@@ -79,7 +79,7 @@ class FileUploader
      */
     private static function openFileForBinaryReading(string $filename)
     {
-        return fopen($filename, 'rb'); // `rb` mode = read binary
+        return fopen($filename, 'rb'); // `rb` mode = read+binary
     }
 
     /**
