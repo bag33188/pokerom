@@ -4,7 +4,7 @@ namespace App\Actions;
 
 use Illuminate\Support\Facades\Request;
 
-trait ApiUtilsTrait
+trait ApiMethodsTrait
 {
     protected function isApiRequest(): bool
     {

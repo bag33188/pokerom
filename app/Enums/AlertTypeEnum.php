@@ -2,11 +2,11 @@
 
 namespace App\Enums;
 
-use App\Actions\EnumUtilsTrait;
+use App\Actions\EnumMethodsTrait;
 
 enum AlertTypeEnum: string
 {
-    use EnumUtilsTrait;
+    use EnumMethodsTrait;
 
     case SUCCESS = 'success';
     case ERROR = 'error';

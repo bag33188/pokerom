@@ -1,3 +1,6 @@
+@php
+    use App\Enums\AlertTypeEnum as AlertType;
+@endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Add Game</h2>
@@ -65,7 +68,7 @@
                 </div>
             </form>
         @else
-            <x-alert :alertType="\App\Enums\AlertTypeEnum::ERROR">
+            <x-alert :alertType="AlertType::ERROR">
                 <x-slot name="heading">Sorry!</x-slot>
                 <x-slot name="message">There are no available roms to add a game to :(</x-slot>
             </x-alert>

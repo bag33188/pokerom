@@ -1,3 +1,6 @@
+@php
+    use App\Enums\AlertTypeEnum as AlertType;
+@endphp
 @inject('romFileRepository', 'App\Interfaces\RomFileRepositoryInterface')
 <x-app-layout>
     <x-slot:header>
@@ -30,7 +33,7 @@
             @endforeach
         </div>
     @else
-        <x-alert :alertType="\App\Enums\AlertTypeEnum::ERROR">
+        <x-alert :alertType="AlertType::ERROR">
             <x-slot:heading>Sorry!</x-slot:heading>
             <x-slot:message>No ROM Files in database</x-slot:message>
         </x-alert>

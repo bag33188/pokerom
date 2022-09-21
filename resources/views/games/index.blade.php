@@ -1,3 +1,6 @@
+@php
+    use App\Enums\AlertTypeEnum as AlertType;
+@endphp
 @inject('gameQueries', 'App\Interfaces\GameQueriesInterface')
 <x-app-layout>
     <x-slot name="header">
@@ -36,7 +39,7 @@
                 @endforeach
             </div>
         @else
-            <x-alert :alertType="\App\Enums\AlertTypeEnum::ERROR">
+            <x-alert :alertType="AlertType::ERROR">
                 <x-slot:heading>Sorry!</x-slot:heading>
                 <x-slot:message>No Games in database</x-slot:message>
             </x-alert>

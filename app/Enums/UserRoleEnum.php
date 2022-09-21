@@ -2,8 +2,14 @@
 
 namespace App\Enums;
 
+use App\Actions\EnumMethodsTrait;
+
 enum UserRoleEnum: string
 {
+    use EnumMethodsTrait {
+        values as public;
+    }
+
     /** administrator */
     case ADMIN = 'admin';
     /** default user */

@@ -1,3 +1,6 @@
+@php
+    use App\Enums\AnchorButtonTypeEnum as AnchorBtnType;
+@endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">
@@ -44,7 +47,7 @@
             </div>
             <div class="mt-4 flex flex-row justify-between">
                 <x-jet-button type="submit">Update!</x-jet-button>
-                <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY" href="{{ route('roms.show', ['rom' => $rom]) }}">
+                <x-anchor-button :btn-type="AnchorBtnType::SECONDARY" href="{{ route('roms.show', ['rom' => $rom]) }}">
                     Cancel
                 </x-anchor-button>
             </div>

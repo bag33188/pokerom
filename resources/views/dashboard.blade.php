@@ -1,3 +1,6 @@
+@php
+    use App\Enums\AnchorButtonTypeEnum as AnchorBtnType;
+@endphp
 @push('scripts')
     <script type="text/javascript">
         const loadCopyrightYear = () => {
@@ -160,7 +163,7 @@
                             </div>
                         </div>
                         <div id="check-it-out-roms" class="mt-3.5 ml-11 inline-flex flex-row h-full items-end">
-                            <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY" href="{{ route('roms.index') }}" target="_self">
+                            <x-anchor-button :btn-type="AnchorBtnType::SECONDARY" href="{{ route('roms.index') }}" target="_self">
                                 <span class="order-1">ROMs</span>
                                 <span class="order-2">@include('partials._more-info-icon')</span>
                             </x-anchor-button>
@@ -180,7 +183,7 @@
                             </div>
                         </div>
                         <div id="check-it-out-games" class="mt-3 ml-11 inline-flex flex-row h-full items-end">
-                            <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY" href="{{ route('games.index') }}" target="_self">
+                            <x-anchor-button :btn-type="AnchorBtnType::SECONDARY" href="{{ route('games.index') }}" target="_self">
                                 <span class="order-1">Games</span>
                                 <span class="order-2">@include('partials._more-info-icon')</span>
                             </x-anchor-button>

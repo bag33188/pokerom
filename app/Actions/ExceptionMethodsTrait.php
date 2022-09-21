@@ -9,7 +9,7 @@ use PDOException;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-trait ExceptionUtilsTrait
+trait ExceptionMethodsTrait
 {
     protected function getCurrentErrorUrl(): string
     {

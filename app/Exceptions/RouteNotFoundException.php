@@ -2,8 +2,8 @@
 
 namespace App\Exceptions;
 
-use App\Actions\ApiUtilsTrait;
-use App\Actions\ExceptionUtilsTrait;
+use App\Actions\ApiMethodsTrait;
+use App\Actions\ExceptionMethodsTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,10 +13,10 @@ use Utils\Classes\AbstractApplicationException as ApplicationException;
 
 class RouteNotFoundException extends ApplicationException
 {
-    use ApiUtilsTrait {
+    use ApiMethodsTrait {
         requestExpectsJson as private;
     }
-    use ExceptionUtilsTrait {
+    use ExceptionMethodsTrait {
         getCurrentErrorUrl as private;
     }
 

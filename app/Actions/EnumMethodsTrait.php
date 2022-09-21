@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-trait EnumUtilsTrait
+trait EnumMethodsTrait
 {
     public static function names(): array
     {
