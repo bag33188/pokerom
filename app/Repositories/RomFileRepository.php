@@ -54,10 +54,12 @@ class RomFileRepository implements RomFileRepositoryInterface
         };
     }
 
-    public function formatUploadDate(string $uploadDate, string $dtFormat, string $timezone): string
+    public function formatUploadDate(string $uploadDate, string $dateTimeFormat, string $timezone): string
     {
         try {
-            return (new DateTime($uploadDate))->setTimezone(new DateTimeZone($timezone))->format($dtFormat);
+            $uploadDateTime = new DateTime($uploadDate);
+            $uploadTimeZone = new DateTimeZone($timezone);
+            return $uploadDateTime->setTimezone($uploadTimeZone)->format($dateTimeFormat);
         } catch (Exception $e) {
             return $e->getMessage() ?? 'Invalid date/datetime';
         }

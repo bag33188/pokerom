@@ -14,5 +14,5 @@ interface RomFileRepositoryInterface
 
     function determineConsole(RomFile $romFile): string;
 
-    function formatUploadDate(string $uploadDate, string $dtFormat, string $timezone): string;
+    function formatUploadDate(string $uploadDate, string $dateTimeFormat, string $timezone): string;
 }
