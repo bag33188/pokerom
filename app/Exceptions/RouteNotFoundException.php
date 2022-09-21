@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Actions\ApiUtilsTrait;
+use App\Actions\ExceptionUtilsTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,6 +16,9 @@ class RouteNotFoundException extends ApplicationException
     use ApiUtilsTrait {
         requestExpectsJson as private;
     }
+    use ExceptionUtilsTrait {
+        getCurrentErrorUrl as private;
+    }
 
     public function render(Request $request): false|JsonResponse|RedirectResponse
     {
@@ -24,7 +28,7 @@ class RouteNotFoundException extends ApplicationException
 
             if ($errorIsHttpNotFound) {
                 return Response::json(
-                    ['message' => "Route not found: {self::getCurrentErrorUrl()}", 'success' => false],
+                    ['message' => "Route not found: {$this->getCurrentErrorUrl()}", 'success' => false],
                     $this->code,
                     $this->headers
                 );
