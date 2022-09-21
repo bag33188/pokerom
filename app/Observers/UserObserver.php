@@ -4,27 +4,24 @@ namespace App\Observers;
 
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserObserver
 {
-    public function __construct(private readonly UserRepositoryInterface $userRepository)
+    public function __construct(private readonly UserRepositoryInterface $userRepository,
+                                private readonly Request                 $request)
     {
     }
 
     public function updated(User $user): void
     {
-        if ($user->isDirty('password') || $this->isApiRequest()) {
-            $this->userRepository->revokeApiTokens($user);
-        }
+        $isApiRequest = $this->request->is('api/*');
+        $passwordHasChanged = $user->isDirty('password');
+        if ($passwordHasChanged || $isApiRequest) $this->userRepository->revokeApiTokens($user);
     }
 
     public function deleted(User $user): void
     {
         $this->userRepository->revokeApiTokens($user);
-    }
-
-    private function isApiRequest(): bool
-    {
-        return request()->is('api/*');
     }
 }
