@@ -20,9 +20,13 @@ trait ExceptionUtilsTrait
     protected function formatErrorTraceString(Exception $e): string
     {
         $replaceLineBreaksInString = fn(string $subject, string $replace): string => preg_replace("/[\r\n]/", $replace, $subject);
-        $trimSpecialCharsFromString = fn(string $string): string => trim($string, "\x20\r\n\t\0\x0B\xA0");
-        $modifiedStackTraceString = $trimSpecialCharsFromString($replaceLineBreaksInString($e->getTraceAsString(), _SPACE . '|' . _SPACE));
+        $trimExtraneousCharsFromString = fn(string $string): string => trim($string, "\x20\r\n\t\xA0\x0B\0");
+
+        $modifiedStackTraceString = $trimExtraneousCharsFromString(
+            $replaceLineBreaksInString($e->getTraceAsString(), _SPACE . '|' . _SPACE)
+        );
         $modifiedStackTraceLength = strlen($modifiedStackTraceString);
+
         return App::isLocal() ? sprintf('[%u] : %s', $modifiedStackTraceLength, $modifiedStackTraceString) : 'null';
     }
 
