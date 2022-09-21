@@ -85,7 +85,7 @@
                 </tfoot>
             </table>
         @else
-            <x-alert type="error">
+            <x-alert :alertType="\App\Enums\AlertTypesEnum::ERROR">
                 <x-slot name="heading">Sorry!</x-slot>
                 <x-slot:message>No ROMs Currently Exist in the Database</x-slot:message>
             </x-alert>

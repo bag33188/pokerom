@@ -1,30 +1,26 @@
-@props(['type'])
 @php
-
-    $resolveAnchorBtnType(btnType: $type, defaultValue: \App\Enums\AnchorTypesEnum::PRIMARY->value, btnTypeEnumValues: \App\Enums\AnchorTypesEnum::values());
-
     $conditionalAnchorBtnClasses = [
-        'bg-red-600' => $type == \App\Enums\AnchorTypesEnum::DANGER->value,
-        'text-white' => $type == \App\Enums\AnchorTypesEnum::DANGER->value || $type == \App\Enums\AnchorTypesEnum::PRIMARY->value,
-        'hover:bg-red-500' => $type == \App\Enums\AnchorTypesEnum::DANGER->value,
-        'active:bg-red-600' => $type == \App\Enums\AnchorTypesEnum::DANGER->value,
-        'border-transparent' => $type == \App\Enums\AnchorTypesEnum::DANGER->value || $type == \App\Enums\AnchorTypesEnum::PRIMARY->value,
-        'focus:ring-red-200' => $type == \App\Enums\AnchorTypesEnum::DANGER->value,
-        'focus:border-red-700' => $type == \App\Enums\AnchorTypesEnum::DANGER->value,
-        'bg-white' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
-        'shadow-sm' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
-        'text-gray-700' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
-        'border-gray-300' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
-        'active:bg-gray-50' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
-        'hover:text-gray-500' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
-        'focus:ring-blue-200' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
-        'active:text-gray-800' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
-        'focus:border-blue-300' => $type == \App\Enums\AnchorTypesEnum::SECONDARY->value,
-        'hover:bg-gray-700' => $type == \App\Enums\AnchorTypesEnum::PRIMARY->value,
-        'active:bg-gray-900' => $type == \App\Enums\AnchorTypesEnum::PRIMARY->value,
-        'focus:ring-gray-300' => $type == \App\Enums\AnchorTypesEnum::PRIMARY->value,
-        'focus:border-gray-900' => $type == \App\Enums\AnchorTypesEnum::PRIMARY->value,
-        'bg-gray-800' => $type == \App\Enums\AnchorTypesEnum::PRIMARY->value,
+        'bg-red-600' => $btnType == \App\Enums\AnchorTypesEnum::DANGER,
+        'text-white' => $btnType == \App\Enums\AnchorTypesEnum::DANGER || $btnType == \App\Enums\AnchorTypesEnum::PRIMARY,
+        'hover:bg-red-500' => $btnType == \App\Enums\AnchorTypesEnum::DANGER,
+        'active:bg-red-600' => $btnType == \App\Enums\AnchorTypesEnum::DANGER,
+        'border-transparent' => $btnType == \App\Enums\AnchorTypesEnum::DANGER || $btnType == \App\Enums\AnchorTypesEnum::PRIMARY,
+        'focus:ring-red-200' => $btnType == \App\Enums\AnchorTypesEnum::DANGER,
+        'focus:border-red-700' => $btnType == \App\Enums\AnchorTypesEnum::DANGER,
+        'bg-white' => $btnType == \App\Enums\AnchorTypesEnum::SECONDARY,
+        'shadow-sm' => $btnType == \App\Enums\AnchorTypesEnum::SECONDARY,
+        'text-gray-700' => $btnType == \App\Enums\AnchorTypesEnum::SECONDARY,
+        'border-gray-300' => $btnType == \App\Enums\AnchorTypesEnum::SECONDARY,
+        'active:bg-gray-50' => $btnType == \App\Enums\AnchorTypesEnum::SECONDARY,
+        'hover:text-gray-500' => $btnType == \App\Enums\AnchorTypesEnum::SECONDARY,
+        'focus:ring-blue-200' => $btnType == \App\Enums\AnchorTypesEnum::SECONDARY,
+        'active:text-gray-800' => $btnType == \App\Enums\AnchorTypesEnum::SECONDARY,
+        'focus:border-blue-300' => $btnType == \App\Enums\AnchorTypesEnum::SECONDARY,
+        'hover:bg-gray-700' => $btnType == \App\Enums\AnchorTypesEnum::PRIMARY,
+        'active:bg-gray-900' => $btnType == \App\Enums\AnchorTypesEnum::PRIMARY,
+        'focus:ring-gray-300' => $btnType == \App\Enums\AnchorTypesEnum::PRIMARY,
+        'focus:border-gray-900' => $btnType == \App\Enums\AnchorTypesEnum::PRIMARY,
+        'bg-gray-800' => $btnType == \App\Enums\AnchorTypesEnum::PRIMARY,
     ];
 
     $universalAnchorCssClasses = [
@@ -46,4 +42,5 @@
         'disabled:opacity-25',
     ];
 @endphp
-<a {{ $attributes }} @class(array_merge($conditionalAnchorBtnClasses, $universalAnchorCssClasses))>{{ $slot }}</a>
+<a {{ $attributes }} @class(array_merge($conditionalAnchorBtnClasses, $universalAnchorCssClasses)) role="button"
+   type="{{ $btnType->value }}">{{ $slot }}</a>

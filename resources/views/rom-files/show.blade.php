@@ -33,7 +33,7 @@
                         <x-rom-file.delete class="order-1" :romFile="$romFile"/>
                     @else
                         <div class="inline-block order-1">
-                            <x-anchor-button type="secondary" :href="route('rom-files.index')">
+                            <x-anchor-button :btn-type="\App\Enums\AnchorTypesEnum::SECONDARY" :href="route('rom-files.index')">
                                 Go Back!
                             </x-anchor-button>
                         </div>

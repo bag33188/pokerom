@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Enums\AnchorTypesEnum;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -13,9 +14,8 @@ class AnchorButton extends Component
      *
      * @return void
      */
-    public function __construct(public string $type = 'primary')
+    public function __construct(public AnchorTypesEnum $btnType = AnchorTypesEnum::PRIMARY)
     {
-        //
     }
 
     /**
@@ -25,16 +25,6 @@ class AnchorButton extends Component
      */
     public function render(): View|string|Closure
     {
-        return view('components.anchor-button', [
-            'resolveAnchorBtnType' => function (string &$btnType, string $defaultValue, array $btnTypeEnumValues): void {
-                if (empty($btnType)) {
-                    $btnType = strtolower($defaultValue);
-                } else if (!in_array($btnType, $btnTypeEnumValues)) {
-                    $btnType = strtolower($defaultValue);
-                } else {
-                    $btnType = strtolower($btnType);
-                }
-            }
-        ]);
+        return view('components.anchor-button');
     }
 }
