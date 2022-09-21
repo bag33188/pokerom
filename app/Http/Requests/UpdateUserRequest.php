@@ -32,6 +32,7 @@ class UpdateUserRequest extends FormRequest
         return $this->user()->can('update', auth()->user());
     }
 
+    // https://stackoverflow.com/a/68647440
     protected function passedValidation(): void
     {
         $this->merge([
