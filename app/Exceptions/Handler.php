@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
+use PDOException;
 use Utils\Classes\AbstractApplicationException as ApplicationException;
 
 class Handler extends ExceptionHandler
@@ -95,4 +96,16 @@ class Handler extends ExceptionHandler
         });
     }
 
+    private static function getErrorCodeFromException(Exception $e)
+    {
+        // the `getStatusCode` method only exists on Exceptions that are instances of HttpException
+        if ($e instanceof HttpException) {
+            // if `getCode` method returns any status (int value) at all, then use that method, else use the `getStatusCode` method's value (int value)
+            return $e->getCode() != 0 ? $e->getCode() : $e->getStatusCode();
+        } else if ($e instanceof PDOException) {
+            return (gettype($e->getCode()) == 'string') ? (int)$e->getCode() : HttpStatus::HTTP_INTERNAL_SERVER_ERROR;
+        } else {
+            return $e->getCode() ?: HttpStatus::HTTP_INTERNAL_SERVER_ERROR;
+        }
+    }
 }
