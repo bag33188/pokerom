@@ -31,4 +31,11 @@ class UpdateUserRequest extends FormRequest
     {
         return $this->user()->can('update', auth()->user());
     }
+
+    protected function passedValidation(): void
+    {
+        $this->merge([
+            'password' => bcrypt($this->string('password')),
+        ]);
+    }
 }

@@ -56,9 +56,9 @@ class UserController extends ApiController
         list('email' => $email, 'password' => $password) = $request->only(['email', 'password']);
         $user = User::where('email', $email)->firstOrFail();
         if ($user->checkPassword($password)) {
-            $bearerToken = $this->userRepository->generateApiToken($user);
+            $newBearerToken = $this->userRepository->generateApiToken($user);
             return response()->json([
-                'token' => $bearerToken,
+                'token' => $newBearerToken,
                 'user' => $user,
                 'success' => true,
             ]);

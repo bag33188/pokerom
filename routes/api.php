@@ -5,6 +5,7 @@ use App\Http\Controllers\api\RomController;
 use App\Http\Controllers\api\RomFileController;
 use App\Http\Controllers\api\UserController;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\Response as HttpStatus;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +19,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::name('api.')->group(function () {
+    Route::get('/version', fn() => response()->json(['success' => true, 'version' => config('app.version')], HttpStatus::HTTP_OK))->name('version');
+
     Route::post('/auth/login', [UserController::class, 'login'])->name('auth.login');
+    Route::post('/auth/register', [UserController::class, 'register'])->name('auth.register');
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/auth/me', [UserController::class, 'me'])->name('auth.me');
         Route::post('/auth/logout', [UserController::class, 'logout'])->name('auth.logout');
-        Route::post('/auth/register', [UserController::class, 'register'])->name('auth.register');
-
 
         Route::get('/roms', [RomController::class, 'index'])->name('roms.index');
         Route::get('/roms/{romId}', [RomController::class, 'show'])->name('roms.show');

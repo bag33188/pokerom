@@ -16,6 +16,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Pok&eacute;ROM'),
+    'version' => (float)env('APP_VERSION', '1.0'),
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +42,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------

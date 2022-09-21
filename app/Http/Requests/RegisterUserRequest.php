@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Rules\MaxLengthRule;
 use App\Rules\MinLengthRule;
+use Hash;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterUserRequest extends FormRequest
@@ -20,5 +21,12 @@ class RegisterUserRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    protected function passedValidation(): void
+    {
+        $this->merge([
+            'password' => Hash::make($this->string('password')),
+        ]);
     }
 }
