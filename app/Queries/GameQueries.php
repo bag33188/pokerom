@@ -38,12 +38,12 @@ class GameQueries implements GameQueriesInterface
         $sql = /** @lang MariaDB */
             "SELECT * FROM `games` WHERE `game_type` = :rom_hack OR `generation` = 0 ORDER BY `date_released` DESC LIMIT :limit_results_to;";
         $query = DB::raw($sql);
-        return $this->game->fromQuery($query, ['rom_hack' => self::parseRomHackValue(), 'limit_results_to' => 10]);
+        return $this->game->fromQuery($query, ['rom_hack' => GAME_TYPES[self::findRomHackIndexOfGameTypes()], 'limit_results_to' => 10]);
     }
 
-    private static function parseRomHackValue(): string
+    private static function findRomHackIndexOfGameTypes(): int
     {
         $__romHackDBStrVal = 'hack';
-        return GAME_TYPES[array_search($__romHackDBStrVal, GAME_TYPES, false)];
+        return array_search($__romHackDBStrVal, GAME_TYPES, false);
     }
 }
