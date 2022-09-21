@@ -1,6 +1,8 @@
 @props(['heading', 'message'])
 
 @php
+    use App\Enums\AlertTypeEnum as AlertType;
+
     $universalAlertCssClasses = [
         'my-6',
         'mx-4',
@@ -13,18 +15,18 @@
     ];
 
     $conditionalAlertCssClasses = [
-        'bg-green-100' => $alertType === \App\Enums\AlertTypeEnum::SUCCESS,
-        'border-green-400' => $alertType === \App\Enums\AlertTypeEnum::SUCCESS,
-        'text-green-700' => $alertType === \App\Enums\AlertTypeEnum::SUCCESS,
-        'bg-red-100' => $alertType === \App\Enums\AlertTypeEnum::ERROR,
-        'border-red-400' => $alertType === \App\Enums\AlertTypeEnum::ERROR,
-        'text-red-700' => $alertType === \App\Enums\AlertTypeEnum::ERROR,
-        'bg-yellow-100' => $alertType === \App\Enums\AlertTypeEnum::WARNING,
-        'border-yellow-400' => $alertType === \App\Enums\AlertTypeEnum::WARNING,
-        'text-yellow-700' => $alertType === \App\Enums\AlertTypeEnum::WARNING,
-        'bg-blue-100' => $alertType === \App\Enums\AlertTypeEnum::DEFAULT,
-        'border-blue-400' => $alertType === \App\Enums\AlertTypeEnum::DEFAULT,
-        'text-blue-700' => $alertType === \App\Enums\AlertTypeEnum::DEFAULT,
+        'bg-green-100' => $alertType === AlertType::SUCCESS,
+        'border-green-400' => $alertType === AlertType::SUCCESS,
+        'text-green-700' => $alertType === AlertType::SUCCESS,
+        'bg-red-100' => $alertType === AlertType::ERROR,
+        'border-red-400' => $alertType === AlertType::ERROR,
+        'text-red-700' => $alertType === AlertType::ERROR,
+        'bg-yellow-100' => $alertType === AlertType::WARNING,
+        'border-yellow-400' => $alertType === AlertType::WARNING,
+        'text-yellow-700' => $alertType === AlertType::WARNING,
+        'bg-blue-100' => $alertType === AlertType::DEFAULT,
+        'border-blue-400' => $alertType === AlertType::DEFAULT,
+        'text-blue-700' => $alertType === AlertType::DEFAULT,
     ];
 @endphp
 <div @class(array_merge($universalAlertCssClasses, $conditionalAlertCssClasses))
