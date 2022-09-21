@@ -110,8 +110,8 @@
         }
     </style>
 @endPushOnce
-<button @class(['punch' => true])
-    {{ $attributes->merge(['data-name' => ($btn_name ?? ((Faker\Factory::create('en_US'))->domainWord . '-punch-btn'))]) }}
+<button
+    {{ $attributes->merge(['class' => 'punch', 'type' => 'button', 'data-name' => ($btn_name ?? $fallbackBtnName)]) }}
     {{ $attributes->has('disabled') ? 'disabled' : '' }}>
     {{ $slot }}
 </button>
