@@ -13,8 +13,9 @@ class WelcomeNotification extends Notification
     use Queueable;
 
     public User $user;
+
     private static string $appName;
-    private string $welcomeMessage;
+    private readonly string $welcomeMessage;
 
     /**
      * Create a new notification instance.
@@ -24,6 +25,12 @@ class WelcomeNotification extends Notification
     public function __construct(User $user)
     {
         $this->user = $user;
+
+        $this->setMailProps();
+    }
+
+    private function setMailProps(): void
+    {
         self::$appName = preg_replace("/^Poke/", POKE_EACUTE, ucfirst(Config::get('app.name')));
         $this->welcomeMessage = sprintf("Hello %s, welcome to the world of %s!", $this->user->name, self::$appName);
     }
@@ -48,7 +55,7 @@ class WelcomeNotification extends Notification
     public function toMail(mixed $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Thank you for joining ' . self::$appName . '!!')
+            ->subject(sprintf("Thank you for joining %s!!", self::$appName))
             ->from(config('mail.from.address'), self::$appName)
             ->line($this->welcomeMessage)
             ->action('Check it out!', route('roms.index'))

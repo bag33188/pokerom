@@ -13,9 +13,9 @@ class FarewellNotification extends Notification
     use Queueable;
 
     public User $user;
-    private static string $appName;
-    private string $farewellMessage;
 
+    private static string $appName;
+    private readonly string $farewellMessage;
 
     /**
      * Create a new notification instance.
@@ -25,6 +25,12 @@ class FarewellNotification extends Notification
     public function __construct(User $user)
     {
         $this->user = $user;
+
+        $this->setMailProps();
+    }
+
+    private function setMailProps(): void
+    {
         self::$appName = preg_replace("/^Poke/", POKE_EACUTE, ucfirst(Config::get('app.name')));
         $this->farewellMessage = "{$this->user->name}, we're sad to see you leave.";
     }
