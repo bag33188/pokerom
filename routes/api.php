@@ -20,7 +20,20 @@ use Symfony\Component\HttpFoundation\Response as HttpStatus;
 
 Route::name('api.')->group(function () {
 
-    Route::get('/version', fn() => response()->json(['success' => true, 'version' => (float)config('app.version')], HttpStatus::HTTP_OK, ['X-Api-Version' => sprintf("Version %.2f", floatval(config('app.version')))]))->name('version');
+    Route::get(
+        '/version',
+        fn() => response()->json(
+            data: [
+                'success' => true,
+                'version' => (float)config('app.version')
+            ],
+            status: HttpStatus::HTTP_OK,
+            headers: array('X-Api-Version' => sprintf(
+                "%s Version %.2f",
+                config('app.name'), floatval(config('app.version'))
+            ))
+        )
+    )->name('version');
 
     // NON-AUTH ROUTES
     Route::name('auth.')->prefix('auth')->group(function () {
