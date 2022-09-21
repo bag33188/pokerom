@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use App\Actions\ApiUtilsTrait;
+use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -69,17 +70,15 @@ class Handler extends ExceptionHandler
         $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
             ['message' => $e->getMessage(), 'code' => HttpStatus::HTTP_CONFLICT]));
 
-
         $this->renderable(fn(AuthenticationException $e) => throw App::make(ApiAuthException::class));
 
         $this->renderable(fn(NotFoundHttpException $e) => throw App::make(RouteNotFoundException::class,
-            ['message' => $e->getMessage(), 'code' => $e->getCode() != 0 ? $e->getCode() : $e->getStatusCode()]));
+            ['message' => $e->getMessage(), 'code' => self::getErrorCode($e)]));
 
         // handle generic \Symfony\Component\HttpKernel\Exception\HttpException
         $this->renderable(function (HttpException $e): JsonResponse|false {
 
-            // if `getCode` method returns any status (int value) at all, then use that method, else use the `getStatusCode` method's value (int value)
-            $statusCode = $e->getCode() != 0 ? $e->getCode() : $e->getStatusCode();
+            $statusCode = self::getErrorCode($e);
 
             // set default message value to message of exception being thrown by request/response
             $message = $e->getMessage();
@@ -96,4 +95,14 @@ class Handler extends ExceptionHandler
         });
     }
 
+    private static function getErrorCode(Exception $e)
+    {
+        // the `getStatusCode` method only exists on Exceptions that are instances of HttpException
+        if ($e instanceof HttpException) {
+            // if `getCode` method returns any status (int value) at all, then use that method, else use the `getStatusCode` method's value (int value)
+            return $e->getCode() != 0 ? $e->getCode() : $e->getStatusCode();
+        } else {
+            return $e->getCode() ?? HttpStatus::HTTP_INTERNAL_SERVER_ERROR;
+        }
+    }
 }
