@@ -63,29 +63,25 @@ class Handler extends ExceptionHandler
 
         $this->renderable(fn(BulkWriteException $e) => throw App::make(MongoWriteException::class,
             ['message' => $e->getMessage(), 'code' => HttpStatus::HTTP_CONFLICT, 'headers' => [
-                'X-Attempted-URL' => $this->getCurrentErrorUrl(),
-                'X-Stack-Trace' => $this->getFormattedErrorTraceStringFromException($e)
+                'X-Attempted-URL' => $this->getCurrentErrorUrl()
             ]]));
 
         $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
             ['message' => $e->getMessage(), 'code' => HttpStatus::HTTP_CONFLICT, 'headers' => [
-                'X-Attempted-URL' => $this->getCurrentErrorUrl(),
-                'X-Stack-Trace' => $this->getFormattedErrorTraceStringFromException($e)
+                'X-Attempted-URL' => $this->getCurrentErrorUrl()
             ]]));
 
         if ($this->isApiRequest() and !$this->isLivewireRequest()) {
             $this->renderable(fn(AuthenticationException $e) => throw App::make(ApiAuthException::class, [
                 'message' => $e->getMessage(),
                 'code' => HttpStatus::HTTP_UNAUTHORIZED, 'headers' => [
-                    'X-Attempted-URL' => $this->getCurrentErrorUrl(),
-                    'X-Stack-Trace' => $this->getFormattedErrorTraceStringFromException($e)
+                    'X-Attempted-URL' => $this->getCurrentErrorUrl()
                 ]
             ]));
             $this->renderable(fn(NotFoundHttpException $e) => throw App::make(RouteNotFoundException::class,
                 ['message' => $e->getMessage(), 'code' => $this->determineErrorCodeFromException($e), 'headers' => [
                     ...$e->getHeaders(),
-                    'X-Attempted-URL' => $this->getCurrentErrorUrl(),
-                    'X-Stack-Trace' => $this->getFormattedErrorTraceStringFromException($e)
+                    'X-Attempted-URL' => $this->getCurrentErrorUrl()
                 ]]));
         }
 
@@ -98,8 +94,7 @@ class Handler extends ExceptionHandler
                     $httpErrorCode,
                     array(
                         ...$e->getHeaders(),
-                        'X-Attempted-URL' => $this->getCurrentErrorUrl(),
-                        'X-Stack-Trace' => $this->getFormattedErrorTraceStringFromException($e)
+                        'X-Attempted-URL' => $this->getCurrentErrorUrl()
                     )
                 );
             }

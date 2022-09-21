@@ -3,7 +3,6 @@
 namespace App\Actions;
 
 use Exception;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\URL;
 use PDOException;
@@ -15,23 +14,6 @@ trait ExceptionUtilsTrait
     protected function getCurrentErrorUrl(): string
     {
         return (string)str_replace(Config::get("app.url") . '/', '/', URL::current());
-    }
-
-    /**
-     * For use in http header value.
-     * @param Exception $e
-     * @return string
-     */
-    protected function getFormattedErrorTraceStringFromException(Exception $e): string
-    {
-        $replaceLineBreaksInString = fn(string $subject, string $replace): string => preg_replace("/[\r\n]/", $replace, $subject);
-        $stripAllSurroundingWhitespaceFromString = fn(string $string): string => trim($string, "\x20\r\n\t\v\xA0\x0B\0");
-
-        $modifiedStackTraceString =
-            $replaceLineBreaksInString($stripAllSurroundingWhitespaceFromString($e->getTraceAsString()), _SPACE . '|' . _SPACE);
-        $modifiedStackTraceLength = strlen($modifiedStackTraceString);
-
-        return App::isLocal() ? sprintf('[%u] : %s', $modifiedStackTraceLength, $modifiedStackTraceString) : 'null';
     }
 
     protected function determineErrorCodeFromException(Exception $e)
