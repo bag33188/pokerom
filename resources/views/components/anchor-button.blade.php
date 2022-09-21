@@ -19,7 +19,7 @@
         $type = 'primary';
     }
 
-    $anchorBtnClasses = [
+    $conditionalAnchorBtnClasses = [
         'bg-red-600' => $type == AnchorTypes::DANGER->value,
         'text-white' => $type == AnchorTypes::DANGER->value || $type == AnchorTypes::PRIMARY->value,
         'hover:bg-red-500' => $type == AnchorTypes::DANGER->value,
@@ -41,6 +41,9 @@
         'focus:ring-gray-300' => $type == AnchorTypes::PRIMARY->value,
         'focus:border-gray-900' => $type == AnchorTypes::PRIMARY->value,
         'bg-gray-800' => $type == AnchorTypes::PRIMARY->value,
+    ];
+
+    $universalAnchorCssClasses = [
         'focus:outline-none',
         'disabled:opacity-25',
         'px-4',
@@ -59,4 +62,4 @@
         'disabled:opacity-25',
     ];
 @endphp
-<a {{ $attributes }} @class($anchorBtnClasses)>{{ $slot }}</a>
+<a {{ $attributes }} @class(array_merge($conditionalAnchorBtnClasses, $universalAnchorCssClasses))>{{ $slot }}</a>

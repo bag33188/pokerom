@@ -20,15 +20,18 @@
         $type = 'default';
     }
 
-    $alertCssClasses = [
-      'my-6',
-      'mx-4',
-      'border',
-      'px-4',
-      'py-3',
-      'rounded',
-      'relative',
-      'text-center',
+    $universalAlertCssClasses = [
+        'my-6',
+        'mx-4',
+        'border',
+        'px-4',
+        'py-3',
+        'rounded',
+        'relative',
+        'text-center',
+    ];
+
+    $conditionalAlertCssClasses = [
       'bg-green-100' => $type === AlertTypes::SUCCESS->value,
       'border-green-400' => $type === AlertTypes::SUCCESS->value,
       'text-green-700' => $type === AlertTypes::SUCCESS->value,
@@ -43,7 +46,7 @@
       'text-blue-700' => $type === AlertTypes::DEFAULT->value,
     ];
 @endphp
-<div @class($alertCssClasses) role="alert" type="{{ $type }}">
+<div @class(array_merge($universalAlertCssClasses, $conditionalAlertCssClasses)) role="alert" type="{{ $type }}">
     <p class="sm:inline text-lg">
         <strong class="font-bold">{{ $heading }}</strong>
         <span class="block">{{ $message }}</span>
