@@ -47,7 +47,7 @@ class RomFileRepository implements RomFileRepositoryInterface
             'NDS' => 'Nintendo DS',
             '3DS' => 'Nintendo 3DS',
             'XCI' => 'Nintendo Switch',
-            default => 'Unknown',
+            default => 'Unknown Console',
         };
     }
 }
