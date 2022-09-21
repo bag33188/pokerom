@@ -21,9 +21,14 @@ class SqlQueryException extends ApplicationException
         if (!$this->isApiRequest() and !$this->isLivewireRequest()) {
             return redirect()->to(url()->previous())->dangerBanner($this->getMessage());
         } else if ($this->isApiRequest()) {
-            return response()->json([
-                'message' => $this->getMessage(), 'success' => false,
-            ], $this->getCode());
+            return response()->json(
+                ['message' => $this->getMessage(), 'success' => false],
+                $this->getCode(),
+                [
+                    'X-Attempted-URL' => self::getCurrentErrorUrl(),
+                    'X-Stack-Trace' => self::getFormattedErrorTraceString($this->getTraceAsString())
+                ]
+            );
         } else return false;
     }
 

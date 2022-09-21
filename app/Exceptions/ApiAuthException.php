@@ -23,7 +23,10 @@ class ApiAuthException extends ApplicationException
             return Response::json(
                 ['message' => 'Error: Unauthenticated.', 'success' => false],
                 HttpStatus::HTTP_UNAUTHORIZED,
-                ['X-Attempted-URL' => $this->getCurrentErrorUrl()]
+                [
+                    'X-Attempted-URL' => self::getCurrentErrorUrl(),
+                    'X-Stack-Trace' => self::getFormattedErrorTraceString($this->getTraceAsString())
+                ]
             );
         }
 

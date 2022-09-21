@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
+use Utils\Classes\AbstractApplicationException as ApplicationException;
 
 class Handler extends ExceptionHandler
 {
@@ -74,22 +75,20 @@ class Handler extends ExceptionHandler
                 'code' => HttpStatus::HTTP_UNAUTHORIZED,
             ]));
             $this->renderable(fn(NotFoundHttpException $e) => throw App::make(RouteNotFoundException::class,
-                ['message' => $e->getMessage(), 'code' => self::getErrorCodeFromException($e)]));
+                ['message' => $e->getMessage(), 'code' => self::determineErrorCodeFromException($e)]));
         }
 
         // handle generic \Symfony\Component\HttpKernel\Exception\HttpException
         $this->renderable(function (HttpException $e): JsonResponse|false {
-            $httpErrorCode = self::getErrorCodeFromException($e);
-            $stringifyErrorTraceValue = fn(string $trace): string => trim(preg_replace("/[\r\n]/", _SPACE . '|' . _SPACE, $trace)); # $e->getTrace();
+            $httpErrorCode = self::determineErrorCodeFromException($e);
             if ($this->isApiRequest() or $this->requestExpectsJson()) {
-                $errorTraceStr = $stringifyErrorTraceValue($e->getTraceAsString());
-                $formattedStackTraceStr = sprintf("[%u] : %s", strlen($errorTraceStr), $errorTraceStr);
                 return Response::json(
                     ['message' => $e->getMessage(), 'success' => false],
                     $httpErrorCode,
                     array(
-                        ...$e->getHeaders(), // populate original headers
-                        'X-Stack-Trace' => (App::isLocal() ? $formattedStackTraceStr : 'null')
+                        ...$e->getHeaders(),
+                        'X-Attempted-URL' => ApplicationException::getCurrentErrorUrl(),
+                        'X-Stack-Trace' => ApplicationException::getFormattedErrorTraceString($e->getTraceAsString())
                     )
                 );
             }
@@ -98,7 +97,7 @@ class Handler extends ExceptionHandler
         });
     }
 
-    private static function getErrorCodeFromException(Exception $e)
+    private static function determineErrorCodeFromException(Exception $e)
     {
         // the `getStatusCode` method only exists on Exceptions that are instances of HttpException
         if ($e instanceof HttpException) {
@@ -110,4 +109,5 @@ class Handler extends ExceptionHandler
             return $e->getCode() ?: HttpStatus::HTTP_INTERNAL_SERVER_ERROR;
         }
     }
+
 }

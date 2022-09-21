@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\URL;
 use Throwable;
@@ -23,8 +24,15 @@ abstract class AbstractApplicationException extends Exception
 
     abstract public function report(): bool|null;
 
-    protected final function getCurrentErrorUrl(): string
+    public final static function getCurrentErrorUrl(): string
     {
         return (string)str_replace(Config::get('app.url') . '/', '/', URL::current());
+    }
+
+    public static final function getFormattedErrorTraceString(string $trace): string
+    {
+        $stackTraceAsCleanString = trim(preg_replace("/[\r\n]/", _SPACE . '|' . _SPACE, $trace));
+        $stackTraceLength = strlen($stackTraceAsCleanString);
+        return App::isLocal() ? sprintf('[%u] : %s', $stackTraceLength, $stackTraceAsCleanString) : 'null';
     }
 }
