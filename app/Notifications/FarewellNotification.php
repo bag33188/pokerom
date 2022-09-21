@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Config;
+use JetBrains\PhpStorm\ArrayShape;
 
 class FarewellNotification extends Notification
 {
@@ -15,7 +16,11 @@ class FarewellNotification extends Notification
     public User $user;
 
     private static string $appName;
+
     private readonly string $farewellMessage;
+    private readonly string $subject;
+    private readonly string $salutation;
+    #[ArrayShape(['address' => "string", 'name' => "string"])] private readonly array $from;
 
     /**
      * Create a new notification instance.
@@ -25,14 +30,17 @@ class FarewellNotification extends Notification
     public function __construct(User $user)
     {
         $this->user = $user;
+        self::$appName = preg_replace("/^Poke/", POKE_EACUTE, ucfirst(Config::get('app.name')));
 
         $this->setMailProps();
     }
 
     private function setMailProps(): void
     {
-        self::$appName = preg_replace("/^Poke/", POKE_EACUTE, ucfirst(Config::get('app.name')));
         $this->farewellMessage = "{$this->user->name}, we're sad to see you leave.";
+        $this->from = ['address' => config('mail.from.address'), 'name' => self::$appName];
+        $this->salutation = sprintf("Thank you for using %s!", self::$appName);
+        $this->subject = "I guess it's goodbye for now...";
     }
 
     /**
@@ -55,10 +63,10 @@ class FarewellNotification extends Notification
     public function toMail(mixed $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject("I guess it's goodbye for now...")
-            ->from(config('mail.from.address'), self::$appName)
+            ->subject($this->subject)
+            ->from(...array_values($this->from))
             ->line($this->farewellMessage)
-            ->line(sprintf("Thank you for using %s!", self::$appName));
+            ->line($this->salutation);
     }
 
     /**
@@ -70,10 +78,10 @@ class FarewellNotification extends Notification
     public function toArray(mixed $notifiable): array
     {
         return [
-            'subject' => "I guess it's goodbye for now...",
-            'from' => [config('mail.from.address'), self::$appName],
+            'subject' => $this->subject,
+            'from' => $this->from,
             'line1' => $this->farewellMessage,
-            'line2' => 'Thank you for using ' . self::$appName . '!'
+            'line2' => $this->salutation
         ];
     }
 }
