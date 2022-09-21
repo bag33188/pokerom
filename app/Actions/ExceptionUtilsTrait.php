@@ -17,6 +17,11 @@ trait ExceptionUtilsTrait
         return (string)str_replace(Config::get("app.url") . '/', '/', URL::current());
     }
 
+    /**
+     * For use in http header value.
+     * @param Exception $e
+     * @return string
+     */
     protected function formatErrorTraceString(Exception $e): string
     {
         $replaceLineBreaksInString = fn(string $subject, string $replace): string => preg_replace("/[\r\n]/", $replace, $subject);
