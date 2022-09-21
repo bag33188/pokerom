@@ -13,7 +13,9 @@ class UserObserver
 
     public function updated(User $user): void
     {
-        $this->userRepository->revokeApiTokens($user);
+        if ($user->isDirty('password') || $this->isApiRequest()) {
+            $this->userRepository->revokeApiTokens($user);
+        }
     }
 
     public function deleted(User $user): void
