@@ -42,8 +42,8 @@ class GameController extends WebController
      */
     public function create(GameQueriesInterface $gameQueries)
     {
-        $romsWhereHasGameIsFalse = $gameQueries->getAllRomsWithNoGameSQL();
-        return view('games.create', ['romsWithNoAssocGame' => $romsWhereHasGameIsFalse]);
+        $romsWithNoGameRelationship = $gameQueries->getAllRomsWithNoGameSQL();
+        return view('games.create', ['romsWithNoAssocGame' => $romsWithNoGameRelationship]);
     }
 
     /**
