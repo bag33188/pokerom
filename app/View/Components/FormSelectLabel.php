@@ -29,12 +29,7 @@ class FormSelectLabel extends Component
     {
         return /** @lang Blade */ <<<'blade'
             @php
-                $formSelectLabelClasses = array(
-                    'block',
-                    'text-sm',
-                    'font-medium',
-                    'text-gray-700'
-                );
+                $formSelectLabelClasses = ['block', 'text-sm', 'font-medium', 'text-gray-700'];
             @endphp
             <label {{ $attributes->merge(['class' => joinCssClasses($formSelectLabelClasses)]) }}>{{ $text }}</label>
         blade;

@@ -25,7 +25,7 @@ class ListGroup extends Component
      */
     public function render(): View|string|Closure
     {
-        return /** @lang InjectablePHP */ <<<'blade'
+        return /** @lang Blade */ <<<'blade'
             @php
                 $listGroupClasses = ['bg-white', 'rounded-lg', 'border', 'border-gray-200', 'text-gray-900'];
             @endphp
