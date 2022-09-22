@@ -51,7 +51,7 @@
                 @class(array_merge($flashMessageStyles, ['grid', 'grid-cols-[95%_auto]', 'grid-rows-[auto]', 'gap-0']))
                 role="alert" type="{{ strtolower($messageType) ?? 'default' }}">
                 <div
-                    class="col-start-2 col-end-3 row-span-full justify-self-end h-full inline-flex flex-row order-1 items-stretch">
+                    class="col-start-2 col-end-3 row-span-full justify-self-end h-full inline-flex flex-row items-stretch order-1">
                     <button type="button"
                             @click="show_flash_message = false"
                             class="text-red-500 text-3xl font-black">
