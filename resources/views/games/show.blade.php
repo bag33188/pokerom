@@ -6,7 +6,7 @@
         </h2>
     </x-slot>
     <div class="p-2.5">
-        <div class="w-full h-full grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-4">
+        <div class="w-full h-full grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-2.5">
             <x-list-group class="row-end-1 row-start-1 col-span-full shadow">
                 <x-list-item>{{ $game->game_name }} Version</x-list-item>
                 <x-list-item>
