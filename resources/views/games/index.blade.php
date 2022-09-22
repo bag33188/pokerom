@@ -2,8 +2,10 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Pok&eacute;mon Games Library</h2>
+        <h5 class="text-center">{{ $games->count() }}</h5>
     </x-slot>
-    <div class="container mx-auto py-6">
+    <div class="container mx-auto my-3.5">
+        <x-flash-message/>
         @unless($games->count() < 1)
             <div
                 class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 justify-items-center my-1.5 pb-4">

@@ -20,8 +20,7 @@
                         <data value="{{ $romFile->chunkSize }}">{{ $romFile->getChunkSizeInBits() }} Bits</data>
                     </x-list-item>
                     <x-list-item>Date Uploaded:
-                        <time
-                            datetime="{{ $romFileRepository->formatUploadDate($romFile->uploadDate, DATE_W3C, 'GMT') }}">{{ $romFileRepository->formatUploadDate($romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'PST8PDT') }}</time>
+                        <time datetime="{{ $cpuUploadDate }}">{{ $readableUploadDate }}</time>
                     </x-list-item>
                     <x-list-item>Content Hash (MD5):
                         <data value="{{ strtoupper($romFile->md5) }}"><code>{{ $romFile->md5 }}</code></data>

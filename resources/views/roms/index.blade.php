@@ -11,6 +11,16 @@
             contentOpened = !contentOpened;
             return contentOpened;
         }
+
+        /**
+         * @name initROMsUiStateData
+         * @returns {ROMsInitAlpineObj}
+         */
+        function initROMsUiStateData() {
+            return {
+                open: true
+            };
+        }
         @endverbatim
     </script>
 @endpush
@@ -22,7 +32,6 @@
       'font-bold',
       'py-2',
       'px-4',
-      'my-4',
       'shadow-md',
       'rounded'
     ];
@@ -30,9 +39,10 @@
 <x-app-layout>
     <x-slot:header>
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">ROMs</h2>
+        <h5 class="text-center">{{ $roms->count() }}</h5>
     </x-slot:header>
-    <div x-data="{ open: true }">
-        <div class="w-full flex justify-center">
+    <div x-data="initROMsUiStateData()" class="mb-3 mx-3">
+        <div class="w-full text-center my-2.5">
             <button type="button" @class($showHideBtnClasses) @click="open = toggleContent(open)">
                 <span x-show="open">Hide</span>
                 <span x-show="!open" x-cloak>Show</span>
@@ -41,7 +51,7 @@
         </div>
         <x-flash-message/>
         @unless($roms->count() === 0)
-            <table class="w-full test-sm text-left text-gray-800 table-auto border-t-2" x-show="open === true">
+            <table class="w-full test-sm text-left text-gray-800 table-auto border-2" x-show="open === true">
                 <thead class="bg-gray-50">
                 @for($i = 0; $i < count($htmlRomTableColumns); $i++)
                     @php $columnName = $htmlRomTableColumns[$i]; @endphp

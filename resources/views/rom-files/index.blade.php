@@ -2,9 +2,9 @@
 <x-app-layout>
     <x-slot:header>
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Pok&eacute;mon ROM Files</h2>
-        <!--<h6 class="text-center font-semibold">{{ $romFiles->count() }}</h6>-->
+        <h5 class="text-center">{{ $romFiles->count() }}</h5>
     </x-slot:header>
-    <div class="container m-auto">
+    <div class="container m-auto p-0.5">
         <x-flash-message/>
         @unless($romFiles->count() < 1)
             <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mx-4 mb-4 mt-3.5 items-center">
@@ -21,7 +21,8 @@
                             @if($romFile->rom)
                                 <span class="font-semibold">{{ $romFile->rom->getKey() }}</span>
                             @else
-                                <span class="font-semibold">No Assoc. ROM</span>
+                                <span class="font-semibold"
+                                      title="This ROM File does not yet have a ROM resource linked to it">No Assoc. ROM</span>
                             @endif
                         </p>
                         <div class="mt-2 inline-flex flex-row justify-between">

@@ -81,6 +81,8 @@ class RomFileController extends WebController
         return view('rom-files.show', [
             'romFile' => $romFile,
             'userIsAdmin' => Auth::user()->isAdmin(),
+            'cpuUploadDate' => $this->romFileRepository->formatUploadDate($romFile->uploadDate, DATE_W3C, 'GMT'),
+            'readableUploadDate' => $this->romFileRepository->formatUploadDate($romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'PST8PDT')
         ]);
     }
 
