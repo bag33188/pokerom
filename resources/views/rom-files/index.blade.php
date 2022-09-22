@@ -24,7 +24,7 @@
                     </p>
                     <div class="mt-2 inline-flex flex-row justify-between">
                         <x-rom-file.download :romFile="$romFile"/>
-                        <x-anchor-button href="{{ route('rom-files.show', ['romFile' => $romFile]) }}">
+                        <x-anchor-button :href="route('rom-files.show', ['romFile' => $romFile])">
                             Info!
                         </x-anchor-button>
                     </div>
