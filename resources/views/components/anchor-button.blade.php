@@ -2,21 +2,9 @@
     use App\Enums\AnchorButtonTypeEnum as AnchorBtnType;
 
     $universalAnchorBtnCssClasses = [
-        "px-4",
-        "py-2",
-        "border",
-        "text-xs",
-        "uppercase",
-        "shadow-sm",
-        "rounded-md",
-        "focus:ring",
-        "transition",
-        "inline-flex",
-        "items-center",
-        "font-semibold",
-        "tracking-widest",
-        "focus:outline-none",
-        "disabled:opacity-25"
+        "px-4", "py-2", "border", "text-xs", "uppercase", "shadow-sm",
+        "rounded-md", "focus:ring", "transition", "inline-flex", "items-center",
+        "font-semibold", "tracking-widest", "focus:outline-none", "disabled:opacity-25"
     ];
 
     $conditionalAnchorBtnClasses = [
