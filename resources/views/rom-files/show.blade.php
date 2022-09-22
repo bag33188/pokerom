@@ -6,7 +6,7 @@
         </h2>
     </x-slot>
     <div class="my-4 mx-3.5">
-        <div class='grid grid-cols-2 grid-rows-[auto_min-content] gap-y-2'>
+        <div class='grid grid-cols-2 grid-rows-[auto_minmax(min-content,_auto)] gap-y-2'>
             <div class="row-span-1 col-span-full">
                 <x-list-group class="shadow">
                     <x-list-item>File ID: {{ $romFile->_id }}</x-list-item>

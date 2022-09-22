@@ -6,18 +6,15 @@
         </h2>
     </x-slot>
     <div class="p-2.5">
-        <div class="grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-2.5">
+        <div class="grid grid-cols-2 grid-rows-[minmax(min-content,_1fr)_auto] gap-y-2.5">
             <x-list-group class="row-span-1 col-span-full shadow">
                 <x-list-item>{{ $game->game_name }} Version</x-list-item>
-                <x-list-item>
-                    Generation {{ numberToRoman($game->generation) }}
-                </x-list-item>
+                <x-list-item>Generation {{ numberToRoman($game->generation) }}</x-list-item>
                 <x-list-item>{{ $game->region }} Region</x-list-item>
                 <x-list-item>Game Type: {{ $gameQueries->formatGameTypeSQL($game->game_type) }}</x-list-item>
-                <x-list-item>Released
-                    on: {{ $game->date_released->format('l, F jS, Y') }}</x-list-item>
+                <x-list-item>Released on: {{ $game->date_released->format('l, F jS, Y') }}</x-list-item>
                 <x-list-item class="!border-b-0">
-                    ROM: <span title="{{ $game->rom->id }}">{{ $game->rom->rom_name }}</span>
+                    <p>ROM: <span title="{{ $game->rom->id }}">{{ $game->rom->rom_name }}</span></p>
                 </x-list-item>
             </x-list-group>
             @if($userIsAdmin)
