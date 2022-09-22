@@ -7,7 +7,7 @@
         <title>{!! preg_replace("/^[Pp]oke/i", 'Pok&eacute;', config('app.name')) !!}</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" type="text/css"/>
 
         <!-- Styles -->
         <style {!! 'type="text/css"' !!}>
