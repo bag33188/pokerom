@@ -27,6 +27,10 @@
     AddType text/html .shtml
     AddHandler server-parsed .shtml
 
+    <Files info.php>
+        Require ip 127.0.0.1
+    </Files>
+
     RewriteEngine On
 
     # Handle Authorization Header
@@ -43,5 +47,5 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 
-    RewriteRule (^|/)rom_files(/([\d\w_\-]+\.?(?:gb[ac]?|nds|3ds|xci))|$) - [F]
+    RewriteRule (^|/)storage/rom_files(/([\w\d_\-]+\.?(?:gb[ac]?|nds|3ds|xci|url))|$) - [F]
 </IfModule>
