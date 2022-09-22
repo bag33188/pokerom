@@ -19,6 +19,7 @@
 
         <!-- Stylesheets -->
         <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/scrollbar.module.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/cloak.module.css') }}" />
 
         <!-- Styles -->
         @stack('styles')
