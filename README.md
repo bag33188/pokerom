@@ -66,5 +66,32 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 [//]: # (`find . -print | grep -i ".htaccess"`)
 [//]: # (`find . -print | grep -i ".gitignore"`)
 
-`@livewire('server-list')`
+# Important Notes
+
+allow node and php to run together (reverse proxy)
+
+assumes nodejs is primary serving on apache
+
+```apacheconf
+# For Windows, XAMPP
+
+# C:/Windows/System32/drivers/etc/hosts (as admin)
+127.0.0.1 localhost:8080
+
+# C:/xampp/apache/conf/httpd.conf
+Listen 5000
+
+# C:/xampp/apache/conf/extra/httpd-vhosts.conf
+<VirtualHost *:5000>
+    DocumentRoot "C:\Users\Brock\Projects\PokeROM\www"
+    ServerName localhost:8080
+    <Directory "C:\Users\Brock\Projects\PokeROM\www">
+        Allow from all
+        Require all granted
+    </Directory>
+    ProxyPreserveHost on
+    ProxyPass / http://localhost:8080/
+    ProxyPassReverse / http://localhost:8080/
+</VirtualHost>
+```
 

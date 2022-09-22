@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 
 trait ApiMethodsTrait
@@ -20,5 +21,10 @@ trait ApiMethodsTrait
     protected function requestExpectsJson(): bool
     {
         return Request::expectsJson();
+    }
+
+    protected function getCurrentAuthGuard(): string
+    {
+        return Auth::getDefaultDriver();
     }
 }
