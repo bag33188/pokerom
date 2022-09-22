@@ -1,5 +1,7 @@
 @pushOnce('styles')
-    <!--suppress CssUnresolvedCustomProperty -->
+    @env('local')
+        <!--suppress CssUnresolvedCustomProperty -->
+    @endenv
     <style {!! 'type="text/css"' !!}>
         :root {
             --borderline-black: #111111;
@@ -8,7 +10,8 @@
             --borderline-denim: #1d2c4d;
             --borderline-cerulean: #87adff;
         }
-
+    </style>
+    <style {!! 'type="text/css"' !!}>
         a.punch,
         button.punch {
             --deep-navy: #1f2d4d;
@@ -112,6 +115,7 @@
 <button
     data-name="{{ $btnName }}"
     {{ $attributes->class(['punch'])->merge(['type' => 'button']) }}
-    {{ $attributes->has('disabled') ? 'disabled' : '' }}>
+    {{ $attributes->has('disabled') ? 'disabled' : '' }}
+>
     {{ $slot }}
 </button>

@@ -1,5 +1,7 @@
 @push('styles')
-    <!--suppress CssUnresolvedCustomProperty -->
+    @env('local')
+        <!--suppress CssUnresolvedCustomProperty -->
+    @endenv
     <style {!! 'type="text/css"'; !!}>
         .white-space-pre {
             white-space: pre;
