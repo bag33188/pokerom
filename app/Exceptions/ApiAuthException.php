@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Actions\ApiMethodsTrait;
+use App\Actions\ApiMethodsTrait as ApiMethods;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -12,7 +12,7 @@ use Utils\Classes\AbstractApplicationException as ApplicationException;
 
 class ApiAuthException extends ApplicationException
 {
-    use ApiMethodsTrait {
+    use ApiMethods {
         requestExpectsJson as private;
     }
 

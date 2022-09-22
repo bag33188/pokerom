@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Actions\ApiMethodsTrait;
+use App\Actions\ApiMethodsTrait as ApiMethods;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
 use App\Notifications\FarewellNotification;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Notification;
 
 class UserObserver
 {
-    use ApiMethodsTrait;
+    use ApiMethods;
 
     protected bool $afterCommit = true;
 
