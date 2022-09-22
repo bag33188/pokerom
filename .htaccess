@@ -1,3 +1,4 @@
+Options +FollowSymLinks
 # php8 (https://stackoverflow.com/a/39806398)
 <IfModule mod_php.c>
     # php settings to override when running on Apache [source: php.ini]
@@ -15,13 +16,16 @@
     </IfModule>
 </IfModule>
 
-AddType text/html .html 
-AddHandler server-parsed .html 
+<Directory pages>
+AddType text/html .html
+AddHandler server-parsed .html
 Options Indexes FollowSymLinks Includes
-Options +Includes 
-AddType text/html .html 
+Options +Includes
+AddType text/html .html
 AddOutputFilter INCLUDES .html
-AddType text/html .shtml 
+AddType text/html .shtml
 AddHandler server-parsed .shtml
+</Directory>
+
 
 # https://ubiq.co/tech-blog/how-to-enable-server-side-includes-ssi-in-apache/
