@@ -31,18 +31,16 @@
                     <x-game.delete :game="$game"/>
                 </div>
             @else
-                <div class="w-full col-span-full row-start-2 row-end-3 flex flex-row justify-between">
-                    <div class="inline-block order-0">
-                        <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY"
-                                         :href="route('games.index')">
-                            Go Back
-                        </x-anchor-button>
-                    </div>
-                    <div class="inline-block order-1">
-                        <x-anchor-button :href="route('roms.show', ['rom' => $game->rom])">
-                            Goto ROM Info
-                        </x-anchor-button>
-                    </div>
+                <div class="row-start-2 row-end-3 col-start-2 col-end-3 justify-self-end">
+                    <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY"
+                                     :href="route('games.index')">
+                        Go Back
+                    </x-anchor-button>
+                </div>
+                <div class="row-start-2 row-end-3 col-start-1 col-end-2 justify-self-start">
+                    <x-anchor-button :href="route('roms.show', ['rom' => $game->rom])">
+                        Goto ROM Info
+                    </x-anchor-button>
                 </div>
             @endif
         </div>
