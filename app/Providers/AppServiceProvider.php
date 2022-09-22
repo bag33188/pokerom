@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\View as ViewFactory;
@@ -35,6 +36,12 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function (ViewFactory $view) {
             $view_name = str_replace('.', '-', $view->getName());
             View::share('view_name', $view_name);
+        });
+
+        // use like so
+        // @gameDate($game->dateReleased)
+        Blade::directive('gameDate', function (string|\Date|\DateTime $expression): string {
+            return "<?php echo ($expression)->format('m/d/Y'); ?>";
         });
     }
 }
