@@ -6,8 +6,8 @@
         </h2>
     </x-slot>
     <div class="my-4 mx-3.5">
-        <div class='flex flex-col'>
-            <div class="order-0">
+        <div class='grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-2.5'>
+            <div class="row-span-1 col-span-full">
                 <x-list-group class="shadow">
                     <x-list-item>File ID: {{ $romFile->_id }}</x-list-item>
                     <x-list-item>Filename: <code>{{ $romFile->filename }}</code></x-list-item>
@@ -27,20 +27,18 @@
                     </x-list-item>
                 </x-list-group>
             </div>
-            <div class="order-1 mt-2.5 inline-flex flex-row justify-between">
-                <div class="inline-block order-1">
-                    @if($userIsAdmin)
-                        <x-rom-file.delete class="order-1" :romFile="$romFile"/>
-                    @else
-                        <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY"
-                                         :href="route('rom-files.index')">
-                            Go Back!
-                        </x-anchor-button>
-                    @endif
-                </div>
-                <div class="inline-block order-0">
-                    <x-rom-file.download :romFile="$romFile"/>
-                </div>
+            <div class="row-start-2 row-end-3 col-start-2 col-end-3 justify-self-end">
+                @if($userIsAdmin)
+                    <x-rom-file.delete :romFile="$romFile"/>
+                @else
+                    <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY"
+                                     :href="route('rom-files.index')">
+                        Go Back!
+                    </x-anchor-button>
+                @endif
+            </div>
+            <div class="row-start-2 row-end-3 col-span-1 justify-self-start">
+                <x-rom-file.download :romFile="$romFile"/>
             </div>
         </div>
     </div>
