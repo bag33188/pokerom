@@ -30,7 +30,7 @@
          x-data="flashMessageData()"
          x-init="setTimeout(() => (show_flash_message = false), {{ session()->has('timeout') ? session('timeout') : Js::from(5000) }})"
     >
-        @switch(strtolower(session('message-type')))
+        @switch(strtolower(Session::get('message-type')))
             @case('success')
                 <div class="mx-3.5 my-3">
                     <div
