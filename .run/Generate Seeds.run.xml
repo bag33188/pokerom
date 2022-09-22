@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Generate Seeds" type="NodeJSConfigurationType" path-to-js-file="seeds.js" working-dir="$PROJECT_DIR$/scripts/helpers">
+  <configuration default="false" name="Generate Seeds" type="NodeJSConfigurationType" path-to-js-file="$PROJECT_DIR$/scripts/helpers/seeds.test.js" working-dir="$PROJECT_DIR$/scripts/helpers">
     <method v="2" />
   </configuration>
 </component>
