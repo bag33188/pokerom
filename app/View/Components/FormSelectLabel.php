@@ -8,17 +8,14 @@ use Illuminate\View\Component;
 
 class FormSelectLabel extends Component
 {
-    /**
-     * @var string
-     */
-    public $text;
+    public string $text;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($text)
+    public function __construct(string $text)
     {
         $this->text = $text;
     }

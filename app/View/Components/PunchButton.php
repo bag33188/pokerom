@@ -8,17 +8,15 @@ use Illuminate\View\Component;
 
 class PunchButton extends Component
 {
-    /**
-     * @var string
-     */
-    public $btnName;
+    public string $btnName;
 
     /**
      * Create a new component instance.
      *
+     * @param string $btnName
      * @return void
      */
-    public function __construct($btnName)
+    public function __construct(string $btnName)
     {
         $this->btnName = $btnName;
     }
