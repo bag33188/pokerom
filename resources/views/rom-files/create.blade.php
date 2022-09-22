@@ -71,20 +71,17 @@
     function removeStoragePathFromFilename(string &$filename): void {
         $filename = str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $filename);
     }
-
-    $romFilesStoragePath = join('/', ['storage', 'app', 'public', ROM_FILES_DIRNAME]);
-    $romFilesDiskStorageNameHTML = "<samp title=\"$romFilesStoragePath\">" . ROM_FILES_DIRNAME . "</samp>";
 @endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Upload a ROM File</h2>
         <h6 class="text-center">
             @if($romFilesListCount > 1)
-                <span>{{ $romFilesListCount }} ROMs found in {!! $romFilesDiskStorageNameHTML !!} Storage</span>
+                <span>{{ $romFilesListCount }} ROMs found in Storage</span>
             @elseif($romFilesListCount === 1)
-                <span>1 ROM found in {!! $romFilesDiskStorageNameHTML !!} Storage</span>
+                <span>1 ROM File found in Storage</span>
             @else
-                <span>No ROMs found in {!! $romFilesDiskStorageNameHTML !!} Storage</span>
+                <span>No ROMs found in Storage</span>
             @endif
         </h6>
     </x-slot>
@@ -119,7 +116,9 @@
         @else
             <x-alert :alertType="\App\Enums\AlertTypeEnum::ERROR">
                 <x-slot name="heading">Sorry!</x-slot>
-                <x-slot name="message">No ROM Files found in {!! $storageDir !!} folder</x-slot>
+                <x-slot name="message">No ROM Files found in
+                    <samp>{{ join('/', ['storage', 'app', 'public', ROM_FILES_DIRNAME]) }}</samp> folder
+                </x-slot>
             </x-alert>
         @endunless
     </div>
