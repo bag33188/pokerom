@@ -9,13 +9,18 @@ use Illuminate\View\Component;
 class FormSelectLabel extends Component
 {
     /**
+     * @var string
+     */
+    public $text;
+
+    /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($text)
     {
-        //
+        $this->text = $text;
     }
 
     /**
@@ -26,7 +31,6 @@ class FormSelectLabel extends Component
     public function render(): View|string|Closure
     {
         return /** @lang Blade */ <<<'blade'
-            @props(['text'])
             @php
                 $formSelectLabelClasses = array(
                     'block',

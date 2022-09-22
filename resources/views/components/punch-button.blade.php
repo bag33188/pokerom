@@ -1,4 +1,3 @@
-@props(['btn_name'])
 @pushOnce('styles')
     <!--suppress CssUnresolvedCustomProperty -->
     <style {!! 'type="text/css"' !!}>
@@ -111,7 +110,7 @@
     </style>
 @endPushOnce
 <button
-    {{ $attributes->class(['punch'])->merge(['type' => 'button', 'data-name' => ($btn_name ?? $fallbackBtnName)]) }}
+    {{ $attributes->class(['punch'])->merge(['type' => 'button', 'data-name' => ($btnName ?? $fallbackBtnName)]) }}
     {{ $attributes->has('disabled') ? 'disabled' : '' }}>
     {{ $slot }}
 </button>
