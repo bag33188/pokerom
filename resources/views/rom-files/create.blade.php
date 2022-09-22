@@ -71,8 +71,7 @@
     function removeStoragePathFromFilename(string &$filename): void {
         $filename = str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $filename);
     }
-    # echo storage_path('app\\public\\rom_files');
-    # echo public_path('storage\\rom_files');
+
     $romFilesStoragePath = join('/', ['storage', 'app', 'public', ROM_FILES_DIRNAME]);
     $romFilesDiskStorageNameHTML = "<samp title=\"$romFilesStoragePath\">" . ROM_FILES_DIRNAME . "</samp>";
 @endphp
