@@ -70,7 +70,6 @@ class RomController extends WebController
      */
     public function show(Rom $rom)
     {
-
         $alpineUiData = "{ romInfoOpened: true, gameInfoOpened: true, romFileInfoOpened: true }";
         return view('roms.show', [
             'rom' => $rom,
