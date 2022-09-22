@@ -16,8 +16,7 @@
          * @param {boolean} show_flash_message
          * @returns {boolean}
          */
-        const flashMessageIsVisible = (show_flash_message) =>
-            show_flash_message === true;
+        const flashMessageIsVisible = (show_flash_message) => show_flash_message === true;
         @endverbatim
     </script>)
 @endPushOnce

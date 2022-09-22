@@ -9,6 +9,8 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/modules/capitalize.js',
                 'resources/js/modules/ready.js',
+                'resources/css/cloak.module.css',
+                'resources/css/scrollbar.module.css',
             ],
             refresh: [
                 ...refreshPaths,
