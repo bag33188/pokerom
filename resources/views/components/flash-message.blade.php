@@ -48,14 +48,15 @@
                 @class(array_merge($flashMessageStyles, ['grid', 'grid-cols-[95%_auto]', 'grid-rows-[auto]', 'gap-0']))
                 role="alert" type="{{ strtolower(Session::get('message-type')) ?? 'default' }}">
                 <div
-                    class="col-start-2 col-end-3 row-span-full justify-self-end self-start order-1 h-full inline-flex flex-row">
-                    <button type="button" @click="show_flash_message = false"
-                            class="text-red-500 text-2xl self-stretch">
+                    class="col-start-2 col-end-3 row-span-full justify-self-end self-start h-full inline-flex flex-row order-1">
+                    <button type="button"
+                            @click="show_flash_message = false"
+                            class="text-red-500 text-3xl self-stretch">
                         &times;
                     </button>
                 </div>
                 <div class="col-start-1 col-end-3 row-span-full justify-self-center w-full order-0">
-                    <div class="w-full h-full flex flex-col justify-center">
+                    <div class="w-full h-full inline-flex flex-col justify-center">
                         @switch(strtoupper(Session::get('message-type')))
                             @case(FlashMessageTypes::SUCCESS->name)
                                 <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Success!' }}</h2>
