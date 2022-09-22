@@ -71,7 +71,6 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
-        public_path(join('/', ['storage', ROM_FILES_DIRNAME])) => storage_path(join('/', ['app', 'public', ROM_FILES_DIRNAME]))
     ],
 
 ];
