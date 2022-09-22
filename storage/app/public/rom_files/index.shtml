@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--#echo var="DATE_LOCAL" -->
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi aspernatur consequatur consequuntur, distinctio dolore ea eius eos est illo laboriosam, laudantium modi odit pariatur quasi ratione recusandae repudiandae suscipit tenetur totam unde ut voluptas.
+</body>
+</html>

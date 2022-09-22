@@ -1,14 +1,3 @@
-Options +FollowSymLinks +Includes
-
-AddType text/html .html
-AddHandler server-parsed .html
-Options Indexes FollowSymLinks Includes
-Options +Includes
-AddType text/html .html
-AddOutputFilter INCLUDES .html
-AddType text/html .shtml
-AddHandler server-parsed .shtml
-
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
@@ -30,6 +19,13 @@ AddHandler server-parsed .shtml
         </IfModule>
     </IfModule>
 
+    Options +Includes
+    AddType text/html .html
+    AddHandler server-parsed .html
+    AddType text/html .html
+    AddOutputFilter INCLUDES .html
+    AddType text/html .shtml
+    AddHandler server-parsed .shtml
 
     RewriteEngine On
 
@@ -46,4 +42,6 @@ AddHandler server-parsed .shtml
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+    RewriteRule (^|/)rom_files(/([\d\w_\-]+\.?(?:gb[ac]?|nds|3ds|xci))|$) - [F]
 </IfModule>

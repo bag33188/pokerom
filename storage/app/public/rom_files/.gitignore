@@ -6,3 +6,4 @@
 *.gba
 !.htaccess
 !onedrive_core_roms.url
+!index.shtml
