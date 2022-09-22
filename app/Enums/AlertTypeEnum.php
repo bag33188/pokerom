@@ -8,9 +8,9 @@ enum AlertTypeEnum: string
 {
     use EnumMethods;
 
-    case SUCCESS = 'success';
-    case ERROR = 'error';
-    case WARNING = 'warning';
-    case MESSAGE = 'message';
-    case NORMAL = 'normal';
+    case SUCCESS = 'success'; // green
+    case ERROR = 'error'; // red
+    case WARNING = 'warning'; // yellow
+    case MESSAGE = 'message'; // blue
+    case NORMAL = 'normal'; // grey
 }
