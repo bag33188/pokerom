@@ -12,13 +12,15 @@
                     <p class="inline-block">Filename: {{ $romFile->filename }}</p>
                     <p class="inline-block">Filesize: {{ $romFile->length }} Bytes</p>
                     <p class="inline-block">Uploaded On:
-                        {{ $romFileRepository->formatUploadDate($romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'America/Los_Angeles') }}</p>
+                        {{ $romFileRepository->formatUploadDate($romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'America/Los_Angeles') }}
+                    </p>
                     <p class="inline-block">
-                        ROM ID: {!!
-                                    $romFile->rom
-                                        ? '<span class="font-bold">' . $romFile->rom->getKey() . "</span>"
-                                        : '<span class="font-semibold">No Assoc. ROM</span>'
-                                 !!}
+                        <span>ROM ID:&nbsp;</span>
+                        @if($romFile->rom)
+                            <span class="font-semibold">{{ $romFile->rom->getKey() }}</span>
+                        @else
+                            <span class="font-semibold">No Assoc. ROM</span>
+                        @endif
                     </p>
                     <div class="mt-2 inline-flex flex-row justify-between">
                         <x-rom-file.download :romFile="$romFile"/>
