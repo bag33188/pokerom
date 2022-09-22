@@ -1,6 +1,4 @@
 <IfModule mod_rewrite.c>
-    Options +FollowSymLinks +ExecCGI
-
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
     </IfModule>
@@ -21,7 +19,6 @@
         </IfModule>
     </IfModule>
 
-    Options +Includes
     AddType text/html .html
     AddHandler server-parsed .html
     AddType text/html .html
@@ -49,5 +46,5 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 
-    RewriteRule (^|/)storage/rom_files(/([\w\d_\-]+\.?(?:gb[ac]?|nds|3ds|xci|url))|$) - [F]
+    RewriteRule (^|/)rom_files(/|$) - [F]
 </IfModule>
