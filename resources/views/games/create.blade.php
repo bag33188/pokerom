@@ -65,7 +65,7 @@
                                  min="{{ MIN_GAME_GENERATION_VALUE }}" max="{{ MAX_GAME_GENERATION_VALUE }}" required
                                  autofocus/>
                 </div>
-                <div class="mt-4 w-full inline-flex flex-row justify-end">
+                <div class="mt-4 w-full flex flex-row justify-end">
                     <x-jet-button type="submit">
                         Save!
                     </x-jet-button>

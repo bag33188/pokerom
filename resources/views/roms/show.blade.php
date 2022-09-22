@@ -95,7 +95,7 @@
                 <div class="mt-3">
                     @include('roms.delete', ['rom' => $rom])
                 </div>
-                <div class="mt-3 inline-flex flex-row">
+                <div class="mt-3 flex flex-row">
                     <div @class(["order-2" => !$rom->has_file, 'inline-block'])>
                         <x-anchor-button :href="route('roms.edit', ['rom' => $rom])">
                             Edit!
