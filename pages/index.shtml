@@ -25,7 +25,7 @@
             <div>
                 <!--#set var="name" value="Brock" -->
                 <!--#config timefmt="%Y" -->
-                <a href="./info.php" target="_self">PHP Info</a>
+                <a href="../info.php" target="_self">PHP Info</a>
                 <p>&copy;&nbsp;<!--#echo var="name" -->&nbsp;<!--#echo var="DATE_LOCAL" --></p>
             </div>
         </div>
