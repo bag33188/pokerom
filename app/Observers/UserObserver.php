@@ -7,7 +7,6 @@ use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
 use App\Notifications\FarewellNotification;
 use App\Notifications\WelcomeNotification;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 
 class UserObserver
@@ -16,8 +15,7 @@ class UserObserver
 
     protected bool $afterCommit = true;
 
-    public function __construct(private readonly UserRepositoryInterface $userRepository,
-                                private readonly Request                 $request)
+    public function __construct(private readonly UserRepositoryInterface $userRepository)
     {
     }
 
