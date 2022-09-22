@@ -13,4 +13,5 @@ enum AnchorButtonTypeEnum: string
     case DANGER = 'danger';
     case INFO = 'info';
     case CAUTION = 'caution';
+    case OK = 'ok';
 }
