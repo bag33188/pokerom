@@ -9,7 +9,7 @@ enum FlashMessageTypeEnum: string
     use EnumMethods;
 
     case SUCCESS = 'success';
-    case WARN = 'warn';
+    case WARNING = 'warning';
     case ERROR = 'error';
     case NOTIFICATION = 'notification';
     case DEFAULT = 'default';

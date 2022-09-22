@@ -35,7 +35,7 @@
     match (strtoupper($messageType)) {
         FlashMessageTypes::SUCCESS->name => $flashMessageStyles = $successCssClasses,
         FlashMessageTypes::ERROR->name => $flashMessageStyles = $errorCssClasses,
-        FlashMessageTypes::WARN->name => $flashMessageStyles = $warnCssClasses,
+        FlashMessageTypes::WARNING->name => $flashMessageStyles = $warnCssClasses,
         FlashMessageTypes::NOTIFICATION->name => $flashMessageStyles = $notificationCssClasses,
         default => $flashMessageStyles = $defaultCssClasses,
     };
