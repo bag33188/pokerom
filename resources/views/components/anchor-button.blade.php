@@ -21,8 +21,8 @@
 
     $conditionalAnchorBtnClasses = [
         'text-white' => match ($btnType) {
-            AnchorBtnType::PRIMARY, AnchorBtnType::INFO, AnchorBtnType::DANGER, AnchorBtnType::OK => true,
-            default => false
+            AnchorBtnType::SECONDARY, AnchorBtnType::CAUTION => false,
+            default => true
         },
         'border-transparent' => match ($btnType) {
             AnchorBtnType::PRIMARY, AnchorBtnType::CAUTION, AnchorBtnType::DANGER, AnchorBtnType::OK => true,
