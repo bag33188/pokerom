@@ -1,11 +1,3 @@
-@php
-    function parsePageTitle(): string {
-        $_eacute_html_entity = "&eacute;";
-        $appName = config('app.name');
-        # return preg_replace("/pok[e\xe9]rom/i", $appName, "Pok" . $_eacute_html_entity . "ROM");
-        return str_replace('Poke', $appName, "Pok" . $_eacute_html_entity . "ROM");
-    }
-@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -14,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
-        <title>{!! parsePageTitle() !!}</title>
+        <title>{!! preg_replace("/^poke/i", 'Pok&eacute;', config('app.name')) !!}</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" type="text/css" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" />
