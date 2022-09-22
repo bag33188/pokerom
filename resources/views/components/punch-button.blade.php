@@ -95,7 +95,8 @@
         }
 
         a.punch:disabled,
-        button.punch:disabled {
+        button.punch:disabled,
+        a.punch.disabled {
             background: gray !important;
             cursor: not-allowed !important;
             -webkit-box-shadow: inset 0 1px 10px 1px lightgrey, 0 1px 0 darkgrey,
@@ -110,12 +111,50 @@
             0 2px 0 darkgray, 0 4px 3px 0 black !important;
             border: 1px solid black !important;
         }
+
+        a.punch.disabled {
+            pointer-events: none !important;
+            -webkit-touch-callout: none !important;
+            -webkit-user-select: none !important;
+            -khtml-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+        }
     </style>
 @endPushOnce
-<button
-    data-name="{{ $btnName }}"
-    {{ $attributes->class(['punch'])->merge(['type' => 'button']) }}
-    {{ $attributes->has('disabled') ? 'disabled' : '' }}
->
-    {{ $slot }}
-</button>
+@switch(strtolower($btnType))
+    @case('button')
+    @case('submit')
+        <button
+            element-type="button"
+            {{ $attributes->class(['punch'])->merge(['type' => strtolower($btnType)]) }}
+            {{ $attributes->has('disabled') ? 'disabled' : '' }}
+            @disabled(!auth()->user()->isAdmin())
+        >
+            {{ $slot }}
+        </button>
+        @break
+    @case('anchor')
+        @once
+            @prepend('scripts')
+                <script type="text/javascript">
+                    let disableButton = function (buttonId) {
+                        let button = document.getElementById(buttonId);
+                        if (button.getAttribute('data-type').toLowerCase() === 'anchor') {
+                            button.classList.add('disabled');
+                            button.setAttribute('href', 'javascript:void(0)');
+                            button.setAttribute('target', '_blank');
+                        }
+                    };
+                    window.disableButton = disableButton;
+                </script>
+            @endprepend
+        @endonce
+        <a element-type="anchor" {{ $attributes->class(['punch'])->merge(['role' => 'button']) }}>
+            {{ $slot }}
+        </a>
+        @break
+    @default
+        @break
+@endswitch
