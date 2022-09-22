@@ -1,4 +1,4 @@
-#Options +FollowSymLinks
+Options FollowSymLinks
 # php8 (https://stackoverflow.com/a/39806398)
 <IfModule mod_php.c>
     # php settings to override when running on Apache [source: php.ini]
@@ -15,6 +15,8 @@
         php_flag exit_on_timeout false
     </IfModule>
 </IfModule>
+
+
 #
 #<Directory ./pages>
 #AddType text/html .html

@@ -1,0 +1,7 @@
+DirectoryIndex disabled
+Options +Indexes
+
+<Files *.gbc>
+
+Require all denied
+</Files>
