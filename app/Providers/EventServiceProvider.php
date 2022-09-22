@@ -63,7 +63,6 @@ class EventServiceProvider extends ServiceProvider
             Registered::class,
             [SendEmailVerificationNotification::class, 'handle']
         );
-        # $this->app->when(LinkRomToRomFile::class)->needs(RomRepositoryInterface::class)->give(fn($app) => $app->make(RomRepositoryInterface::class));
     }
 
     /**

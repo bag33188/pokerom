@@ -37,7 +37,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // establish these as gates since multiple controllers will need to use them
+        // establish this particular gate since multiple controllers will need to use it for verification
         Gate::define('viewAny-romFile', fn(User $user) => $user->isAdmin());
 
         // give admin user complete access to all endpoints and actions
