@@ -65,18 +65,18 @@ style="grid-column: 1/3;grid-row:1/-1;justify-self: center;width: 100%"
                 <div class="col-start-1 col-end-3 row-span-full justify-self-center w-full">
                     @switch(strtoupper(Session::get('message-type')))
                         @case(FlashMessageTypes::SUCCESS->name)
-                            <h2 class="font-bold text-center text-xl w-full">{{ session('header') ?? 'Success!' }}</h2>
+                            <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Success!' }}</h2>
                             @break
                         @case(FlashMessageTypes::ERROR->name)
-                            <h2 class="font-bold text-xl">{{ session('header') ?? 'Oops!' }}</h2>
+                            <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Oops!' }}</h2>
                             @break
                         @case(FlashMessageTypes::NOTIFICATION->name)
-                            <h2 class="font-bold text-xl">{{ session('header') ?? 'Notice!' }}</h2>
+                            <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Notice!' }}</h2>
                             @break
                         @default
-                            <h2 class="font-bold text-xl">{{ session('header') ?? 'Flash!' }}</h2>
+                            <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Flash!' }}</h2>
                     @endswitch
-                    <p class="text-center w-full">{{ session('message') }}</p>
+                    <p class="font-medium text-center w-full">{{ session('message') }}</p>
                 </div>
             </div>
         </div>
