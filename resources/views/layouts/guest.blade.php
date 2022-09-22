@@ -17,6 +17,9 @@
         <script type="text/javascript" src="{{ Vite::asset('resources/js/modules/capitalize.js') }}" defer></script>
         <script type="text/javascript" src="{{ Vite::asset('resources/js/modules/ready.js') }}" defer></script>
 
+        <!-- Stylesheets -->
+        <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/scrollbar.module.css') }}" />
+
         <!-- Styles -->
         @stack('styles')
     </head>
