@@ -25,7 +25,9 @@
                     @foreach(ROM_TYPES as $index => $romType)
                         <option
                             value="{{ $romType }}"
-                            @selected(strtolower(old('rom_type', ROM_TYPES[0])) == $romType)>{{ strtoupper($romType) }}</option>
+                            @selected(strtolower(old('rom_type', ROM_TYPES[0])) == $romType)>
+                            {{ strtoupper($romType) }}
+                        </option>
                     @endforeach
                 </x-form-select>
             </div>

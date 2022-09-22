@@ -102,7 +102,10 @@
                         <x-form-select class="shadow" name="rom_filename" id="romFile">
                             @foreach($romFilesList as $romFileListing)
                                 @php removeStoragePathFromFilename($romFileListing); @endphp
-                                <option value="{{ $romFileListing }}">{{ $romFileListing }}</option>
+                                <option
+                                    value="{{ $romFileListing }}"
+                                    @selected(old('rom_filename') == $romFileListing)
+                                >{{ $romFileListing }}</option>
                             @endforeach
                         </x-form-select>
                     </div>

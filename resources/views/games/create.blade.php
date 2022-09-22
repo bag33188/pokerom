@@ -12,7 +12,10 @@
                 <x-form-select-label text="Assoc. ROM" for="availableRoms"/>
                 <x-form-select id="availableRoms" name="rom_id" autofocus required>
                     @foreach($romsWithNoAssocGame as $rom)
-                        <option value="{{ $rom->id }}">{{ $rom->rom_name }}</option>
+                        <option
+                            value="{{ $rom->id }}"
+                            @selected(intval(old('rom_id')) == $rom->id)
+                        >{{ $rom->rom_name }}</option>
                     @endforeach
                 </x-form-select>
                 <div class="mt-2.5">
@@ -27,10 +30,13 @@
                 <div class="mt-2.5">
                     <x-jet-label for="gameType" :value="__('Game Type')"/>
                     <x-form-select name="game_type" id="gameType" required autofocus>
-                        <option value="" selected>Select Game Type</option>
                         @foreach(GAME_TYPES as $index => $gameType)
-                            <option value="{{ $gameType }}"
-                            >{{ str_capitalize($gameType, true, '-', 2) }}</option>
+                            <option
+                                value="{{ $gameType }}"
+                                @selected(strtolower(old('game_type', GAME_TYPES[0])) == $gameType)
+                            >
+                                {{ str_capitalize($gameType, true, '-', 2) }}
+                            </option>
                         @endforeach
                     </x-form-select>
                 </div>
@@ -41,6 +47,7 @@
                         required autofocus>
                         @foreach(REGIONS as $index => $gameRegion)
                             <option value="{{ $gameRegion }}"
+                                @selected(strtolower(old('region', REGIONS[0])) == $gameRegion)
                             >{{ ucfirst($gameRegion) }}</option>
                         @endforeach
                     </x-form-select>
