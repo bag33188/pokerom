@@ -10,5 +10,6 @@ enum FlashMessageTypeEnum: string
 
     case SUCCESS = 'success';
     case ERROR = 'error';
-    case MESSAGE = 'message';
+    case NOTIFICATION = 'notification';
+    case DEFAULT = 'default';
 }

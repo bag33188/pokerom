@@ -12,4 +12,5 @@ enum AlertTypeEnum: string
     case ERROR = 'error';
     case WARNING = 'warning';
     case MESSAGE = 'message';
+    case NORMAL = 'normal';
 }

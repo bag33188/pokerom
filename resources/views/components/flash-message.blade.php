@@ -26,7 +26,8 @@
 @php
     $successFlashMessageStyles = 'class="w-full text-center bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"';
     $errorFlashMessageStyles = 'class="w-full text-center bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"';
-    $defaultFlashMessageStyles = 'class="w-full text-center bg-blue-100 border border-blue-400 text-blue-600 rounded relative"';
+    $notificationFlashMessageStyles = 'class="w-full text-center bg-blue-100 border border-blue-400 text-blue-600 rounded relative"';
+    $defaultFlashMessageStyles = 'class="w-full text-center bg-gray-200 border border-gray-400 text-gray-600 rounded relative"';
 @endphp
 @if(Session::has('message'))
     <div {{ $attributes }}
@@ -45,7 +46,7 @@
                                 class="mr-2.5 mt-1 text-red-500 float-right clear-none text-2xl">
                             &times;
                         </button>
-                        <h2 class="font-bold text-xl">Success!</h2>
+                        <h2 class="font-bold text-xl">{{ session('header') ?? 'Success!' }}</h2>
                         <p class="sm:inline-block block font-medium">{{ session('message') }}</p>
                     </div>
                 </div>
@@ -60,24 +61,40 @@
                                 class="mr-2.5 mt-1 text-red-500 float-right clear-none text-2xl">
                             &times;
                         </button>
-                        <h2 class="font-bold text-xl">Error!</h2>
+                        <h2 class="font-bold text-xl">{{ session('header') ?? 'Error!' }}</h2>
                         <p class="sm:inline-block block font-medium">{{ session('message') }}</p>
                     </div>
                 </div>
                 @break
-            @case(FlashMessageTypes::MESSAGE->name)
-            @default
+            @case(FlashMessageTypes::NOTIFICATION->name)
                 <div class="mx-3.5 my-3">
                     <div
-                        {!! $defaultFlashMessageStyles !!}
-                        role="alert" type="info">
+                        {!! $notificationFlashMessageStyles !!}
+                        role="alert" type="notification">
                         <button type="button"
                                 @click="show_flash_message = false"
                                 class="mr-2.5 mt-1 text-red-500 float-right clear-none text-2xl">
                             <b>&times;</b>
                         </button>
                         <div class="px-4 py-3">
-                            <h2 class="font-bold text-xl">Notice!</h2>
+                            <h2 class="font-bold text-xl">{{ session('header') ?? 'Notice!' }}</h2>
+                            <p class="sm:inline-block block font-medium">{{ session('message') }}</p>
+                        </div>
+                    </div>
+                </div>
+                @break
+            @default
+                <div class="mx-3.5 my-3">
+                    <div
+                        {!! $defaultFlashMessageStyles !!}
+                        role="alert" type="message">
+                        <button type="button"
+                                @click="show_flash_message = false"
+                                class="mr-2.5 mt-1 text-red-500 float-right clear-none text-2xl">
+                            <b>&times;</b>
+                        </button>
+                        <div class="px-4 py-3">
+                            <h2 class="font-bold text-xl">{{ session('header') ?? 'Flash!' }}</h2>
                             <p class="sm:inline-block block font-medium">{{ session('message') }}</p>
                         </div>
                     </div>
