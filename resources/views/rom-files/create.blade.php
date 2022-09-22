@@ -71,18 +71,21 @@
     function removeStoragePathFromFilename(string &$filename): void {
         $filename = str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $filename);
     }
-    $storageDirnameHTML = "<samp>" . implode('/', ['public', ROM_FILES_DIRNAME])  . "</samp>";
+    # echo storage_path('app\\public\\rom_files');
+    # echo public_path('storage\\rom_files');
+    $romFilesStoragePath = join('/', ['storage', 'app', 'public', ROM_FILES_DIRNAME]);
+    $romFilesDiskStorageNameHTML = "<samp title=\"$romFilesStoragePath\">" . ROM_FILES_DIRNAME . "</samp>";
 @endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Upload a ROM File</h2>
         <h6 class="text-center">
             @if($romFilesListCount > 1)
-                <span>{{ $romFilesListCount }} ROMs found in {!! $storageDirnameHTML !!} Storage</span>
+                <span>{{ $romFilesListCount }} ROMs found in {!! $romFilesDiskStorageNameHTML !!} Storage</span>
             @elseif($romFilesListCount === 1)
-                <span>1 ROM found in {!! $storageDirnameHTML !!} Storage</span>
+                <span>1 ROM found in {!! $romFilesDiskStorageNameHTML !!} Storage</span>
             @else
-                <span>No ROMs found in {!! $storageDirnameHTML !!} Storage</span>
+                <span>No ROMs found in {!! $romFilesDiskStorageNameHTML !!} Storage</span>
             @endif
         </h6>
     </x-slot>
