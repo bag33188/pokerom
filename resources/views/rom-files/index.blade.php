@@ -15,18 +15,24 @@
                         <p class="inline-block">Filesize: {{ $romFile->length }} Bytes</p>
                         <p class="inline-block">
                             @php
-                                $dtFormattingParams = [$romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'America/Los_Angeles'];
+                                $uploadDateFormattingParams = [
+                                    $romFile->uploadDate,
+                                    'm-d-Y, h:i:s A (T, I)',
+                                    'America/Los_Angeles'
+                                ];
                             @endphp
-                            <span>Uploaded On: {{ $romFileRepository->formatUploadDate(...$dtFormattingParams) }}</span>
+                            Uploaded On: {{ $romFileRepository->formatUploadDate(...$uploadDateFormattingParams) }}
                         </p>
                         <p class="inline-block">
-                            <span>ROM ID:&nbsp;</span>
-                            @if($romFile->rom)
-                                <span class="font-semibold">{{ $romFile->rom->getKey() }}</span>
-                            @else
-                                <span class="font-semibold"
-                                      title="This ROM File does not yet have a ROM resource linked to it">No Assoc. ROM</span>
-                            @endif
+                            @php
+                                $romIdHtml = '';
+                                if ($romFile->rom) {
+                                    $romIdHtml = '<span class="font-semibold">' . $romFile->rom->id . '</span>';
+                                } else {
+                                    $romIdHtml = '<span class="font-semibold" title="This ROM File does not yet have a ROM resource linked to it">No Assoc. ROM</span>';
+                                }
+                            @endphp
+                            <span>ROM ID:&nbsp;{!! $romIdHtml !!}</span>
                         </p>
                         <div class="mt-2 flex flex-row justify-between">
                             <x-rom-file.download class="order-0" :romFile="$romFile"/>
