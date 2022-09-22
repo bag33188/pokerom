@@ -10,12 +10,22 @@
         <!-- Fonts -->
         <link rel="stylesheet" type="text/css" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap"/>
 
-        <!-- Scripts -->
+        <!-- Bundles -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <!-- Modules -->
+        <script type="text/javascript" src="{{ Vite::asset('resources/js/modules/capitalize.js') }}" defer></script>
+        <script type="text/javascript" src="{{ Vite::asset('resources/js/modules/ready.js') }}" defer></script>
+
+        <!-- Styles -->
+        @stack('styles')
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
+
+        <!-- Scripts -->
+        @stack('scripts')
     </body>
 </html>
