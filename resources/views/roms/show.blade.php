@@ -40,7 +40,6 @@
     $toggleROMInfo = Js::from('romInfoOpened = toggleInfo(romInfoOpened)');
     $toggleGameInfo = Js::from('gameInfoOpened = toggleInfo(gameInfoOpened)');
     $toggleROMFileInfo = Js::from('romFileInfoOpened = toggleInfo(romFileInfoOpened)');
-    $alpineInitialUiState = html_entity_decode($alpineUiData);
 @endphp
 <x-app-layout>
     <x-slot:header>

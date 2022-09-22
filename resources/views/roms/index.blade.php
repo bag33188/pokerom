@@ -14,7 +14,7 @@
 
         /**
          * @name initROMsUiStateData
-         * @returns {ROMsUIAlpineObject}
+         * @returns {ROMsUIAlpineState}
          */
         function initROMsUiStateData() {
             return {

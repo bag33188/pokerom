@@ -25,7 +25,7 @@ class FormSelectLabel extends Component
      */
     public function render(): View|string|Closure
     {
-        return /** @lang InjectablePHP */ <<<'blade'
+        return /** @lang Blade */ <<<'blade'
             @props(['text'])
             @php
                 $formSelectLabelClasses = array(

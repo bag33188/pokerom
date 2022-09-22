@@ -5,7 +5,7 @@
  */
 
 /**
- * @typedef ROMsUIAlpineObject
+ * @typedef ROMsUIAlpineState
  * @type {Object}
  * @property {boolean} open
  */

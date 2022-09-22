@@ -1,3 +1,6 @@
+@php
+    use App\Enums\FlashMessageTypeEnum as FlashMessageTypes;
+@endphp
 @pushOnce('scripts')
     <script type="text/javascript">
         @verbatim
@@ -31,8 +34,8 @@
          x-init="setTimeout(() => (show_flash_message = false), {{ session()->has('timeout') ? session('timeout') : Js::from(5000) }})"
          x-show="flashMessageIsVisible(show_flash_message)"
     >
-        @switch(strtolower(Session::get('message-type')))
-            @case('success')
+        @switch(strtoupper(Session::get('message-type')))
+            @case(FlashMessageTypes::SUCCESS->name)
                 <div class="mx-3.5 my-3">
                     <div
                         {!! $successFlashMessageStyles !!}
@@ -47,7 +50,7 @@
                     </div>
                 </div>
                 @break
-            @case('error')
+            @case(FlashMessageTypes::ERROR->name)
                 <div class="mx-3.5 my-3">
                     <div
                         {!! $errorFlashMessageStyles !!}
@@ -62,6 +65,7 @@
                     </div>
                 </div>
                 @break
+            @case(FlashMessageTypes::MESSAGE->name)
             @default
                 <div class="mx-3.5 my-3">
                     <div
