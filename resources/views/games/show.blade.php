@@ -7,10 +7,10 @@
     </x-slot>
     <div class="p-2.5">
         <div class="grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-2.5">
-            <x-list-group class="row-end-2 row-start-1 col-span-full shadow">
+            <x-list-group class="row-span-1 col-span-full shadow">
                 <x-list-item>{{ $game->game_name }} Version</x-list-item>
                 <x-list-item>
-                    Generation <span title="{{ $game->generation }}">{{ numberToRoman($game->generation) }}</span>
+                    Generation {{ numberToRoman($game->generation) }}
                 </x-list-item>
                 <x-list-item>{{ $game->region }} Region</x-list-item>
                 <x-list-item>Game Type: {{ $gameQueries->formatGameTypeSQL($game->game_type) }}</x-list-item>
@@ -21,14 +21,14 @@
                 </x-list-item>
             </x-list-group>
             @if($userIsAdmin)
-                <div class="row-start-2 row-end-3 ml-1 col-start-2 col-end-3 justify-self-end">
-                    <x-game.delete :game="$game"/>
-                </div>
-                <div class="col-start-1 col-end-2 row-start-2 row-end-3 justify-self-start">
+                <div class="row-start-2 row-end-3 col-start-1 col-end-2 justify-self-start">
                     <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::PRIMARY"
                                      :href="route('games.edit', ['game' => $game])">
                         Edit!
                     </x-anchor-button>
+                </div>
+                <div class="row-start-2 row-end-3 col-start-2 col-end-3 justify-self-end">
+                    <x-game.delete :game="$game"/>
                 </div>
             @else
                 <div class="w-full col-span-full row-start-2 row-end-3 flex flex-row justify-between">
