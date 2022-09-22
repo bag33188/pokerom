@@ -101,7 +101,7 @@
                             Edit!
                         </x-anchor-button>
                     </div>
-                    @if($rom->has_file)
+                    @if(!$rom->has_file)
                         <div class="order-1">
                             <form
                                 method="POST"
