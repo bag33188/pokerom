@@ -25,11 +25,12 @@
                         </p>
                         <p class="inline-block">
                             @php
-                                $romIdHtml = '';
+                                $romIdHtml = null;
                                 if ($romFile->rom) {
-                                    $romIdHtml = '<span class="font-semibold">' . $romFile->rom->id . '</span>';
+                                    $romIdHtml = "<span class=\"font-semibold\">{$romFile->rom->getKey()}</span>";
                                 } else {
-                                    $romIdHtml = '<span class="font-semibold" title="This ROM File does not yet have a ROM resource linked to it">No Assoc. ROM</span>';
+                                    $noAssocRomTitle = 'This ROM File does not yet have a ROM resource linked to it.';
+                                    $romIdHtml = "<span class=\"font-semibold\" title=\"$noAssocRomTitle\">No Assoc. ROM</span>";
                                 }
                             @endphp
                             <span>ROM ID:&nbsp;{!! $romIdHtml !!}</span>
