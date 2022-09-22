@@ -92,27 +92,28 @@
         </x-list-group>
         @if($userIsAdmin)
             <div class="flex flex-row justify-between no-select">
-                <div class="mt-3">
+                <div class="mt-3 order-0">
                     @include('roms.delete', ['rom' => $rom])
                 </div>
-                <div class="mt-3 flex flex-row">
-                    <div @class(["order-2" => !$rom->has_file, 'inline-block'])>
+                <div class="mt-3 inline-flex flex-row-reverse order-1 justify-start space-x-2.5 space-x-reverse w-full">
+                    <div class="order-0">
                         <x-anchor-button :href="route('roms.edit', ['rom' => $rom])">
                             Edit!
                         </x-anchor-button>
                     </div>
-                    @if(!$rom->has_file)
-                        <div class="mx-1 order-1"></div>
-                        <form class="order-0 block"
-                              method="POST"
-                              action="{{ route('roms.link-file', ['rom' => $rom]) }}">
-                            @method('PATCH')
-                            @csrf
-                            <x-jet-button type="submit">Link Rom To File If Exists</x-jet-button>
-                        </form>
+                    @if($rom->has_file)
+                        <div class="order-1">
+                            <form
+                                method="POST"
+                                action="{{ route('roms.link-file', ['rom' => $rom]) }}">
+                                @method('PATCH')
+                                @csrf
+                                <x-jet-button type="submit">Link Rom To File If Exists</x-jet-button>
+                            </form>
+                        </div>
                     @endif
                 </div>
-            </div>
+            </div> <!-- // end of EDIT/LINK button flex container -->
         @else
             <div class="mt-3 no-select flex flex-row justify-between w-full">
                 <div class="order-1">

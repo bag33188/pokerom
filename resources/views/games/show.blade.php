@@ -6,7 +6,7 @@
         </h2>
     </x-slot>
     <div class="p-2.5">
-        <div class="w-full h-full grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-2.5">
+        <div class="grid grid-cols-2 grid-rows-[minmax(0,_1fr)_auto] gap-y-2.5">
             <x-list-group class="row-end-2 row-start-1 col-span-full shadow">
                 <x-list-item>{{ $game->game_name }} Version</x-list-item>
                 <x-list-item>
@@ -25,14 +25,16 @@
                     @include('games.delete', ['game' => $game])
                 </div>
                 <div class="col-start-1 col-end-2 row-start-2 row-end-3 justify-self-start">
-                    <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::PRIMARY" :href="route('games.edit', ['game' => $game])">
+                    <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::PRIMARY"
+                                     :href="route('games.edit', ['game' => $game])">
                         Edit!
                     </x-anchor-button>
                 </div>
             @else
-                <div class="w-full col-span-full flex flex-row justify-between">
+                <div class="w-full col-span-full row-start-2 row-end-3 flex flex-row justify-between">
                     <div class="inline-block order-0">
-                        <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY" :href="route('games.index')">
+                        <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY"
+                                         :href="route('games.index')">
                             Go Back
                         </x-anchor-button>
                     </div>
