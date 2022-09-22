@@ -96,6 +96,7 @@
                       enctype="multipart/form-data">
                     @csrf
                     @method('POST')
+
                     <div class="flex flex-col">
                         <x-form-select-label class="!font-semibold" for="romFile" text="Select ROM File"/>
                         <x-form-select class="shadow" name="rom_filename" id="romFile">
