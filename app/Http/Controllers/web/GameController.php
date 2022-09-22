@@ -29,6 +29,7 @@ class GameController extends WebController
     public function index(): Application|Factory|View
     {
         $games = Game::with('rom')->get();
+
         return view('games.index', [
             'games' => $games,
         ]);
