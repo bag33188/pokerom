@@ -110,7 +110,8 @@
     </style>
 @endPushOnce
 <button
-    {{ $attributes->class(['punch'])->merge(['type' => 'button', 'data-name' => $btnName]) }}
+    data-name="{{ $btnName }}"
+    {{ $attributes->class(['punch'])->merge(['type' => 'button']) }}
     {{ $attributes->has('disabled') ? 'disabled' : '' }}>
     {{ $slot }}
 </button>
