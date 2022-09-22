@@ -25,9 +25,9 @@
                                       title="This ROM File does not yet have a ROM resource linked to it">No Assoc. ROM</span>
                             @endif
                         </p>
-                        <div class="mt-2 inline-flex flex-row justify-between">
-                            <x-rom-file.download :romFile="$romFile"/>
-                            <x-anchor-button :href="route('rom-files.show', ['romFile' => $romFile])">
+                        <div class="mt-2 flex flex-row justify-between">
+                            <x-rom-file.download class="order-0" :romFile="$romFile"/>
+                            <x-anchor-button class="order-1" :href="route('rom-files.show', ['romFile' => $romFile])">
                                 Info!
                             </x-anchor-button>
                         </div>

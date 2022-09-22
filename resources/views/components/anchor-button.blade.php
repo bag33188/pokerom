@@ -24,8 +24,7 @@
         'bg-red-600 hover:bg-red-500 active:bg-red-600 focus:ring-red-200 focus:border-red-700' => $btnType == AnchorBtnType::DANGER,
     ];
 @endphp
-<a {{ $attributes }}
-   @class(array_merge($conditionalAnchorBtnClasses, $universalAnchorBtnCssClasses))
+<a {{ $attributes->class(array_merge($conditionalAnchorBtnClasses, $universalAnchorBtnCssClasses)) }}
    role="button"
    type="{{ $btnType->value }}">
     {{ $slot }}
