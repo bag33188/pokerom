@@ -32,7 +32,7 @@ class RomController extends WebController
     {
         $roms = Rom::with(['romFile', 'game'])->get();
 //session()->flash("message", "Roms loaded");
-//session()->flash("message-type", 'success');
+//session()->flash("message-type", 'warn');
         return view('roms.index', [
             'roms' => $roms,
             'htmlRomTableColumns' => ['ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information'],
