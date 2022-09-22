@@ -1,5 +1,6 @@
 @if(Session::has('message'))
-    <div x-data="{ flashOpen: true }"
+    <div {{ $attributes }}
+         x-data="{ flashOpen: true }"
          x-init="setTimeout(() => (flashOpen = false), {{ session()->has('timeout') ? session('timeout') : Js::from(5000) }})"
     >
         @switch(strtolower(session('message-type')))
