@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
@@ -21,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if (self::$useIdeHelper === true) {
             if (App::isLocal()) {
-                App::register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+                App::register(IdeHelperServiceProvider::class);
             }
         }
     }
@@ -39,9 +40,10 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // use like so
-        // @gameDate($game->dateReleased)
-        Blade::directive('gameDate', function (string|\Date|\DateTime $expression): string {
-            return "<?php echo ($expression)->format('m/d/Y'); ?>";
+        // @mdyDate($game->dateReleased)
+        Blade::directive('mdyDate', function (string|\Date|\DateTime $expression): string {
+            $fmt = 'm/d/Y'; // 01/01/2021 (month/day/year)
+            return "<?php echo ($expression)->format($fmt); ?>";
         });
     }
 }
