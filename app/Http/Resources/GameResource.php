@@ -2,10 +2,11 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Game;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-/** @mixin \App\Models\Game */
+/** @mixin Game */
 class GameResource extends JsonResource
 {
     public $additional = ['success' => true];

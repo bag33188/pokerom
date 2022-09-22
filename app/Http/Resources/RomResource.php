@@ -2,10 +2,11 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Rom;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-/** @mixin \App\Models\Rom */
+/** @mixin Rom */
 class RomResource extends JsonResource
 {
     public $additional = ['success' => true];
