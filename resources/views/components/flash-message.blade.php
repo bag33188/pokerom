@@ -43,40 +43,34 @@
          x-data="flashMessageData()"
          x-show="flashMessageIsVisible(show_flash_message)"
     >
-        {{--                 x-init="setTimeout(() => (show_flash_message = false), {{ session('timeout') ?? Js::from(5000) }})"
-                        style="display: grid;grid-template-columns: 95% auto;grid-template-rows: auto;"
-style="grid-column: 1/3;grid-row:1/-1;justify-self: center;width: 100%"
- style="grid-column: 2/3;justify-self: end;align-self:start;grid-row:1/-1;z-index: 10"
-        --}}
         <div class="mx-3.5 my-3">
             <div
-                @class(array_merge($flashMessageStyles,['grid-cols-[95%_auto]', 'grid-rows-[auto]', 'grid']))
+                @class(array_merge($flashMessageStyles, ['grid', 'grid-cols-[95%_auto]', 'grid-rows-[auto]', 'gap-0']))
                 role="alert" type="{{ strtolower(Session::get('message-type')) ?? 'default' }}">
                 <div
-                    class="col-start-2 col-end-3 justify-self-end self-start row-span-full z-10">
-                    <button type="button"
-                            @click="show_flash_message = false"
-                            class="text-red-500 text-2xl"
-                    >
+                    class="col-start-2 col-end-3 row-span-full justify-self-end self-start order-1 h-full inline-flex flex-row">
+                    <button type="button" @click="show_flash_message = false"
+                            class="text-red-500 text-2xl self-stretch">
                         &times;
                     </button>
                 </div>
-
-                <div class="col-start-1 col-end-3 row-span-full justify-self-center w-full">
-                    @switch(strtoupper(Session::get('message-type')))
-                        @case(FlashMessageTypes::SUCCESS->name)
-                            <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Success!' }}</h2>
-                            @break
-                        @case(FlashMessageTypes::ERROR->name)
-                            <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Oops!' }}</h2>
-                            @break
-                        @case(FlashMessageTypes::NOTIFICATION->name)
-                            <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Notice!' }}</h2>
-                            @break
-                        @default
-                            <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Flash!' }}</h2>
-                    @endswitch
-                    <p class="font-medium text-center w-full">{{ session('message') }}</p>
+                <div class="col-start-1 col-end-3 row-span-full justify-self-center w-full order-0">
+                    <div class="w-full h-full flex flex-col justify-center">
+                        @switch(strtoupper(Session::get('message-type')))
+                            @case(FlashMessageTypes::SUCCESS->name)
+                                <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Success!' }}</h2>
+                                @break
+                            @case(FlashMessageTypes::ERROR->name)
+                                <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Oops!' }}</h2>
+                                @break
+                            @case(FlashMessageTypes::NOTIFICATION->name)
+                                <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Notice!' }}</h2>
+                                @break
+                            @default
+                                <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Flash!' }}</h2>
+                        @endswitch
+                        <p class="font-medium text-center w-full">{{ session('message') }}</p>
+                    </div>
                 </div>
             </div>
         </div>
