@@ -5,16 +5,16 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    @guest()
-                        <a href="{{ route('welcome') }}">
-                            <x-jet-application-mark class="block h-9 w-auto"/>
-                        </a>
-                    @endguest
-                    @auth()
+                    @auth
                         <a href="{{ route('dashboard') }}">
                             <x-jet-application-mark class="block h-9 w-auto"/>
                         </a>
                     @endauth
+                    @guest
+                        <a href="{{ route('welcome') }}">
+                            <x-jet-application-mark class="block h-9 w-auto"/>
+                        </a>
+                    @endguest
                 </div>
 
                 <!-- Navigation Links -->
