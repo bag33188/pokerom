@@ -104,6 +104,7 @@
                     @if(!$rom->has_file)
                         <div class="order-1">
                             <form
+                                class="inline-block"
                                 method="POST"
                                 action="{{ route('roms.link-file', ['rom' => $rom]) }}">
                                 @method('PATCH')
@@ -113,7 +114,7 @@
                         </div>
                     @endif
                 </div>
-            </div> <!-- // end of EDIT/LINK button flex container -->
+            </div>
         @else
             <div class="mt-3 no-select flex flex-row justify-between w-full">
                 <div class="order-1">
