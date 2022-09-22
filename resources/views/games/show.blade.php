@@ -22,7 +22,7 @@
             </x-list-group>
             @if($userIsAdmin)
                 <div class="row-start-2 row-end-3 ml-1 col-start-2 col-end-3 justify-self-end">
-                    @include('games.delete', ['game' => $game])
+                    <x-game.delete :game="$game"/>
                 </div>
                 <div class="col-start-1 col-end-2 row-start-2 row-end-3 justify-self-start">
                     <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::PRIMARY"

@@ -97,7 +97,7 @@
         @if($userIsAdmin)
             <div class="flex flex-row justify-between no-select">
                 <div class="order-0 mt-3">
-                    @include('roms.delete', ['rom' => $rom])
+                    <x-rom.delete :rom="$rom"/>
                 </div>
                 <div class="order-1 mt-3 inline-flex flex-row-reverse justify-start space-x-2.5 space-x-reverse w-full">
                     <div class="order-0">
