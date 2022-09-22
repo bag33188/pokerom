@@ -2,3 +2,11 @@ DirectoryIndex disabled
 Options +Indexes
 
 # DirectoryIndex index.shtml
+
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+<Files ~ "^(.*\.url)$">
+    Require all denied
+</Files>
