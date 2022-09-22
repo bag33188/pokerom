@@ -44,7 +44,7 @@
     <div {{ $attributes }}
          x-data="flashMessageData()"
          x-show="flashMessageIsVisible(show_flash_message)"
-         x-init="setTimeout(() => (show_flash_message = false), {{ session('timeout') ?? Js::from(5000) }})"
+         x-init="setTimeout(() => (show_flash_message = false), {{ Js::from($sessionFlashTimeout) }})"
     >
         <div class="mx-3.5 my-3">
             <div

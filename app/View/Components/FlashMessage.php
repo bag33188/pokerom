@@ -29,6 +29,7 @@ class FlashMessage extends Component
         return view('components.flash-message', [
             'sessionHasMessage' => Session::has('message'),
             'messageType' => Session::get('message-type'),
+            'sessionFlashTimeout' => (int)session('timeout', 5000)
         ]);
     }
 }
