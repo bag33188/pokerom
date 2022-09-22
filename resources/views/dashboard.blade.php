@@ -90,8 +90,8 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <div class="flex flex-row w-full justify-between">
-                <span class="order-0" id="home-page-name">{{ __('Dashboard') }}</span>
-                <span class="order-1" id="welcome-username">Welcome, {{ $userFirstName }}!</span>
+                <span class="order-0">{{ __('Dashboard') }}</span>
+                <span class="order-1">Welcome, {{ $userFirstName }}!</span>
             </div>
         </h2>
     </x-slot>
@@ -120,14 +120,13 @@
                     <section data-name="about" class="p-6 border-b border-gray-200 col-span-2 row-span-1">
                         <h3 class="ml-12 text-lg text-gray-600 leading-7 font-semibold">About</h3>
                         <div class="ml-12">
-                            <div id="about-description" class="mt-2 text-md text-gray-500">
+                            <div class="mt-2 text-md text-gray-500">
                                 <!-- about description -->
                                 <p class="inline-block">
                                     This web app is a databank of Pok&#xE9;mon ROMs.
                                     <wbr/>
                                     This databank contains
-                                    <span
-                                        id="adv-count"><!--more than-->{{ $romsDisplayCount }}+</span>
+                                    <span id="adv-count"><!--more than-->{{ $romsDisplayCount }}+</span>
                                     ROMs, including all 33 of the core Pok&#233;mon ROMs.
                                 </p>
                                 <br/>
@@ -144,7 +143,7 @@
                         class="flex flex-col p-6 border-r border-t border-gray-200 row-start-2 row-end-2 col-span-full md:col-start-1 md:col-end-1 h-full">
                         <h3 class="ml-12 text-lg text-gray-600 leading-7 font-semibold">Roms</h3>
                         <div class="ml-12">
-                            <div id="roms-description" class="mt-2 text-sm text-gray-500">
+                            <div class="mt-2 text-sm text-gray-500">
                                 <!-- roms description -->
                                 <p class="inline-block">
                                     Here you will find all your <strong>Core Pok&#xE9;mon ROMs</strong>,
@@ -159,8 +158,9 @@
                                 </p>
                             </div>
                         </div>
-                        <div id="check-it-out-roms" class="mt-3.5 ml-11 inline-flex flex-row h-full items-end">
-                            <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::INFO" href="{{ route('roms.index') }}" target="_self">
+                        <div class="mt-3.5 ml-11 inline-flex flex-row h-full items-end">
+                            <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::INFO"
+                                             href="{{ route('roms.index') }}" target="_self">
                                 <span class="order-1">ROMs</span>
                                 <span class="order-2">@include('partials._more-info-icon')</span>
                             </x-anchor-button>
@@ -171,7 +171,7 @@
                         class="flex flex-col p-6 border-l border-t border-gray-200 md:row-start-2 md:row-end-2 row-start-3 row-end-3 col-span-full md:col-start-2 md:col-end-2 h-full">
                         <h3 class="ml-12 text-lg text-gray-600 leading-7 font-semibold">Games</h3>
                         <div class="ml-12">
-                            <div id="games-description" class="mt-2 text-sm text-gray-500">
+                            <div class="mt-2 text-sm text-gray-500">
                                 <!-- games description -->
                                 <p class="inline-block">Feel free to play these amazing Games on your emulators!!</p>
                                 <ul id="emulator-links" class="mt-1.5">
@@ -179,8 +179,9 @@
                                 </ul>
                             </div>
                         </div>
-                        <div id="check-it-out-games" class="mt-3 ml-11 inline-flex flex-row h-full items-end">
-                            <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::INFO" href="{{ route('games.index') }}" target="_self">
+                        <div class="mt-3 ml-11 inline-flex flex-row h-full items-end">
+                            <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::INFO"
+                                             href="{{ route('games.index') }}" target="_self">
                                 <span class="order-1">Games</span>
                                 <span class="order-2">@include('partials._more-info-icon')</span>
                             </x-anchor-button>
