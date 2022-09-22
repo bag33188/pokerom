@@ -37,15 +37,14 @@
     ];
 @endphp
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900"
-            {!! $rom->has_game === TRUE ? 'title="' . $rom->game->game_name . '"' : '' !!}>
+    <x-slot:header>
+        <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900" {!! $gameNameTitle !!}>
             {{ $rom->rom_name }} Information
         </h2>
-    </x-slot>
+    </x-slot:header>
     <div class="py-6 px-5">
         <x-list-group @class(['shadow', 'no-select' => !$userIsAdmin])
-                      x-data="{ romInfoOpened: true, gameInfoOpened: true, romFileInfoOpened: true }">
+                      x-data="{!! $alpineInitialUiState !!}">
             <x-list-item class="pb-4">
                 <p class="mt-1.5 mb-3.5 inline-block font-semibold cursor-pointer no-select"
                    @click="romInfoOpened = toggleInfo(romInfoOpened)">ROM Info</p>
@@ -103,7 +102,8 @@
                     </div>
                     @if(!$rom->has_file)
                         <div class="mx-1 order-1"></div>
-                        <form class="order-0 block" method="POST"
+                        <form class="order-0 block"
+                              method="POST"
                               action="{{ route('roms.link-file', ['rom' => $rom]) }}">
                             @method('PATCH')
                             @csrf
