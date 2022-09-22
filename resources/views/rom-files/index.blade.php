@@ -13,8 +13,11 @@
                         <p class="inline-block">File ID: {{ $romFile->_id }}</p>
                         <p class="inline-block">Filename: {{ $romFile->filename }}</p>
                         <p class="inline-block">Filesize: {{ $romFile->length }} Bytes</p>
-                        <p class="inline-block">Uploaded On:
-                            {{ $romFileRepository->formatUploadDate($romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'America/Los_Angeles') }}
+                        <p class="inline-block">
+                            @php
+                                $dtFormattingParams = [$romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'America/Los_Angeles'];
+                            @endphp
+                            <span>Uploaded On: {{ $romFileRepository->formatUploadDate(...$dtFormattingParams) }}</span>
                         </p>
                         <p class="inline-block">
                             <span>ROM ID:&nbsp;</span>
