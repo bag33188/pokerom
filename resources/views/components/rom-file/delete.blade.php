@@ -23,11 +23,13 @@
     @endpush
 @endonce
 @php
-    $deleteRomFileBtnId = sprintf("delete-romFile-%s-btn", $romFile->_id);
+    $deleteRomFileBtnId = "delete-romFile-$romFile->_id-btn";
+    $deleteRomFileFormName = "delete-romFile-$romFile->_id-form";
 @endphp
-<form {{ $attributes->merge(['class' => 'inline']) }} method="POST"
+<form {{ $attributes->merge(['class' => 'inline-block']) }}
+      method="POST"
       action="{{ route('rom-files.destroy', ['romFile' => $romFile]) }}"
-      name="delete-romFile-{{ $romFile->_id }}-form"
+      name="{{ $deleteRomFileFormName }}"
       onsubmit="disableDeleteBtn({{ Js::from($deleteRomFileBtnId) }})"
       enctype="multipart/form-data">
     @method('DELETE')
