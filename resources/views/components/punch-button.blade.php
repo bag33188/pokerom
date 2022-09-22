@@ -123,7 +123,6 @@
         }
     </style>
 @endPushOnce
-
 @switch($btnType)
     @case('button')
     @case('submit')
@@ -137,21 +136,32 @@
         </button>
         @break
     @case('anchor')
-        @once
-            @prepend('scripts')
+        @prependOnce('scripts')
+            @verbatim
                 <script type="text/javascript">
-                    let disableButton = function (buttonId) {
-                        let button = document.getElementById(buttonId);
+                    /**
+                     * @name disablePunchButton
+                     * @description Invoke this function to disable the punch button if you are using it as an {@link HTMLAnchorElement anchor tag}.
+                     * @summary Disables the button, nullifies the hyperlink, and removes any pointer events
+                     * @param {string} buttonID ID of the punch button {@link HTMLAnchorElement anchor tag} to disable
+                     * @returns {boolean} Returns true if the button was disabled, false if the button was not disabled
+                     */
+                    let disablePunchButton = function (buttonID) {
+                        const button = document.getElementById(buttonID);
                         if (button.getAttribute('data-type').toLowerCase() === 'anchor') {
-                            button.classList.add('disabled');
+                            button.setAttribute('class', 'punch disabled');
                             button.setAttribute('href', 'javascript:void(0)');
                             button.setAttribute('target', '_blank');
+                            return true;
+                        } else {
+                            return false;
                         }
                     };
-                    window.disableButton = disableButton;
+
+                    window.disablePunchButton = disablePunchButton;
                 </script>
-            @endprepend
-        @endonce
+            @endverbatim
+        @endPrependOnce
         <a element-type="anchor"
             {{ $attributes->class(['punch', 'disabled' => !$userIsAdmin])->merge(['role' => $btnType]) }}>
             {{ $slot }}

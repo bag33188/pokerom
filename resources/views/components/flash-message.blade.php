@@ -2,26 +2,26 @@
     use App\Enums\FlashMessageTypeEnum as FlashMessageTypes;
 @endphp
 @pushOnce('scripts')
-    <script type="text/javascript">
-        @verbatim
-        /**
-         * @name flashMessageData
-         * @returns {FlashMessageObject}
-         */
-        function flashMessageData() {
-            return {
-                show_flash_message: true,
-            };
-        }
+    @verbatim
+        <script type="text/javascript">
+            /**
+             * @name flashMessageData
+             * @returns {FlashMessageObject}
+             */
+            function flashMessageData() {
+                return {
+                    show_flash_message: true,
+                };
+            }
 
-        /**
-         * @name flashMessageIsVisible
-         * @param {boolean} show_flash_message
-         * @returns {boolean}
-         */
-        const flashMessageIsVisible = (show_flash_message) => show_flash_message === true;
-        @endverbatim
-    </script>
+            /**
+             * @name flashMessageIsVisible
+             * @param {boolean} show_flash_message
+             * @returns {boolean}
+             */
+            const flashMessageIsVisible = (show_flash_message) => show_flash_message === true;
+        </script>
+    @endverbatim
 @endPushOnce
 @php
     $successCssClasses = ['w-full', 'bg-green-100', 'border', 'border-green-400', 'text-green-700', 'px-3', 'py-2', 'rounded', 'relative'];
@@ -32,7 +32,7 @@
 
     $flashMessageStyles = null;
 
-    match (strtoupper($messageType)) {
+    match ($messageType) {
         FlashMessageTypes::SUCCESS->name => $flashMessageStyles = $successCssClasses,
         FlashMessageTypes::ERROR->name => $flashMessageStyles = $errorCssClasses,
         FlashMessageTypes::WARNING->name => $flashMessageStyles = $warnCssClasses,
@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-start-1 col-end-3 row-span-full justify-self-center w-full order-0">
                     <div class="w-full h-full inline-flex flex-col justify-center">
-                        @switch(strtoupper($messageType))
+                        @switch($messageType)
                             @case(FlashMessageTypes::SUCCESS->name)
                                 <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Success!' }}</h2>
                                 @break

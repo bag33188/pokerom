@@ -14,19 +14,19 @@
     </style>
 @endpush
 @push('scripts')
-    <script type="text/javascript">
-        @verbatim
-        /**
-         * @name toggleInfo
-         * @param {boolean} infoOpened
-         * @returns {boolean}
-         */
-        function toggleInfo(infoOpened) {
-            infoOpened = !infoOpened;
-            return infoOpened;
-        }
-        @endverbatim
-    </script>
+    @verbatim
+        <script type="text/javascript">
+            /**
+             * @name toggleInfo
+             * @param {boolean} infoOpened
+             * @returns {boolean}
+             */
+            function toggleInfo(infoOpened) {
+                infoOpened = !infoOpened;
+                return infoOpened;
+            }
+        </script>
+    @endverbatim
 @endpush
 @php
     $innerListGroupClasses = [

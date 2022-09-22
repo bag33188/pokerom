@@ -1,28 +1,28 @@
 @inject('romQueries', 'App\Interfaces\RomQueriesInterface')
 @push('scripts')
-    <script type="text/javascript">
-        @verbatim
-        /**
-         * @name toggleContent
-         * @param {boolean} contentOpened
-         * @returns {boolean}
-         */
-        function toggleContent(contentOpened) {
-            contentOpened = !contentOpened;
-            return contentOpened;
-        }
+    @verbatim
+        <script type="text/javascript">
+            /**
+             * @name toggleContent
+             * @param {boolean} contentOpened
+             * @returns {boolean}
+             */
+            function toggleContent(contentOpened) {
+                contentOpened = !contentOpened;
+                return contentOpened;
+            }
 
-        /**
-         * @name initROMsUiStateData
-         * @returns {ROMsUIAlpineState}
-         */
-        function initROMsUiStateData() {
-            return {
-                open: true
-            };
-        }
-        @endverbatim
-    </script>
+            /**
+             * @name initROMsUiStateData
+             * @returns {ROMsUIAlpineState}
+             */
+            function initROMsUiStateData() {
+                return {
+                    open: true
+                };
+            }
+        </script>
+    @endverbatim
 @endpush
 @php
     $showHideBtnClasses = [
