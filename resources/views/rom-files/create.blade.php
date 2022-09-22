@@ -71,6 +71,11 @@
     function removeStoragePathFromFilename(string &$filename): void {
         $filename = str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $filename);
     }
+
+    function formatRomFilename(string $rom_filename): string {
+        list($filename, $filetype) = explode('.', $rom_filename, 2);
+        return sprintf("%s.%s", trim($filename), strtoupper($filetype));
+    }
 @endphp
 <x-app-layout>
     <x-slot name="header">
@@ -105,7 +110,7 @@
                                 <option
                                     value="{{ $romFileListing }}"
                                     @selected(old('rom_filename') == $romFileListing)
-                                >{{ $romFileListing }}</option>
+                                >{{ formatRomFilename($romFileListing) }}</option>
                             @endforeach
                         </x-form-select>
                     </div>
