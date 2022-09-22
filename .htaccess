@@ -26,6 +26,12 @@ AddOutputFilter INCLUDES .html
 AddType text/html .shtml
 AddHandler server-parsed .shtml
 </Directory>
+#<Directory storage/app/public/rom_files>
+#<Files "pokeprism.gbc">
+#   deny from all
+#</Files>
+#</Directory>
+
 
 
 # https://ubiq.co/tech-blog/how-to-enable-server-side-includes-ssi-in-apache/

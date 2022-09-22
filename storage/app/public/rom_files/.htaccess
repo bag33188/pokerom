@@ -1,10 +1,9 @@
-DirectoryIndex disabled
-Options +Indexes
 
-<Files "POKEMON_GREEN01.gb">
-    Order allow,deny
-    Deny from all
-</Files>
+#<Files "POKEMON_GREEN01.gb">
+#    Order allow,deny
+#    Deny from all
+#</Files>
+
 
 #DirectoryIndex disabled
 #Options +FollowSymLinks -Indexes
