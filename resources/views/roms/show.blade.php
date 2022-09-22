@@ -35,7 +35,7 @@
       'bg-gray-100',
       'shadow-inner' => !$userIsAdmin,
     ];
-    $entitySectionClasses = ["mt-1.5", "mb-3.5", "inline-block", "font-semibold", "cursor-pointer", "no-select"];
+    $paragraphSectionClasses = ["mt-1.5", "mb-3.5", "inline-block", "font-semibold", "cursor-pointer", "no-select"];
 
     $toggleROMInfo = Js::from('romInfoOpened = toggleInfo(romInfoOpened)');
     $toggleGameInfo = Js::from('gameInfoOpened = toggleInfo(gameInfoOpened)');
@@ -50,7 +50,7 @@
     <div class="py-6 px-5">
         <x-list-group @class(['shadow', 'no-select' => !$userIsAdmin]) x-data="{{ $alpineInitialUiState }}">
             <x-list-item class="pb-4">
-                <p @class($entitySectionClasses) @click={{ $toggleROMInfo }}>ROM Info</p>
+                <p @class($paragraphSectionClasses) @click={{ $toggleROMInfo }}>ROM Info</p>
                 <x-list-group @class($innerListGroupClasses) x-show="romInfoOpened === true">
                     <x-list-item>ROM ID: {{ $rom->id }}</x-list-item>
                     <x-list-item>ROM Name: {{ $rom->rom_name }}</x-list-item>
@@ -58,10 +58,10 @@
                     <x-list-item class="border-b-0">ROM Type: {{ $rom->rom_type }}</x-list-item>
                 </x-list-group>
                 <p class="font-bold m-0 p-0 text-xl" x-show="!romInfoOpened" x-cloak>...</p>
-            </x-list-item>
+            </x-list-item> <!-- // end of ROM Info -->
             @if($rom->has_game)
                 <x-list-item class="pb-4">
-                    <p @class($entitySectionClasses) @click={{ $toggleGameInfo }}>Game Info</p>
+                    <p @class($paragraphSectionClasses) @click={{ $toggleGameInfo }}>Game Info</p>
                     <x-list-group @class($innerListGroupClasses) x-show="gameInfoOpened === true">
                         <x-list-item>Game ID: {{ $rom->game->id }}</x-list-item>
                         <x-list-item>Game Name: {{ $rom->game->game_name }} Version</x-list-item>
@@ -73,10 +73,10 @@
                     </x-list-group>
                     <p class="font-bold m-0 p-0 text-xl" x-show="!gameInfoOpened" x-cloak>...</p>
                 </x-list-item>
-            @endif
+            @endif <!-- // end of Game Info -->
             @if($rom->has_file)
                 <x-list-item class="pb-4">
-                    <p @class($entitySectionClasses) @click={{ $toggleROMFileInfo }}>
+                    <p @class($paragraphSectionClasses) @click={{ $toggleROMFileInfo }}>
                         File Info
                     </p>
                     <x-list-group @class($innerListGroupClasses) x-show="romFileInfoOpened === true">
@@ -88,14 +88,15 @@
                     </x-list-group>
                     <p class="font-bold m-0 p-0 text-xl" x-show="!romFileInfoOpened" x-cloak>...</p>
                 </x-list-item>
-            @endif
+            @endif <!-- // end of ROM File Info -->
         </x-list-group>
+
         @if($userIsAdmin)
             <div class="flex flex-row justify-between no-select">
-                <div class="mt-3 order-0">
+                <div class="order-0 mt-3">
                     @include('roms.delete', ['rom' => $rom])
                 </div>
-                <div class="mt-3 inline-flex flex-row-reverse order-1 justify-start space-x-2.5 space-x-reverse w-full">
+                <div class="order-1 mt-3 inline-flex flex-row-reverse justify-start space-x-2.5 space-x-reverse w-full">
                     <div class="order-0">
                         <x-anchor-button :href="route('roms.edit', ['rom' => $rom])">
                             Edit!
@@ -123,9 +124,10 @@
                     </x-anchor-button>
                 </div>
                 <div class="order-0">
-                    <x-rom-file.download :romFile="$rom->romFile" class="order-1" :title="$rom->romFile->filename"/>
+                    <x-rom-file.download :romFile="$rom->romFile" :title="$rom->romFile->filename"/>
                 </div>
             </div>
         @endif
     </div>
+
 </x-app-layout>
