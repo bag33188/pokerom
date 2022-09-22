@@ -6,12 +6,11 @@
     </x-slot>
     <div class="container mx-auto my-3.5">
         <x-flash-message/>
-        @unless($games->count() > 1)
+        @unless($games->count() < 1)
             <div
                 class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 justify-items-center my-1.5 pb-4">
                 @foreach($games as $game)
-                    <x-card :game="$game">
-                        <x-slot:heading>{{ $game->game_name }}</x-slot:heading>
+                    <x-card :game="$game" :heading="$game->game_name">
                         <x-list-group class="divide-y-2 divide-gray-100 border">
                             <x-list-item class="p-3 hover:bg-blue-600 hover:text-blue-200 !border-b-0">
                                 {{ $game->game_name }} Version
