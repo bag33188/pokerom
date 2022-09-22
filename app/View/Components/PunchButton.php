@@ -3,7 +3,6 @@
 namespace App\View\Components;
 
 use Closure;
-use Faker\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
@@ -31,9 +30,6 @@ class PunchButton extends Component
      */
     public function render(): View|string|Closure
     {
-        $randomWord = Factory::create('en_US')->word;
-        return view('components.punch-button', [
-            'fallbackBtnName' => "$randomWord-punch-btn",
-        ]);
+        return view('components.punch-button');
     }
 }
