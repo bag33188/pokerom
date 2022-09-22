@@ -1,3 +1,14 @@
+Options +FollowSymLinks +Includes
+
+AddType text/html .html
+AddHandler server-parsed .html
+Options Indexes FollowSymLinks Includes
+Options +Includes
+AddType text/html .html
+AddOutputFilter INCLUDES .html
+AddType text/html .shtml
+AddHandler server-parsed .shtml
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
