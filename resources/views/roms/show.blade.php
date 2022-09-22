@@ -36,6 +36,10 @@
       'shadow-inner' => !$userIsAdmin,
     ];
     $entitySectionClasses = ["mt-1.5", "mb-3.5", "inline-block", "font-semibold", "cursor-pointer", "no-select"];
+
+    $toggleROMInfo = Js::from('romInfoOpened = toggleInfo(romInfoOpened)');
+    $toggleGameInfo = Js::from('gameInfoOpened = toggleInfo(gameInfoOpened)');
+    $toggleROMFileInfo = Js::from('romFileInfoOpened = toggleInfo(romFileInfoOpened)');
 @endphp
 <x-app-layout>
     <x-slot:header>
@@ -44,10 +48,9 @@
         </h2>
     </x-slot:header>
     <div class="py-6 px-5">
-        <x-list-group @class(['shadow', 'no-select' => !$userIsAdmin])
-                      x-data="{!! $alpineInitialUiState !!}">
+        <x-list-group @class(['shadow', 'no-select' => !$userIsAdmin]) x-data="{{ $alpineInitialUiState }}">
             <x-list-item class="pb-4">
-                <p @class($entitySectionClasses) @click="romInfoOpened = toggleInfo(romInfoOpened)">ROM Info</p>
+                <p @class($entitySectionClasses) @click={{ $toggleROMInfo }}>ROM Info</p>
                 <x-list-group @class($innerListGroupClasses) x-show="romInfoOpened === true">
                     <x-list-item>ROM ID: {{ $rom->id }}</x-list-item>
                     <x-list-item>ROM Name: {{ $rom->rom_name }}</x-list-item>
@@ -58,7 +61,7 @@
             </x-list-item>
             @if($rom->has_game)
                 <x-list-item class="pb-4">
-                    <p @class($entitySectionClasses) @click="gameInfoOpened = toggleInfo(gameInfoOpened)">Game Info</p>
+                    <p @class($entitySectionClasses) @click={{ $toggleGameInfo }}>Game Info</p>
                     <x-list-group @class($innerListGroupClasses) x-show="gameInfoOpened === true">
                         <x-list-item>Game ID: {{ $rom->game->id }}</x-list-item>
                         <x-list-item>Game Name: {{ $rom->game->game_name }} Version</x-list-item>
@@ -73,7 +76,7 @@
             @endif
             @if($rom->has_file)
                 <x-list-item class="pb-4">
-                    <p @class($entitySectionClasses) @click="romFileInfoOpened = toggleInfo(romFileInfoOpened)">
+                    <p @class($entitySectionClasses) @click={{ $toggleROMFileInfo }}>
                         File Info
                     </p>
                     <x-list-group @class($innerListGroupClasses) x-show="romFileInfoOpened === true">
