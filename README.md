@@ -65,3 +65,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 [//]: # (`find . -print | grep -i ".htaccess"`)
 [//]: # (`find . -print | grep -i ".gitignore"`)
+
+`@livewire('server-list')`
+
