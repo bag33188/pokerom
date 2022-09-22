@@ -5,7 +5,8 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "ide-helper": "NODE_ENV=development php artisan ide-helper:generate && php artisan ide-helper:meta"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
