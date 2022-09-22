@@ -17,7 +17,7 @@ class PunchButton extends Component
      */
     public function __construct(string $btnType)
     {
-        $this->btnType = $btnType;
+        $this->btnType = strtolower($btnType);
     }
 
     /**
@@ -27,6 +27,8 @@ class PunchButton extends Component
      */
     public function render(): View|string|Closure
     {
-        return view('components.punch-button');
+        return view('components.punch-button', [
+            'userIsAdmin' => auth()->user()->isAdmin(),
+        ]);
     }
 }

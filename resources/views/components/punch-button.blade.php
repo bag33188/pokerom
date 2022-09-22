@@ -123,14 +123,15 @@
         }
     </style>
 @endPushOnce
-@switch(strtolower($btnType))
+
+@switch($btnType)
     @case('button')
     @case('submit')
         <button
             element-type="button"
-            {{ $attributes->class(['punch'])->merge(['type' => strtolower($btnType)]) }}
+            {{ $attributes->class(['punch'])->merge(['type' => $btnType]) }}
             {{ $attributes->has('disabled') ? 'disabled' : '' }}
-            @disabled(!auth()->user()->isAdmin())
+            @disabled(!$userIsAdmin)
         >
             {{ $slot }}
         </button>
@@ -151,7 +152,8 @@
                 </script>
             @endprepend
         @endonce
-        <a element-type="anchor" {{ $attributes->class(['punch'])->merge(['role' => 'button']) }}>
+        <a element-type="anchor"
+            {{ $attributes->class(['punch', 'disabled' => !$userIsAdmin])->merge(['role' => $btnType]) }}>
             {{ $slot }}
         </a>
         @break
