@@ -1,13 +1,13 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Build Assets" type="js.build_tools.npm">
+  <configuration default="false" name="Vite Server" type="js.build_tools.npm">
     <package-json value="$PROJECT_DIR$/package.json" />
     <command value="run" />
     <scripts>
-      <script value="build" />
+      <script value="dev" />
     </scripts>
     <node-interpreter value="project" />
     <envs>
-      <env name="NODE_ENV" value="production" />
+      <env name="NODE_ENV" value="development" />
     </envs>
     <method v="2" />
   </configuration>
