@@ -6,9 +6,7 @@ use App\Actions\EnumMethodsTrait as EnumMethods;
 
 enum UserRoleEnum: string
 {
-    use EnumMethods {
-        values as public;
-    }
+    use EnumMethods;
 
     /** administrator */
     case ADMIN = 'admin';
