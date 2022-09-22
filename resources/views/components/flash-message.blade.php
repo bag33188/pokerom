@@ -3,7 +3,7 @@
         @verbatim
         /**
          * @name flashMessageData
-         * @returns {FlashMessageObj}
+         * @returns {FlashMessageObject}
          */
         function flashMessageData() {
             return {
