@@ -32,7 +32,7 @@
 @if(Session::has('message'))
     <div {{ $attributes }}
          x-data="flashMessageData()"
-         x-init="setTimeout(() => (show_flash_message = false), {{ session()->has('timeout') ? session('timeout') : Js::from(5000) }})"
+         x-init="setTimeout(() => (show_flash_message = false), {{ session('timeout') ?? Js::from(5000) }})"
          x-show="flashMessageIsVisible(show_flash_message)"
     >
         @switch(strtoupper(Session::get('message-type')))
