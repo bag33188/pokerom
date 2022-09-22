@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Actions\ApiMethodsTrait;
+use App\Actions\ApiMethodsTrait as ApiMethods;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,7 +11,7 @@ use Utils\Classes\AbstractApplicationException as ApplicationException;
 /** Handled when there is an error querying `MongoDB` */
 class MongoWriteException extends ApplicationException
 {
-    use ApiMethodsTrait {
+    use ApiMethods {
         isApiRequest as private;
         isLivewireRequest as private;
     }

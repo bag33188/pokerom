@@ -2,8 +2,8 @@
 
 namespace App\Exceptions;
 
-use App\Actions\ApiMethodsTrait;
-use App\Actions\ExceptionMethodsTrait;
+use App\Actions\ApiMethodsTrait as ApiMethods;
+use App\Actions\ExceptionMethodsTrait as ExceptionHandlerMethods;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -19,7 +19,7 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
-    use ApiMethodsTrait, ExceptionMethodsTrait;
+    use ApiMethods, ExceptionHandlerMethods;
 
     /**
      * A list of exception types with their corresponding custom log levels.

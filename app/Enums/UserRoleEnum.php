@@ -2,11 +2,11 @@
 
 namespace App\Enums;
 
-use App\Actions\EnumMethodsTrait;
+use App\Actions\EnumMethodsTrait as EnumMethods;
 
 enum UserRoleEnum: string
 {
-    use EnumMethodsTrait {
+    use EnumMethods {
         values as public;
     }
 
