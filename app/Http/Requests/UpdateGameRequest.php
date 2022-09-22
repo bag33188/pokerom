@@ -39,11 +39,15 @@ class UpdateGameRequest extends FormRequest
 
     public function prepareForValidation()
     {
-        $this->merge([
-            'slug' => Str::slug($this->input('game_name')),
-            'date_released' => Date::create($this->input('date_released'))->format('Y-m-d'),
-            'game_name' => preg_replace("/[\x{E9}\x{C9}]/u", "\u{0065}", $this->input('game_name'))
-        ]);
+        $a = [];
+        if (!$this->missing('game_name')) {
+            $a['game_name'] = preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name'));
+            $a['slug'] = Str::slug($a['game_name']);
+        }
+        if (!$this->missing('date_released')) {
+            $a['date_released'] = Date::create($this->input('date_released'))->format('Y-m-d');
+        }
+        $this->merge($a);
     }
 
 

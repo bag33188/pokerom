@@ -13,6 +13,7 @@ use App\Rules\MinSizeRule;
 use Date;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 /** @mixin Game */
 class StoreGameRequest extends FormRequest
@@ -50,8 +51,9 @@ class StoreGameRequest extends FormRequest
             'region' => ['required', 'string', new MinLengthRule(MIN_GAME_REGION_LENGTH), new MaxLengthRule(MAX_GAME_REGION_LENGTH), new GameRegionRule()],
             'date_released' => ['required', 'date', 'after_or_equal:' . FIRST_POKEMON_GAME_RELEASE_DATE, 'date_format:Y-m-d'],
             'generation' => ['required', 'integer', new MinSizeRule(MIN_GAME_GENERATION_VALUE), new MaxSizeRule(MAX_GAME_GENERATION_VALUE)],
+            'rom_id' => ['required', 'integer', Rule::exists('roms', 'id'), Rule::unique('games', 'rom_id')],
             'slug' => 'string|unique:games',
-            'rom_id' => 'required|integer|exists:roms,id|unique:games,rom_id'
+            # 'rom_id' => 'required|integer|exists:roms,id|unique:games,rom_id'
         ];
     }
 }

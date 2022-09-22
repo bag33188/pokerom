@@ -17,7 +17,7 @@ class Administrator
      * Handle an incoming request.
      *
      * @param Request $request
-     * @param Closure(Request): (Response|RedirectResponse)  $next
+     * @param Closure(Request): (Response|RedirectResponse) $next
      * @return Response|RedirectResponse|JsonResponse
      * @throws HttpResponseException
      */
@@ -29,7 +29,7 @@ class Administrator
             return response()->redirectTo(RouteServiceProvider::HOME);
         } else {
             // throws: HttpResponseException
-            abort(HttpStatus::HTTP_FORBIDDEN, "This action is unauthorized.");
+            abort(HttpStatus::HTTP_FORBIDDEN, "This action is forbidden.");
         }
     }
 }
