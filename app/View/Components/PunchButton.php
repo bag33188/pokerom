@@ -13,7 +13,7 @@ class PunchButton extends Component
     /**
      * Create a new component instance.
      *
-     * @return void
+     * @param string $btnType
      */
     public function __construct(string $btnType)
     {
