@@ -39,11 +39,19 @@
                 font-size: 36px;
                 padding: 20px;
             }
+
+            .code {
+                font-weight: 350;
+                letter-spacing: 0.05em;
+                margin: 0.5rem;
+            }
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
             <div class="content">
+                <h4 class="code">@yield('code')</h4>
+
                 <div class="title">
                     @yield('message')
                 </div>
