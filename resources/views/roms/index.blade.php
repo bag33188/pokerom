@@ -39,7 +39,7 @@
                 <span><!--&nbsp;-->ROMs</span>
             </button>
         </div>
-        <x-flash-message class="my-3"/>
+        <x-flash-message/>
         @unless($roms->count() === 0)
             <table class="w-full test-sm text-left text-gray-800 table-auto border-t-2" x-show="open === true">
                 <thead class="bg-gray-50">

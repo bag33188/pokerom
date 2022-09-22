@@ -1,13 +1,25 @@
 @pushOnce('scripts')
     <script type="text/javascript">
+        @verbatim
+        /**
+         * @name flashMessageData
+         * @returns {FlashMessageObj}
+         */
         function flashMessageData() {
             return {
-                show_flash_message: true
-            }
+                show_flash_message: true,
+            };
         }
 
-        const flashMessageIsVisible = (show_flash_message) => show_flash_message === true;
-    </script>
+        /**
+         * @name flashMessageIsVisible
+         * @param {boolean} show_flash_message
+         * @returns {boolean}
+         */
+        const flashMessageIsVisible = (show_flash_message) =>
+            show_flash_message === true;
+        @endverbatim
+    </script>)
 @endPushOnce
 @if(Session::has('message'))
     <div {{ $attributes }}
@@ -16,38 +28,37 @@
     >
         @switch(strtolower(session('message-type')))
             @case('success')
-                <div class="w-full flex justify-center">
+                <div class="mx-3.5 my-3">
                     <div
                         class="w-full text-center bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
                         role="alert" type="success" x-show="flashMessageIsVisible(show_flash_message)">
-                        <button type="button" @click="show_flash_message = false" class="text-red-500 float-right">X
-                        </button>
+                        @include('partials._close-flash-btn')
                         <h2 class="font-bold text-xl">Success!</h2>
-                        <span class="block sm:inline">{{ session('message') }}</span>
+                        <p class="sm:inline-block block font-medium">{{ session('message') }}</p>
                     </div>
                 </div>
                 @break
             @case('error')
-                <div class="w-full flex justify-center">
+                <div class="mx-3.5 my-3">
                     <div
                         class="w-full text-center bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
                         role="alert" type="error" x-show="flashMessageIsVisible(show_flash_message)">
-                        <button type="button" @click="show_flash_message = false" class="text-red-500 float-right">X
-                        </button>
+                        @include('partials._close-flash-btn')
                         <h2 class="font-bold text-xl">Error!</h2>
-                        <span class="block sm:inline">{{ session('message') }}</span>
+                        <p class="sm:inline-block block font-medium">{{ session('message') }}</p>
                     </div>
                 </div>
                 @break
             @default
-                <div class="w-full flex justify-center">
+                <div class="mx-3.5 my-3">
                     <div
-                        class="w-full text-center bg-blue-100 border border-blue-400 text-blue-600 px-4 py-3 rounded relative"
+                        class="w-full text-center bg-blue-100 border border-blue-400 text-blue-600 rounded relative"
                         role="alert" type="info" x-show="flashMessageIsVisible(show_flash_message)">
-                        <button type="button" @click="show_flash_message = false" class="text-red-500 float-right">X
-                        </button>
-                        <h2 class="font-bold text-xl">Notice!</h2>
-                        <span class="block sm:inline">{{ session('message') }}</span>
+                        @include('partials._close-flash-btn')
+                        <div class="px-4 py-3">
+                            <h2 class="font-bold text-xl">Notice!</h2>
+                            <p class="sm:inline-block block font-medium">{{ session('message') }}</p>
+                        </div>
                     </div>
                 </div>
         @endswitch

@@ -7,7 +7,8 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/js/angular.min.js'
+                'resources/js/modules/capitalize.js',
+                'resources/js/modules/ready.js',
             ],
             refresh: [
                 ...refreshPaths,
