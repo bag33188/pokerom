@@ -13,7 +13,7 @@ class RegisterUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', new MinLengthRule(MIN_USER_NAME_LENGTH), new MaxLengthRule(MAX_USER_NAME_LENGTH)],
-            'email' => ['required', 'string', 'email', new MaxLengthRule(MAX_USER_EMAIL_LENGTH), 'unique:users'],
+            'email' => ['required', 'string', 'email', 'unique:users', new MaxLengthRule(MAX_USER_EMAIL_LENGTH)],
             'password' => ['required', 'string', 'confirmed', new MinLengthRule(MIN_USER_PASSWORD_LENGTH), new MaxLengthRule(MAX_USER_PASSWORD_LENGTH)],
         ];
     }

@@ -22,7 +22,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => [Rule::requiredIf($this->isMethod('PUT')), 'string', new MinLengthRule(MIN_USER_NAME_LENGTH), new MaxLengthRule(MAX_USER_NAME_LENGTH)],
-            'email' => [Rule::requiredIf($this->isMethod('PUT')), 'string', 'email', 'max:' . MAX_USER_EMAIL_LENGTH, Rule::unique('users', 'email')->ignore($this->route($this->routeParamName))],
+            'email' => [Rule::requiredIf($this->isMethod('PUT')), 'string', 'email', new MaxLengthRule(MAX_USER_EMAIL_LENGTH), Rule::unique('users', 'email')->ignore($this->route($this->routeParamName))],
             'password' => [Rule::requiredIf($this->isMethod('PUT')), 'string', 'confirmed', new MinLengthRule(MIN_USER_PASSWORD_LENGTH), new MaxLengthRule(MAX_USER_PASSWORD_LENGTH)],
         ];
     }
