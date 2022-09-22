@@ -77,11 +77,11 @@
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Upload a ROM File</h2>
         <h6 class="text-center">
             @if($romFilesListCount > 1)
-                <span>{{ $romFilesListCount }} Selections</span>
+                <span>{{ $romFilesListCount }} ROMs in Storage</span>
             @elseif($romFilesListCount === 1)
-                <span>1 Selection</span>
+                <span>1 in Storage</span>
             @else
-                <span>No Selections</span>
+                <span>No ROMs in Storage</span>
             @endif
         </h6>
     </x-slot>
