@@ -37,7 +37,7 @@
                 'border-yellow-400',
             ];
             break;
-        case AlertType::INFO:
+        case AlertType::MESSAGE:
             $conditionalAlertCssClasses = [
                 'bg-blue-100',
                 'text-blue-700',
