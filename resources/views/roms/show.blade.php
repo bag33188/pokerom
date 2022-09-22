@@ -36,6 +36,7 @@
       'shadow-inner' => !$userIsAdmin,
     ];
     $paragraphSectionClasses = ["mt-1.5", "mb-3.5", "inline-block", "font-semibold", "cursor-pointer", "no-select"];
+    $paragraphHiddenContentClasses = ['font-bold', 'text-gray-400', 'text-xl', 'm-0', 'p-0'];
 
     $toggleROMInfo = Js::from('romInfoOpened = toggleInfo(romInfoOpened)');
     $toggleGameInfo = Js::from('gameInfoOpened = toggleInfo(gameInfoOpened)');
@@ -47,7 +48,9 @@
             {{ $rom->rom_name }} Information
         </h2>
     </x-slot:header>
+
     <div class="py-6 px-5">
+
         <x-list-group @class(['shadow', 'no-select' => !$userIsAdmin]) x-data="{{ $alpineInitialUiState }}">
             <x-list-item class="pb-4">
                 <p @class($paragraphSectionClasses) @click={{ $toggleROMInfo }}>ROM Info</p>
@@ -57,7 +60,7 @@
                     <x-list-item>ROM Size: {{ $romQueries->formatRomSizeSQL($rom->rom_size) }}</x-list-item>
                     <x-list-item class="border-b-0">ROM Type: {{ $rom->rom_type }}</x-list-item>
                 </x-list-group>
-                <p class="font-bold m-0 p-0 text-xl" x-show="!romInfoOpened" x-cloak>...</p>
+                <p @class($paragraphHiddenContentClasses) x-show="!romInfoOpened" x-cloak>...</p>
             </x-list-item> <!-- // end of ROM Info -->
             @if($rom->has_game)
                 <x-list-item class="pb-4">
@@ -71,7 +74,7 @@
                             Release Date: {{ $rom->game->date_released->format('l, F jS, Y') }}
                         </x-list-item>
                     </x-list-group>
-                    <p class="font-bold m-0 p-0 text-xl" x-show="!gameInfoOpened" x-cloak>...</p>
+                    <p @class($paragraphHiddenContentClasses) x-show="!gameInfoOpened" x-cloak>...</p>
                 </x-list-item>
             @endif <!-- // end of Game Info -->
             @if($rom->has_file)
@@ -86,7 +89,7 @@
                         <x-list-item class="border-b-0">Designated
                             Console: {{ $romFileRepository->determineConsole($rom->romFile) }}</x-list-item>
                     </x-list-group>
-                    <p class="font-bold m-0 p-0 text-xl" x-show="!romFileInfoOpened" x-cloak>...</p>
+                    <p @class($paragraphHiddenContentClasses) x-show="!romFileInfoOpened" x-cloak>...</p>
                 </x-list-item>
             @endif <!-- // end of ROM File Info -->
         </x-list-group>
