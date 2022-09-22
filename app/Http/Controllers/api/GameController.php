@@ -12,7 +12,6 @@ use App\Models\Rom;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class GameController extends ApiController
 {
@@ -35,8 +34,7 @@ class GameController extends ApiController
      */
     public function store(StoreGameRequest $request)
     {
-        if ($request->missing('rom_id')) self::throwNoRomIdQueryGivenException();
-        $romId = request()->query('rom_id');
+        $romId = $request->input('rom_id');
         $rom = Rom::findOrFail($romId);
         $game = $rom->game()->create($request->all());
         return (new GameResource($game->load('rom')))->response()->setStatusCode(HttpStatus::HTTP_CREATED);
@@ -84,17 +82,5 @@ class GameController extends ApiController
             'message' => 'Game deleted successfully! ' . $game->game_name,
             'success' => true
         ]);
-    }
-
-    private static function throwNoRomIdQueryGivenException()
-    {
-        throw new BadRequestHttpException(
-            message: 'Error: No ROM ID was sent.',
-            code: HttpStatus::HTTP_BAD_REQUEST,
-            headers: [
-                'X-Http-Request-Requirement' => 'A game resource MUST be constrained to a ROM resource in the database.',
-                'X-Http-Request-Required-Action' => 'Add query parameter `rom_id` to request URI.'
-            ]
-        );
     }
 }
