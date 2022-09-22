@@ -96,10 +96,8 @@
                 </tfoot>
             </table>
         @else
-            <x-alert :alertType="\App\Enums\AlertTypeEnum::ERROR">
-                <x-slot name="heading">Sorry!</x-slot>
-                <x-slot:message>No ROMs Currently Exist in the Database</x-slot:message>
-            </x-alert>
+            <x-alert :alertType="\App\Enums\AlertTypeEnum::ERROR" heading="Sorry!"
+                     message="No ROMs Currently Exist in the Database"/>
         @endunless
     </div>
 </x-app-layout>

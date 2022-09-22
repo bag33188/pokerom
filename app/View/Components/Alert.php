@@ -16,7 +16,7 @@ class Alert extends Component
      *
      * @return void
      */
-    public function __construct(AlertType $alertType = AlertType::MESSAGE)
+    public function __construct(AlertType $alertType = AlertType::NORMAL)
     {
         $this->alertType = $alertType;
     }

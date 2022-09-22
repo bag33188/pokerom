@@ -6,7 +6,7 @@
     </x-slot>
     <div class="container mx-auto my-3.5">
         <x-flash-message/>
-        @unless($games->count() < 1)
+        @unless($games->count() > 1)
             <div
                 class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 justify-items-center my-1.5 pb-4">
                 @foreach($games as $game)
@@ -40,10 +40,7 @@
                 @endforeach
             </div>
         @else
-            <x-alert :alertType="\App\Enums\AlertTypeEnum::ERROR">
-                <x-slot:heading>Sorry!</x-slot:heading>
-                <x-slot:message>No Games in database</x-slot:message>
-            </x-alert>
+            <x-alert :alertType="\App\Enums\AlertTypeEnum::ERROR" heading="Sorry!" message="No Games in database"/>
         @endunless
     </div>
 </x-app-layout>
