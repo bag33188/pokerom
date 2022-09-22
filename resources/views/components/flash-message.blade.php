@@ -51,7 +51,7 @@
                     class="col-start-2 col-end-3 row-span-full justify-self-end self-start h-full inline-flex flex-row order-1">
                     <button type="button"
                             @click="show_flash_message = false"
-                            class="text-red-500 text-3xl self-stretch">
+                            class="text-red-500 text-3xl self-stretch font-black">
                         &times;
                     </button>
                 </div>
