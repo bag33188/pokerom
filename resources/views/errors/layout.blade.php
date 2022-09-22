@@ -41,19 +41,25 @@
             }
 
             .code {
-                font-weight: 350;
+                font-weight: 350 !important;
                 letter-spacing: 0.05em;
                 margin: 0.5rem;
+            }
+
+            .message {
+                margin: 0;
+                text-align: center;
+                letter-spacing: 0.025em;
+                font-weight: 300 !important;
             }
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
             <div class="content">
-                <h4 class="code">@yield('code')</h4>
-
                 <div class="title">
-                    @yield('message')
+                    <h4 class="code">@yield('code')</h4>
+                    <p class="message">@yield('message')</p>
                 </div>
             </div>
         </div>
