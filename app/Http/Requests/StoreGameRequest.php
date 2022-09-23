@@ -50,12 +50,12 @@ class StoreGameRequest extends FormRequest
      */
     public function rules(): array
     {
-
+        $pokemonGreenReleaseDate = FIRST_POKEMON_GAME_RELEASE_DATE;
         return [
             'game_name' => ['required', 'string', new MinLengthRule(MIN_GAME_NAME_LENGTH), new MaxLengthRule(MAX_GAME_NAME_LENGTH), new GameNameRule()],
             'game_type' => ['required', 'string', new MinLengthRule(MIN_GAME_TYPE_LENGTH), new MaxLengthRule(MAX_GAME_TYPE_LENGTH), new GameTypeRule()],
             'region' => ['required', 'string', new MinLengthRule(MIN_GAME_REGION_LENGTH), new MaxLengthRule(MAX_GAME_REGION_LENGTH), new GameRegionRule()],
-            'date_released' => ['required', 'date', 'after_or_equal:' . FIRST_POKEMON_GAME_RELEASE_DATE, 'date_format:Y-m-d'],
+            'date_released' => ['required', 'date', "after_or_equal:$pokemonGreenReleaseDate", 'date_format:Y-m-d'],
             'generation' => ['required', 'integer', new MinSizeRule(MIN_GAME_GENERATION_VALUE), new MaxSizeRule(MAX_GAME_GENERATION_VALUE)],
             'rom_id' => ['required', 'integer', Rule::exists('roms', 'id'), Rule::unique('games', 'rom_id')],
             'slug' => 'string|unique:games,slug',
@@ -66,7 +66,7 @@ class StoreGameRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'slug.unique' => 'The game name is already in use.',
+            'slug.unique' => "The game name {$this->get('game_name')} already exists.",
             'rom_id.unique' => "The ROM with id of {$this->get('rom_id')} already has a game.",
         ];
     }
