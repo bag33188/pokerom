@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Rom;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Rom>
+ * @extends Factory<Rom>
  */
 class RomFactory extends Factory
 {
@@ -14,10 +15,13 @@ class RomFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
+        $path = str_replace('public', 'data/seeds.json', $_SERVER['DOCUMENT_ROOT']);
+        $roms = json_decode(file_get_contents($path), true)['roms'];
+        $randomRom = $roms[array_rand($roms)];
         return [
-            //
+            ...$randomRom
         ];
     }
 }

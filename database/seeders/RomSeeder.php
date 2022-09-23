@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Rom;
 use Illuminate\Database\Seeder;
+# use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RomSeeder extends Seeder
 {
@@ -12,8 +13,8 @@ class RomSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        //
+        Rom::factory()->count(10)->create();
     }
 }

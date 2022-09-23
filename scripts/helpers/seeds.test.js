@@ -26,7 +26,7 @@ gamesData = gamesData.valueOf().map((gameData) => {
     delete gameData["created_at"];
     delete gameData["updated_at"];
     delete gameData["slug"];
-    delete gameData["rom_id"];
+    // delete gameData["rom_id"];
     gameData["region"] = gameData["region"].toLowerCase();
     gameData["game_type"] = gameData["game_type"].toLowerCase();
     gameData["game_name"] = gameData["game_name"].replace(

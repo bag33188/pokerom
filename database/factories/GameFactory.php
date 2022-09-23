@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Game;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Game>
+ * @extends Factory<Game>
  */
 class GameFactory extends Factory
 {
@@ -14,10 +15,13 @@ class GameFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
+        $path = str_replace('public', 'data/seeds.json', $_SERVER['DOCUMENT_ROOT']);
+        $games = json_decode(file_get_contents($path), true)['games'];
+        $randomGame = $games[array_rand($games)];
         return [
-            //
+            ...$randomGame
         ];
     }
 }
