@@ -2,6 +2,7 @@
 
 namespace Utils\Modules;
 
+use Exception;
 use MongoDB\Client as MongoClient;
 use MongoDB\GridFS\Bucket;
 
@@ -13,38 +14,53 @@ class GridFSConnection
     protected string $host;
     protected string $port;
     protected bool $useAuth;
-    protected string $authDatabase;
-    protected string $authMechanism = 'SCRAM-SHA-1';
-    protected string $usernameConfigPath;
-    protected string $passwordConfigPath;
+    protected ?string $authDatabase;
+    protected ?string $authMechanism;
+    protected ?string $usernameConfigPath;
+    protected ?string $passwordConfigPath;
     public readonly Bucket $bucket;
 
+    /**
+     * @throws Exception
+     */
     public function __construct()
     {
-        $this->setBucket();
+        $this->connect();
     }
 
-    function mongoURI()
+    private function mongoURI(): string
     {
-        $dsn = "mongodb://{$this->host}:{$this->port}/?authSource={$this->authDatabase}";
+        $dsn = "mongodb://{$this->host}:{$this->port}/";
+        if ($this->useAuth) {
+            $authSource = $this->authDatabase ?? 'admin';
+            $dsn .= "?authSource=${authSource}";
+        }
         return $dsn;
     }
 
-    public function connect()
+    private function parseDbCredentials(): array
     {
-//        $authObj = ($this->useAuth) ?
-//            ['username' => config($this->usernameConfigPath), 'password' => $this->passwordConfigPath, 'authSource' => $this->authDatabase, 'authMechanism' => $this->authMechanism] : [];
-        $db = new MongoClient($this->mongoURI(), uriOptions: [
-            'username' => config($this->usernameConfigPath), 'password' => config($this->passwordConfigPath), 'authMechanism' => $this->authMechanism]
-        );
-        return $db->selectDatabase($this->databaseName);
+        return [
+            'username' => config($this->usernameConfigPath),
+            'password' => config($this->passwordConfigPath),
+            'authMechanism' => $this->authMechanism ?? 'SCRAM-SHA-1'
+        ];
     }
 
-    function setBucket()
+    /**
+     * @throws Exception
+     */
+    private function connect(): void
     {
-        $this->bucket = $this->connect()->selectGridFSBucket([
-            'chunkSizeBytes' => $this->chunkSize,
-            'bucketName' => $this->bucketName
-        ]);
+        try {
+            $db = new MongoClient(uri: $this->mongoURI(), uriOptions: $this->parseDbCredentials());
+
+            $this->bucket = $db->selectDatabase($this->databaseName)->selectGridFSBucket([
+                'chunkSizeBytes' => $this->chunkSize,
+                'bucketName' => $this->bucketName
+            ]);
+        } catch (Exception $e) {
+            throw new Exception("Error connecting to GridFS: {$e->getMessage()}");
+        }
     }
 }
