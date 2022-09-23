@@ -33,16 +33,17 @@ class UpdateGameRequest extends FormRequest
 
     public function prepareForValidation(): void
     {
-        $normalizeGameNameUnicodeChars = fn(string $gameName) => preg_replace("/[\x{E9}\x{C9}]/u", "e", $gameName);
-        $formatDateReleased = fn(string $dateReleased) => Date::create($dateReleased)->format('Y-m-d');
+        $normalizeGameNameUnicodeChars = fn(?string $gameName = '') => preg_replace("/[\x{E9}\x{C9}]/u", "e", $gameName);
+        $formatDateReleased = fn(?string $dateReleased = '') => Date::create($dateReleased)->format('Y-m-d');
 
-        $fieldsToMerge = [];
+        $fieldsToMerge = array();
 
         if ($this->isMethod('PATCH')) {
             if ($this->has('game_name')) {
                 $fieldsToMerge['game_name'] = $normalizeGameNameUnicodeChars($this->input('game_name'));
-                $fieldsToMerge['slug'] = Game::slugifyGameName($this->get('game_name'));
+                $fieldsToMerge['slug'] = Game::slugifyGameName($this->input('game_name'));
             }
+
             if ($this->has('date_released')) {
                 $fieldsToMerge['date_released'] = $formatDateReleased($this->input('date_released'));
             }
@@ -50,7 +51,7 @@ class UpdateGameRequest extends FormRequest
             $fieldsToMerge = [
                 'date_released' => $formatDateReleased($this->input('date_released')),
                 'game_name' => $normalizeGameNameUnicodeChars($this->input('game_name')),
-                'slug' => Game::slugifyGameName($this->get('game_name')),
+                'slug' => Game::slugifyGameName($this->input('game_name')),
             ];
         }
 
@@ -79,7 +80,7 @@ class UpdateGameRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'slug.unique' => "The game name {$this->get('game_name')} already exists.",
+            'slug.unique' => "The game name {$this->input('game_name')} already exists.",
         ];
     }
 }

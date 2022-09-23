@@ -64,8 +64,8 @@ class StoreGameRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'slug.unique' => "The game name {$this->get('game_name')} already exists.",
-            'rom_id.unique' => "The ROM with id of {$this->get('rom_id')} already has a game.",
+            'slug.unique' => "The game name {$this->input('game_name')} already exists.",
+            'rom_id.unique' => "The ROM with id of {$this->input('rom_id')} already has a game.",
         ];
     }
 }
