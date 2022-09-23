@@ -33,9 +33,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Utils\\": "utils/",
             "App\\Http\\Controllers\\Web\\": "app/Http/Controllers/web/",
-            "App\\Http\\Controllers\\Api\\": "app/Http/Controllers/api/"
+            "App\\Http\\Controllers\\Api\\": "app/Http/Controllers/api/",
+            "Modules\\": "utils/Modules/",
+            "Classes\\": "utils/Classes/"
         },
         "files": [
             "scripts/helpers/dir_is_empty.php",

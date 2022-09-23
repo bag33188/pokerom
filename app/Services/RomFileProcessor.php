@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use Utils\Modules\GridFSProcessor;
+use Modules\GridFSProcessor;
 
 class RomFileProcessor extends GridFSProcessor
 {

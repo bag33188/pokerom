@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
 use MongoDB\BSON\ObjectId;
-use Utils\Classes\AbstractGridFSModel as GridFSModel;
+use Classes\AbstractGridFSModel as GridFSModel;
 
 /** @mixin GridFSModel */
 class RomFile extends MongoDbModel

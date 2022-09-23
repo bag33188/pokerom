@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use Utils\Modules\GridFSConnection;
+use Modules\GridFSConnection;
 
 class RomFilesConnection extends GridFSConnection
 {

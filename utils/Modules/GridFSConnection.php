@@ -1,6 +1,6 @@
 <?php
 
-namespace Utils\Modules;
+namespace Modules;
 
 use MongoDB\Client as MongoClient;
 use MongoDB\Driver\Exception\RuntimeException as DriverRuntimeException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Utils\Classes;
+namespace Classes;
 
 use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
 

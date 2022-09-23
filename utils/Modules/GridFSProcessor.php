@@ -1,6 +1,6 @@
 <?php
 
-namespace Utils\Modules;
+namespace Modules;
 
 use Exception;
 use MongoDB\BSON\ObjectId;

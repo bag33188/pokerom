@@ -9,7 +9,7 @@
  * https://www.php.net/readfile
  */
 
-namespace Utils\Modules;
+namespace Modules;
 
 class FileDownloader
 {
