@@ -84,4 +84,6 @@ abstract class AbstractGridFSModel extends MongoDbModel
      * @var string
      */
     public readonly string $md5;
+
+    public readonly array $metadata;
 }

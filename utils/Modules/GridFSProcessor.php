@@ -33,7 +33,12 @@ class GridFSProcessor
         $this->parseGridStorageDirectory();
 
         $filepath = "{$this->gridFilesDiskPath}/${filename}";
-        $stream = $this->gridFSBucket->openUploadStream($filename, ['chunkSizeBytes' => $this->gridFSConnection->chunkSize]);
+        $stream = $this->gridFSBucket->openUploadStream($filename, [
+            'metadata' => [
+                'contentType' => 'application/octet-stream',
+                'romType' => strtoupper(explode('.', $filename, 2)[1])
+            ]
+        ]);
         $fileUploader = new FileUploader($stream, $filepath, $this->contentUploadTransferSize);
         $fileUploader->uploadFile();
     }

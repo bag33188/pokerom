@@ -24,6 +24,7 @@ class RomFileResource extends JsonResource
             'uploadDate' => $this->uploadDate,
             'md5' => $this->md5,
             '_id' => $this->_id,
+            'metadata' => $this->metadata,
 
             'rom' => new RomResource($this->whenLoaded('rom')),
         ];

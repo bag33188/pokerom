@@ -5,7 +5,11 @@
         "length": 1048576,
         "uploadDate": "2022-08-24T06:17:31.639000Z",
         "md5": "3d45c1ee9abd5738df46d2bdda8b57dc",
-        "_id": "6305c27b4bc3e0c5dc0c46ef"
+        "_id": "6305c27b4bc3e0c5dc0c46ef",
+        "metadata": {
+            "romType": "GB",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -13,7 +17,11 @@
         "length": 1048576,
         "uploadDate": "2022-08-24T06:17:54.434000Z",
         "md5": "50927e843568814f7ed45ec4f944bd8b",
-        "_id": "6305c2924bc3e0c5dc0c46f3"
+        "_id": "6305c2924bc3e0c5dc0c46f3",
+        "metadata": {
+            "romType": "GB",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -21,7 +29,11 @@
         "length": 1048576,
         "uploadDate": "2022-08-24T06:18:02.171000Z",
         "md5": "5114bfa60b50a37ed530e607ee7ea74b",
-        "_id": "6305c29a4bc3e0c5dc0c46f7"
+        "_id": "6305c29a4bc3e0c5dc0c46f7",
+        "metadata": {
+            "romType": "GB",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -29,7 +41,11 @@
         "length": 1048576,
         "uploadDate": "2022-08-24T06:18:08.925000Z",
         "md5": "d9290db87b1f0a23b89f99ee4469e34b",
-        "_id": "6305c2a04bc3e0c5dc0c46fa"
+        "_id": "6305c2a04bc3e0c5dc0c46fa",
+        "metadata": {
+            "romType": "GB",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -37,7 +53,11 @@
         "length": 2097152,
         "uploadDate": "2022-08-24T06:18:19.031000Z",
         "md5": "a6924ce1f9ad2228e1c6580779b23878",
-        "_id": "6305c2ab4bc3e0c5dc0c46fd"
+        "_id": "6305c2ab4bc3e0c5dc0c46fd",
+        "metadata": {
+            "romType": "GBC",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -45,7 +65,11 @@
         "length": 2097152,
         "uploadDate": "2022-08-24T06:18:24.300000Z",
         "md5": "2ac166169354e84d0e2d7cf4cb40b312",
-        "_id": "6305c2b04bc3e0c5dc0c4701"
+        "_id": "6305c2b04bc3e0c5dc0c4701",
+        "metadata": {
+            "romType": "GBC",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -53,7 +77,11 @@
         "length": 2097152,
         "uploadDate": "2022-08-24T06:18:49.274000Z",
         "md5": "301899b8087289a6436b0a241fbbb474",
-        "_id": "6305c2c94bc3e0c5dc0c4705"
+        "_id": "6305c2c94bc3e0c5dc0c4705",
+        "metadata": {
+            "romType": "GBC",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -61,7 +89,11 @@
         "length": 16777216,
         "uploadDate": "2022-08-24T06:18:55.532000Z",
         "md5": "e0503182a2e699678bcf25a6897a24d6",
-        "_id": "6305c2cf4bc3e0c5dc0c4709"
+        "_id": "6305c2cf4bc3e0c5dc0c4709",
+        "metadata": {
+            "romType": "GBA",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -69,7 +101,11 @@
         "length": 16777216,
         "uploadDate": "2022-08-24T06:19:13.245000Z",
         "md5": "3a32fd98b065283d09eeba1ce0542888",
-        "_id": "6305c2e14bc3e0c5dc0c471b"
+        "_id": "6305c2e14bc3e0c5dc0c471b",
+        "metadata": {
+            "romType": "GBA",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -77,7 +113,11 @@
         "length": 16777216,
         "uploadDate": "2022-08-24T06:19:18.167000Z",
         "md5": "605b89b67018abcea91e693a4dd25be3",
-        "_id": "6305c2e64bc3e0c5dc0c472d"
+        "_id": "6305c2e64bc3e0c5dc0c472d",
+        "metadata": {
+            "romType": "GBA",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -85,7 +125,11 @@
         "length": 16777216,
         "uploadDate": "2022-08-24T06:19:24.306000Z",
         "md5": "51901a6e40661b3914aa333c802e24e8",
-        "_id": "6305c2ec4bc3e0c5dc0c473f"
+        "_id": "6305c2ec4bc3e0c5dc0c473f",
+        "metadata": {
+            "romType": "GBA",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -93,7 +137,11 @@
         "length": 16777216,
         "uploadDate": "2022-08-24T06:19:29.207000Z",
         "md5": "9d33a02159e018d09073e700e1fd10fd",
-        "_id": "6305c2f14bc3e0c5dc0c4751"
+        "_id": "6305c2f14bc3e0c5dc0c4751",
+        "metadata": {
+            "romType": "GBA",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -101,7 +149,11 @@
         "length": 67108864,
         "uploadDate": "2022-08-24T06:19:38.692000Z",
         "md5": "e53d7a96aa6f3a57b2967d79cc4343c6",
-        "_id": "6305c2f94bc3e0c5dc0c4763"
+        "_id": "6305c2f94bc3e0c5dc0c4763",
+        "metadata": {
+            "romType": "NDS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -109,7 +161,11 @@
         "length": 67108864,
         "uploadDate": "2022-08-24T06:19:47.256000Z",
         "md5": "e5da92c8cfabedd0d037ff33a2f2b6ba",
-        "_id": "6305c3024bc3e0c5dc0c47a5"
+        "_id": "6305c3024bc3e0c5dc0c47a5",
+        "metadata": {
+            "romType": "NDS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -117,7 +173,11 @@
         "length": 134217728,
         "uploadDate": "2022-08-24T06:20:18.073000Z",
         "md5": "f8905424f7d8aea299c51ec7580b33d8",
-        "_id": "6305c3204bc3e0c5dc0c47e7"
+        "_id": "6305c3204bc3e0c5dc0c47e7",
+        "metadata": {
+            "romType": "NDS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -125,7 +185,11 @@
         "length": 134217728,
         "uploadDate": "2022-08-24T06:20:27.544000Z",
         "md5": "ae2a483d0a5e8130d39f44f41a86df57",
-        "_id": "6305c32a4bc3e0c5dc0c4869"
+        "_id": "6305c32a4bc3e0c5dc0c4869",
+        "metadata": {
+            "romType": "NDS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -133,7 +197,11 @@
         "length": 134217728,
         "uploadDate": "2022-08-24T06:20:44.444000Z",
         "md5": "545aa550bafeebdd71ee0256d4c122a0",
-        "_id": "6305c3374bc3e0c5dc0c48eb"
+        "_id": "6305c3374bc3e0c5dc0c48eb",
+        "metadata": {
+            "romType": "NDS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -141,7 +209,11 @@
         "length": 268435456,
         "uploadDate": "2022-08-24T06:20:55.923000Z",
         "md5": "f45fd94bb761721e30bd3a0a4fde124a",
-        "_id": "6305c3414bc3e0c5dc0c496d"
+        "_id": "6305c3414bc3e0c5dc0c496d",
+        "metadata": {
+            "romType": "NDS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -149,7 +221,11 @@
         "length": 268435456,
         "uploadDate": "2022-08-24T06:21:03.548000Z",
         "md5": "da6b09652cced64d9df877a8741db33e",
-        "_id": "6305c34d4bc3e0c5dc0c4a70"
+        "_id": "6305c34d4bc3e0c5dc0c4a70",
+        "metadata": {
+            "romType": "NDS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -157,7 +233,11 @@
         "length": 536870912,
         "uploadDate": "2022-08-24T06:21:12.254000Z",
         "md5": "603583dc6e1b86f786dfe971c5641e85",
-        "_id": "6305c3544bc3e0c5dc0c4b73"
+        "_id": "6305c3544bc3e0c5dc0c4b73",
+        "metadata": {
+            "romType": "NDS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -165,7 +245,11 @@
         "length": 536870912,
         "uploadDate": "2022-08-24T06:21:23.051000Z",
         "md5": "fa7f9772c2d51866185b3fc3fce3acdc",
-        "_id": "6305c35f4bc3e0c5dc0c4d77"
+        "_id": "6305c35f4bc3e0c5dc0c4d77",
+        "metadata": {
+            "romType": "NDS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -173,7 +257,11 @@
         "length": 2147483648,
         "uploadDate": "2022-08-24T06:21:47.982000Z",
         "md5": "3935b44824d2b2e679ec4020d2241ade",
-        "_id": "6305c36e4bc3e0c5dc0c4f7b"
+        "_id": "6305c36e4bc3e0c5dc0c4f7b",
+        "metadata": {
+            "romType": "3DS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -181,7 +269,11 @@
         "length": 2147483648,
         "uploadDate": "2022-08-24T06:22:28.977000Z",
         "md5": "af10001ee09ef09d9ae29de056276196",
-        "_id": "6305c3974bc3e0c5dc0c5785"
+        "_id": "6305c3974bc3e0c5dc0c5785",
+        "metadata": {
+            "romType": "3DS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -189,7 +281,11 @@
         "length": 2147483648,
         "uploadDate": "2022-08-24T06:22:58.686000Z",
         "md5": "3de786d75125137669c6e59d16b065d8",
-        "_id": "6305c3b34bc3e0c5dc0c5f8f"
+        "_id": "6305c3b34bc3e0c5dc0c5f8f",
+        "metadata": {
+            "romType": "3DS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -197,7 +293,11 @@
         "length": 2147483648,
         "uploadDate": "2022-08-24T06:23:22.287000Z",
         "md5": "18a93bea3dda74d7f5337d336d2491dd",
-        "_id": "6305c3cc4bc3e0c5dc0c6799"
+        "_id": "6305c3cc4bc3e0c5dc0c6799",
+        "metadata": {
+            "romType": "3DS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -205,7 +305,11 @@
         "length": 4294967295,
         "uploadDate": "2022-08-24T06:24:00.881000Z",
         "md5": "5b5132f209942e696d5c07f58cdcd8d3",
-        "_id": "6305c3e54bc3e0c5dc0c6fa3"
+        "_id": "6305c3e54bc3e0c5dc0c6fa3",
+        "metadata": {
+            "romType": "3DS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -213,7 +317,11 @@
         "length": 4294967295,
         "uploadDate": "2022-08-24T06:25:25.748000Z",
         "md5": "a91327128187650d415313aa80b5236e",
-        "_id": "6305c4124bc3e0c5dc0c7fb5"
+        "_id": "6305c4124bc3e0c5dc0c7fb5",
+        "metadata": {
+            "romType": "3DS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -221,7 +329,11 @@
         "length": 4294967295,
         "uploadDate": "2022-08-24T06:26:56.646000Z",
         "md5": "4cddff7ff0c10ce6a988373f1698d548",
-        "_id": "6305c45f4bc3e0c5dc0c8fc7"
+        "_id": "6305c45f4bc3e0c5dc0c8fc7",
+        "metadata": {
+            "romType": "3DS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -229,7 +341,11 @@
         "length": 4294967295,
         "uploadDate": "2022-08-24T06:28:09.655000Z",
         "md5": "d9e4a3be78d9c96f4a0720137e562c6a",
-        "_id": "6305c4c24bc3e0c5dc0c9fd9"
+        "_id": "6305c4c24bc3e0c5dc0c9fd9",
+        "metadata": {
+            "romType": "3DS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -237,7 +353,11 @@
         "length": 15971909632,
         "uploadDate": "2022-08-24T06:32:32.010000Z",
         "md5": "cc435fd0a6f0d3998c68a4fa788ded83",
-        "_id": "6305c5344bc3e0c5dc0cafec"
+        "_id": "6305c5344bc3e0c5dc0cafec",
+        "metadata": {
+            "romType": "XCI",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -245,7 +365,11 @@
         "length": 15971909632,
         "uploadDate": "2022-08-24T06:36:02.864000Z",
         "md5": "0349941d294e3981e982b8c4945e16a9",
-        "_id": "6305c6184bc3e0c5dc0cebac"
+        "_id": "6305c6184bc3e0c5dc0cebac",
+        "metadata": {
+            "romType": "XCI",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -253,7 +377,11 @@
         "length": 4997734912,
         "uploadDate": "2022-08-24T06:38:11.068000Z",
         "md5": "f67caf72e3c9003442b5fa2f37e4655d",
-        "_id": "6305c6fa4bc3e0c5dc0d2769"
+        "_id": "6305c6fa4bc3e0c5dc0d2769",
+        "metadata": {
+            "romType": "XCI",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -261,7 +389,11 @@
         "length": 7985954816,
         "uploadDate": "2022-08-24T06:41:05.942000Z",
         "md5": "413a114c1198dd3f85eace41dbdb4523",
-        "_id": "6305c7694bc3e0c5dc0d3a1b"
+        "_id": "6305c7694bc3e0c5dc0d3a1b",
+        "metadata": {
+            "romType": "XCI",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -269,7 +401,11 @@
         "length": 4851431936,
         "uploadDate": "2022-08-24T06:43:28.058000Z",
         "md5": "1081a3174abc14e16f1bc7669194ed51",
-        "_id": "6305c81e4bc3e0c5dc0d57fa"
+        "_id": "6305c81e4bc3e0c5dc0d57fa",
+        "metadata": {
+            "romType": "XCI",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -277,7 +413,11 @@
         "length": 4468491264,
         "uploadDate": "2022-08-24T06:45:48.288000Z",
         "md5": "f7f1d1953595b13ef74e43057427d1b4",
-        "_id": "6305c8a14bc3e0c5dc0d6a20"
+        "_id": "6305c8a14bc3e0c5dc0d6a20",
+        "metadata": {
+            "romType": "XCI",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -285,7 +425,11 @@
         "length": 2097152,
         "uploadDate": "2022-08-24T06:46:51.370000Z",
         "md5": "3cd828587eb8d3fe818d57f99b3a3c95",
-        "_id": "6305c95b4bc3e0c5dc0d7ad8"
+        "_id": "6305c95b4bc3e0c5dc0d7ad8",
+        "metadata": {
+            "romType": "GBC",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -293,7 +437,11 @@
         "length": 2097152,
         "uploadDate": "2022-08-24T06:46:59.995000Z",
         "md5": "854390c4a18d0a1744fb437037b4a531",
-        "_id": "6305c9634bc3e0c5dc0d7adc"
+        "_id": "6305c9634bc3e0c5dc0d7adc",
+        "metadata": {
+            "romType": "GB",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -301,7 +449,11 @@
         "length": 16777216,
         "uploadDate": "2022-08-24T06:47:04.859000Z",
         "md5": "cb0d9b6407cde2bc5043d2f7cfc2216c",
-        "_id": "6305c9684bc3e0c5dc0d7ae0"
+        "_id": "6305c9684bc3e0c5dc0d7ae0",
+        "metadata": {
+            "romType": "GBA",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -309,7 +461,11 @@
         "length": 16777216,
         "uploadDate": "2022-08-24T06:47:10.099000Z",
         "md5": "92262059190c05a5615be6b98612fb14",
-        "_id": "6305c96e4bc3e0c5dc0d7af2"
+        "_id": "6305c96e4bc3e0c5dc0d7af2",
+        "metadata": {
+            "romType": "GBA",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -317,7 +473,11 @@
         "length": 104923028,
         "uploadDate": "2022-08-24T06:47:17.098000Z",
         "md5": "4cbf654b4735760f8efd64a8a41415ca",
-        "_id": "6305c9744bc3e0c5dc0d7b04"
+        "_id": "6305c9744bc3e0c5dc0d7b04",
+        "metadata": {
+            "romType": "NDS",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -325,7 +485,11 @@
         "length": 7985954816,
         "uploadDate": "2022-08-24T06:51:23.657000Z",
         "md5": "fcc796fb20d0ae28f9296e241200ecbb",
-        "_id": "6305c9a94bc3e0c5dc0d7b6a"
+        "_id": "6305c9a94bc3e0c5dc0d7b6a",
+        "metadata": {
+            "romType": "XCI",
+            "contentType": "application/octet-stream"
+        }
     },
     {
         "chunkSize": 1044480,
@@ -333,6 +497,10 @@
         "length": 2147483648,
         "uploadDate": "2022-08-25T19:32:00.010000Z",
         "md5": "51d5e6e5555981ab5f7b153177414e86",
-        "_id": "6307ce21b12790f2b2083cb8"
+        "_id": "6307ce21b12790f2b2083cb8",
+        "metadata": {
+            "romType": "3DS",
+            "contentType": "application/octet-stream"
+        }
     }
 ]
