@@ -18,23 +18,39 @@ class GridFSProcessor
     private readonly Bucket $gridFSBucket;
     private readonly string $gridFilesDiskPath;
 
-
     /**
      * @throws Exception
+     * @throws DirectoryNotFoundException
      */
     public function __construct(private readonly GridFSConnection $gridFSConnection)
     {
         $this->gridFSBucket = $this->gridFSConnection->bucket;
-
         $this->parseGridStorageDirectory();
+    }
 
-        if (!is_dir($this->gridFilesDiskPath)) {
-            throw new DirectoryNotFoundException("GridFS storage path '{$this->gridFilesDiskPath}' does not exist.");
-        }
+    public final function upload(string $filename): void
+    {
+        $filepath = "{$this->gridFilesDiskPath}/${filename}";
+        $stream = $this->gridFSBucket->openUploadStream($filename, ['chunkSizeBytes' => $this->gridFSConnection->chunkSize]);
+        $fileUploader = new FileUploader($stream, $filepath, $this->contentUploadTransferSize);
+        $fileUploader->uploadFile();
+    }
+
+    public final function download(ObjectId $fileId): void
+    {
+        $stream = $this->gridFSBucket->openDownloadStream($fileId);
+        $fileDownloader = new FileDownloader($stream, $this->contentDownloadTransferSize);
+        $fileDownloader->downloadFile();
+    }
+
+    public final function delete(ObjectId $fileId): void
+    {
+        $this->gridFSBucket->delete($fileId);
     }
 
     /**
      * @throws Exception
+     * @throws DirectoryNotFoundException
      */
     private function parseGridStorageDirectory(): void
     {
@@ -57,25 +73,9 @@ class GridFSProcessor
             $this->gridFilesStoragePath = array_values(array_map(fn($path) => trim(strtolower($path)), $this->gridFilesStoragePath));
             $this->gridFilesDiskPath = storage_path(implode(DIRECTORY_SEPARATOR, $this->gridFilesStoragePath));
         }
-    }
 
-    public final function upload(string $filename): void
-    {
-        $filepath = "{$this->gridFilesDiskPath}/${filename}";
-        $stream = $this->gridFSBucket->openUploadStream($filename, ['chunkSizeBytes' => $this->gridFSConnection->chunkSize]);
-        $fileUploader = new FileUploader($stream, $filepath, $this->contentUploadTransferSize);
-        $fileUploader->uploadFile();
-    }
-
-    public final function download(ObjectId $fileId): void
-    {
-        $stream = $this->gridFSBucket->openDownloadStream($fileId);
-        $fileDownloader = new FileDownloader($stream, $this->contentDownloadTransferSize);
-        $fileDownloader->downloadFile();
-    }
-
-    public final function delete(ObjectId $fileId): void
-    {
-        $this->gridFSBucket->delete($fileId);
+        if (!is_dir($this->gridFilesDiskPath)) {
+            throw new DirectoryNotFoundException("GridFS storage path '{$this->gridFilesDiskPath}' does not exist.");
+        }
     }
 }
