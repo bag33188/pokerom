@@ -7,7 +7,7 @@
 /** the special _**&eacute;**_ character in the Pokemon logo */
 const _EACUTE = "\u{00E9}";
 /** **&Eacute;** , uppercase version of {@see _EACUTE} */
-const _EACUTE_U = "\u{00C9}";
+const U_EACUTE = "\u{00C9}";
 /** Unicode's entity for a space char */
 const _SPACE = "\u{0020}";
 

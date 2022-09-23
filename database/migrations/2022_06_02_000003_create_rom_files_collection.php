@@ -12,14 +12,14 @@ return new class extends Migration {
      * @var string
      */
     protected $connection = 'mongodb';
-
-    protected static bool $_ALLOW_MIGRATIONS = false;
+    public $withinTransaction = true;
+    protected const _ALLOW_MIGRATIONS_ = false;
 
     public function up(): void
     {
-        if (self::$_ALLOW_MIGRATIONS === true) {
+        if (self::_ALLOW_MIGRATIONS_ === true) {
             $filename_length = MAX_ROM_FILENAME_LENGTH - 4;
-            $rom_filetypes = array_merge(ROM_TYPES, FILE_TYPES);
+            $rom_filetypes = array_merge(ROM_TYPES, ROMFILE_TYPES);
 
             Schema::connection($this->connection)->create('rom_files', function (Blueprint $collection) use ($filename_length, $rom_filetypes) {
                 $collection->index(
@@ -42,7 +42,7 @@ return new class extends Migration {
 
     public function down(): void
     {
-        if (self::$_ALLOW_MIGRATIONS === true) {
+        if (self::_ALLOW_MIGRATIONS_ === true) {
             Schema::dropIfExists('rom_files');
 
             # Schema::connection($this->connection)

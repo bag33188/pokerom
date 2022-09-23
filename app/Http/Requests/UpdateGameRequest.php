@@ -33,7 +33,7 @@ class UpdateGameRequest extends FormRequest
 
     public function prepareForValidation(): void
     {
-        $normalizeGameNameUnicodeChars = fn(?string $gameName = '') => preg_replace("/[\x{E9}\x{C9}]/u", "e", $gameName);
+        $normalizeGameNameUnicodeChars = fn(?string $gameName = '') => preg_replace(EACUTE_PATTERN, "e", $gameName);
         $formatDateReleased = fn(?string $dateReleased = '') => Date::create($dateReleased)->format('Y-m-d');
 
         $fieldsToMerge = array();

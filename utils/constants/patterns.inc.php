@@ -17,3 +17,6 @@ const GAME_NAME_PATTERN = /** @lang RegExp */
 /** rom name regular expression */
 const ROM_NAME_PATTERN = /** @lang RegExp */
 "/^[\w\d_\-]+$/i";
+/** regex for detecting {@see _EACUTE}, {@see U_EACUTE} */
+const EACUTE_PATTERN = /** @lang RegExp */
+"/[\x{E9}\x{C9}]/u";

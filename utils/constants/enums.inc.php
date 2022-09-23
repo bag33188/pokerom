@@ -22,4 +22,5 @@ const REGIONS = array(
 const ROM_TYPES = array('gb', 'gbc', 'gba', 'nds', '3ds', 'xci');
 /** array of valid user roles */
 const USER_ROLES = array('guest', 'user', 'admin');
-const FILE_TYPES = array('.GB', '.GBC', '.GBA', '.NDS', '.3DS', '.XCI');
+/** array of valid rom file types */
+const ROMFILE_TYPES = array('.GB', '.GBC', '.GBA', '.NDS', '.3DS', '.XCI');

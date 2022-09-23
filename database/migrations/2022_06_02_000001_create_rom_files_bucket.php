@@ -12,9 +12,9 @@ return new class extends Migration {
      * @var string
      */
     protected $connection = 'mongodb';
+    public $withinTransaction = true;
 
-
-    protected static bool $_ALLOW_MIGRATIONS = false;
+    protected const _ALLOW_MIGRATIONS_ = false;
 
 
     /**
@@ -25,7 +25,7 @@ return new class extends Migration {
     public function up(): void
     {
         /*!! never execute. current data is intended to be permanent !!*/
-        if (self::$_ALLOW_MIGRATIONS === true) {
+        if (self::_ALLOW_MIGRATIONS_ === true) {
             Schema::connection($this->connection)->create('rom.files', function (Blueprint $collection) {
                 $collection->index(
                     columns: ['length', 'filename'],
@@ -43,6 +43,17 @@ return new class extends Migration {
                 $collection->dateTime('uploadDate');
                 $collection->char('md5', MD5_HASH_LENGTH);
             });
+            Schema::connection($this->connection)->create('rom.chunks', function (Blueprint $collection) {
+                $collection->index(
+                    columns: ['files_id', 'n'],
+                    name: 'files_id_1_n_1',
+                    options: ['unique' => true]
+                );
+                $collection->integer('n', false, true);
+                $collection->binary('data');
+                $collection->char('files_id', OBJECT_ID_LENGTH);
+                $collection->foreign('files_id')->references('_id')->on('rom.files');
+            });
         }
     }
 
@@ -54,11 +65,17 @@ return new class extends Migration {
     public function down(): void
     {
         /*! don't use down methods as it could overwrite current files in db */
-        if (self::$_ALLOW_MIGRATIONS === true) {
+        if (self::_ALLOW_MIGRATIONS_ === true) {
             Schema::dropIfExists('rom.files');
+            Schema::dropIfExists('rom.chunks');
 
             # Schema::connection($this->connection)
             #     ->table('rom.files', function (Blueprint $collection) {
+            #         $collection->drop();
+            #     });
+
+            # Schema::connection($this->connection)
+            #     ->table('rom.chunks', function (Blueprint $collection) {
             #         $collection->drop();
             #     });
         }
