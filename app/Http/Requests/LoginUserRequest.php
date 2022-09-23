@@ -27,7 +27,6 @@ class LoginUserRequest extends FormRequest
         ];
     }
 
-
     /**
      * Configure the validator instance.
      *

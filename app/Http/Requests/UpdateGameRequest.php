@@ -34,23 +34,27 @@ class UpdateGameRequest extends FormRequest
 
     public function prepareForValidation(): void
     {
+        $normalizeGameNameUnicodeChars = fn() => preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name'));
+        $formatDateReleased = fn() => Date::create($this->input('date_released'))->format('Y-m-d');
+        $slugifyGameName = fn() => Str::slug($this->input('game_name'));
+
         if ($this->isMethod('PATCH')) {
             if ($this->has('game_name')) {
                 $this->merge([
-                    'game_name' => preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name')),
-                    'slug' => Str::slug($this->input('game_name')),
+                    'game_name' => $normalizeGameNameUnicodeChars(),
+                    'slug' => $slugifyGameName(),
                 ]);
             }
             if ($this->has('date_released')) {
                 $this->merge([
-                    'date_released' => Date::create($this->input('date_released'))->format('Y-m-d'),
+                    'date_released' => $formatDateReleased(),
                 ]);
             }
         } else {
             $this->merge([
-                'game_name' => preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name')),
-                'slug' => Str::slug($this->input('game_name')),
-                'date_released' => Date::create($this->input('date_released'))->format('Y-m-d'),
+                'game_name' => $normalizeGameNameUnicodeChars(),
+                'slug' => $slugifyGameName(),
+                'date_released' => $formatDateReleased(),
             ]);
         }
     }
@@ -70,6 +74,13 @@ class UpdateGameRequest extends FormRequest
             'date_released' => [Rule::requiredIf($this->isMethod('PUT')), 'date', 'after_or_equal:' . FIRST_POKEMON_GAME_RELEASE_DATE, 'date_format:Y-m-d'],
             'generation' => [Rule::requiredIf($this->isMethod('PUT')), 'integer', new MinSizeRule(MIN_GAME_GENERATION_VALUE), new MaxSizeRule(MAX_GAME_GENERATION_VALUE)],
             'slug' => ['string', Rule::unique('games', 'slug')->ignore($this->route($this->routeParamName), 'id')],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'slug.unique' => 'The game name is already in use.',
         ];
     }
 }
