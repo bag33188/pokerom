@@ -3,7 +3,6 @@
 namespace App\Observers;
 
 use App\Models\Game;
-use Str;
 
 class GameObserver
 {
@@ -22,7 +21,7 @@ class GameObserver
 
     public function creating(Game $game): void
     {
-        $game->slug = Str::slug($game->game_name);
+        $game->slug = Game::slugifyGameName($game->game_name);
     }
 
     public function created(Game $game): void
@@ -37,7 +36,7 @@ class GameObserver
 
     public function updating(Game $game): void
     {
-        $game->slug = Str::slug($game->game_name);
+        $game->slug = Game::slugifyGameName($game->game_name);
     }
 
     public function deleted(Game $game): void
