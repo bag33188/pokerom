@@ -36,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // https://laravel.com/docs/9.x/queues#handle-method-dependency-injection
         $this->app->bindMethod([UploadRomFileRequest::class, 'rules'], fn($request, $app) => $request->rules($app->make(RomFile::class)));
 
         View::composer('*', function (ViewFactory $view) {
