@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use MongoDB\BSON\ObjectId;
 
 /**
  * @extends Factory<Rom>
@@ -13,6 +12,10 @@ class RomFactory extends Factory
 {
     protected $connection = 'mysql';
     protected $model = Rom::class;
+    protected $has = [
+        'game' => GameFactory::class,
+        'romFile' => RomFileFactory::class,
+    ];
 
     /**
      * Define the model's default state.
@@ -30,7 +33,7 @@ class RomFactory extends Factory
             'rom_type' => $randomRom['rom_type'],
             'rom_size' => $randomRom['rom_size'],
             'game_id' => $randomRom['game_id'],
-            'file_id' => new ObjectId($randomRom['file_id']),
+            'file_id' => $randomRom['file_id'],
             'has_file' => $randomRom['has_file'],
             'has_game' => $randomRom['has_game'],
         ];

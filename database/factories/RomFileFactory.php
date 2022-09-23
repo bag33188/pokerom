@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Rom;
 use App\Models\RomFile;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use MongoDB\BSON\ObjectId;
@@ -13,6 +14,7 @@ class RomFileFactory extends Factory
 {
     protected $connection = 'mongodb';
     protected $model = RomFile::class;
+    protected $for = Rom::class;
 
     /**
      * Define the model's default state.

@@ -27,8 +27,8 @@ class Rom extends Model
         'has_game' => false
     ];
     protected $casts = [
+        'has_game' => 'bool',
         'has_file' => 'boolean',
-        'has_game' => 'boolean',
     ];
 
     public function game(): HasOne

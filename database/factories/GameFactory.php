@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Game;
+use App\Models\Rom;
 use Date;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -13,6 +14,7 @@ class GameFactory extends Factory
 {
     protected $connection = 'mysql';
     protected $model = Game::class;
+    protected $for = Rom::class;
 
     /**
      * Define the model's default state.
