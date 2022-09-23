@@ -68,7 +68,7 @@ class UpdateGameRequest extends FormRequest
             'region' => [Rule::requiredIf($this->isMethod('PUT')), 'string', new MinLengthRule(MIN_GAME_REGION_LENGTH), new MaxLengthRule(MAX_GAME_REGION_LENGTH), new GameRegionRule()],
             'date_released' => [Rule::requiredIf($this->isMethod('PUT')), 'date', 'after_or_equal:' . FIRST_POKEMON_GAME_RELEASE_DATE, 'date_format:Y-m-d'],
             'generation' => [Rule::requiredIf($this->isMethod('PUT')), 'integer', new MinSizeRule(MIN_GAME_GENERATION_VALUE), new MaxSizeRule(MAX_GAME_GENERATION_VALUE)],
-            'slug' => [Rule::requiredIf($this->isMethod('PUT')), 'string', Rule::unique('games', 'slug')->ignore($this->route($this->routeParamName), 'id')],
+            'slug' => ['string', Rule::unique('games', 'slug')->ignore($this->route($this->routeParamName), 'id')],
         ];
     }
 }
