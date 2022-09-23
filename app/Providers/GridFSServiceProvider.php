@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\RomFileProcessor;
 use App\Services\RomFilesConnection;
 use App\Services\RomFilesDatabase;
 use Illuminate\Contracts\Foundation\Application;
@@ -18,15 +19,13 @@ class GridFSServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register(): void
     {
-        # // https://laravel.com/docs/9.x/container#binding-scoped
-        # $this->app->scoped(RomFilesConnection::class, function (Application $app) {
-        #     return new RomFilesConnection($app->make(RomFilesDatabase::class));
-        # });
-        # // use singleton?? better performance since scoped gets flushed after queue worker gets processed??
-
-        $this->app->singleton(RomFilesConnection::class, function (Application $app) {
-            return new RomFilesConnection($app->make(RomFilesDatabase::class));
-        });
+        $this->app->when(RomFileProcessor::class)
+            ->needs(RomFilesConnection::class)
+            ->give(function (Application $app) {
+                return new RomFilesConnection($app->make(RomFilesDatabase::class, ['databaseName' => config('gridfs.connection.database'),
+                    'bucketName' => config('gridfs.bucketName'),
+                    'chunkSize' => config('gridfs.chunkSize')]));
+            });
     }
 
     /**
@@ -48,6 +47,6 @@ class GridFSServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function provides(): array
     {
-        return [RomFilesConnection::class];
+        return [RomFilesConnection::class, RomFileProcessor::class];
     }
 }

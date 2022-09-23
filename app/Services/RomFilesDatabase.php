@@ -13,8 +13,8 @@ class RomFilesDatabase extends GridFSDatabase
     /**
      * Create new GridFS Database Instance
      */
-    public function __construct()
+    public function __construct(string $databaseName, string $bucketName, int $chunkSize)
     {
-        parent::__construct();
+        parent::__construct($databaseName, $bucketName, $chunkSize);
     }
 }
