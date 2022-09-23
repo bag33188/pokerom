@@ -3,6 +3,7 @@
 namespace Classes;
 
 use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
+use JetBrains\PhpStorm\ArrayShape;
 
 # use JetBrains\PhpStorm\Internal\LanguageLevelTypeAware;
 
@@ -85,5 +86,16 @@ abstract class AbstractGridFSModel extends MongoDbModel
      */
     public readonly string $md5;
 
+    /**
+     * metadata
+     * --------
+     *
+     * ### BSON Data Type: Object (`object`)
+     *
+     * **Arbitrary metadata for the file.**
+     *
+     * @var array
+     */
+    #[ArrayShape(['contentType' => "string", 'romType' => "string"])]
     public readonly array $metadata;
 }
