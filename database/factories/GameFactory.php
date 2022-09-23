@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class GameFactory extends Factory
 {
+    protected $connection = 'mysql';
+    protected $model = Game::class;
+
     /**
      * Define the model's default state.
      *

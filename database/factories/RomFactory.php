@@ -11,6 +11,9 @@ use MongoDB\BSON\ObjectId;
  */
 class RomFactory extends Factory
 {
+    protected $connection = 'mysql';
+    protected $model = Rom::class;
+
     /**
      * Define the model's default state.
      *
