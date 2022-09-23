@@ -4,7 +4,6 @@ namespace Utils\Modules;
 
 use MongoDB\BSON\ObjectId;
 use MongoDB\GridFS\Bucket;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GridFSProcessor
 {
@@ -15,19 +14,20 @@ class GridFSProcessor
 
 
     private Bucket $gridFSBucket;
+    private string $diskStoragePath;
 
 
     public function __construct(private readonly GridFSConnection $gridFSConnection)
     {
         $this->gridFSBucket = $this->gridFSConnection->bucket;
-
+        $this->diskStoragePath = storage_path($this->gridFilesStoragePath);
     }
 
     public final function upload(string $filename): void
     {
         $originalFileName = trim($filename);
         $stream = $this->gridFSBucket->openUploadStream($originalFileName, ['chunkSizeBytes' => $this->gridFSConnection->chunkSize]);
-        $fileUploader = new FileUploader($stream, $filename, $this->contentUploadTransferSize);
+        $fileUploader = new FileUploader($stream, $this->diskStoragePath . '/' . $filename, $this->contentUploadTransferSize);
         $fileUploader->uploadFile();
     }
 
