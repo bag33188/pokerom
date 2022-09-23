@@ -26,18 +26,15 @@ class UploadRomFileRequest extends FormRequest
 
     public function rules(RomFile $romFile): array
     {
+        $romFilesCollection = "{$romFile->getConnectionName()}.{$romFile->getTable()}";
+
         return array(
             'rom_filename' => [
                 'required',
                 'string',
                 new RomFilenameRule,
-                Rule::unique("{$romFile->getConnectionName()}.{$romFile->getTable()}", 'filename')
+                Rule::unique($romFilesCollection, 'filename')
             ],
         );
     }
-
-#    private function romFilesCollection(RomFile $romFile): string
-#    {
-#        return "{$romFile->getConnectionName()}.{$romFile->getTable()}";
-#    }
 }
