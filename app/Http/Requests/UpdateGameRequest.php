@@ -19,13 +19,6 @@ class UpdateGameRequest extends FormRequest
 {
     private string $routeParamName;
 
-    function __construct()
-    {
-        parent::__construct();
-
-        $this->routeParamName = $this->routeIs('api.*') ? 'gameId' : 'game';
-    }
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,21 +26,48 @@ class UpdateGameRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        $this->routeParamName = $this->routeIs('api.*') ? 'gameId' : 'game';
+
+//        dd($this->routeIs('api.*'));
+//        dd(\Request::route()->getName(),\Route::getFacadeRoot()->current()->uri());
         $game = Game::find($this->route($this->routeParamName));
         return $this->user()->can('update', $game);
     }
 
     public function prepareForValidation()
     {
-        $a = [];
-        if (!$this->missing('game_name')) {
-            $a['game_name'] = preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name'));
-            $a['slug'] = Str::slug($a['game_name']);
+//        $mergedInput = [];
+//
+//        if ($this->exists('game_name')) {
+//            $keys = ['game_name', 'slug'];
+//            $values = [preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name')), Str::slug($this->input('game_name'))];
+//            $mergedInput = array_merge($mergedInput, array_combine($keys, $values));
+////            $mergedInput = [...$mergedInput, ...array_combine($keys, $values)];
+//        }
+//        if ($this->exists('date_released')) {
+////            $mergedInput['date_released'] = Date::create($this->input('date_released'))->format('Y-m-d');
+//            $mergedInput = array_merge($mergedInput, ['date_released' => Date::create($this->input('date_released'))->format('Y-m-d')]);
+//        }
+        if ($this->isMethod('PATCH')) {
+            if ($this->has('game_name')) {
+                $this->merge([
+                    'game_name' => preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name')),
+                    'slug' => Str::slug($this->input('game_name')),
+                ]);
+            }
+            if ($this->has('date_released')) {
+                $this->merge([
+                    'date_released' => Date::create($this->input('date_released'))->format('Y/m/d'),
+                ]);
+            }
+        } else {
+
+            $this->merge([
+                'game_name' => preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name')),
+                'slug' => Str::slug($this->input('game_name')),
+                'date_released' => Date::create($this->input('date_released'))->format('Y-m-d'),
+            ]);
         }
-        if (!$this->missing('date_released')) {
-            $a['date_released'] = Date::create($this->input('date_released'))->format('Y-m-d');
-        }
-        $this->merge($a);
     }
 
 
@@ -64,7 +84,7 @@ class UpdateGameRequest extends FormRequest
             'region' => [Rule::requiredIf($this->isMethod('PUT')), 'string', new MinLengthRule(MIN_GAME_REGION_LENGTH), new MaxLengthRule(MAX_GAME_REGION_LENGTH), new GameRegionRule()],
             'date_released' => [Rule::requiredIf($this->isMethod('PUT')), 'date', 'after_or_equal:' . FIRST_POKEMON_GAME_RELEASE_DATE, 'date_format:Y-m-d'],
             'generation' => [Rule::requiredIf($this->isMethod('PUT')), 'integer', new MinSizeRule(MIN_GAME_GENERATION_VALUE), new MaxSizeRule(MAX_GAME_GENERATION_VALUE)],
-            'slug' => ['string', Rule::unique('games', 'slug')->ignore($this->route($this->routeParamName))]
+            'slug' => [Rule::requiredIf($this->isMethod('PUT')), 'string', Rule::unique('games', 'slug')->ignore($this->route($this->routeParamName), 'id')],
         ];
     }
 }
