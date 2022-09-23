@@ -38,7 +38,7 @@ class UpdateGameRequest extends FormRequest
 
         $fieldsToMerge = array();
 
-        if ($this->isMethod('PATCH')) {
+        if ($this->isMethod(self::METHOD_PATCH)) {
 
             if ($this->has('game_name')) {
                 $fieldsToMerge['game_name'] = $normalizeGameNameUnicodeChars($this->input('game_name'));
@@ -67,11 +67,11 @@ class UpdateGameRequest extends FormRequest
     {
         $pokemonGreenReleaseDate = FIRST_POKEMON_GAME_RELEASE_DATE;
         return [
-            'game_name' => [Rule::requiredIf($this->isMethod('PUT')), 'string', new MinLengthRule(MIN_GAME_NAME_LENGTH), new MaxLengthRule(MAX_GAME_NAME_LENGTH), new GameNameRule()],
-            'game_type' => [Rule::requiredIf($this->isMethod('PUT')), 'string', new MinLengthRule(MIN_GAME_TYPE_LENGTH), new MaxLengthRule(MAX_GAME_TYPE_LENGTH), new GameTypeRule()],
-            'region' => [Rule::requiredIf($this->isMethod('PUT')), 'string', new MinLengthRule(MIN_GAME_REGION_LENGTH), new MaxLengthRule(MAX_GAME_REGION_LENGTH), new GameRegionRule()],
-            'date_released' => [Rule::requiredIf($this->isMethod('PUT')), 'date', "after_or_equal:$pokemonGreenReleaseDate", 'date_format:Y-m-d'],
-            'generation' => [Rule::requiredIf($this->isMethod('PUT')), 'integer', new MinSizeRule(MIN_GAME_GENERATION_VALUE), new MaxSizeRule(MAX_GAME_GENERATION_VALUE)],
+            'game_name' => [Rule::requiredIf($this->isMethod(self::METHOD_PUT)), 'string', new MinLengthRule(MIN_GAME_NAME_LENGTH), new MaxLengthRule(MAX_GAME_NAME_LENGTH), new GameNameRule()],
+            'game_type' => [Rule::requiredIf($this->isMethod(self::METHOD_PUT)), 'string', new MinLengthRule(MIN_GAME_TYPE_LENGTH), new MaxLengthRule(MAX_GAME_TYPE_LENGTH), new GameTypeRule()],
+            'region' => [Rule::requiredIf($this->isMethod(self::METHOD_PUT)), 'string', new MinLengthRule(MIN_GAME_REGION_LENGTH), new MaxLengthRule(MAX_GAME_REGION_LENGTH), new GameRegionRule()],
+            'date_released' => [Rule::requiredIf($this->isMethod(self::METHOD_PUT)), 'date', "after_or_equal:$pokemonGreenReleaseDate", 'date_format:Y-m-d'],
+            'generation' => [Rule::requiredIf($this->isMethod(self::METHOD_PUT)), 'integer', new MinSizeRule(MIN_GAME_GENERATION_VALUE), new MaxSizeRule(MAX_GAME_GENERATION_VALUE)],
             'slug' => ['string', Rule::unique('games', 'slug')->ignore($this->route($this->routeParamName), 'id')],
         ];
     }

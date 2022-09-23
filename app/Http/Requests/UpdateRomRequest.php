@@ -37,9 +37,9 @@ class UpdateRomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'rom_name' => [Rule::requiredIf($this->isMethod('PUT')), 'string', new MinLengthRule(MIN_ROM_NAME_LENGTH), new MaxLengthRule(MAX_ROM_NAME_LENGTH), new RomNameRule(), Rule::unique('roms', 'rom_name')->ignore($this->route($this->routeParamName), 'id')],
-            'rom_size' => [Rule::requiredIf($this->isMethod('PUT')), 'integer', new MinSizeRule(MIN_ROM_SIZE), new MaxSizeRule(MAX_ROM_SIZE)],
-            'rom_type' => [Rule::requiredIf($this->isMethod('PUT')), 'string', new MinLengthRule(MIN_ROM_TYPE_LENGTH), new MaxLengthRule(MAX_ROM_TYPE_LENGTH), new RomTypeRule()],
+            'rom_name' => [Rule::requiredIf($this->isMethod(self::METHOD_PUT)), 'string', new MinLengthRule(MIN_ROM_NAME_LENGTH), new MaxLengthRule(MAX_ROM_NAME_LENGTH), new RomNameRule(), Rule::unique('roms', 'rom_name')->ignore($this->route($this->routeParamName), 'id')],
+            'rom_size' => [Rule::requiredIf($this->isMethod(self::METHOD_PUT)), 'integer', new MinSizeRule(MIN_ROM_SIZE), new MaxSizeRule(MAX_ROM_SIZE)],
+            'rom_type' => [Rule::requiredIf($this->isMethod(self::METHOD_PUT)), 'string', new MinLengthRule(MIN_ROM_TYPE_LENGTH), new MaxLengthRule(MAX_ROM_TYPE_LENGTH), new RomTypeRule()],
         ];
     }
 }
