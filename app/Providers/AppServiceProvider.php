@@ -27,7 +27,6 @@ class AppServiceProvider extends ServiceProvider
                 App::register(IdeHelperServiceProvider::class);
             }
         }
-        $this->app->bindMethod([UploadRomFileRequest::class, 'rules'], fn($request, $app) => $request->rules($app->make(RomFile::class)));
     }
 
     /**
@@ -37,6 +36,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->app->bindMethod([UploadRomFileRequest::class, 'rules'], fn($request, $app) => $request->rules($app->make(RomFile::class)));
+
         View::composer('*', function (ViewFactory $view) {
             $view_name = str_replace('.', '-', $view->getName());
             View::share('view_name', $view_name);
