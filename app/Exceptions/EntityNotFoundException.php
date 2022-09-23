@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Utils\Classes\AbstractApplicationException as ApplicationException;
 
-class RouteNotFoundException extends ApplicationException
+class EntityNotFoundException extends ApplicationException
 {
     use ApiMethods {
         requestExpectsJson as private;
@@ -23,12 +23,19 @@ class RouteNotFoundException extends ApplicationException
     public function render(Request $request): false|JsonResponse|RedirectResponse
     {
         if ($this->requestExpectsJson()) {
+            // make sure it's not `model not found` exception
 
-            $errorIsHttpNotFound = $this->code === HttpStatus::HTTP_NOT_FOUND && strlen($this->message) === 0;
+            $errorIsRouteNotFound = $this->code === HttpStatus::HTTP_NOT_FOUND && strlen($this->message) === 0;
 
-            if ($errorIsHttpNotFound) {
+            if ($errorIsRouteNotFound) {
                 return Response::json(
                     ['message' => "Route not found: {$this->getCurrentErrorUrl()}", 'success' => false],
+                    $this->code,
+                    $this->headers
+                );
+            } else {
+                return Response::json(
+                    ['message' => $this->message, 'success' => false],
                     $this->code,
                     $this->headers
                 );

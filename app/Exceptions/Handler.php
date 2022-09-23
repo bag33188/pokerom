@@ -90,10 +90,10 @@ class Handler extends ExceptionHandler
                     ]
                 ]
             ));
-            $this->renderable(fn(NotFoundHttpException $e) => throw App::make(RouteNotFoundException::class,
+            $this->renderable(fn(NotFoundHttpException $e) => throw App::make(EntityNotFoundException::class,
                 [
                     'message' => $e->getMessage(),
-                    'code' => $this->determineErrorCodeFromException($e),
+                    'code' => 404,
                     'headers' => [
                         ...$e->getHeaders(),
                         'X-Attempted-URL' => $this->getCurrentErrorUrl()
