@@ -7,25 +7,30 @@ use MongoDB\GridFS\Bucket;
 
 class GridFSProcessor
 {
-    protected string $gridFilesStoragePath;
+    protected string $gridFilesPath;
 
     protected int $contentUploadTransferSize;
     protected int $contentDownloadTransferSize;
 
-    private Bucket $gridFSBucket;
-    private string $diskStoragePath;
+    private readonly Bucket $gridFSBucket;
+    private readonly string $gridStoragePath;
 
     public function __construct(private readonly GridFSConnection $gridFSConnection)
     {
         $this->gridFSBucket = $this->gridFSConnection->bucket;
-        $this->diskStoragePath = storage_path($this->gridFilesStoragePath ?? 'app/public/grid_files');
+
+        if (empty($this->gridFilesPath)) {
+            $this->gridFilesPath = 'app/public/grid_files';
+        }
+
+        $this->gridStoragePath = preg_replace('/\x{5C}/u', '/', storage_path($this->gridFilesPath));
     }
 
     public final function upload(string $filename): void
     {
-        $originalFileName = trim($filename);
-        $stream = $this->gridFSBucket->openUploadStream($originalFileName, ['chunkSizeBytes' => $this->gridFSConnection->chunkSize]);
-        $fileUploader = new FileUploader($stream, "{$this->diskStoragePath}/${filename}", $this->contentUploadTransferSize);
+        $filepath = "{$this->gridStoragePath}/${filename}";
+        $stream = $this->gridFSBucket->openUploadStream($filename, ['chunkSizeBytes' => $this->gridFSConnection->chunkSize]);
+        $fileUploader = new FileUploader($stream, $filepath, $this->contentUploadTransferSize);
         $fileUploader->uploadFile();
     }
 

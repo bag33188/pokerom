@@ -35,12 +35,12 @@ class GridFSConnection
 
     private function parseDbCredentials(): array
     {
-        return [
+        return $this->useAuth ? [
             'username' => config($this->usernameConfigPath),
             'password' => config($this->passwordConfigPath),
             'authSource' => $this->authDatabase,
             'authMechanism' => $this->authMechanism
-        ];
+        ] : [];
     }
 
     /**
@@ -49,7 +49,7 @@ class GridFSConnection
     private function connect(): void
     {
         try {
-            $db = new MongoClient(uri: $this->dsn(), uriOptions: ($this->useAuth) ? $this->parseDbCredentials() : []);
+            $db = new MongoClient(uri: $this->dsn(), uriOptions: $this->parseDbCredentials());
 
             $this->bucket = $db->selectDatabase($this->databaseName)->selectGridFSBucket([
                 'chunkSizeBytes' => $this->chunkSize,
