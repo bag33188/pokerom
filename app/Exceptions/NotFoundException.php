@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Utils\Classes\AbstractApplicationException as ApplicationException;
 
-class EntityNotFoundException extends ApplicationException
+class NotFoundException extends ApplicationException
 {
     use ApiMethods {
         requestExpectsJson as private;
@@ -23,19 +23,20 @@ class EntityNotFoundException extends ApplicationException
     public function render(Request $request): false|JsonResponse|RedirectResponse
     {
         if ($this->requestExpectsJson()) {
-            // make sure it's not `model not found` exception
-
+            // route not found always has an error message whose string length is 0
             $errorIsRouteNotFound = $this->code === HttpStatus::HTTP_NOT_FOUND && strlen($this->message) === 0;
-
-            if ($errorIsRouteNotFound) {
+            // model not found always has an error message whose string matches 'No query results for model'
+            $errorIsModelNotFound = $this->code === HttpStatus::HTTP_NOT_FOUND && str_contains(strtoupper($this->message), strtoupper('No query results for model'));
+            if ($errorIsModelNotFound) {
                 return Response::json(
-                    ['message' => "Route not found: {$this->getCurrentErrorUrl()}", 'success' => false],
+                    ['message' => $this->message, 'success' => false],
                     $this->code,
                     $this->headers
                 );
-            } else {
+            }
+            if ($errorIsRouteNotFound) {
                 return Response::json(
-                    ['message' => $this->message, 'success' => false],
+                    ['message' => "Route not found: {$this->getCurrentErrorUrl()}", 'success' => false],
                     $this->code,
                     $this->headers
                 );

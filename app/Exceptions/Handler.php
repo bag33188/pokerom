@@ -82,6 +82,7 @@ class Handler extends ExceptionHandler
         ));
 
         if ($this->isApiRequest() and !$this->isLivewireRequest()) {
+
             $this->renderable(fn(AuthenticationException $e) => throw App::make(ApiAuthException::class, [
                     'message' => $e->getMessage(),
                     'code' => HttpStatus::HTTP_UNAUTHORIZED,
@@ -90,10 +91,11 @@ class Handler extends ExceptionHandler
                     ]
                 ]
             ));
-            $this->renderable(fn(NotFoundHttpException $e) => throw App::make(EntityNotFoundException::class,
+
+            $this->renderable(fn(NotFoundHttpException $e) => throw App::make(NotFoundException::class,
                 [
                     'message' => $e->getMessage(),
-                    'code' => 404,
+                    'code' => $this->determineErrorCodeFromException($e),
                     'headers' => [
                         ...$e->getHeaders(),
                         'X-Attempted-URL' => $this->getCurrentErrorUrl()
