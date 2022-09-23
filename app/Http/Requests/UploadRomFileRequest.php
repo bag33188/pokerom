@@ -38,6 +38,12 @@ class UploadRomFileRequest extends FormRequest
         );
     }
 
+    public function messages(): array
+    {
+        return [
+            'rom_filename.unique' => 'A ROM file with this name already exists.'
+        ];
+    }
 
     private function romFilesCollection(): string
     {
