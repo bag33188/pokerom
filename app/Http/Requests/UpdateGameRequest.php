@@ -12,7 +12,6 @@ use App\Rules\MinLengthRule;
 use App\Rules\MinSizeRule;
 use Date;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class UpdateGameRequest extends FormRequest
@@ -36,14 +35,13 @@ class UpdateGameRequest extends FormRequest
     {
         $normalizeGameNameUnicodeChars = fn(string $gameName) => preg_replace("/[\x{E9}\x{C9}]/u", "e", $gameName);
         $formatDateReleased = fn(string $dateReleased) => Date::create($dateReleased)->format('Y-m-d');
-        $slugifyGameName = fn() => Str::slug($this->get('game_name'), '-', 'en');
 
         $fieldsToMerge = [];
 
         if ($this->isMethod('PATCH')) {
             if ($this->has('game_name')) {
                 $fieldsToMerge['game_name'] = $normalizeGameNameUnicodeChars($this->input('game_name'));
-                $fieldsToMerge['slug'] = $slugifyGameName();
+                $fieldsToMerge['slug'] = Game::slugifyGameName($this->get('game_name'));
             }
             if ($this->has('date_released')) {
                 $fieldsToMerge['date_released'] = $formatDateReleased($this->input('date_released'));
@@ -52,7 +50,7 @@ class UpdateGameRequest extends FormRequest
             $fieldsToMerge = [
                 'date_released' => $formatDateReleased($this->input('date_released')),
                 'game_name' => $normalizeGameNameUnicodeChars($this->input('game_name')),
-                'slug' => $slugifyGameName(),
+                'slug' => Game::slugifyGameName($this->get('game_name')),
             ];
         }
 

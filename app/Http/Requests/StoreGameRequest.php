@@ -12,7 +12,6 @@ use App\Rules\MinLengthRule;
 use App\Rules\MinSizeRule;
 use Date;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 /** @mixin Game */
@@ -39,7 +38,7 @@ class StoreGameRequest extends FormRequest
         $this->merge([
             'date_released' => Date::create($this->input('date_released'))->format('Y-m-d'),
             'game_name' => preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name')),
-            'slug' => Str::slug($this->input('game_name')),
+            'slug' => Game::slugifyGameName($this->get('game_name')),
             'rom_id' => $this->query('rom_id'),
         ]);
     }
