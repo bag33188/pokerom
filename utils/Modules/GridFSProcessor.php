@@ -18,18 +18,20 @@ class GridFSProcessor
     private readonly Bucket $gridFSBucket;
     private readonly string $gridFilesDiskPath;
 
+
+    public function __construct(private readonly GridFSConnection $gridFSConnection)
+    {
+        $this->gridFSBucket = $this->gridFSConnection->bucket;
+    }
+
     /**
      * @throws Exception
      * @throws DirectoryNotFoundException
      */
-    public function __construct(private readonly GridFSConnection $gridFSConnection)
-    {
-        $this->gridFSBucket = $this->gridFSConnection->bucket;
-        $this->parseGridStorageDirectory();
-    }
-
     public final function upload(string $filename): void
     {
+        $this->parseGridStorageDirectory();
+
         $filepath = "{$this->gridFilesDiskPath}/${filename}";
         $stream = $this->gridFSBucket->openUploadStream($filename, ['chunkSizeBytes' => $this->gridFSConnection->chunkSize]);
         $fileUploader = new FileUploader($stream, $filepath, $this->contentUploadTransferSize);

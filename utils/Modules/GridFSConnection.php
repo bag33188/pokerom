@@ -2,8 +2,8 @@
 
 namespace Utils\Modules;
 
-use Exception;
 use MongoDB\Client as MongoClient;
+use MongoDB\Driver\Exception\RuntimeException as DriverRuntimeException;
 use MongoDB\GridFS\Bucket;
 
 class GridFSConnection
@@ -11,6 +11,7 @@ class GridFSConnection
     protected string $host = 'localhost';
     protected int $port = 27017;
     protected bool $useAuth = false;
+
     protected string $authDatabase = 'admin';
     protected string $authMechanism = 'SCRAM-SHA-1';
     protected string $usernameConfigPath;
@@ -19,17 +20,15 @@ class GridFSConnection
     public string $databaseName = 'test';
     public string $bucketName = 'fs';
     public int $chunkSize = 0x3FC00;
+
     public readonly Bucket $bucket;
 
-    /**
-     * @throws Exception
-     */
     public function __construct()
     {
         try {
             $this->connectGfs();
-        } catch (Exception $e) {
-            throw new Exception("Error connecting to GridFS: {$e->getMessage()}");
+        } catch (DriverRuntimeException $e) {
+            throw new DriverRuntimeException("Error connecting to GridFS: {$e->getMessage()}");
         }
     }
 
