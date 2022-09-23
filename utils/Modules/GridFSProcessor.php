@@ -27,7 +27,7 @@ class GridFSProcessor
      * @throws Exception
      * @throws DirectoryNotFoundException
      */
-    public final function upload(string $filename, array $metadata = []): void
+    public final function upload(string $filename, array $metadata = ['contentType' => "application/octet-stream"]): void
     {
         $this->parseGridStorageDirectory();
 

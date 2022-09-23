@@ -42,7 +42,7 @@ class RomFileController extends WebController
     public function create(): Application|Factory|View
     {
         $storageRomFilesList = Storage::disk('public')->files(ROM_FILES_DIRNAME);
-        $matchRomFilePattern = fn(string $romFilename): false|int => preg_match(ROM_FILENAME_PATTERNS[1], $romFilename);
+        $matchRomFilePattern = fn(string $romFilename): false|int => preg_match("/([\w\d\-_]{1,28})\.(3ds|xci|nds|gbc|gb|gba)$/i", $romFilename);
         $romFilesList = array_values(array_filter($storageRomFilesList, $matchRomFilePattern, ARRAY_FILTER_USE_BOTH));
         $sortByStringLength = fn(string $a, string $b): int => strlen($a) <=> strlen($b);
         usort($romFilesList, $sortByStringLength);
