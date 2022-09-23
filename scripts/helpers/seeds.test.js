@@ -55,7 +55,7 @@ romsData = romsData.valueOf().map((romData) => {
 romFilesData = romFilesData.valueOf().map((romFileData) => {
     // delete romFileData["_id"];
     delete romFileData["uploadDate"];
-    delete romFileData["md5"];
+    // delete romFileData["md5"];
     return romFileData;
 });
 
