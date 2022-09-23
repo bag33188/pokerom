@@ -18,3 +18,7 @@ const ROM_FILES_DIRNAME = 'rom_files';
 const API_TOKEN_KEY = 'auth_token';
 /** concat: Pok, &eacute; ... output: Pok&eacute; */
 const POKE_EACUTE = "Pok" . _EACUTE;
+
+
+/** Pokemon Green release date */
+const FIRST_POKEMON_GAME_RELEASE_DATE = '1996-02-27';
