@@ -69,16 +69,6 @@
         handleUploadRomFileForm();
     </script>
 @endpush
-@php
-    function removeStoragePathFromFilename(string &$filename): void {
-        $filename = str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $filename);
-    }
-
-    function formatRomFilename(string $rom_filename): string {
-        list($filename, $filetype) = explode('.', $rom_filename, 2);
-        return sprintf("%s.%s", trim($filename), strtoupper($filetype));
-    }
-@endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Upload a ROM File</h2>
@@ -108,11 +98,10 @@
                         <x-form-select-label class="!font-semibold" for="romFile" text="Select ROM File"/>
                         <x-form-select class="shadow" name="rom_filename" id="romFile">
                             @foreach($romFilesList as $romFileListing)
-                                @php removeStoragePathFromFilename($romFileListing); @endphp
                                 <option
                                     value="{{ $romFileListing }}"
                                     @selected(old('rom_filename') == $romFileListing)
-                                >{{ formatRomFilename($romFileListing) }}</option>
+                                >{{ $romFileListing }}</option>
                             @endforeach
                         </x-form-select>
                     </div>
