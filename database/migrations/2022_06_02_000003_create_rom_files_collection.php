@@ -35,7 +35,7 @@ return new class extends Migration {
                 );
                 $collection->string('filename', $filename_length);
                 $collection->enum('filetype', $rom_filetypes);
-                $collection->unsignedBigInteger('filesize', autoIncrement: false);
+                $collection->bigInteger('filesize', autoIncrement: false, unsigned: true);
             });
         }
     }
