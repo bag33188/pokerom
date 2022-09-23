@@ -2,11 +2,14 @@
 
 namespace Utils\Modules;
 
+use Exception;
 use MongoDB\BSON\ObjectId;
 use MongoDB\GridFS\Bucket;
+use Symfony\Component\Finder\Exception\DirectoryNotFoundException;
 
 class GridFSProcessor
 {
+    /** @var string|string[] */
     protected string|array $gridFilesStoragePath;
 
     protected int $contentUploadTransferSize;
@@ -15,20 +18,33 @@ class GridFSProcessor
     private readonly Bucket $gridFSBucket;
     private readonly string $gridFilesDiskPath;
 
+
+    /**
+     * @throws Exception
+     */
     public function __construct(private readonly GridFSConnection $gridFSConnection)
     {
         $this->gridFSBucket = $this->gridFSConnection->bucket;
 
         $this->parseGridStorageDirectory();
+
+        if (!is_dir($this->gridFilesDiskPath)) {
+            throw new DirectoryNotFoundException("GridFS storage path '{$this->gridFilesDiskPath}' does not exist.");
+        }
     }
 
+    /**
+     * @throws Exception
+     */
     private function parseGridStorageDirectory(): void
     {
         if (empty($this->gridFilesStoragePath)) {
-            $this->gridFilesStoragePath = 'app/public/grid_files';
+            throw new Exception('GridFS storage path is not set.');
         }
 
         if (is_string($this->gridFilesStoragePath)) {
+            $this->gridFilesStoragePath = trim(strtolower($this->gridFilesStoragePath));
+
             if (str_starts_with(strtolower($this->gridFilesStoragePath), 'storage'))
                 $this->gridFilesStoragePath = str_replace('storage/', '', $this->gridFilesStoragePath);
 
@@ -36,10 +52,10 @@ class GridFSProcessor
         }
 
         if (is_array($this->gridFilesStoragePath)) {
-            if (strtolower($this->gridFilesStoragePath[0]) === 'storage')
-                array_splice($this->gridFilesStoragePath, 0, 1); # unset($this->gridFilesStoragePath[0]);
+            if (strtolower($this->gridFilesStoragePath[0]) === 'storage') unset($this->gridFilesStoragePath[0]);
 
-            $this->gridFilesDiskPath = preg_replace('/\x{5C}/u', DIRECTORY_SEPARATOR, storage_path(implode(DIRECTORY_SEPARATOR, $this->gridFilesStoragePath)));
+            $this->gridFilesStoragePath = array_values(array_map(fn($path) => trim(strtolower($path)), $this->gridFilesStoragePath));
+            $this->gridFilesDiskPath = storage_path(implode(DIRECTORY_SEPARATOR, $this->gridFilesStoragePath));
         }
     }
 

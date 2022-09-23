@@ -11,7 +11,6 @@ class RomFileProcessor extends GridFSProcessor
     protected int $contentUploadTransferSize = 0xFF000;
     protected int $contentDownloadTransferSize = 0xFF000;
 
-
     public function __construct(RomFilesConnection $romFilesConnection)
     {
         parent::__construct($romFilesConnection);
