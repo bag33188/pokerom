@@ -10,6 +10,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class RomResource extends JsonResource
 {
     public $additional = ['success' => true];
+
     /**
      * @param Request $request
      * @return array

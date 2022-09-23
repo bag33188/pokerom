@@ -10,6 +10,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class RomFileResource extends JsonResource
 {
     public $additional = ['success' => true];
+
     /**
      * @param Request $request
      * @return array
@@ -22,7 +23,6 @@ class RomFileResource extends JsonResource
             'length' => $this->length,
             'uploadDate' => $this->uploadDate,
             'md5' => $this->md5,
-
             '_id' => $this->_id,
 
             'rom' => new RomResource($this->whenLoaded('rom')),

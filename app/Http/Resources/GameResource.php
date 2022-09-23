@@ -10,6 +10,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class GameResource extends JsonResource
 {
     public $additional = ['success' => true];
+
     /**
      * @param Request $request
      * @return array
@@ -26,8 +27,8 @@ class GameResource extends JsonResource
             'slug' => $this->slug,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-
             'rom_id' => $this->rom_id,
+
             'rom' => new RomResource($this->whenLoaded('rom')),
         ];
     }
