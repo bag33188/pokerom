@@ -35,7 +35,7 @@ class StoreGameRequest extends FormRequest
 
         $this->merge([
             'date_released' => Date::create($this->input('date_released'))->format('Y-m-d'),
-            'game_name' => preg_replace(EACUTE_PATTERN, "e", $this->input('game_name')),
+            'game_name' => preg_replace(EACUTE_PATTERN, 'e', $this->input('game_name')),
             'rom_id' => $this->query('rom_id'),
         ]);
     }
@@ -47,7 +47,6 @@ class StoreGameRequest extends FormRequest
      */
     public function rules(): array
     {
-        $pokemonGreenReleaseDate = FIRST_POKEMON_GAME_RELEASE_DATE;
         return [
             'game_name' => ['required', 'string', new MinLengthRule(MIN_GAME_NAME_LENGTH), new MaxLengthRule(MAX_GAME_NAME_LENGTH), new GameNameRule()],
             'game_type' => ['required', 'string', new MinLengthRule(MIN_GAME_TYPE_LENGTH), new MaxLengthRule(MAX_GAME_TYPE_LENGTH), new GameTypeRule()],
