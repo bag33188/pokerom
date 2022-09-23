@@ -11,29 +11,28 @@ class UploadRomFileRequest extends FormRequest
 {
     protected $stopOnFirstFailure = true;
 
-    protected function prepareForValidation()
+    public function authorize(): bool
     {
-        $romFilename = $this->string('rom_filename');
+        return $this->user()->can('create', RomFile::class);
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $romFilename = $this->str('rom_filename');
         RomFile::normalizeRomFilename($romFilename);
-        $this->merge([
-            'rom_filename' => $romFilename
-        ]);
+
+        $this->merge(['rom_filename' => $romFilename]);
     }
 
     public function rules(): array
     {
-        return [
+        return array(
             'rom_filename' => [
                 'required',
                 'string',
                 new RomFilenameRule,
                 Rule::unique(RomFile::class, 'filename'), // <-- works EXACTLY as excepted
             ],
-        ];
-    }
-
-    public function authorize(): bool
-    {
-        return $this->user()->can('create', RomFile::class);
+        );
     }
 }

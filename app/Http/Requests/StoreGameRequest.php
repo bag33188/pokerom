@@ -28,12 +28,12 @@ class StoreGameRequest extends FormRequest
         return $this->user()->can('create', Game::class);
     }
 
-    public function prepareForValidation()
+    public function prepareForValidation(): void
     {
         $this->merge([
             'slug' => Str::slug($this->input('game_name')),
             'date_released' => Date::create($this->input('date_released'))->format('Y-m-d'),
-            'game_name' => preg_replace("/[\x{E9}\x{C9}]/u", "\u{0065}", $this->input('game_name')),
+            'game_name' => preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name')),
             'rom_id' => $this->query('rom_id'),
         ]);
     }

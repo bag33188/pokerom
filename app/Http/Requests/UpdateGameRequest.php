@@ -27,14 +27,15 @@ class UpdateGameRequest extends FormRequest
     public function authorize(): bool
     {
         $this->routeParamName = $this->routeIs('api.*') ? 'gameId' : 'game';;
+
         $game = Game::find($this->route($this->routeParamName));
         return $this->user()->can('update', $game);
     }
 
-    public function prepareForValidation()
+    public function prepareForValidation(): void
     {
         if ($this->isMethod('PATCH')) {
-            if ($this->exists('game_name')) {
+            if ($this->has('game_name')) {
                 $this->merge([
                     'game_name' => preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name')),
                     'slug' => Str::slug($this->input('game_name')),

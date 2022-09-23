@@ -9,6 +9,11 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RegisterUserRequest extends FormRequest
 {
+    public function authorize(): bool
+    {
+        return true;
+    }
+
     public function rules(): array
     {
         return [
@@ -16,11 +21,6 @@ class RegisterUserRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'unique:users', new MaxLengthRule(MAX_USER_EMAIL_LENGTH)],
             'password' => ['required', 'string', 'confirmed', new MinLengthRule(MIN_USER_PASSWORD_LENGTH), new MaxLengthRule(MAX_USER_PASSWORD_LENGTH)],
         ];
-    }
-
-    public function authorize(): bool
-    {
-        return true;
     }
 
     // https://stackoverflow.com/a/68647440

@@ -11,6 +11,13 @@ class UpdateUserRequest extends FormRequest
 {
     private readonly string $routeParamName;
 
+    public function authorize(): bool
+    {
+        $this->routeParamName = $this->routeIs('api.*') ? 'userId' : 'user';
+
+        return $this->user()->can('update', auth()->user());
+    }
+
     public function rules(): array
     {
         return [
@@ -20,16 +27,11 @@ class UpdateUserRequest extends FormRequest
         ];
     }
 
-    public function authorize(): bool
-    {
-        $this->routeParamName = $this->routeIs('api.*') ? 'userId' : 'user';
-
-        return $this->user()->can('update', auth()->user());
-    }
-
     // https://stackoverflow.com/a/68647440
     protected function passedValidation(): void
     {
-        $this->merge(['password' => bcrypt($this->string('password'))]);
+        if ($this->exists('password') && $this->exists('password_confirmation')) {
+            $this->merge(['password' => bcrypt($this->str('password'))]);
+        }
     }
 }

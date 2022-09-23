@@ -11,7 +11,13 @@ use Illuminate\Validation\Validator;
 
 class LoginUserRequest extends FormRequest
 {
-    private ?User $userFromRequest = null;
+    private readonly ?User $userFromRequest;
+
+    public function authorize(): bool
+    {
+        $this->userFromRequest = User::where('email', '=', $this->string('email'))->firstOrFail();
+        return true;
+    }
 
     public function rules(): array
     {
@@ -21,11 +27,6 @@ class LoginUserRequest extends FormRequest
         ];
     }
 
-    public function authorize(): bool
-    {
-        $this->userFromRequest = User::where('email', $this->string('email'))->firstOrFail();
-        return true;
-    }
 
     /**
      * Configure the validator instance.
@@ -38,7 +39,7 @@ class LoginUserRequest extends FormRequest
         // checks user current password
         // before making changes
         $validator->after(function (Validator $validator) {
-            if (!Hash::check($this->string('password'), $this->userFromRequest->password)) {
+            if (!Hash::check($this->string('password'), $this->userFromRequest->getAttributeValue('password'))) {
                 $validator->errors()->add('password', 'The password you entered is incorrect.');
             }
         });
