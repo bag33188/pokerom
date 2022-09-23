@@ -8,10 +8,6 @@ use Illuminate\Http\Request;
 
 class UserRepository implements UserRepositoryInterface
 {
-    function __construct(private readonly Request $request)
-    {
-    }
-
     public function revokeApiTokens(User $user): int
     {
         return $user->tokens()->delete();
@@ -22,8 +18,8 @@ class UserRepository implements UserRepositoryInterface
         return $user->createToken(API_TOKEN_KEY)->plainTextToken;
     }
 
-    public function getCurrentUserBearerToken(): ?string
+    public function getCurrentUserBearerToken(Request $request): ?string
     {
-        return $this->request->bearerToken();
+        return $request->bearerToken();
     }
 }

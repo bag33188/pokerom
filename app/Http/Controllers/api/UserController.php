@@ -23,7 +23,7 @@ class UserController extends ApiController
 
     public function me(Request $request): JsonResponse
     {
-        $authToken = $this->userRepository->getCurrentUserBearerToken();
+        $authToken = $this->userRepository->getCurrentUserBearerToken($request);
         $currentUser = $request->user();
         return response()->json([
             'success' => true,

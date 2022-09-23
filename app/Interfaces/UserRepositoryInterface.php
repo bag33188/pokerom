@@ -3,6 +3,7 @@
 namespace App\Interfaces;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 
 interface UserRepositoryInterface
 {
@@ -10,5 +11,5 @@ interface UserRepositoryInterface
 
     function generateApiToken(User $user): string;
 
-    function getCurrentUserBearerToken(): string|null;
+    function getCurrentUserBearerToken(Request $request): string|null;
 }
