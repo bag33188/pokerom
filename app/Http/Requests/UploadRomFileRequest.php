@@ -36,8 +36,8 @@ class UploadRomFileRequest extends FormRequest
         );
     }
 
-//    private function romFilesCollection(RomFile $romFile): string
-//    {
-//        return "{$romFile->getConnectionName()}.{$romFile->getTable()}";
-//    }
+#    private function romFilesCollection(RomFile $romFile): string
+#    {
+#        return "{$romFile->getConnectionName()}.{$romFile->getTable()}";
+#    }
 }

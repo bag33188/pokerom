@@ -9,15 +9,15 @@ use MongoDB\GridFS\Bucket;
 class GridFSConnection
 {
     public string $databaseName;
-    public string $bucketName;
-    public int $chunkSize;
-    protected string $host;
-    protected string $port;
-    protected bool $useAuth;
+    public string $bucketName = 'fs';
+    public int $chunkSize = 0x3FC00;
+    protected string $host = '127.0.0.1';
+    protected string $port = '27017';
+    protected bool $useAuth = false;
     protected string $authDatabase = 'admin';
     protected string $authMechanism = 'SCRAM-SHA-1';
-    protected ?string $usernameConfigPath;
-    protected ?string $passwordConfigPath;
+    protected string $usernameConfigPath;
+    protected string $passwordConfigPath;
     public readonly Bucket $bucket;
 
     /**

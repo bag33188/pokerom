@@ -14,7 +14,7 @@ class RomFilesConnection extends GridFSConnection
     public string $databaseName = 'pokerom_files';
     public string $bucketName = 'rom';
     public int $chunkSize = 0xFF000;
-    protected ?string $usernameConfigPath = 'database.connections.mongodb.username';
-    protected ?string $passwordConfigPath = 'database.connections.mongodb.password';
+    protected string $usernameConfigPath = 'database.connections.mongodb.username';
+    protected string $passwordConfigPath = 'database.connections.mongodb.password';
 
 }
