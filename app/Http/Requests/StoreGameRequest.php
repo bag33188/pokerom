@@ -29,16 +29,14 @@ class StoreGameRequest extends FormRequest
 
     public function prepareForValidation(): void
     {
-        if ($this->missing('rom_id')) {
-            $this->mergeIfMissing([
-                'rom_id' => null,
-            ]);
-        }
+        $this->mergeIfMissing([
+            'rom_id' => null,
+        ]);
 
         $this->merge([
             'date_released' => Date::create($this->input('date_released'))->format('Y-m-d'),
             'game_name' => preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name')),
-            'slug' => Game::slugifyGameName($this->get('game_name')),
+            'slug' => Game::slugifyGameName($this->input('game_name')),
             'rom_id' => $this->query('rom_id'),
         ]);
     }
