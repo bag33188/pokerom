@@ -25,11 +25,6 @@ class UploadRomFileRequest extends FormRequest
         $this->merge(['rom_filename' => $romFilename]);
     }
 
-    private function romFilesCollection(RomFile $romFile): string
-    {
-        return "{$romFile->getConnectionName()}.{$romFile->getTable()}";
-    }
-
     public function rules(): array
     {
         return array(
@@ -40,5 +35,10 @@ class UploadRomFileRequest extends FormRequest
                 Rule::unique($this->romFilesCollection(App::make(RomFile::class)), 'filename')
             ],
         );
+    }
+
+    private function romFilesCollection(RomFile $romFile): string
+    {
+        return "{$romFile->getConnectionName()}.{$romFile->getTable()}";
     }
 }
