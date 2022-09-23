@@ -9,14 +9,7 @@ use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
-    private string $routeParamName;
-
-    function __construct()
-    {
-        parent::__construct();
-
-        $this->routeParamName = $this->routeIs('api.*') ? 'userId' : 'user';
-    }
+    private readonly string $routeParamName;
 
     public function rules(): array
     {
@@ -29,6 +22,8 @@ class UpdateUserRequest extends FormRequest
 
     public function authorize(): bool
     {
+        $this->routeParamName = $this->routeIs('api.*') ? 'userId' : 'user';
+
         return $this->user()->can('update', auth()->user());
     }
 

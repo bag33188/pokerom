@@ -68,15 +68,13 @@ Route::name('api.')->group(function () {
             Route::patch('/{romId}/link-file', 'linkRomToRomFile')->name('linkFile');
         });
 
-        Route::name('games.')->group(function () {
-
-            Route::get('/games', [GameController::class,'index'])->name('index');
-            Route::get('/games/{gameId}', [GameController::class,'show'])->name('show');
-            Route::put('/games/{gameId}', [GameController::class,'update'])->name('update');
-            Route::patch('/games/{gameId}', [GameController::class,'update'])->name('edit');
-            Route::post('/games', [GameController::class,'store'])->name('store');
-            Route::delete('/games/{gameId}', [GameController::class,'destroy'])->name('destroy');
-
+        Route::controller(GameController::class)->prefix('games')->name('games.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/{gameId}', 'show')->name('show');
+            Route::put('/{gameId}', 'update')->name('update');
+            Route::patch('/{gameId}', 'update')->name('edit');
+            Route::post('/', 'store')->name('store');
+            Route::delete('/{gameId}', 'destroy')->name('destroy');
         });
 
         Route::controller(RomFileController::class)->prefix('rom-files')->name('rom-files.')->group(function () {

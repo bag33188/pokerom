@@ -14,14 +14,7 @@ use Illuminate\Validation\Rule;
 
 class UpdateRomRequest extends FormRequest
 {
-    private string $routeParamName;
-
-    function __construct()
-    {
-        parent::__construct();
-
-        $this->routeParamName = $this->routeIs('api.*') ? 'romId' : 'rom';
-    }
+    private readonly string $routeParamName;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -30,6 +23,8 @@ class UpdateRomRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        $this->routeParamName = $this->routeIs('api.*') ? 'romId' : 'rom';
+
         $rom = Rom::find($this->route($this->routeParamName));
         return $this->user()->can('update', $rom);
     }

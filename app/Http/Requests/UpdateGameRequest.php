@@ -17,7 +17,7 @@ use Illuminate\Validation\Rule;
 
 class UpdateGameRequest extends FormRequest
 {
-    private string $routeParamName;
+    private readonly string $routeParamName;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -26,30 +26,15 @@ class UpdateGameRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $this->routeParamName = $this->routeIs('api.*') ? 'gameId' : 'game';
-
-//        dd($this->routeIs('api.*'));
-//        dd(\Request::route()->getName(),\Route::getFacadeRoot()->current()->uri());
+        $this->routeParamName = $this->routeIs('api.*') ? 'gameId' : 'game';;
         $game = Game::find($this->route($this->routeParamName));
         return $this->user()->can('update', $game);
     }
 
     public function prepareForValidation()
     {
-//        $mergedInput = [];
-//
-//        if ($this->exists('game_name')) {
-//            $keys = ['game_name', 'slug'];
-//            $values = [preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name')), Str::slug($this->input('game_name'))];
-//            $mergedInput = array_merge($mergedInput, array_combine($keys, $values));
-////            $mergedInput = [...$mergedInput, ...array_combine($keys, $values)];
-//        }
-//        if ($this->exists('date_released')) {
-////            $mergedInput['date_released'] = Date::create($this->input('date_released'))->format('Y-m-d');
-//            $mergedInput = array_merge($mergedInput, ['date_released' => Date::create($this->input('date_released'))->format('Y-m-d')]);
-//        }
         if ($this->isMethod('PATCH')) {
-            if ($this->has('game_name')) {
+            if ($this->exists('game_name')) {
                 $this->merge([
                     'game_name' => preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name')),
                     'slug' => Str::slug($this->input('game_name')),
@@ -57,11 +42,10 @@ class UpdateGameRequest extends FormRequest
             }
             if ($this->has('date_released')) {
                 $this->merge([
-                    'date_released' => Date::create($this->input('date_released'))->format('Y/m/d'),
+                    'date_released' => Date::create($this->input('date_released'))->format('Y-m-d'),
                 ]);
             }
         } else {
-
             $this->merge([
                 'game_name' => preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name')),
                 'slug' => Str::slug($this->input('game_name')),

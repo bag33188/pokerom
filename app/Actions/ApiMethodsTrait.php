@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
+use Route;
 
 trait ApiMethodsTrait
 {
@@ -26,5 +27,15 @@ trait ApiMethodsTrait
     protected function getCurrentAuthGuard(): string
     {
         return Auth::getDefaultDriver();
+    }
+
+    protected function getCurrentRouteName(): ?string
+    {
+        return Request::route()->getName();
+    }
+
+    protected function getCurrentRouteGlob(): ?string
+    {
+        return Route::getFacadeRoot()->current()->uri();
     }
 }
