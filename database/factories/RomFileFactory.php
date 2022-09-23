@@ -33,6 +33,7 @@ class RomFileFactory extends Factory
             'chunkSize' => $randomRomFile['chunkSize'],
             'md5' => md5($randomRomFile['filename']),
             'uploadDate' => now(),
+            'metadata' => $randomRomFile['metadata'],
         ];
     }
 }
