@@ -3,7 +3,7 @@
 namespace App\Exceptions;
 
 use App\Actions\ApiMethodsTrait as ApiMethods;
-use App\Actions\ExceptionMethodsTrait as ExceptionHandlerMethods;
+use App\Actions\ExceptionHandlerMethodsTrait as ExceptionHandlerMethods;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;

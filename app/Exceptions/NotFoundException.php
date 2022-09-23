@@ -3,7 +3,7 @@
 namespace App\Exceptions;
 
 use App\Actions\ApiMethodsTrait as ApiMethods;
-use App\Actions\ExceptionMethodsTrait as ExceptionHandlerMethods;
+use App\Actions\ExceptionHandlerMethodsTrait as ExceptionHandlerMethods;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
