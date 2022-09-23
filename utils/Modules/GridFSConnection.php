@@ -28,14 +28,9 @@ class GridFSConnection
         $this->connect();
     }
 
-    private function mongoURI(): string
+    private function dsn(): string
     {
-        $dsn = "mongodb://{$this->host}:{$this->port}/";
-        if ($this->useAuth) {
-            $authSource = $this->authDatabase ?? 'admin';
-            $dsn .= "?authSource=${authSource}";
-        }
-        return $dsn;
+        return "mongodb://{$this->host}:{$this->port}/";
     }
 
     private function parseDbCredentials(): array
@@ -43,6 +38,7 @@ class GridFSConnection
         return [
             'username' => config($this->usernameConfigPath),
             'password' => config($this->passwordConfigPath),
+            'authSource' => $this->authDatabase ?? 'admin',
             'authMechanism' => $this->authMechanism ?? 'SCRAM-SHA-1'
         ];
     }
@@ -53,7 +49,7 @@ class GridFSConnection
     private function connect(): void
     {
         try {
-            $db = new MongoClient(uri: $this->mongoURI(), uriOptions: $this->parseDbCredentials());
+            $db = new MongoClient(uri: $this->dsn(), uriOptions: ($this->useAuth) ? $this->parseDbCredentials() : []);
 
             $this->bucket = $db->selectDatabase($this->databaseName)->selectGridFSBucket([
                 'chunkSizeBytes' => $this->chunkSize,
