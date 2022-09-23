@@ -11,7 +11,7 @@ class GameObserver
      * use database triggers instead of ORM logic
      * @var bool
      */
-    private bool $useDbLogic = true;
+    private bool $useDbTriggerLogic = true;
 
     /**
      * Handle events after all transactions are committed.
@@ -27,7 +27,7 @@ class GameObserver
 
     public function created(Game $game): void
     {
-        if ($this->useDbLogic === false) {
+        if ($this->useDbTriggerLogic === false) {
             $rom = $game->rom()->first();
             $rom->has_game = TRUE;
             $rom->game_id = $game->id;
@@ -42,7 +42,7 @@ class GameObserver
 
     public function deleted(Game $game): void
     {
-        if ($this->useDbLogic === false) {
+        if ($this->useDbTriggerLogic === false) {
             $rom = $game->rom()->first();
             $rom->game_id = NULL;
             $rom->has_game = FALSE;

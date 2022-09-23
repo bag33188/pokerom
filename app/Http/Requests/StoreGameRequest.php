@@ -35,11 +35,12 @@ class StoreGameRequest extends FormRequest
                 'rom_id' => null,
             ]);
         }
+
         $this->merge([
-            'game_name' => preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name')),
             'date_released' => Date::create($this->input('date_released'))->format('Y-m-d'),
-            'rom_id' => $this->query('rom_id'),
+            'game_name' => preg_replace("/[\x{E9}\x{C9}]/u", "e", $this->input('game_name')),
             'slug' => Str::slug($this->input('game_name')),
+            'rom_id' => $this->query('rom_id'),
         ]);
     }
 

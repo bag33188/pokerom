@@ -11,7 +11,7 @@ class RomObserver
      * use database triggers instead of ORM logic
      * @var bool
      */
-    private bool $useDbLogic = true;
+    private bool $useDbTriggerLogic = true;
 
     /**
      * Handle events after all transactions are committed.
@@ -38,7 +38,7 @@ class RomObserver
 
     public function deleted(Rom $rom): void
     {
-        if ($this->useDbLogic === false) {
+        if ($this->useDbTriggerLogic === false) {
             $rom->game()->delete();
         }
     }

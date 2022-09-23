@@ -13,7 +13,7 @@ use Illuminate\View\View as ViewFactory;
 
 class AppServiceProvider extends ServiceProvider
 {
-    private static bool $useIdeHelper = false;
+    private static bool $__use_laravel_ide_helper = false;
 
     /**
      * Register any application services.
@@ -22,8 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        if (self::$useIdeHelper === true) {
-            if (App::isLocal()) {
+        if (App::isLocal()) {
+            if (self::$__use_laravel_ide_helper === true) {
                 App::register(IdeHelperServiceProvider::class);
             }
         }
