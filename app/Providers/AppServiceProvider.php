@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Requests\UploadRomFileRequest;
+use App\Models\RomFile;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
@@ -25,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
                 App::register(IdeHelperServiceProvider::class);
             }
         }
+        $this->app->bindMethod([UploadRomFileRequest::class, 'rules'], fn($request, $app) => $request->rules($app->make(RomFile::class)));
     }
 
     /**

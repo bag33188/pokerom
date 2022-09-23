@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use App\Models\RomFile;
 use App\Rules\RomFilenameRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\App;
 use Illuminate\Validation\Rule;
 
 class UploadRomFileRequest extends FormRequest
@@ -25,20 +24,20 @@ class UploadRomFileRequest extends FormRequest
         $this->merge(['rom_filename' => $romFilename]);
     }
 
-    public function rules(): array
+    public function rules(RomFile $romFile): array
     {
         return array(
             'rom_filename' => [
                 'required',
                 'string',
                 new RomFilenameRule,
-                Rule::unique($this->romFilesCollection(App::make(RomFile::class)), 'filename')
+                Rule::unique("{$romFile->getConnectionName()}.{$romFile->getTable()}", 'filename')
             ],
         );
     }
 
-    private function romFilesCollection(RomFile $romFile): string
-    {
-        return "{$romFile->getConnectionName()}.{$romFile->getTable()}";
-    }
+//    private function romFilesCollection(RomFile $romFile): string
+//    {
+//        return "{$romFile->getConnectionName()}.{$romFile->getTable()}";
+//    }
 }
