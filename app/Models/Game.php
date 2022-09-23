@@ -25,6 +25,7 @@ class Game extends Model
         'date_released',
         'region',
     ];
+    protected $guarded = ['rom_id'];
     protected $casts = ['date_released' => 'date'/*:Y-m-d*/];
 
     public function rom(): BelongsTo
