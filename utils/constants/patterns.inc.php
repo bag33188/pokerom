@@ -17,3 +17,6 @@ const ROM_NAME_PATTERN = /** @lang RegExp */
 /** regex for detecting {@see _EACUTE}, {@see U_EACUTE} */
 const EACUTE_PATTERN = /** @lang RegExp */
 "/[\x{E9}\x{C9}]/u";
+
+const POKE_PATTERN = /** @lang RegExp */
+"/^(poke)/i";

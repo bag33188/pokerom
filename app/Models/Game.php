@@ -35,7 +35,7 @@ class Game extends Model
     protected function gameName(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => preg_replace("/^(Poke)/i", POKE_EACUTE, $value),
+            get: fn($value) => preg_replace(POKE_PATTERN, POKE_EACUTE, $value),
             set: fn($value) => preg_replace("/^(pok[e\x{E9}\x{C9}]mon)/ui", 'Pokemon', $value)
         );
     }

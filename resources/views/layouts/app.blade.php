@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
-        <title>{!! preg_replace("/^poke/i", 'Pok&eacute;', config('app.name')) !!}</title>
+        <title>{!! config('app.web_name') !!}</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" type="text/css" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" />

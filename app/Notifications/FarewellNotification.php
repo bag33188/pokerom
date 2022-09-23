@@ -15,7 +15,6 @@ class FarewellNotification extends Notification
 
     public User $user;
 
-    private static string $appName;
 
     private readonly string $messageBody;
     private readonly string $subject;
@@ -30,7 +29,6 @@ class FarewellNotification extends Notification
     public function __construct(User $user)
     {
         $this->user = $user;
-        self::$appName = preg_replace("/^Poke/", POKE_EACUTE, ucfirst(Config::get('app.name')));
 
         $this->setMailProps();
     }
@@ -38,8 +36,8 @@ class FarewellNotification extends Notification
     private function setMailProps(): void
     {
         $this->messageBody = "{$this->user->name}, we're sad to see you leave.";
-        $this->from = ['address' => Config::get('mail.from.address'), 'name' => self::$appName];
-        $this->closer = sprintf("Thank you for using %s!", self::$appName);
+        $this->from = ['address' => Config::get('mail.from.address'), 'name' => config('app.name')];
+        $this->closer = sprintf("Thank you for using %s!", config('app.name'));
         $this->subject = "I guess it's goodbye for now...";
     }
 

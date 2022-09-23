@@ -15,7 +15,8 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Pok&eacute;ROM'),
+    'name' => preg_replace(POKE_PATTERN, POKE_EACUTE, env('APP_NAME')),
+    'web_name' => preg_replace(POKE_PATTERN, "Pok&eacute;", env('APP_NAME')),
 
     'version' => (float)env('APP_VERSION', '1.01'),
 

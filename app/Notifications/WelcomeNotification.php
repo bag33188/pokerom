@@ -15,7 +15,6 @@ class WelcomeNotification extends Notification
 
     public User $user;
 
-    private static string $appName;
 
     private readonly string $subject;
     private readonly string $messageBody;
@@ -31,16 +30,15 @@ class WelcomeNotification extends Notification
     public function __construct(User $user)
     {
         $this->user = $user;
-        self::$appName = preg_replace("/^Poke/", POKE_EACUTE, ucfirst(Config::get('app.name')));
 
         $this->setMailProps();
     }
 
     private function setMailProps(): void
     {
-        $this->subject = sprintf("Thank you for joining %s!!", self::$appName);
-        $this->messageBody = sprintf("Hello %s, welcome to the world of %s!", $this->user->name, self::$appName);
-        $this->from = ['address' => Config::get('mail.from.address'), 'name' => self::$appName];
+        $this->subject = sprintf("Thank you for joining %s!!", config('app.name'));
+        $this->messageBody = sprintf("Hello %s, welcome to the world of %s!", $this->user->name, config('app.name'));
+        $this->from = ['address' => Config::get('mail.from.address'), 'name' => config('app.name')];
         $this->action = ['text' => 'Check it out!', 'url' => route('roms.index')];
         $this->closer = 'Enjoy!';
     }
