@@ -8,16 +8,17 @@ use MongoDB\GridFS\Bucket;
 
 class GridFSConnection
 {
-    public string $databaseName;
-    public string $bucketName = 'fs';
-    public int $chunkSize = 0x3FC00;
-    protected string $host = '127.0.0.1';
-    protected string $port = '27017';
+    protected string $host = 'localhost';
+    protected int $port = 27017;
     protected bool $useAuth = false;
     protected string $authDatabase = 'admin';
     protected string $authMechanism = 'SCRAM-SHA-1';
     protected string $usernameConfigPath;
     protected string $passwordConfigPath;
+
+    public string $databaseName = 'test';
+    public string $bucketName = 'fs';
+    public int $chunkSize = 0x3FC00;
     public readonly Bucket $bucket;
 
     /**
@@ -25,12 +26,42 @@ class GridFSConnection
      */
     public function __construct()
     {
-        $this->connect();
+        try {
+            $this->connectGfs();
+        } catch (Exception $e) {
+            throw new Exception("Error connecting to GridFS: {$e->getMessage()}");
+        }
     }
 
-    private function dsn(): string
+    /**
+     * @link https://www.mongodb.com/docs/manual/reference/connection-string/
+     * @param bool|null $useFullMongoURI
+     * @return string
+     */
+    private function dsn(?bool $useFullMongoURI = null): string
     {
-        return "mongodb://{$this->host}:{$this->port}/";
+        #!empty($useFullMongoURI) && $useFullMongoURI === true
+        if ($useFullMongoURI) {
+
+            list($username, $password) = array_values(
+                config()->getMany([
+                    $this->usernameConfigPath,
+                    $this->passwordConfigPath,
+                ])
+            );
+
+            $dsn = _SPACE .
+                'mongodb' . '://' .
+                "${username}:${password}" . '@' .
+                "{$this->host}:{$this->port}" . '/' .
+                $this->databaseName . '?' .
+                "authSource={$this->authDatabase}" . '&' .
+                "authMechanism={$this->authMechanism}";
+
+            return ltrim($dsn);
+        } else {
+            return "mongodb://{$this->host}:{$this->port}/";
+        }
     }
 
     private function parseDbCredentials(): array
@@ -44,19 +75,16 @@ class GridFSConnection
     }
 
     /**
-     * @throws Exception
+     * @link https://www.php.net/manual/en/mongodb-driver-manager.construct.php
+     * @return void
      */
-    private function connect(): void
+    private function connectGfs(): void
     {
-        try {
-            $db = new MongoClient(uri: $this->dsn(), uriOptions: $this->parseDbCredentials());
-
-            $this->bucket = $db->selectDatabase($this->databaseName)->selectGridFSBucket([
-                'chunkSizeBytes' => $this->chunkSize,
-                'bucketName' => $this->bucketName
-            ]);
-        } catch (Exception $e) {
-            throw new Exception("Error connecting to GridFS: {$e->getMessage()}");
-        }
+        $connection = new MongoClient(uri: $this->dsn(false), uriOptions: $this->parseDbCredentials());
+        $db = $connection->selectDatabase($this->databaseName);
+        $this->bucket = $db->selectGridFSBucket([
+            'chunkSizeBytes' => $this->chunkSize,
+            'bucketName' => $this->bucketName
+        ]);
     }
 }

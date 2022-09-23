@@ -6,7 +6,7 @@ use Utils\Modules\GridFSProcessor;
 
 class RomFileProcessor extends GridFSProcessor
 {
-    protected string $gridFilesPath = 'app/public/rom_files';
+    protected array|string $gridFilesStoragePath = ['storage', 'app', 'public', 'rom_files'];
 
     protected int $contentUploadTransferSize = 0xFF000;
     protected int $contentDownloadTransferSize = 0xFF000;
