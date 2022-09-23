@@ -34,7 +34,8 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "Utils\\": "utils/",
-            "GridFS\\": "utils/Modules/GridFS/"
+            "App\\Http\\Controllers\\Web\\": "app/Http/Controllers/web/",
+            "App\\Http\\Controllers\\Api\\": "app/Http/Controllers/api/"
         },
         "files": [
             "scripts/helpers/dir_is_empty.php",

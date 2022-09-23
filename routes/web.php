@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\web\GameController;
-use App\Http\Controllers\web\HomeController;
-use App\Http\Controllers\web\RomController;
-use App\Http\Controllers\web\RomFileController;
+use App\Http\Controllers\Web\GameController;
+use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\Web\RomController;
+use App\Http\Controllers\Web\RomFileController;
 use Illuminate\Support\Facades\Route;
 
 /*
