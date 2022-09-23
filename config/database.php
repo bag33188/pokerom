@@ -78,6 +78,10 @@ return [
                 'authMechanism' => env('DB_AUTHENTICATION_MECHANISM'),
                 'authSource' => env('DB_AUTHENTICATION_DATABASE'),
             ],
+            'gridfs' => [
+                'chunkSize' => (int)env('DB_GFS_CHUNK_SIZE', 0x3FC00),
+                'bucketName' => env('DB_GFS_BUCKET_NAME', 'fs'),
+            ]
         ],
 
         'pgsql' => [
