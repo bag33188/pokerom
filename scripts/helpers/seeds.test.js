@@ -46,8 +46,8 @@ romsData = romsData.valueOf().map((romData) => {
     delete romData["updated_at"];
     // delete romData["game_id"];
     // delete romData["file_id"];
-    delete romData["has_game"];
-    delete romData["has_file"];
+    // delete romData["has_game"];
+    // delete romData["has_file"];
     romData["rom_type"] = romData["rom_type"].toLowerCase();
     return romData;
 });

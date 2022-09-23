@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Rom;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use MongoDB\BSON\ObjectId;
 
 /**
  * @extends Factory<Rom>
@@ -21,7 +22,14 @@ class RomFactory extends Factory
         list('roms' => $roms) = json_decode(file_get_contents($path), true);
         $randomRom = $roms[array_rand($roms)];
         return [
-            ...$randomRom
+            'id' => $randomRom['id'],
+            'rom_name' => $randomRom['rom_name'],
+            'rom_type' => $randomRom['rom_type'],
+            'rom_size' => $randomRom['rom_size'],
+            'game_id' => $randomRom['game_id'],
+            'file_id' => new ObjectId($randomRom['file_id']),
+            'has_file' => $randomRom['has_file'],
+            'has_game' => $randomRom['has_game'],
         ];
     }
 }
