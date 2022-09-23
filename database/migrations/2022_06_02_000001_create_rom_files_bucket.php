@@ -42,6 +42,7 @@ return new class extends Migration {
                 $collection->bigInteger('length', false, true);
                 $collection->dateTime('uploadDate');
                 $collection->char('md5', MD5_HASH_LENGTH);
+                // + metadata object
             });
             Schema::connection($this->connection)->create('rom.chunks', function (Blueprint $collection) {
                 $collection->index(
