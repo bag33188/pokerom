@@ -109,7 +109,7 @@
                     </div>
                     <p class="text-lg sm:text-xl md:text-2xl">
                         <span class="font-semibold">
-                            {!! str_replace('Poke', "Pok&eacute;", ucfirst(config('app.name'))) !!}
+                            {!! config('app.web_name') !!}
                         </span>
                         <span class="font-bold">&#160;&#8209;&#xA0;</span>
                         <span class="italic">One Stop for all your Pok&eacute;mon ROMs</span>
