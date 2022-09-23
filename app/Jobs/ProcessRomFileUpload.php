@@ -3,8 +3,8 @@
 namespace App\Jobs;
 
 use App\Services\RomFileProcessor;
+use Exception;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -31,9 +31,14 @@ class ProcessRomFileUpload implements ShouldQueue
      *
      * @param RomFileProcessor $romFileProcessor
      * @return void
+     * @throws Exception
      */
     public function handle(RomFileProcessor $romFileProcessor): void
     {
-        $romFileProcessor->upload($this->romFilename);
+        $romFileType = strtoupper(explode('.', $this->romFilename, 2)[1]);
+        $romFileProcessor->upload($this->romFilename, [
+            'contentType' => 'application/octet-stream',
+            'romType' => $romFileType
+        ]);
     }
 }

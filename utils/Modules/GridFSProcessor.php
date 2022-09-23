@@ -18,12 +18,6 @@ class GridFSProcessor
     private readonly Bucket $gridFSBucket;
     private readonly string $gridFilesDiskPath;
 
-    protected final const CONTENT_TYPES = [
-        'application/octet-stream',
-        'application/x-rom-file'
-    ];
-
-
     public function __construct(private readonly GridFSConnection $gridFSConnection)
     {
         $this->gridFSBucket = $this->gridFSConnection->bucket;
@@ -33,16 +27,13 @@ class GridFSProcessor
      * @throws Exception
      * @throws DirectoryNotFoundException
      */
-    public final function upload(string $filename): void
+    public final function upload(string $filename, array $metadata = []): void
     {
         $this->parseGridStorageDirectory();
 
         $filepath = "{$this->gridFilesDiskPath}/${filename}";
         $stream = $this->gridFSBucket->openUploadStream($filename, [
-            'metadata' => [
-                'contentType' => self::CONTENT_TYPES[0],
-                'romType' => strtoupper(explode('.', $filename, 2)[1])
-            ]
+            'metadata' => $metadata,
         ]);
         $fileUploader = new FileUploader($stream, $filepath, $this->contentUploadTransferSize);
         $fileUploader->uploadFile();
