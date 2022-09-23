@@ -19,11 +19,11 @@ class GridFSServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register(): void
     {
-        $this->app->when(RomFileProcessor::class)
-            ->needs(GridFSConnection::class)
-            ->give(function (Application $app) {
-                return $app->make(RomFilesConnection::class, ['databaseName' => 'pokerom_files', 'bucketName' => 'rom', 'chunkSize' => 0xFF000]);
-            });
+//        $this->app->when(RomFileProcessor::class)
+//            ->needs(RomFilesConnection::class)
+//            ->give(function (Application $app) {
+//                return $app->make(RomFilesConnection::class, ['databaseName' => 'pokerom_files', 'bucketName' => 'rom', 'chunkSize' => 0xFF000]);
+//            });
     }
 
     /**

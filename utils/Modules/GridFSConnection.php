@@ -7,6 +7,9 @@ use MongoDB\GridFS\Bucket;
 
 class GridFSConnection
 {
+    public string $databaseName;
+    public string $bucketName;
+    public int $chunkSize;
     protected string $host;
     protected string $port;
     protected bool $useAuth;
@@ -16,25 +19,24 @@ class GridFSConnection
     protected string $passwordConfigPath;
     public readonly Bucket $bucket;
 
-    public function __construct(public readonly string $databaseName, public readonly string $bucketName, public readonly int $chunkSize)
+    public function __construct()
     {
-        //"mongodb://brock:3931Sunflower!@localhost:27017/?authSource=admin&authMechanism=SCRAM-SHA-256"
         $this->setBucket();
     }
 
     function mongoURI()
     {
-        $dsn = "mongodb://{$this->host}:{$this->port}/";
-        if ($this->useAuth) {
-            $dsn .= "?authSource={$this->authDatabase}&authMechanism={$this->authMechanism}";
-        }
+        $dsn = "mongodb://{$this->host}:{$this->port}/?authSource={$this->authDatabase}";
         return $dsn;
     }
 
     public function connect()
     {
-        $authObj = ($this->useAuth) ? ['username' => config($this->usernameConfigPath), 'password' => $this->passwordConfigPath] : [];
-        $db = new MongoClient($this->mongoURI(), $authObj);
+//        $authObj = ($this->useAuth) ?
+//            ['username' => config($this->usernameConfigPath), 'password' => $this->passwordConfigPath, 'authSource' => $this->authDatabase, 'authMechanism' => $this->authMechanism] : [];
+        $db = new MongoClient($this->mongoURI(), uriOptions: [
+            'username' => config($this->usernameConfigPath), 'password' => config($this->passwordConfigPath), 'authMechanism' => $this->authMechanism]
+        );
         return $db->selectDatabase($this->databaseName);
     }
 
