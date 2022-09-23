@@ -18,7 +18,7 @@ class RomFactory extends Factory
     public function definition(): array
     {
         $path = str_replace('public', 'data/seeds.json', $_SERVER['DOCUMENT_ROOT']);
-        $roms = json_decode(file_get_contents($path), true)['roms'];
+        list('roms' => $roms) = json_decode(file_get_contents($path), true);
         $randomRom = $roms[array_rand($roms)];
         return [
             ...$randomRom

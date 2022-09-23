@@ -18,7 +18,7 @@ class GameFactory extends Factory
     public function definition(): array
     {
         $path = str_replace('public', 'data/seeds.json', $_SERVER['DOCUMENT_ROOT']);
-        $games = json_decode(file_get_contents($path), true)['games'];
+        list('games' => $games) = json_decode(file_get_contents($path), true);
         $randomGame = $games[array_rand($games)];
         return [
             ...$randomGame
