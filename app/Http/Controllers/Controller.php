@@ -15,17 +15,17 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, ApiMethods;
 
-    protected function getCurrentAuthGuard(): string
+    protected final function getCurrentAuthGuard(): string
     {
         return Auth::getDefaultDriver();
     }
 
-    protected function getCurrentRouteName(): ?string
+    protected final function getCurrentRouteName(): ?string
     {
         return Request::route()->getName();
     }
 
-    protected function getCurrentRouteGlob(): ?string
+    protected final function getCurrentRouteGlob(): ?string
     {
         return Route::getFacadeRoot()->current()->uri();
     }
