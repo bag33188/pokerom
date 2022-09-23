@@ -36,7 +36,7 @@ class Game extends Model
     {
         return Attribute::make(
             get: fn($value) => preg_replace("/^(Poke)/i", POKE_EACUTE, $value),
-            set: fn($value) => preg_replace("/^(pok(?:[Ee]|[\x{E9}\x{C9}])mon)/ui", 'Pokemon', $value)
+            set: fn($value) => preg_replace("/^(pok[e\x{E9}\x{C9}]mon)/ui", 'Pokemon', $value)
         );
     }
 
@@ -56,7 +56,7 @@ class Game extends Model
         );
     }
 
-    public static function slugifyGameName(?string $gameName = ''): string
+    public static function slugifyGameName(string $gameName): string
     {
         return Str::slug($gameName, '-', 'en');
     }

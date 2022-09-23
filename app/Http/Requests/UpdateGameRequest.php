@@ -39,9 +39,9 @@ class UpdateGameRequest extends FormRequest
         $fieldsToMerge = array();
 
         if ($this->isMethod('PATCH')) {
+
             if ($this->has('game_name')) {
                 $fieldsToMerge['game_name'] = $normalizeGameNameUnicodeChars($this->input('game_name'));
-                $fieldsToMerge['slug'] = Game::slugifyGameName($this->input('game_name'));
             }
 
             if ($this->has('date_released')) {
@@ -51,7 +51,6 @@ class UpdateGameRequest extends FormRequest
             $fieldsToMerge = [
                 'date_released' => $formatDateReleased($this->input('date_released')),
                 'game_name' => $normalizeGameNameUnicodeChars($this->input('game_name')),
-                'slug' => Game::slugifyGameName($this->input('game_name')),
             ];
         }
 
