@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Http\Requests\UploadRomFileRequest;
-use App\Models\RomFile;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Blade;
@@ -36,9 +34,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // https://laravel.com/docs/9.x/queues#handle-method-dependency-injection
-        $this->app->bindMethod([UploadRomFileRequest::class, 'rules'], fn($request, $app) => $request->rules($app->make(RomFile::class)));
-
         View::composer('*', function (ViewFactory $view) {
             $view_name = str_replace('.', '-', $view->getName());
             View::share('view_name', $view_name);

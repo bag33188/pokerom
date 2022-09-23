@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use App\Models\RomFile;
 use App\Rules\RomFilenameRule;
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -24,17 +26,28 @@ class UploadRomFileRequest extends FormRequest
         $this->merge(['rom_filename' => $romFilename]);
     }
 
-    public function rules(RomFile $romFile): array
+    public function rules(): array
     {
-        $romFilesCollection = "{$romFile->getConnectionName()}.{$romFile->getTable()}";
-
         return array(
             'rom_filename' => [
                 'required',
                 'string',
                 new RomFilenameRule,
-                Rule::unique($romFilesCollection, 'filename')
-            ],
+                Rule::unique($this->romFilesCollection(), 'filename')
+            ]
         );
+    }
+
+
+    private function romFilesCollection(): string
+    {
+        $this->setContainer(Container::getInstance());
+        try {
+            $romFile = $this->container->make(RomFile::class);
+            return "{$romFile->getConnectionName()}.{$romFile->getTable()}";
+        } catch (BindingResolutionException $e) {
+            # $e->getMessage();
+            return RomFile::class;
+        }
     }
 }

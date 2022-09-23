@@ -28,7 +28,6 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        # $this->app->bindMethod([UserRepositoryInterface::class, 'getCurrentUserBearerToken'], fn($b, $app) => $b->getCurrentUserBearerToken($app->make(Request::class)));
-        # $authToken = App::call([$this->userRepository, 'getCurrentUserBearerToken']);
+        //
     }
 }
