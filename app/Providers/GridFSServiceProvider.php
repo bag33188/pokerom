@@ -4,10 +4,10 @@ namespace App\Providers;
 
 use App\Services\RomFileProcessor;
 use App\Services\RomFilesConnection;
-use App\Services\RomFilesDatabase;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
+use Utils\Modules\GridFSConnection;
 
 
 class GridFSServiceProvider extends ServiceProvider implements DeferrableProvider
@@ -20,11 +20,9 @@ class GridFSServiceProvider extends ServiceProvider implements DeferrableProvide
     public function register(): void
     {
         $this->app->when(RomFileProcessor::class)
-            ->needs(RomFilesConnection::class)
+            ->needs(GridFSConnection::class)
             ->give(function (Application $app) {
-                return new RomFilesConnection($app->make(RomFilesDatabase::class, ['databaseName' => config('gridfs.connection.database'),
-                    'bucketName' => config('gridfs.bucketName'),
-                    'chunkSize' => config('gridfs.chunkSize')]));
+                return $app->make(RomFilesConnection::class, ['databaseName' => 'pokerom_files', 'bucketName' => 'rom', 'chunkSize' => 0xFF000]);
             });
     }
 

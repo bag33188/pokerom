@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use GridFS\Support\GridFSProcessor;
+use Utils\Modules\GridFSProcessor;
 
 class RomFileProcessor extends GridFSProcessor
 {
@@ -11,11 +11,7 @@ class RomFileProcessor extends GridFSProcessor
     protected int $contentUploadTransferSize = 0xFF000;
     protected int $contentDownloadTransferSize = 0xFF000;
 
-    /**
-     * Create new GridFS Processor Instance
-     *
-     * @param RomFilesConnection $romFilesConnection
-     */
+
     public function __construct(RomFilesConnection $romFilesConnection)
     {
         parent::__construct($romFilesConnection);

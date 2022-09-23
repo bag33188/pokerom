@@ -2,16 +2,17 @@
 
 namespace App\Services;
 
-use GridFS\Client\AbstractGridFSConnection as GridFSConnection;
+use Utils\Modules\GridFSConnection;
 
 class RomFilesConnection extends GridFSConnection
 {
-    protected string $connectionName = 'PokeROM Files GridFS Connection';
+    protected string $host = 'localhost';
+    protected string $port = '27017';
+    protected bool $useAuth = true;
+    protected string $authDatabase = 'admin';
+    protected string $authMechanism = 'SCRAM-SHA-256';
 
-    protected bool $useConfig = true;
+    protected string $usernameConfigPath = 'database.connections.mongodb.username';
+    protected string $passwordConfigPath = 'database.connections.mongodb.password';
 
-    function __construct(RomFilesDatabase $romFilesDatabase)
-    {
-        parent::__construct($romFilesDatabase);
-    }
 }
