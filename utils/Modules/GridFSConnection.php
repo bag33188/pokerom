@@ -14,8 +14,8 @@ class GridFSConnection
     protected string $host;
     protected string $port;
     protected bool $useAuth;
-    protected ?string $authDatabase;
-    protected ?string $authMechanism;
+    protected string $authDatabase = 'admin';
+    protected string $authMechanism = 'SCRAM-SHA-1';
     protected ?string $usernameConfigPath;
     protected ?string $passwordConfigPath;
     public readonly Bucket $bucket;
@@ -38,8 +38,8 @@ class GridFSConnection
         return [
             'username' => config($this->usernameConfigPath),
             'password' => config($this->passwordConfigPath),
-            'authSource' => $this->authDatabase ?? 'admin',
-            'authMechanism' => $this->authMechanism ?? 'SCRAM-SHA-1'
+            'authSource' => $this->authDatabase,
+            'authMechanism' => $this->authMechanism
         ];
     }
 
