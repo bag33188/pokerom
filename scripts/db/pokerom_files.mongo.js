@@ -52,6 +52,10 @@ db.createCollection("rom.files", {
                     properties: {
                         contentType: {
                             bsonType: "string",
+                            enum: [
+                                "application/octet-stream",
+                                "application/x-rom-file",
+                            ],
                         },
                         romType: {
                             bsonType: "string",

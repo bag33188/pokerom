@@ -18,6 +18,11 @@ class GridFSProcessor
     private readonly Bucket $gridFSBucket;
     private readonly string $gridFilesDiskPath;
 
+    protected final const CONTENT_TYPES = [
+        'application/octet-stream',
+        'application/x-rom-file'
+    ];
+
 
     public function __construct(private readonly GridFSConnection $gridFSConnection)
     {
@@ -35,7 +40,7 @@ class GridFSProcessor
         $filepath = "{$this->gridFilesDiskPath}/${filename}";
         $stream = $this->gridFSBucket->openUploadStream($filename, [
             'metadata' => [
-                'contentType' => 'application/octet-stream',
+                'contentType' => self::CONTENT_TYPES[0],
                 'romType' => strtoupper(explode('.', $filename, 2)[1])
             ]
         ]);
