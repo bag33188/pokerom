@@ -16,10 +16,8 @@ REM.||(
 
 :MAILHOG
 
-    REM assumes working directory is project directory
-    REM %USERPROFILE%\PhpstormProjects\pokerom_rebirth
-    REM CD %POKEROM%
+    REM assumes `xampp\mailhog` is added to PATH
 
-    %USERPROFILE%\Desktop\MailHog_windows_386.exe
+    C:\xampp\mailhog\mailhog.exe
 
 EXIT /B 0
