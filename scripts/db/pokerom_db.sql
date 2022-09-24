@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2022 at 11:39 PM
+-- Generation Time: Sep 24, 2022 at 11:50 PM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.6
 
@@ -351,7 +351,6 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Sep 24, 2022 at 09:37 PM
--- Last update: Sep 24, 2022 at 08:52 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -384,15 +383,15 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 -- Table structure for table `roms`
 --
--- Creation: Sep 24, 2022 at 11:23 AM
+-- Creation: Sep 24, 2022 at 09:49 PM
 --
 
 DROP TABLE IF EXISTS `roms`;
 CREATE TABLE `roms` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `rom_name` varchar(28) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `game_id` int(10) UNSIGNED DEFAULT NULL,
-  `file_id` char(24) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `game_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `file_id` char(24) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'references ''_id'' field in ''rom.files'' collection',
   `rom_size` int(10) UNSIGNED NOT NULL DEFAULT 1020,
   `rom_type` enum('gb','gbc','gba','nds','3ds','xci') COLLATE utf8mb4_unicode_ci NOT NULL,
   `has_game` tinyint(1) NOT NULL DEFAULT 0,
@@ -403,6 +402,8 @@ CREATE TABLE `roms` (
 
 --
 -- RELATIONSHIPS FOR TABLE `roms`:
+--   `game_id`
+--       `games` -> `id`
 --
 
 --
@@ -567,7 +568,8 @@ ALTER TABLE `password_resets`
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`),
+  ADD KEY `personal_access_tokens_tokenable_id_foreign` (`tokenable_id`);
 
 --
 -- Indexes for table `roms`
@@ -840,6 +842,13 @@ TRUNCATE TABLE `pma__bookmark`;
 --
 
 TRUNCATE TABLE `pma__relation`;
+--
+-- Dumping data for table `pma__relation`
+--
+
+INSERT INTO `pma__relation` (`master_db`, `master_table`, `master_field`, `foreign_db`, `foreign_table`, `foreign_field`) VALUES
+('pokerom_db', 'roms', 'game_id', 'pokerom_db', 'games', 'id');
+
 --
 -- Truncate table before insert `pma__savedsearches`
 --
