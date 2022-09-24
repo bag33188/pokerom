@@ -45,15 +45,16 @@ return new class extends Migration {
                 // + metadata object
             });
             Schema::connection($this->connection)->create('rom.chunks', function (Blueprint $collection) {
+                $filesIdIndexName = 'files_id_1_n_1';
                 $collection->index(
                     columns: ['files_id', 'n'],
-                    name: 'files_id_1_n_1',
+                    name: $filesIdIndexName,
                     options: ['unique' => true]
                 );
                 $collection->integer('n')->unsigned();
                 $collection->binary('data');
                 $collection->char('files_id', OBJECT_ID_LENGTH);
-                $collection->foreign('files_id', 'files_id_1_n_1')->references('_id')->on('rom.files');
+                $collection->foreign('files_id', $filesIdIndexName)->references('_id')->on('rom.files');
             });
         }
     }
