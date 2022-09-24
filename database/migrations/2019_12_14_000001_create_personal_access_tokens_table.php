@@ -20,11 +20,11 @@ return new class extends Migration {
         Schema::create('personal_access_tokens', function (Blueprint $table) {
             $table->id();
             $table->morphs('tokenable');
-            $table->string('name', 255);
+            $table->string('name', PERSONAL_ACCESS_TOKEN_NAME_LENGTH);
             $table->char('token', PERSONAL_ACCESS_TOKEN_LENGTH)->unique();
             $table->text('abilities')->nullable();
-            $table->foreign('tokenable_id') // <-- part of `morphs('tokenable')`
-                ->references('id')
+            $table->foreign('tokenable_id', 'personal_access_tokens_tokenable_id_foreign') // <-- part of `morphs('tokenable')`
+            ->references('id')
                 ->on('users')
                 ->cascadeOnDelete()
                 ->onUpdate(ConstraintOption::RESTRICT->value);

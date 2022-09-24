@@ -37,9 +37,9 @@ return new class extends Migration {
                         ]
                     ]
                 );
-                $collection->integer('chunkSize');
+                $collection->mediumInteger('chunkSize')->unsigned();
                 $collection->string('filename', MAX_ROM_FILENAME_LENGTH);
-                $collection->bigInteger('length', false, true);
+                $collection->unsignedBigInteger('length');
                 $collection->dateTime('uploadDate');
                 $collection->char('md5', MD5_HASH_LENGTH);
                 // + metadata object
@@ -50,10 +50,10 @@ return new class extends Migration {
                     name: 'files_id_1_n_1',
                     options: ['unique' => true]
                 );
-                $collection->integer('n', false, true);
+                $collection->integer('n')->unsigned();
                 $collection->binary('data');
                 $collection->char('files_id', OBJECT_ID_LENGTH);
-                $collection->foreign('files_id')->references('_id')->on('rom.files');
+                $collection->foreign('files_id', 'files_id_1_n_1')->references('_id')->on('rom.files');
             });
         }
     }
@@ -69,16 +69,6 @@ return new class extends Migration {
         if (self::_ALLOW_MIGRATIONS_ === true) {
             Schema::dropIfExists('rom.files');
             Schema::dropIfExists('rom.chunks');
-
-            # Schema::connection($this->connection)
-            #     ->table('rom.files', function (Blueprint $collection) {
-            #         $collection->drop();
-            #     });
-
-            # Schema::connection($this->connection)
-            #     ->table('rom.chunks', function (Blueprint $collection) {
-            #         $collection->drop();
-            #     });
         }
     }
 };

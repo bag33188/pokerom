@@ -18,7 +18,7 @@ return new class extends Migration {
     {
         Schema::create('password_resets', function (Blueprint $table) {
             $table->string('email', MAX_USER_EMAIL_LENGTH)->index();
-            $table->foreign('email')
+            $table->foreign('email', 'password_resets_email_foreign')
                 ->references('email')
                 ->on('users')
                 ->onDelete(ConstraintOption::CASCADE->value)
