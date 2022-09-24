@@ -20,14 +20,14 @@ return new class extends Migration {
         Schema::create('personal_access_tokens', function (Blueprint $table) {
             $table->id();
             $table->morphs('tokenable');
-            $table->foreign('tokenable_id')
+            $table->string('name', 255);
+            $table->char('token', PERSONAL_ACCESS_TOKEN_LENGTH)->unique();
+            $table->text('abilities')->nullable();
+            $table->foreign('tokenable_id') // <-- part of `morphs('tokenable')`
                 ->references('id')
                 ->on('users')
                 ->cascadeOnDelete()
                 ->onUpdate(ConstraintOption::RESTRICT->value);
-            $table->string('name');
-            $table->char('token', PERSONAL_ACCESS_TOKEN_LENGTH)->unique();
-            $table->text('abilities')->nullable();
             $table->timestamp('last_used_at')->nullable();
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
