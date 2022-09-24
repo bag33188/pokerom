@@ -12,8 +12,8 @@
         }
 
         .disabled-form-select {
-            --disabled-outline-color: #CCC;
-            --disabled-background-color: #EDEDED;
+            --disabled-outline-color: #ccc;
+            --disabled-background-color: #ededed;
             border: 2px solid var(--disabled-outline-color) !important;
             background-color: var(--disabled-background-color) !important;
         }
