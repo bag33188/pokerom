@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2022 at 11:50 PM
+-- Generation Time: Sep 25, 2022 at 12:18 AM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.6
 
@@ -516,6 +516,10 @@ CREATE TABLE `users` (
 
 --
 -- RELATIONSHIPS FOR TABLE `users`:
+--   `email`
+--       `password_resets` -> `email`
+--   `id`
+--       `sessions` -> `user_id`
 --
 
 --
@@ -847,7 +851,9 @@ TRUNCATE TABLE `pma__relation`;
 --
 
 INSERT INTO `pma__relation` (`master_db`, `master_table`, `master_field`, `foreign_db`, `foreign_table`, `foreign_field`) VALUES
-('pokerom_db', 'roms', 'game_id', 'pokerom_db', 'games', 'id');
+('pokerom_db', 'roms', 'game_id', 'pokerom_db', 'games', 'id'),
+('pokerom_db', 'users', 'email', 'pokerom_db', 'password_resets', 'email'),
+('pokerom_db', 'users', 'id', 'pokerom_db', 'sessions', 'user_id');
 
 --
 -- Truncate table before insert `pma__savedsearches`

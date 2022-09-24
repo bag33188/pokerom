@@ -63,10 +63,6 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-[//]: # (`find . -print | grep -i ".htaccess"`)
-[//]: # (`find . -print | grep -i ".gitignore"`)
-[//]: # ("@php artisan vendor:publish --force --tag=livewire:assets --ansi")
-
 # Important Notes
 
 allow node and php to run together (reverse proxy)
@@ -99,3 +95,6 @@ Listen 5000
 [php gridfs documentation](https://www.mongodb.com/docs/php-library/v1.12/tutorial/gridfs/)
 
 
+[//]: # (`find . -print | grep -i ".htaccess"`)
+[//]: # (`find . -print | grep -i ".gitignore"`)
+[//]: # ("@php artisan vendor:publish --force --tag=livewire:assets --ansi")

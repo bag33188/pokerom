@@ -54,7 +54,9 @@ return new class extends Migration {
                 $collection->unsignedInteger('n');
                 $collection->binary('data');
                 $collection->char('files_id', OBJECT_ID_LENGTH);
-                $collection->foreign('files_id', $filesIdIndexName)->references('_id')->on('rom.files');
+                $collection->foreign('files_id', $filesIdIndexName)
+                    ->references('_id')
+                    ->on('rom.files');
             });
         }
     }
