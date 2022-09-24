@@ -3,16 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2022 at 09:07 AM
--- Server version: 10.9.2-MariaDB
+-- Generation Time: Sep 24, 2022 at 11:09 PM
+-- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.6
 
---
--- CREATE USER 'bag33188'@'%' IDENTIFIED VIA mysql_native_password USING '***';GRANT ALL PRIVILEGES ON *.* TO 'bag33188'@'%' REQUIRE NONE WITH GRANT OPTION MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;CREATE DATABASE IF NOT EXISTS `bag33188`;GRANT ALL PRIVILEGES ON `bag33188`.* TO 'bag33188'@'%';GRANT ALL PRIVILEGES ON `bag33188\_%`.* TO 'bag33188'@'%';
--- set autocommit = {0|1}
--- auto increment `roms` + `games` = 43,  auto increment `users` = 3, auto increment `personal_access_tokens` = 1, auto increment `migrations` = 10
--- ALTER TABLE table_name AUTO_INCREMENT = value;
---
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -153,7 +147,7 @@ DELIMITER ;
 --
 -- Table structure for table `failed_jobs`
 --
--- Creation: Aug 27, 2022 at 03:45 PM
+-- Creation: Sep 24, 2022 at 11:23 AM
 --
 
 DROP TABLE IF EXISTS `failed_jobs`;
@@ -181,7 +175,7 @@ TRUNCATE TABLE `failed_jobs`;
 --
 -- Table structure for table `games`
 --
--- Creation: Sep 08, 2022 at 05:16 AM
+-- Creation: Sep 24, 2022 at 11:23 AM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -292,7 +286,7 @@ DELIMITER ;
 --
 -- Table structure for table `migrations`
 --
--- Creation: Sep 08, 2022 at 05:16 AM
+-- Creation: Sep 24, 2022 at 11:23 AM
 --
 
 DROP TABLE IF EXISTS `migrations`;
@@ -330,12 +324,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 -- Table structure for table `password_resets`
 --
--- Creation: Sep 21, 2022 at 07:03 AM
+-- Creation: Sep 24, 2022 at 09:01 PM
 --
 
 DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` char(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -356,7 +350,8 @@ TRUNCATE TABLE `password_resets`;
 --
 -- Table structure for table `personal_access_tokens`
 --
--- Creation: Sep 21, 2022 at 07:06 AM
+-- Creation: Sep 24, 2022 at 11:23 AM
+-- Last update: Sep 24, 2022 at 08:52 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -389,7 +384,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 -- Table structure for table `roms`
 --
--- Creation: Sep 21, 2022 at 03:01 AM
+-- Creation: Sep 24, 2022 at 11:23 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -408,8 +403,6 @@ CREATE TABLE `roms` (
 
 --
 -- RELATIONSHIPS FOR TABLE `roms`:
---   `game_id`
---       `games` -> `id`
 --
 
 --
@@ -470,13 +463,12 @@ INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_typ
 --
 -- Table structure for table `sessions`
 --
--- Creation: Sep 21, 2022 at 07:05 AM
--- Last update: Sep 21, 2022 at 07:06 AM
+-- Creation: Sep 24, 2022 at 11:23 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE `sessions` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` char(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -500,17 +492,16 @@ TRUNCATE TABLE `sessions`;
 --
 -- Table structure for table `users`
 --
--- Creation: Sep 08, 2022 at 05:16 AM
--- Last update: Sep 21, 2022 at 07:06 AM
+-- Creation: Sep 24, 2022 at 11:23 AM
 --
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `two_factor_secret` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `two_factor_recovery_codes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
@@ -787,6 +778,13 @@ TRUNCATE TABLE `pma__column_info`;
 
 TRUNCATE TABLE `pma__table_uiprefs`;
 --
+-- Dumping data for table `pma__table_uiprefs`
+--
+
+INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
+('bag33188', 'pokerom_db', 'roms', '{\"sorted_col\":\"`roms`.`rom_size` DESC\"}', '2022-09-24 20:47:46');
+
+--
 -- Truncate table before insert `pma__tracking`
 --
 
@@ -843,13 +841,6 @@ TRUNCATE TABLE `pma__bookmark`;
 --
 
 TRUNCATE TABLE `pma__relation`;
---
--- Dumping data for table `pma__relation`
---
-
-INSERT INTO `pma__relation` (`master_db`, `master_table`, `master_field`, `foreign_db`, `foreign_table`, `foreign_field`) VALUES
-('pokerom_db', 'roms', 'game_id', 'pokerom_db', 'games', 'id');
-
 --
 -- Truncate table before insert `pma__savedsearches`
 --
