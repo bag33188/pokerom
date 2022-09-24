@@ -37,12 +37,12 @@ return new class extends Migration {
                         ]
                     ]
                 );
-                $collection->mediumInteger('chunkSize')->unsigned();
+                $collection->unsignedMediumInteger('chunkSize');
                 $collection->string('filename', MAX_ROM_FILENAME_LENGTH);
                 $collection->unsignedBigInteger('length');
                 $collection->dateTime('uploadDate');
                 $collection->char('md5', MD5_HASH_LENGTH);
-                // + metadata object
+                /*! note: metadata `field-object` (of this collection) cannot be represented in this migration */
             });
             Schema::connection($this->connection)->create('rom.chunks', function (Blueprint $collection) {
                 $filesIdIndexName = 'files_id_1_n_1';
@@ -51,7 +51,7 @@ return new class extends Migration {
                     name: $filesIdIndexName,
                     options: ['unique' => true]
                 );
-                $collection->integer('n')->unsigned();
+                $collection->unsignedInteger('n');
                 $collection->binary('data');
                 $collection->char('files_id', OBJECT_ID_LENGTH);
                 $collection->foreign('files_id', $filesIdIndexName)->references('_id')->on('rom.files');
