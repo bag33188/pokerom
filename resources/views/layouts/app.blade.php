@@ -14,7 +14,7 @@
         <!-- Bundles -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        <!-- Modules -->
+        <!-- Global Scripts -->
         <script type="text/javascript" src="{{ Vite::asset('resources/js/modules/capitalize.js') }}"></script>
         <script type="text/javascript" src="{{ Vite::asset('resources/js/modules/ready.js') }}"></script>
 

@@ -13,9 +13,9 @@
         <!-- Bundles -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        <!-- Modules -->
-        <script type="text/javascript" src="{{ Vite::asset('resources/js/modules/capitalize.js') }}" defer></script>
-        <script type="text/javascript" src="{{ Vite::asset('resources/js/modules/ready.js') }}" defer></script>
+        <!-- Global Scripts -->
+        <script type="text/javascript" src="{{ Vite::asset('resources/js/modules/capitalize.js') }}"></script>
+        <script type="text/javascript" src="{{ Vite::asset('resources/js/modules/ready.js') }}"></script>
 
         <!-- Stylesheets -->
         <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/scrollbar.module.css') }}" />
