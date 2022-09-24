@@ -15,8 +15,8 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <!-- Modules -->
-        <script type="text/javascript" src="{{ Vite::asset('resources/js/modules/capitalize.js') }}" defer></script>
-        <script type="text/javascript" src="{{ Vite::asset('resources/js/modules/ready.js') }}" defer></script>
+        <script type="text/javascript" src="{{ Vite::asset('resources/js/modules/capitalize.js') }}"></script>
+        <script type="text/javascript" src="{{ Vite::asset('resources/js/modules/ready.js') }}"></script>
 
         <!-- Stylesheets -->
         <link rel="stylesheet" type="text/css" href="{{ Vite::asset('resources/css/scrollbar.module.css') }}" />
@@ -35,7 +35,7 @@
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>

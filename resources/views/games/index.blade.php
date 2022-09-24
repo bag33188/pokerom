@@ -1,9 +1,9 @@
 @inject('gameQueries', 'App\Interfaces\GameQueriesInterface')
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot:header>
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Pok&eacute;mon Games Library</h2>
         <h5 class="text-center">{{ $games->count() }}</h5>
-    </x-slot>
+    </x-slot:header>
     <div class="container mx-auto my-3.5">
         <x-flash-message/>
         @unless($games->count() < 1)

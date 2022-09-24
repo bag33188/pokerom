@@ -70,7 +70,7 @@
     </script>
 @endpush
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot:header>
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Upload a ROM File</h2>
         <h6 class="text-center">
             @if($romFilesListCount > 1)
@@ -81,7 +81,7 @@
                 <span>No ROM Files found in Storage</span>
             @endif
         </h6>
-    </x-slot>
+    </x-slot:header>
     <div class="container mx-auto w-full">
         @unless($romFilesListCount === 0)
             <div class="p-6">

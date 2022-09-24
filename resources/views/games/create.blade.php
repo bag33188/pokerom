@@ -1,7 +1,7 @@
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot:header>
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Add Game</h2>
-    </x-slot>
+    </x-slot:header>
     <div class="container mx-auto w-full mt-3.5">
         @if($romsWithNoAssocGame->count() > 0)
             <x-jet-validation-errors class="mb-4"/>
