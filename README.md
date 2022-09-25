@@ -128,3 +128,5 @@ add this cookie to the current request:
 [//]: # ([php mongodb vendor manual]: https://www.php.net/manual/en/set.mongodb.php)
 [//]: # ([php mongodb driver tutorial]: https://www.php.net/manual/en/mongodb.tutorial.library.php)
 [//]: # ([mongodb php driver docs]: https://www.mongodb.com/docs/drivers/php/)
+
+[comment]: <> "> Note: the Proper count of the `rom.chunks` collection should be: _**`88628`**_ documents"
