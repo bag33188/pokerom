@@ -67,38 +67,9 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-# Important Notes
+# Useful Information
 
-[comment]: <> "> Note: the Proper count of the `rom.chunks` collection should be: _**`88628`**_ documents"
-
-## NodeJS and PHP Reverse Proxy
-
-allow node and php to run together (reverse proxy)
-
-> _assumes nodejs is the primary runtime serving on apache_
-
-```apacheconf
-# For Windows, XAMPP
-
-# C:/Windows/System32/drivers/etc/hosts (as admin)
-127.0.0.1 localhost:8080
-
-# C:/xampp/apache/conf/httpd.conf
-Listen 5000
-
-# C:/xampp/apache/conf/extra/httpd-vhosts.conf
-<VirtualHost *:5000>
-    DocumentRoot "C:\Users\Brock\Projects\PokeROM\www"
-    ServerName localhost:8080
-    <Directory "C:\Users\Brock\Projects\PokeROM\www">
-        Allow from all
-        Require all granted
-    </Directory>
-    ProxyPreserveHost on
-    ProxyPass / http://localhost:8080/
-    ProxyPassReverse / http://localhost:8080/
-</VirtualHost>
-```
+[comment]: <> "`db.rom.chunks.countDocuments() == 88628`"
 
 ## PHPStorm debug with Postman
 
@@ -106,7 +77,6 @@ add this cookie to the current request:
 > XDEBUG_SESSION=phpstorm; Path=/; Domain=pokerom.test; Expires=Tue, 16 Jan 2069 13:32:00 GMT;
 
 ________
-
 
 ## Documentation Links
 
@@ -134,4 +104,3 @@ ________
 [//]: # ([php mongodb vendor manual]: https://www.php.net/manual/en/set.mongodb.php)
 [//]: # ([php mongodb driver tutorial]: https://www.php.net/manual/en/mongodb.tutorial.library.php)
 [//]: # ([mongodb php driver docs]: https://www.mongodb.com/docs/drivers/php/)
-
