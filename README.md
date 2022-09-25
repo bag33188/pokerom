@@ -99,4 +99,4 @@ Listen 5000
 [//]: # (`find . -print | grep -i ".gitignore"`)
 [//]: # ("@php artisan vendor:publish --force --tag=livewire:assets --ansi")
 
-`XDEBUG_SESSION=phpstorm; Path=/; Domain=pokerom.test; Expires=Tue, 16 Jan 2069 13:32:00 GMT;`
+phpstorm debug with **postman**: `XDEBUG_SESSION=phpstorm; Path=/; Domain=pokerom.test; Expires=Tue, 16 Jan 2069 13:32:00 GMT;`
