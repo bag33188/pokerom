@@ -105,6 +105,7 @@ Listen 5000
 add this cookie to the current request: 
 > XDEBUG_SESSION=phpstorm; Path=/; Domain=pokerom.test; Expires=Tue, 16 Jan 2069 13:32:00 GMT;
 
+________
 
 
 ## Documentation Links
@@ -133,3 +134,4 @@ add this cookie to the current request:
 [//]: # ([php mongodb vendor manual]: https://www.php.net/manual/en/set.mongodb.php)
 [//]: # ([php mongodb driver tutorial]: https://www.php.net/manual/en/mongodb.tutorial.library.php)
 [//]: # ([mongodb php driver docs]: https://www.mongodb.com/docs/drivers/php/)
+
