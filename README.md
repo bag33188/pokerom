@@ -117,9 +117,9 @@ add this cookie to the current request:
 [MongoDB Docs]: https://www.mongodb.com/docs/manual/ "v6.0"
 [PHP Manual]: https://www.php.net/manual/en/ "v8.1.6"
 [Laravel Docs]: https://laravel.com/docs/9.x/ "Laravel 9"
-[PHP GridFS Tutorial]: https://www.mongodb.com/docs/php-library/v1.12/tutorial/gridfs/" "v1.12"
+[PHP GridFS Tutorial]: https://www.mongodb.com/docs/php-library/v1.13/tutorial/gridfs/ "v1.13"
 [Vite Docs]: https://vitejs.dev/guide "v3.1.3"
 [Tailwind CSS Docs]: https://tailwindcss.com/docs "v3.1.8"
 
-[//]: # ([mongodb php driver docs]: https://www.php.net/manual/en/mongodb.installation.pecl.php)
-[//]: # ([mongodb php extension]: https://pecl.php.net/package/mongodb)
+[//]: # ([mongodb php driver page]: https://www.php.net/manual/en/mongodb.installation.pecl.php)
+[//]: # ([mongodb pecl extension]: https://pecl.php.net/package/mongodb)
