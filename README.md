@@ -109,6 +109,7 @@ add this cookie to the current request:
 * [MongoDB Docs][]
 * [PHP Manual][]
 * [Laravel Docs][]
+* [MongoDB GridFS Docs][]
 * [PHP GridFS Tutorial][]
 * [Vite Docs][]
 * [Tailwind CSS Docs][]
@@ -117,6 +118,7 @@ add this cookie to the current request:
 [MongoDB Docs]: https://www.mongodb.com/docs/manual/ "v6.0"
 [PHP Manual]: https://www.php.net/manual/en/ "v8.1.6"
 [Laravel Docs]: https://laravel.com/docs/9.x/ "v9.x"
+[MongoDB GridFS Docs]: https://www.mongodb.com/docs/manual/core/gridfs/ "v6.0"
 [PHP GridFS Tutorial]: https://www.mongodb.com/docs/php-library/v1.13/tutorial/gridfs/ "v1.13"
 [Vite Docs]: https://vitejs.dev/guide "v3.1.3"
 [Tailwind CSS Docs]: https://tailwindcss.com/docs "v3.1.8"
