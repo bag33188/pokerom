@@ -3,10 +3,14 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2022 at 08:47 AM
+-- Generation Time: Sep 25, 2022 at 09:45 AM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.6
 
+--
+-- set autocommit = {0|1}
+-- ALTER TABLE `table_name` AUTO_INCREMENT = `value`;
+--
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -383,7 +387,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 -- Table structure for table `roms`
 --
--- Creation: Sep 24, 2022 at 09:49 PM
+-- Creation: Sep 25, 2022 at 07:40 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -391,7 +395,7 @@ CREATE TABLE `roms` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `rom_name` varchar(28) COLLATE utf8mb4_unicode_ci NOT NULL,
   `game_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `file_id` char(24) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'reference to "mongodb://`pokerom_files`.`rom.files`.`_id`"',
+  `file_id` char(24) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'reference to "mongodb://`pokerom_files`.`rom.files`.`_id`" field',
   `rom_size` int(10) UNSIGNED NOT NULL DEFAULT 1020,
   `rom_type` enum('gb','gbc','gba','nds','3ds','xci') COLLATE utf8mb4_unicode_ci NOT NULL,
   `has_game` tinyint(1) NOT NULL DEFAULT 0,

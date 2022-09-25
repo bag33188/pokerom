@@ -96,7 +96,6 @@ db.createCollection("rom.chunks", {
     validationLevel: "off",
     validationAction: "warn",
 });
-// 86571 total documents if all proper files are stored in the collection
 db.rom.chunks.createIndex({ files_id: 1, n: 1 }, { unique: true });
 
 // prettier-ignore
