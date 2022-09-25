@@ -69,7 +69,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 # Important Notes
 
-allow node and php to run together (reverse proxy)
+## allow node and php to run together (reverse proxy)
 
 assumes nodejs is primary serving on apache
 
@@ -96,11 +96,29 @@ Listen 5000
 </VirtualHost>
 ```
 
-[php gridfs documentation](https://www.mongodb.com/docs/php-library/v1.12/tutorial/gridfs/)
+## phpstorm debug with **postman**
+
+add this cookie to the current request:
+> XDEBUG_SESSION=phpstorm; Path=/; Domain=pokerom.test; Expires=Tue, 16 Jan 2069 13:32:00 GMT;
 
 
-[//]: # (`find . -print | grep -i ".htaccess"`)
-[//]: # (`find . -print | grep -i ".gitignore"`)
-[//]: # ("@php artisan vendor:publish --force --tag=livewire:assets --ansi")
+## Documentation Links
 
-phpstorm debug with **postman**: `XDEBUG_SESSION=phpstorm; Path=/; Domain=pokerom.test; Expires=Tue, 16 Jan 2069 13:32:00 GMT;`
+* [MariaDB Server Docs][]
+* [MongoDB Docs][]
+* [PHP Manual][]
+* [Laravel Docs][]
+* [PHP GridFS Tutorial][]
+* [Vite Docs][]
+* [Tailwind CSS Docs][]
+
+[MariaDB Server Docs]: https://mariadb.com/kb/en/documentation/ ""
+[MongoDB Docs]: https://www.mongodb.com/docs/manual/ "v6.0"
+[PHP Manual]: https://www.php.net/manual/en/ "v8.1.6"
+[Laravel Docs]: https://laravel.com/docs/9.x/ "Laravel 9"
+[PHP GridFS Tutorial]: https://www.mongodb.com/docs/php-library/v1.12/tutorial/gridfs/" "v1.12"
+[Vite Docs]: https://vitejs.dev/guide "Vite.js"
+[Tailwind CSS Docs]: https://tailwindcss.com/docs
+
+[//]: # ([mongodb php driver docs]: https://www.php.net/manual/en/mongodb.installation.pecl.php)
+[//]: # ([mongodb php extension]: https://pecl.php.net/package/mongodb)
