@@ -74,13 +74,13 @@ class User extends Authenticatable
         return $this->attributes['role'] === UserRoleEnum::ADMIN->value;
     }
 
-    public function checkPassword(string $currentPassword): bool
+    public static function checkPassword(string $textValue, string $hashValue): bool
     {
-        return Hash::check($currentPassword, $this->attributes['password']);
+        return Hash::check($textValue, $hashValue);
     }
 
     # public function setPasswordAttribute(string $password): void
     # {
-    #     $this->attributes['password'] = Hash::make($password);
+    #     $this->attributes['password'] = bcrypt($password);
     # }
 }

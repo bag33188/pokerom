@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Rules\MaxLengthRule;
 use App\Rules\MinLengthRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Validator;
 
 class LoginUserRequest extends FormRequest
@@ -38,7 +37,7 @@ class LoginUserRequest extends FormRequest
         // checks user current password
         // before making changes
         $validator->after(function (Validator $validator) {
-            if (!Hash::check($this->string('password'), $this->userFromRequest->getAttributeValue('password'))) {
+            if (!User::checkPassword($this->string('password'), $this->userFromRequest->getAttributeValue('password'))) {
                 $validator->errors()->add('password', 'The password you entered is incorrect.');
             }
         });

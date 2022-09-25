@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Rules\MaxLengthRule;
 use App\Rules\MinLengthRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
@@ -31,7 +32,7 @@ class UpdateUserRequest extends FormRequest
     protected function passedValidation(): void
     {
         if ($this->exists('password') && $this->exists('password_confirmation')) {
-            $this->merge(['password' => bcrypt($this->str('password'))]);
+            $this->merge(['password' => Hash::make($this->str('password'))]);
         }
     }
 }
