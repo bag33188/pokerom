@@ -1,9 +1,11 @@
+# noinspection SpellCheckingInspectionForFile
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2022 at 09:45 AM
+-- Generation Time: Sep 25, 2022 at 10:02 AM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.6
 
