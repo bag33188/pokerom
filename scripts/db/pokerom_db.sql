@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2022 at 12:18 AM
+-- Generation Time: Sep 25, 2022 at 08:47 AM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.6
 
@@ -391,7 +391,7 @@ CREATE TABLE `roms` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `rom_name` varchar(28) COLLATE utf8mb4_unicode_ci NOT NULL,
   `game_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `file_id` char(24) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'references `_id` field in `rom.files` collection',
+  `file_id` char(24) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'reference to "mongodb://`pokerom_files`.`rom.files`.`_id`"',
   `rom_size` int(10) UNSIGNED NOT NULL DEFAULT 1020,
   `rom_type` enum('gb','gbc','gba','nds','3ds','xci') COLLATE utf8mb4_unicode_ci NOT NULL,
   `has_game` tinyint(1) NOT NULL DEFAULT 0,
