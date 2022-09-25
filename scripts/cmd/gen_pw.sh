@@ -4,19 +4,6 @@
 # Generate Password Script
 # ========================
 
-:<< --MULTILINE-COMMENT--
-Permissions (Unix)
-------------------
-
-add to current permissions
-$ cd scripts/cmd
-$ chmod +x ./gen_pw.sh
-
-set current permissions
-$ cd scripts/cmd
-$ chmod 755 ./gen_pw.sh
---MULTILINE-COMMENT--
-
 gen_pw() {
   export NODE_ENV=development
   target_PWD=$(readlink -f .)
