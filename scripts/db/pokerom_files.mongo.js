@@ -1,11 +1,9 @@
 // noinspection JSUnresolvedFunction,JSUnresolvedVariable
 
-const mongoURI = // DSN
-    "mongodb://brock:3931Sunflower!@localhost:27017/?authSource=admin&authMechanism=SCRAM-SHA-256";
-
 conn = new Mongo("localhost:27017");
 
 db = conn.getDB("admin");
+
 db.createUser({
     user: "brock",
     pwd: "3931Sunflower!", // passwordPrompt()
@@ -107,7 +105,7 @@ db.rom.files.aggregate([
     ...aggregations[11].pipeline,
 ]);
 
-// use pokerom_files;
-// db.rom_files.reIndex();
-// db.rom.files.reIndex();
-// db.rom.chunks.reIndex();
+/*
+db.rom.files.reIndex();
+db.rom.chunks.reIndex();
+*/
