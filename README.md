@@ -1,6 +1,6 @@
 # Pok&eacute;ROM
 
-[//]: # (https://github.com/bag33188/new-pokerom)
+[comment]: <> (https://github.com/bag33188/new-pokerom)
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
@@ -116,10 +116,13 @@ add this cookie to the current request:
 [MariaDB Server Docs]: https://mariadb.com/kb/en/documentation/ "v10.9.3"
 [MongoDB Docs]: https://www.mongodb.com/docs/manual/ "v6.0"
 [PHP Manual]: https://www.php.net/manual/en/ "v8.1.6"
-[Laravel Docs]: https://laravel.com/docs/9.x/ "Laravel 9"
+[Laravel Docs]: https://laravel.com/docs/9.x/ "v9.x"
 [PHP GridFS Tutorial]: https://www.mongodb.com/docs/php-library/v1.13/tutorial/gridfs/ "v1.13"
 [Vite Docs]: https://vitejs.dev/guide "v3.1.3"
 [Tailwind CSS Docs]: https://tailwindcss.com/docs "v3.1.8"
 
 [//]: # ([mongodb php driver page]: https://www.php.net/manual/en/mongodb.installation.pecl.php)
-[//]: # ([mongodb pecl extension]: https://pecl.php.net/package/mongodb)
+[//]: # ([mongodb pecl extension]: https://pecl.php.net/package/mongodb "v1.13.0 - ts-x64, windows")
+[//]: # ([php mongodb vendor manual]: https://www.php.net/manual/en/set.mongodb.php)
+[//]: # ([php mongodb driver tutorial]: https://www.php.net/manual/en/mongodb.tutorial.library.php)
+[//]: # ([mongodb php driver docs]: https://www.mongodb.com/docs/drivers/php/)
