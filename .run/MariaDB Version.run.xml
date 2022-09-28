@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="MariaDB Version" type="DatabaseScript">
-    <data-source id="3cf67475-4de6-434a-8f12-75e1198cb543" />
+    <data-source id="ffcae544-a18f-46a0-89c9-2d80091ec941" />
     <script-text>SELECT VERSION();</script-text>
     <method v="2" />
   </configuration>
