@@ -75,7 +75,9 @@ class RomController extends WebController
             'rom' => $rom,
             'userIsAdmin' => Auth::user()->isAdmin(),
             'alpineInitialUiState' => html_entity_decode($alpineUiData),
-            'gameNameTitle' => $rom->has_game === TRUE ? sprintf('title="%s"', $rom->game->game_name) : ''
+            'gameNameTitle' => $rom->has_game === TRUE
+                ? sprintf('title="%s"', $rom->game->game_name)
+                : ''
         ]);
     }
 
