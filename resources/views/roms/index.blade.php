@@ -25,6 +25,8 @@
     @endverbatim
 @endpush
 @php
+    use App\Enums\AlertTypeEnum as AlertTypes;
+
     $showHideBtnClasses = [
       'bg-emerald-500',
       'hover:bg-emerald-600',
@@ -96,7 +98,7 @@
                 </tfoot>
             </table>
         @else
-            <x-alert :alertType="\App\Enums\AlertTypeEnum::ERROR" heading="Sorry!"
+            <x-alert :alertType="AlertTypes::ERROR" heading="Sorry!"
                      message="No ROMs Currently Exist in the Database"/>
         @endunless
     </div>
