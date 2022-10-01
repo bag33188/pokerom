@@ -1,4 +1,18 @@
 @inject('romQueries', 'App\Interfaces\RomQueriesInterface')
+@php
+    use App\Enums\AlertTypeEnum as AlertTypes;
+
+    $showHideBtnClasses = [
+      'bg-emerald-500',
+      'hover:bg-emerald-600',
+      'text-white',
+      'font-bold',
+      'py-2',
+      'px-4',
+      'shadow-md',
+      'rounded'
+    ];
+@endphp
 @push('scripts')
     @verbatim
         <script type="text/javascript">
@@ -24,20 +38,6 @@
         </script>
     @endverbatim
 @endpush
-@php
-    use App\Enums\AlertTypeEnum as AlertTypes;
-
-    $showHideBtnClasses = [
-      'bg-emerald-500',
-      'hover:bg-emerald-600',
-      'text-white',
-      'font-bold',
-      'py-2',
-      'px-4',
-      'shadow-md',
-      'rounded'
-    ];
-@endphp
 <x-app-layout>
     <x-slot:header>
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">ROMs</h2>
