@@ -1,7 +1,5 @@
 @inject('romQueries', 'App\Interfaces\RomQueriesInterface')
 @php
-    use App\Enums\AlertTypeEnum as AlertTypes;
-
     $showHideBtnClasses = [
       'bg-emerald-500',
       'hover:bg-emerald-600',
@@ -44,15 +42,15 @@
         <h5 class="text-center">{{ $roms->count() }}</h5>
     </x-slot:header>
     <div x-data="initROMsUiStateData()" class="mb-3 mx-3">
-        <div class="w-full text-center my-2.5">
-            <button type="button" @class($showHideBtnClasses) @click="open = toggleContent(open)">
-                <span x-show="open">Hide</span>
-                <span x-show="!open" x-cloak>Show</span>
-                <span><!--&nbsp;-->ROMs</span>
-            </button>
-        </div>
         <x-flash-message/>
         @unless($roms->count() === 0)
+            <div class="w-full text-center my-2.5">
+                <button type="button" @class($showHideBtnClasses) @click="open = toggleContent(open)">
+                    <span x-show="open">Hide</span>
+                    <span x-show="!open" x-cloak>Show</span>
+                    <span><!--&nbsp;-->ROMs</span>
+                </button>
+            </div>
             <table class="w-full test-sm text-left text-gray-800 table-auto border-2" x-show="open === true">
                 <thead class="bg-gray-50">
                 @for($i = 0; $i < count($htmlRomTableColumns); $i++)
@@ -98,7 +96,7 @@
                 </tfoot>
             </table>
         @else
-            <x-alert :alertType="AlertTypes::ERROR" heading="Sorry!"
+            <x-alert :alertType="App\Enums\AlertTypeEnum::ERROR" heading="Sorry!"
                      message="No ROMs Currently Exist in the Database"/>
         @endunless
     </div>
