@@ -4,7 +4,7 @@
     </x-slot:header>
     <div class="container mx-auto w-full mt-3.5">
         @if($romsWithNoAssocGame->count() > 0)
-            <x-jet-validation-errors class="mb-4"/>
+            <x-jet-validation-errors class="m-4"/>
             <form method="POST" action="{{ route('games.store') }}">
                 @method('POST')
                 @csrf

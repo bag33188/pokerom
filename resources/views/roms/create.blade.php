@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     <div class="container mx-auto w-full">
-        <x-jet-validation-errors class="mb-4"/>
+        <x-jet-validation-errors class="m-4"/>
         <form method="POST" action="{{ route('roms.store') }}">
             @csrf
             @method('POST')
