@@ -86,8 +86,9 @@
                         <x-list-item>File ID: {{ $rom->romFile->_id }}</x-list-item>
                         <x-list-item>File Name: {{ $rom->romFile->filename }}</x-list-item>
                         <x-list-item>File Length: {{ $rom->romFile->length }} Bytes</x-list-item>
-                        <x-list-item class="border-b-0">Designated
-                            Console: {{ $romFileRepository->determineConsole($rom->romFile) }}</x-list-item>
+                        <x-list-item class="border-b-0">
+                            Designated Console: {{ $romFileRepository->determineConsole($rom->romFile) }}
+                        </x-list-item>
                     </x-list-group>
                     <p @class($paragraphHiddenContentClasses) x-show="!romFileInfoOpened" x-cloak>...</p>
                 </x-list-item>
