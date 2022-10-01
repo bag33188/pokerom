@@ -115,7 +115,7 @@
                 </form>
             </div>
         @else
-            <x-alert :alertType="\App\Enums\AlertTypeEnum::ERROR">
+            <x-alert :alertType="App\Enums\AlertTypeEnum::ERROR">
                 <x-slot name="heading">Sorry!</x-slot>
                 <x-slot name="message">No ROM Files found in
                     <samp>{{ join('/', ['storage', 'app', 'public', ROM_FILES_DIRNAME]) }}</samp> folder

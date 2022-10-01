@@ -45,7 +45,7 @@
                 @endforeach
             </div>
         @else
-            <x-alert :alertType="\App\Enums\AlertTypeEnum::ERROR" heading="Sorry!" message="No ROM Files in database"/>
+            <x-alert :alertType="App\Enums\AlertTypeEnum::ERROR" heading="Sorry!" message="No ROM Files in database"/>
         @endunless
     </div>
 </x-app-layout>
