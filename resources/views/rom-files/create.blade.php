@@ -65,9 +65,9 @@
             // IMPORTANT!!!
             // cannot set disabled attribute on select element since it will nullify the data being sent to the server
             // bad: romFilenameField.disabled = true;
-            @endenv
 
             // remove all pointer events instead
+            @endenv
             romFilenameField.classList.add(...romFilenameDisabledClasses);
         };
 
