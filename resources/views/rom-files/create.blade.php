@@ -1,6 +1,6 @@
 @push('styles')
     @env('local')
-        <!--suppress CssUnresolvedCustomProperty, CssUnknownProperty -->
+        <!--suppress CssUnresolvedCustomProperty, CssUnknownProperty, CssUnusedSymbol -->
     @endenv
     <style {!! 'type="text/css"'; !!}>
         .white-space-pre {
@@ -71,8 +71,8 @@
             romFilenameField.classList.add(...romFilenameDisabledClasses);
         };
 
-        let handleUploadRomFileForm = function () {
-            uploadRomFileForm.addEventListener("submit", function () {
+        let handleUploadRomFileForm = function() {
+            uploadRomFileForm.addEventListener("submit", function() {
                 tempDisableUploadBtn();
                 tempDisableRomFilesFormSelect();
             });
@@ -98,7 +98,7 @@
     <div class="container mx-auto w-full">
         @unless($romFilesListCount === 0)
             <div class="p-6">
-                <x-jet-validation-errors class="mb-4"/>
+                <x-jet-validation-errors class="mb-4" />
 
                 <form name="upload-romFile-form"
                       method="POST"
@@ -108,7 +108,7 @@
                     @method('POST')
 
                     <div class="flex flex-col">
-                        <x-form-select-label class="!font-semibold" for="romFile" text="Select ROM File"/>
+                        <x-form-select-label class="!font-semibold" for="romFile" text="Select ROM File" />
                         <x-form-select class="shadow" name="rom_filename" id="romFile">
                             @foreach($romFilesList as $romFileListing)
                                 <option
@@ -129,7 +129,7 @@
             <x-alert :alertType="App\Enums\AlertTypeEnum::ERROR">
                 <x-slot name="heading">Sorry!</x-slot>
                 <x-slot name="message">No ROM Files found in
-                    <samp>{{ join('/', ['storage', 'app', 'public', ROM_FILES_DIRNAME]) }}</samp> folder
+                    <samp>{{ join(DIRECTORY_SEPARATOR, ['storage', 'app', 'public', ROM_FILES_DIRNAME]) }}</samp> folder
                 </x-slot>
             </x-alert>
         @endunless
