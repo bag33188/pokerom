@@ -44,12 +44,13 @@
                 'border-blue-400',
             ];
             break;
-        default:
+        default: {
             $conditionalAlertCssClasses = [
                 'bg-gray-100',
                 'text-gray-600',
                 'border-gray-500',
             ];
+        }
     }
 @endphp
 <div {{ $attributes->class(array_merge($conditionalAlertCssClasses, $universalAlertCssClasses)) }}

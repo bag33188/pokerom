@@ -28,6 +28,7 @@ class FormSelectLabel extends Component
     public function render(): View|string|Closure
     {
         return /** @lang Blade */ <<<'blade'
+            @props(['text'])
             @php
                 $formSelectLabelClasses = ['block', 'text-sm', 'font-medium', 'text-gray-700'];
             @endphp
