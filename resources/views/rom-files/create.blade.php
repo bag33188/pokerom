@@ -1,6 +1,6 @@
 @push('styles')
     @env('local')
-        <!--suppress CssUnresolvedCustomProperty -->
+        <!--suppress CssUnresolvedCustomProperty, CssUnknownProperty -->
     @endenv
     <style {!! 'type="text/css"'; !!}>
         .white-space-pre {
@@ -23,6 +23,16 @@
             -moz-box-shadow: inset 0 0 6px var(--disabled-shadow-color) !important;
             -webkit-box-shadow: inset 0 0 6px var(--disabled-shadow-color) !important;
             box-shadow: inset 0 0 6px var(--disabled-shadow-color) !important;
+        }
+
+        .no-select {
+            pointer-events: none !important;
+            -webkit-touch-callout: none !important;
+            -webkit-user-select: none !important;
+            -khtml-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
         }
     </style>
 @endpush
@@ -47,7 +57,8 @@
             let romFilenameDisabledClasses = [
                 "no-pointer-events",
                 "disabled-form-select",
-                "inset-box-shadow"
+                "inset-box-shadow",
+                "no-select"
             ];
 
             @env('local')
