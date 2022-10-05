@@ -1,4 +1,4 @@
-<form {{ $attributes->merge(['class' => 'inline-block']) }}
+<form {!! $attributes->merge(['class' => 'inline-block']) !!}
       method="POST" action="{{ route('roms.destroy', ['rom' => $rom]) }}">
     @method('DELETE')
     @csrf

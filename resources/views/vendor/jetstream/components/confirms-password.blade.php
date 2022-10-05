@@ -5,7 +5,7 @@
 @endphp
 
 <span
-    {{ $attributes->wire('then') }}
+    {!! $attributes->wire('then') !!}
     x-data
     x-ref="span"
     x-on:click="$wire.startConfirmingPassword('{{ $confirmableId }}')"

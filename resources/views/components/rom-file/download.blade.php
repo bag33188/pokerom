@@ -1,4 +1,4 @@
-<form {{ $attributes->merge(['class' => 'inline-block']) }}
+<form {!! $attributes->merge(['class' => 'inline-block']) !!}
       method="GET"
       action="{{ route('rom-files.download', ['romFile' => $romFile]) }}"
       name="download-romFile-{{ $romFile->_id }}-form"

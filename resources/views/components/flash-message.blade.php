@@ -41,7 +41,7 @@
     };
 @endphp
 @if($sessionHasMessage)
-    <div {{ $attributes }}
+    <div {!! $attributes !!}
          x-data="flashMessageData()"
          x-show="flashMessageIsVisible(show_flash_message)"
          x-init="setTimeout(() => (show_flash_message = false), {{ Js::from($sessionFlashTimeout) }})"

@@ -26,7 +26,7 @@
     $deleteRomFileBtnId = "delete-romFile-$romFile->_id-btn";
     $deleteRomFileFormName = "delete-romFile-$romFile->_id-form";
 @endphp
-<form {{ $attributes->merge(['class' => 'inline-block']) }}
+<form {!! $attributes->merge(['class' => 'inline-block']) !!}
       method="POST"
       action="{{ route('rom-files.destroy', ['romFile' => $romFile]) }}"
       name="{{ $deleteRomFileFormName }}"
