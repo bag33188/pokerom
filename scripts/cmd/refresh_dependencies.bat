@@ -1,8 +1,8 @@
 @ECHO OFF
 
-REM =====================
-::  Launch Mailhog Script
-REM =====================
+REM |=======================|
+REM | Launch Mailhog Script |
+REM |=======================|
 
 CALL :REFRESH_DEPENDENCIES
 EXIT /b %ERRORLEVEL%
