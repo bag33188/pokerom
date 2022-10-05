@@ -1,9 +1,9 @@
-/* alpinejs */
+/* AlpineJS */
 [x-cloak] {
     display: none;
 }
 
-/* angularjs */
+/* AngularJS */
 [ng\:cloak],
 [ng-cloak],
 .ng-cloak {
