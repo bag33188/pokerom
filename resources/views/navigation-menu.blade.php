@@ -41,17 +41,17 @@
                 </div>
                 @if(auth()->user()->isAdmin())
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav-item-create">
-                        <x-jet-nav-link href="{{ route('roms.create') }}" :active="request()->routeIs('roms.create')">
+                        <x-jet-nav-link accesskey="r" :href="route('roms.create')" :active="request()->routeIs('roms.create')">
                             {{ __('Add ROM') }}
                         </x-jet-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav-item-create">
-                        <x-jet-nav-link href="{{ route('games.create') }}" :active="request()->routeIs('games.create')">
+                        <x-jet-nav-link accesskey="g" :href="route('games.create')" :active="request()->routeIs('games.create')">
                             {{ __('Add Game') }}
                         </x-jet-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex nav-item-create">
-                        <x-jet-nav-link href="{{ route('rom-files.create') }}"
+                        <x-jet-nav-link accesskey="b" :href="route('rom-files.create')"
                                         :active="request()->routeIs('rom-files.create')">
                             {{ __('Upload ROM File') }}
                         </x-jet-nav-link>
