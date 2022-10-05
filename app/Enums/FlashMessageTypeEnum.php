@@ -10,9 +10,9 @@ enum FlashMessageTypeEnum: string
         names as public;
     }
 
-    case SUCCESS = 'success'; // green
-    case WARNING = 'warning'; // yellow
-    case ERROR = 'error'; // red
-    case NOTIFICATION = 'notification'; // blue
-    case DEFAULT = 'default'; // grey
+    case SUCCESS = 'success';             // green
+    case WARNING = 'warning';             // yellow
+    case ERROR = 'error';                 // red
+    case NOTIFICATION = 'notification';   // blue
+    case DEFAULT = 'default';             // grey
 }

@@ -8,10 +8,10 @@ enum AnchorButtonTypeEnum: string
 {
     use EnumMethods;
 
-    case PRIMARY = 'primary'; // black
-    case SECONDARY = 'secondary'; // grey
-    case DANGER = 'danger'; // red
-    case INFO = 'info'; // blue
-    case CAUTION = 'caution'; // yellow
-    case OK = 'ok'; // green
+    case PRIMARY = 'primary';       // black
+    case SECONDARY = 'secondary';   // grey
+    case DANGER = 'danger';         // red
+    case INFO = 'info';             // blue
+    case CAUTION = 'caution';       // yellow
+    case OK = 'ok';                 // green
 }
