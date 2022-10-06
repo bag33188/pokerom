@@ -11,7 +11,7 @@
       'rounded'
     ];
 
-    $userIsAdmin = Auth::user()->isAdmin();
+    $htmlRomTableColumns = ['ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information'];
 @endphp
 @push('scripts')
     @verbatim

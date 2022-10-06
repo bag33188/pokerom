@@ -34,9 +34,9 @@ class RomController extends WebController
 
         return view('roms.index', [
             'roms' => $roms,
-            'htmlRomTableColumns' => ['ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information'],
             'totalRomsSize' => $romFileQueries->getTotalSizeOfAllFilesThatHaveRoms(),
             'totalRomsCount' => Rom::all()->count(),
+            'userIsAdmin' => Auth::user()->isAdmin(),
         ]);
     }
 
