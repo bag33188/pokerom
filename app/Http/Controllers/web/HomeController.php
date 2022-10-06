@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller as WebController;
 use App\Models\Rom;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends WebController
 {
@@ -16,7 +17,7 @@ class HomeController extends WebController
 
     public function __invoke()
     {
-        $splitUserName = explode(_SPACE, auth()->user()->name, 3);
+        $splitUserName = explode(_SPACE, Auth::user()->name, 3);
 
         return view('dashboard', [
             'romsDisplayCount' => $this->rom->count() - 2, // subtract 2 from total count for display purposes
