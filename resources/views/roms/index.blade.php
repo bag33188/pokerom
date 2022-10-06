@@ -70,7 +70,7 @@
                         <td class="px-6 py-4">{{ strtolower($rom->rom_type) }}</td>
                         <td class="px-6 py-4">
                             @if($rom->has_game)
-                                <span data-game-id="{{ $rom->game->id }}">{{ $rom->game->game_name }}</span>
+                                <span data-game-id="{{ @$rom->game->id }}">{{ @$rom->game->game_name }}</span>
                             @else
                                 <span>N/A</span>
                             @endif
