@@ -16,7 +16,7 @@
         @if($userIsAdmin)
         @media (max-width: 433px) {
             #link-rom-{{ $rom->id }}-container {
-                margin-bottom: 0.5rem;
+                margin-bottom: 0.75rem;
                 margin-right: 0 !important;
             }
         }
