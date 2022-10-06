@@ -78,7 +78,7 @@
                         <td class="px-6 py-4">
                             @if($rom->has_file)
                                 <div class="inline-block" data-romFile-id="{{ @$rom->romFile->_id }}">
-                                    <x-rom-file.download :romFile="@$rom->romFile"/>
+                                    <x-rom-file.download :romFile="$rom->romFile"/>
                                 </div>
                             @else
                                 <span>No file yet!</span>
