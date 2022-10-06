@@ -10,8 +10,6 @@
       'shadow-md',
       'rounded'
     ];
-
-    $romsCount = $roms->count();
 @endphp
 @push('scripts')
     @verbatim
@@ -41,11 +39,11 @@
 <x-app-layout>
     <x-slot:header>
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">ROMs</h2>
-        <h5 class="text-center">{{ $romsCount }} Total ROMs</h5>
+        <h5 class="text-center">{{ $totalRomsCount }} Total ROMs</h5>
     </x-slot:header>
     <div x-data="initROMsUiStateData()" class="mb-3 mx-3">
         <x-flash-message/>
-        @unless($romsCount === 0)
+        @unless($totalRomsCount === 0)
             <div class="w-full text-center my-2.5">
                 <button type="button" @class($showHideBtnClasses) @click="open = toggleContent(open)">
                     <span x-show="open">Hide</span>
