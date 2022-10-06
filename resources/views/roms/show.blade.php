@@ -20,6 +20,11 @@
                 margin-right: 0 !important;
             }
         }
+        @media (max-width: 380px) {
+            #link-rom-{{ $rom->id }}-container {
+                margin-left: 0.75rem;
+            }
+        }
         @endif
     </style>
 @endpush
