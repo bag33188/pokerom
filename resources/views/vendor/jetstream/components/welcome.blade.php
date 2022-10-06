@@ -1,90 +1,179 @@
-<div class="p-6 sm:px-20 bg-white border-b border-gray-200">
-    <div>
-        <x-jet-application-logo class="block h-12 w-auto" />
-    </div>
+@prepend('scripts')
+    <script type="text/javascript">
+        const loadCopyrightYear = () => {
+            const currentYear = (new Date()).getFullYear();
+            const copyrightYearElement = document.getElementById('copyright-year');
+            copyrightYearElement.textContent = currentYear.toString();
+        };
 
-    <div class="mt-8 text-2xl">
-        Welcome to your Jetstream application!
-    </div>
+        const loadEmulatorLinks = () => {
+            /** @type HTMLUListElement */
+            const emulatorLinksList = document.getElementById("emulator-links");
 
-    <div class="mt-6 text-gray-500">
-        Laravel Jetstream provides a beautiful, robust starting point for your next Laravel application. Laravel is designed
-        to help you build your application using a development environment that is simple, powerful, and enjoyable. We believe
-        you should love expressing your creativity through programming, so we have spent time carefully crafting the Laravel
-        ecosystem to be a breath of fresh air. We hope you love it.
-    </div>
-</div>
+            /**
+             * these classes are under the `saved`/`safe` array/list in tailwind config due to
+             * classes **not being able to be generated** at build time when hardcoded in js
+             *
+             * @constant
+             * @name anchorClasses
+             * @type {string[]}
+             */
+            const anchorClasses = ["underline", "text-blue-400", "hover:text-blue-500"];
 
-<div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2">
-    <div class="p-6">
-        <div class="flex items-center">
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-400"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="https://laravel.com/docs">Documentation</a></div>
+            /**
+             * @name emulators
+             * @type {Array<EmulatorObject>}
+             * @description Array of nintendo emulator data for use with making an _unordered_ {@link HTMLLIElement List} of {@link HTMLAnchorElement HTML Anchor Elements}
+             */
+            let emulators = [
+                {
+                    href: "https://desmume.org/",
+                    text: "DeSmuME",
+                    name: "desmume",
+                    target: "_blank",
+                    platform: 'nintendo ds/lite (nds)'
+                },
+                {
+                    href: "https://www.emulator-zone.com/doc.php/gba/vboyadvance.html",
+                    text: "Visual Boy Advanced",
+                    name: "vba",
+                    target: "_blank",
+                    title: "emulator-zone download page",
+                    platform: 'gameboy/gameboy color/gameboy advanced (gb/gbc/gba)'
+                    // https://github.com/visualboyadvance-m/visualboyadvance-m
+                },
+                {
+                    href: "https://citra-emu.org/",
+                    text: "Citra",
+                    name: "citra",
+                    target: "_blank",
+                    platform: '[new] nintendo 3ds/xl (3ds)'
+                },
+                {
+                    href: "https://yuzu-emu.org/",
+                    text: "Yuzu",
+                    name: "yuzu",
+                    target: "_blank",
+                    platform: 'nintendo switch/lite (nx)'
+                }
+            ];
+
+            emulatorLinksList.style.setProperty('list-style-type', 'none', 'important');
+
+            emulators.forEach((emulator, index) => {
+                let listItemElement = document.createElement("li");
+                let emulatorLinkElement = document.createElement("a");
+                listItemElement.id = `emulator-${(index + 1).valueOf().toString()}`;
+
+                emulatorLinkElement.id = `${emulator.name}-emulator-url`;
+                emulatorLinkElement.href = emulator.href;
+                emulatorLinkElement.text = emulator.text;
+                emulatorLinkElement.target = emulator.target;
+                emulatorLinkElement.rel = "noreferrer";
+                emulatorLinkElement.setAttribute('data-platform', emulator.platform);
+
+                if (emulators[index].hasOwnProperty('title'))
+                    emulatorLinkElement.title = emulator['title'];
+
+                emulatorLinkElement.classList.add(...anchorClasses);
+                listItemElement.appendChild(emulatorLinkElement);
+                emulatorLinksList.appendChild(listItemElement);
+            });
+        };
+    </script>
+@endprepend
+@push('scripts')
+    <script type="text/javascript">
+        loadCopyrightYear();
+        loadEmulatorLinks();
+    </script>
+@endpush
+<div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+    <section
+        data-name="heading"
+        class="p-4 sm:px-20 md:p-6 bg-white border-b-2 border-gray-200 flex flex-col md:flex-row justify-start md:justify-between items-center">
+        <div class="mb-3 md:mb-auto">
+            <x-jet-application-logo class="!h-12 !w-auto"/>
         </div>
-
-        <div class="ml-12">
-            <div class="mt-2 text-sm text-gray-500">
-                Laravel has wonderful documentation covering every aspect of the framework. Whether you're new to the framework or have previous experience, we recommend reading all of the documentation from beginning to end.
-            </div>
-
-            <a href="https://laravel.com/docs">
-                <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
-                        <div>Explore the documentation</div>
-
-                        <div class="ml-1 text-indigo-500">
-                            <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        </div>
+        <p class="text-lg sm:text-xl md:text-2xl">
+                        <span class="font-semibold">
+                            {!! config('app.web_name') !!}
+                        </span>
+            <span class="font-bold">&#160;&#8209;&#xA0;</span>
+            <span class="italic">One Stop for all your Pok&eacute;mon ROMs</span>
+        </p>
+    </section>
+    <div
+        class="bg-gray-200 bg-opacity-25 grid grid-rows-[repeat(3,auto)] grid-cols-1 md:grid-cols-2 md:grid-rows-[auto_auto]">
+        <section data-name="about" class="p-6 border-b border-gray-200 col-span-2 row-span-1">
+            <h3 class="ml-12 text-lg text-gray-600 leading-7 font-semibold">About</h3>
+            <div class="ml-12">
+                <div class="mt-2 text-md text-gray-500">
+                    <!-- about description -->
+                    <p class="inline-block">
+                        This web app is a databank of Pok&#xE9;mon ROMs.
+                        <wbr/>
+                        This databank contains
+                        <span id="adv-count"><!--more than-->{{ $romsDisplayCount }}+</span>
+                        ROMs, including all 33 of the core Pok&#233;mon ROMs.
+                    </p>
+                    <br/>
+                    <p class="italic mt-3 mb-0 pb-0 inline-flex flex-row text-sm">
+                        <span>&copy; Pok&eacute;mon Company</span>
+                        <span>&nbsp;</span>
+                        <span id="copyright-year"><!-- js content insert --></span>
+                    </p>
                 </div>
-            </a>
-        </div>
-    </div>
-
-    <div class="p-6 border-t border-gray-200 md:border-t-0 md:border-l">
-        <div class="flex items-center">
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-400"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="https://laracasts.com">Laracasts</a></div>
-        </div>
-
-        <div class="ml-12">
-            <div class="mt-2 text-sm text-gray-500">
-                Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
             </div>
-
-            <a href="https://laracasts.com">
-                <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
-                        <div>Start watching Laracasts</div>
-
-                        <div class="ml-1 text-indigo-500">
-                            <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        </div>
+        </section>
+        <section
+            data-name="roms"
+            class="flex flex-col p-6 border-r border-t border-gray-200 row-start-2 row-end-2 col-span-full md:col-start-1 md:col-end-1 h-full">
+            <h3 class="ml-12 text-lg text-gray-600 leading-7 font-semibold">Roms</h3>
+            <div class="ml-12">
+                <div class="mt-2 text-sm text-gray-500">
+                    <!-- roms description -->
+                    <p class="inline-block">
+                        Here you will find all your <strong>Core Pok&#xE9;mon ROMs</strong>,
+                        <wbr/>
+                        as well as some <b>Spin-Off Games</b>,
+                        <wbr/>
+                        and even some <b>Pok&#233;mon ROM hacks</b>.
+                        <wbr/>
+                        <br/>
+                        <br/>
+                        Feel free to download them for use with an <i>emulator</i>.
+                    </p>
                 </div>
-            </a>
-        </div>
-    </div>
-
-    <div class="p-6 border-t border-gray-200">
-        <div class="flex items-center">
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-400"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="https://tailwindcss.com/">Tailwind</a></div>
-        </div>
-
-        <div class="ml-12">
-            <div class="mt-2 text-sm text-gray-500">
-                Laravel Jetstream is built with Tailwind, an amazing utility first CSS framework that doesn't get in your way. You'll be amazed how easily you can build and maintain fresh, modern designs with this wonderful framework at your fingertips.
             </div>
-        </div>
-    </div>
-
-    <div class="p-6 border-t border-gray-200 md:border-l">
-        <div class="flex items-center">
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-400"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold">Authentication</div>
-        </div>
-
-        <div class="ml-12">
-            <div class="mt-2 text-sm text-gray-500">
-                Authentication and registration views are included with Laravel Jetstream, as well as support for user email verification and resetting forgotten passwords. So, you're free to get started what matters most: building your application.
+            <div class="mt-3.5 ml-11 inline-flex flex-row h-full items-end">
+                <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::INFO"
+                                 href="{{ route('roms.index') }}" target="_self">
+                    <span class="order-1">ROMs</span>
+                    <span class="order-2">@include('partials._more-info-icon')</span>
+                </x-anchor-button>
             </div>
-        </div>
+        </section>
+        <section
+            data-name="games"
+            class="flex flex-col p-6 border-l border-t border-gray-200 md:row-start-2 md:row-end-2 row-start-3 row-end-3 col-span-full md:col-start-2 md:col-end-2 h-full">
+            <h3 class="ml-12 text-lg text-gray-600 leading-7 font-semibold">Games</h3>
+            <div class="ml-12">
+                <div class="mt-2 text-sm text-gray-500">
+                    <!-- games description -->
+                    <p class="inline-block">Feel free to play these amazing Games on your emulators!!</p>
+                    <ul id="emulator-links" class="mt-1.5">
+                        <!-- js content insert -->
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-3 ml-11 inline-flex flex-row h-full items-end">
+                <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::INFO"
+                                 href="{{ route('games.index') }}" target="_self">
+                    <span class="order-1">Games</span>
+                    <span class="order-2">@include('partials._more-info-icon')</span>
+                </x-anchor-button>
+            </div>
+        </section>
     </div>
 </div>
