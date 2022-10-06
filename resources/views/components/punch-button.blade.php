@@ -1,5 +1,7 @@
 @pushOnce('styles')
-    @env('local') <!--suppress CssUnresolvedCustomProperty --> @endenv
+    @env('local')
+        <!--suppress CssUnresolvedCustomProperty -->
+    @endenv
     <style {!! 'type="text/css"' !!}>
         :root {
             --borderline-black: #111111;
@@ -9,6 +11,9 @@
             --borderline-cerulean: #87adff;
         }
     </style>
+    @env('local')
+        <!--suppress CssUnknownProperty, CssUnusedSymbol -->
+    @endenv
     <style {!! 'type="text/css"' !!}>
         a.punch,
         button.punch {
@@ -144,12 +149,12 @@
                      * @param {string} buttonID ID of the punch button {@link HTMLAnchorElement anchor tag} to disable
                      * @returns {boolean} Returns true if the button was disabled, false if the button was not disabled
                      */
-                    let disablePunchButton = function (buttonID) {
+                    let disablePunchButton = function(buttonID) {
                         const button = document.getElementById(buttonID);
-                        if (button.getAttribute('data-type').toLowerCase() === 'anchor') {
-                            button.setAttribute('class', 'punch disabled');
-                            button.setAttribute('href', 'javascript:void(0)');
-                            button.setAttribute('target', '_blank');
+                        if (button.getAttribute("data-type").toLowerCase() === "anchor") {
+                            button.setAttribute("class", "punch disabled");
+                            button.setAttribute("href", "javascript:void(0)");
+                            button.setAttribute("target", "_blank");
                             return true;
                         } else {
                             return false;
