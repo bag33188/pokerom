@@ -37,7 +37,7 @@ class RomFileController extends WebController
             ? RomFile::with('rom')->get()
             : RomFile::whereHas('rom')->get();
         return view('rom-files.index', [
-            'romFiles' => $romFiles
+            'romFiles' => $romFiles,
         ]);
     }
 

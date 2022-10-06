@@ -10,6 +10,8 @@
       'shadow-md',
       'rounded'
     ];
+
+    $userIsAdmin = Auth::user()->isAdmin();
 @endphp
 @push('scripts')
     @verbatim
@@ -39,7 +41,9 @@
 <x-app-layout>
     <x-slot:header>
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">ROMs</h2>
-        <h5 class="text-center">{{ $totalRomsCount }} Total ROMs</h5>
+        @unless($userIsAdmin)
+            <h5 class="text-center">{{ $totalRomsCount }} Total ROMs</h5>
+        @endunless
     </x-slot:header>
     <div x-data="initROMsUiStateData()" class="mb-3 mx-3">
         <x-flash-message/>
