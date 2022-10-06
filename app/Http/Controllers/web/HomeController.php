@@ -17,7 +17,8 @@ class HomeController extends WebController
 
     public function __invoke()
     {
-        $splitUserName = explode(_SPACE, Auth::user()->name, 3);
+        $authUserName = Auth::user()->name;
+        $splitUserName = explode(_SPACE, $authUserName, 3);
 
         return view('dashboard', [
             'romsDisplayCount' => $this->rom->count() - 2, // subtract 2 from total count for display purposes
