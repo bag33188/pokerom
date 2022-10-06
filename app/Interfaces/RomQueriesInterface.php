@@ -12,4 +12,6 @@ interface RomQueriesInterface
     function updateRomFromRomFileDataSQL(Rom $rom, RomFile $romFile): bool;
 
     function findRomMatchingRomFile(RomFile $romFile): ?Rom;
+
+    function getCountOfRomsThatHaveROMFiles(): int;
 }
