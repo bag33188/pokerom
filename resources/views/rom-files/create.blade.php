@@ -36,7 +36,7 @@
         }
     </style>
 @endpush
-@push('scripts')
+@prepend('scripts')
     <script type="text/javascript">
         const _CRLF_ = "\r\n";
 
@@ -71,13 +71,15 @@
             romFilenameField.classList.add(...romFilenameDisabledClasses);
         };
 
-        let handleUploadRomFileForm = function() {
-            uploadRomFileForm.addEventListener("submit", function() {
+        let handleUploadRomFileForm = function () {
+            uploadRomFileForm.addEventListener("submit", function () {
                 tempDisableUploadBtn();
                 tempDisableRomFilesFormSelect();
             });
         };
     </script>
+@endprepend
+@push('scripts')
     <script type="text/javascript">
         handleUploadRomFileForm();
     </script>
@@ -98,7 +100,7 @@
     <div class="container mx-auto w-full">
         @unless($romFilesListCount === 0)
             <div class="p-6">
-                <x-jet-validation-errors class="mb-4" />
+                <x-jet-validation-errors class="mb-4"/>
 
                 <form name="upload-romFile-form"
                       method="POST"
@@ -108,7 +110,7 @@
                     @method('POST')
 
                     <div class="flex flex-col">
-                        <x-form-select-label class="!font-semibold" for="romFile" text="Select ROM File" />
+                        <x-form-select-label class="!font-semibold" for="romFile" text="Select ROM File"/>
                         <x-form-select class="shadow" name="rom_filename" id="romFile">
                             @foreach($romFilesList as $romFileListing)
                                 <option

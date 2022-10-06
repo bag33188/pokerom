@@ -1,4 +1,4 @@
-@push('scripts')
+@prepend('scripts')
     <script type="text/javascript">
         const loadCopyrightYear = () => {
             const currentYear = (new Date()).getFullYear();
@@ -81,6 +81,8 @@
             });
         };
     </script>
+@endprepend
+@push('scripts')
     <script type="text/javascript">
         loadCopyrightYear();
         loadEmulatorLinks();
