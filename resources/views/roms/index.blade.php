@@ -96,8 +96,11 @@
                 </tbody>
                 <tfoot class="bg-gray-50">
                 <tr class="text-sm text-gray-700 uppercase">
-                    <td class="px-6 py-3">Total Count: {{ $totalRomsCount }}</td>
-                    <td class="px-6 py-3">Total Count w/ Files: {{ $romsWithFilesCount }}</td>
+                    <td class="px-6 py-3">
+                        Total Count: {{ $totalRomsCount }}
+                        <br />
+                        w/ Files: {{ $romsWithFilesCount }}
+                    </td>
                     <td class="px-6 py-3">Total Size: {{ $totalRomsSize }} Bytes</td>
                 </tr>
                 </tfoot>
