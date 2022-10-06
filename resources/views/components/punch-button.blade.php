@@ -1,7 +1,5 @@
 @pushOnce('styles')
-    @env('local')
-        <!--suppress CssUnresolvedCustomProperty -->
-    @endenv
+    @env('local') <!--suppress CssUnresolvedCustomProperty --> @endenv
     <style {!! 'type="text/css"' !!}>
         :root {
             --borderline-black: #111111;
