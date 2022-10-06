@@ -14,17 +14,20 @@
         }
 
         @if($userIsAdmin)
+        @verbatim
         @media (max-width: 433px) {
             #link-rom-{{ $rom->id }}-container {
                 margin-bottom: 0.75rem;
                 margin-right: 0 !important;
             }
         }
+
         @media (max-width: 380px) {
             #link-rom-{{ $rom->id }}-container {
                 margin-left: 0.75rem;
             }
         }
+        @endverbatim
         @endif
     </style>
 @endpush
