@@ -97,7 +97,7 @@
     </x-slot>
 
     <div data-name="dashboard-container"
-         class="py-1.5 my-1.5 sm:my-2 sm:py-2 md:my-4 md:py-4 lg:my-6 lg:py-6 xl:py-16 xl:my-16">
+         class="px-1.5 mx-1.5 py-1.5 my-1.5 sm:my-2 sm:py-2 md:my-4 md:py-4 lg:my-6 lg:py-6 xl:py-16 xl:my-16">
         <div data-name="dash-content-card" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 {{--<x-jet-welcome/>--}}
