@@ -2,7 +2,7 @@
 <x-app-layout>
     <x-slot:header>
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Pok&eacute;mon Games Library</h2>
-        <h5 class="text-center">{{ $games->count() }}</h5>
+        <h5 class="text-center">{{ $games->count() }} Total Games</h5>
     </x-slot:header>
     <div class="container mx-auto my-3.5">
         <x-flash-message/>

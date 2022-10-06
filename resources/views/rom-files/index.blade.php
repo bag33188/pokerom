@@ -2,7 +2,7 @@
 <x-app-layout>
     <x-slot:header>
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Pok&eacute;mon ROM Files</h2>
-        <h5 class="text-center">{{ $romFiles->count() }}</h5>
+        <h5 class="text-center">{{ $romFiles->count() }} Total ROM Files</h5>
     </x-slot:header>
     <div class="container m-auto p-0.5">
         <x-flash-message/>
