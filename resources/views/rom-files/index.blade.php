@@ -5,7 +5,7 @@
         <h5 class="text-center">{{ $romFiles->count() }} Total ROM Files</h5>
     </x-slot:header>
     <div class="container m-auto p-0.5">
-        <x-flash-message/>
+        <x-flash-message />
         @unless($romFiles->count() < 1)
             <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mx-4 mb-4 mt-3.5 items-center">
                 @foreach($romFiles as $romFile)
@@ -36,7 +36,7 @@
                             <span>ROM ID:&nbsp;{!! $romIdHtml !!}</span>
                         </p>
                         <div class="mt-2 flex flex-row justify-between">
-                            <x-rom-file.download class="order-0" :romFile="$romFile"/>
+                            <x-rom-file.download class="order-0" :romFile="$romFile" />
                             <x-anchor-button class="order-1" :href="route('rom-files.show', ['romFile' => $romFile])">
                                 Info!
                             </x-anchor-button>
@@ -45,7 +45,7 @@
                 @endforeach
             </div>
         @else
-            <x-alert :alertType="App\Enums\AlertTypeEnum::ERROR" heading="Sorry!" message="No ROM Files in database"/>
+            <x-alert :alertType="App\Enums\AlertTypeEnum::ERROR" heading="Sorry!" message="No ROM Files in database" />
         @endunless
     </div>
 </x-app-layout>

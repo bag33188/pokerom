@@ -1,6 +1,9 @@
 @inject('romFileRepository', 'App\Interfaces\RomFileRepositoryInterface')
 @inject('romQueries', 'App\Interfaces\RomQueriesInterface')
 @push('styles')
+    @env('local')
+        <!--suppress CssUnusedSymbol, CssUnknownProperty, SpellCheckingInspection -->
+    @endenv
     <style {!! 'type="text/css"'; !!}>
         .no-select {
             -webkit-touch-callout: none; /* iOS Safari */
@@ -11,6 +14,23 @@
             user-select: none;
             /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
         }
+
+        @if($userIsAdmin)
+        @verbatim
+        @media (max-width: 433px) {
+            #link-rom-{{ $rom->id }}-container {
+                margin-bottom: 0.75rem;
+                margin-right: 0 !important;
+            }
+        }
+
+        @media (max-width: 380px) {
+            #link-rom-{{ $rom->id }}-container {
+                margin-left: 0.75rem;
+            }
+        }
+        @endverbatim
+        @endif
     </style>
 @endpush
 @push('scripts')
@@ -98,22 +118,25 @@
         @if($userIsAdmin)
             <div class="flex flex-row justify-between no-select">
                 <div class="order-0 mt-3">
-                    <x-rom.delete :rom="$rom"/>
+                    <x-rom.delete :rom="$rom" />
                 </div>
-                <div class="order-1 mt-3 inline-flex flex-row-reverse justify-start space-x-2.5 space-x-reverse w-full">
+                <div
+                    class="order-1 mt-3 inline-flex flex-row-reverse justify-start space-x-2.5 space-x-reverse w-full flex-wrap-reverse">
                     <div class="order-0">
                         <x-anchor-button :href="route('roms.edit', ['rom' => $rom])">
                             Edit!
                         </x-anchor-button>
                     </div>
                     @if(!$rom->has_file)
-                        <div class="order-1">
+                        <div class="order-1" id="link-rom-{{ $rom->id }}-container">
                             <form
                                 class="inline-block"
                                 method="POST"
+                                name="link-rom-{{ $rom->id }}-form"
                                 action="{{ route('roms.link-file', ['rom' => $rom]) }}">
                                 @method('PATCH')
                                 @csrf
+
                                 <x-jet-button type="submit">Link Rom To File If Exists</x-jet-button>
                             </form>
                         </div>
@@ -128,10 +151,9 @@
                     </x-anchor-button>
                 </div>
                 <div class="order-0">
-                    <x-rom-file.download :romFile="$rom->romFile" :title="$rom->romFile->filename"/>
+                    <x-rom-file.download :romFile="$rom->romFile" :title="$rom->romFile->filename" />
                 </div>
             </div>
         @endif
     </div>
-
 </x-app-layout>

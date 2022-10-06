@@ -48,6 +48,6 @@ class LinkRomToRomFile implements ShouldQueue
     public function handle(AttemptRomLinkToRomFile $event): void
     {
         $this->romQueries->updateRomFromRomFileDataSQL($event->rom, self::$matchingRomFile);
-        $event->rom->refresh();
+        # $event->rom->refresh(); // cannot refresh ROM here, does not work
     }
 }

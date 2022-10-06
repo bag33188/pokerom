@@ -12,6 +12,8 @@
     ];
 
     $htmlRomTableColumns = ['ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information'];
+
+    $romsWithFilesCount = $romQueries->getCountOfRomsThatHaveROMFiles();
 @endphp
 @push('scripts')
     @verbatim
@@ -46,7 +48,7 @@
         @endunless
     </x-slot:header>
     <div x-data="initROMsUiStateData()" class="mb-3 mx-3">
-        <x-flash-message/>
+        <x-flash-message />
         @unless($totalRomsCount === 0)
             <div class="w-full text-center my-2.5">
                 <button type="button" @class($showHideBtnClasses) @click="open = toggleContent(open)">
@@ -70,15 +72,15 @@
                         <td class="px-6 py-4">{{ strtolower($rom->rom_type) }}</td>
                         <td class="px-6 py-4">
                             @if($rom->has_game)
-                                <span data-game-id="{{ $rom->game->id }}">{{ $rom->game->game_name }}</span>
+                                <span data-game-id="{{ @$rom->game->id }}">{{ @$rom->game->game_name }}</span>
                             @else
                                 <span>N/A</span>
                             @endif
                         </td>
                         <td class="px-6 py-4">
                             @if($rom->has_file)
-                                <div class="inline-block" data-romFile-id="{{ $rom->romFile->_id }}">
-                                    <x-rom-file.download :romFile="$rom->romFile"/>
+                                <div class="inline-block" data-romFile-id="{{ @$rom->romFile->_id }}">
+                                    <x-rom-file.download :romFile="$rom->romFile" />
                                 </div>
                             @else
                                 <span>No file yet!</span>
@@ -94,14 +96,19 @@
                 </tbody>
                 <tfoot class="bg-gray-50">
                 <tr class="text-sm text-gray-700 uppercase">
-                    <td class="px-6 py-3">Total Count: {{ $totalRomsCount }}</td>
+                    <td class="px-6 py-3">
+                        Total Count: {{ $totalRomsCount }}
+                        <br />
+                        w/ Files: {{ $romsWithFilesCount }}
+                    </td>
                     <td class="px-6 py-3">Total Size: {{ $totalRomsSize }} Bytes</td>
                 </tr>
                 </tfoot>
             </table>
         @else
-            <x-alert :alertType="App\Enums\AlertTypeEnum::ERROR" heading="Sorry!"
-                     message="No ROMs Currently Exist in the Database"/>
+            <x-alert :alertType="App\Enums\AlertTypeEnum::ERROR"
+                     heading="Sorry!"
+                     message="No ROMs Currently Exist in the Database" />
         @endunless
     </div>
 </x-app-layout>
