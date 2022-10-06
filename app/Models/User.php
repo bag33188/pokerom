@@ -14,11 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens;
-    use HasFactory;
-    use HasProfilePhoto;
-    use Notifiable;
-    use TwoFactorAuthenticatable;
+    use HasApiTokens, HasFactory, HasProfilePhoto, Notifiable, TwoFactorAuthenticatable;
 
     protected $connection = 'mysql';
     protected $table = 'users';
@@ -74,9 +70,9 @@ class User extends Authenticatable
         return $this->attributes['role'] === UserRoleEnum::ADMIN->value;
     }
 
-    public static function checkPassword(string $textValue, string $hashValue): bool
+    public static function checkPassword(string $plainTextValue, string $hashValue): bool
     {
-        return Hash::check($textValue, $hashValue);
+        return Hash::check($plainTextValue, $hashValue);
     }
 
     # public function setPasswordAttribute(string $password): void
