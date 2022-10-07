@@ -1,3 +1,16 @@
+@push('styles')
+    <style {!! 'type="text/css"' !!}>
+        .no-select {
+            pointer-events: none !important;
+            -webkit-touch-callout: none !important;
+            -webkit-user-select: none !important;
+            -khtml-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+        }
+    </style>
+@endpush
 @prepend('scripts')
     <script type="text/javascript">
         const loadCopyrightYear = () => {
@@ -113,7 +126,7 @@
                     data-name="heading"
                     class="p-4 sm:px-20 md:p-6 bg-white border-b-2 border-gray-200 flex flex-col md:flex-row justify-start md:justify-between items-center">
                     <div class="mb-3 md:mb-auto">
-                        <x-jet-application-logo class="!h-12 !w-auto" />
+                        <x-jet-application-logo class="!h-12 !w-auto no-select" />
                     </div>
                     <p class="text-lg sm:text-xl md:text-2xl">
                         <span class="font-semibold">
