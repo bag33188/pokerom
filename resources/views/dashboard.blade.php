@@ -2,7 +2,7 @@
     <script type="text/javascript">
         const loadCopyrightYear = () => {
             const currentYear = (new Date()).getFullYear();
-            const copyrightYearElement = document.getElementById('copyright-year');
+            const copyrightYearElement = document.getElementById("copyright-year");
             copyrightYearElement.textContent = currentYear.toString();
         };
 
@@ -31,7 +31,7 @@
                     text: "DeSmuME",
                     name: "desmume",
                     target: "_blank",
-                    platform: 'nintendo ds/lite (nds)'
+                    platform: "nintendo ds/lite (nds)"
                 },
                 {
                     href: "https://www.emulator-zone.com/doc.php/gba/vboyadvance.html",
@@ -39,7 +39,7 @@
                     name: "vba",
                     target: "_blank",
                     title: "emulator-zone download page",
-                    platform: 'gameboy/gameboy color/gameboy advanced (gb/gbc/gba)'
+                    platform: "gameboy/gameboy color/gameboy advanced (gb/gbc/gba)"
                     // https://github.com/visualboyadvance-m/visualboyadvance-m
                 },
                 {
@@ -47,18 +47,18 @@
                     text: "Citra",
                     name: "citra",
                     target: "_blank",
-                    platform: '[new] nintendo 3ds/xl (3ds)'
+                    platform: "[new] nintendo 3ds/xl (3ds)"
                 },
                 {
                     href: "https://yuzu-emu.org/",
                     text: "Yuzu",
                     name: "yuzu",
                     target: "_blank",
-                    platform: 'nintendo switch/lite (nx)'
+                    platform: "nintendo switch/lite (nx)"
                 }
             ];
 
-            emulatorLinksList.style.setProperty('list-style-type', 'none', 'important');
+            emulatorLinksList.style.setProperty("list-style-type", "none", "important");
 
             emulators.forEach((emulator, index) => {
                 let listItemElement = document.createElement("li");
@@ -70,10 +70,10 @@
                 emulatorLinkElement.text = emulator.text;
                 emulatorLinkElement.target = emulator.target;
                 emulatorLinkElement.rel = "noreferrer";
-                emulatorLinkElement.setAttribute('data-platform', emulator.platform);
+                emulatorLinkElement.setAttribute("data-platform", emulator.platform);
 
-                if (emulators[index].hasOwnProperty('title'))
-                    emulatorLinkElement.title = emulator['title'];
+                if (emulators[index].hasOwnProperty("title"))
+                    emulatorLinkElement.title = emulator["title"];
 
                 emulatorLinkElement.classList.add(...anchorClasses);
                 listItemElement.appendChild(emulatorLinkElement);
@@ -98,15 +98,22 @@
         </h2>
     </x-slot>
 
-    <div data-name="dashboard-container"
-         class="px-1.5 mx-1.5 py-1.5 my-1.5 sm:my-2 sm:py-2 md:my-4 md:py-4 lg:my-6 lg:py-6 xl:py-16 xl:my-16">
+    <div data-name="dashboard-container" @class([
+        'px-1.5',    'mx-1.5',
+        'py-1.5',    'my-1.5',
+        'sm:my-2',   'sm:py-2',
+        'md:my-3',   'md:py-3',
+        'lg:my-4',   'lg:py-4',
+        'xl:py-6',   'xl:my-6',
+        '2xl:py-16', '2xl:my-16'
+    ])>
         <div data-name="dash-content-card" class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <section
                     data-name="heading"
                     class="p-4 sm:px-20 md:p-6 bg-white border-b-2 border-gray-200 flex flex-col md:flex-row justify-start md:justify-between items-center">
                     <div class="mb-3 md:mb-auto">
-                        <x-jet-application-logo class="!h-12 !w-auto"/>
+                        <x-jet-application-logo class="!h-12 !w-auto" />
                     </div>
                     <p class="text-lg sm:text-xl md:text-2xl">
                         <span class="font-semibold">
@@ -125,12 +132,12 @@
                                 <!-- about description -->
                                 <p class="inline-block">
                                     This web app is a databank of Pok&#xE9;mon ROMs.
-                                    <wbr/>
+                                    <wbr />
                                     This databank contains
                                     <span id="adv-count"><!--more than-->{{ $romsDisplayCount }}+</span>
                                     ROMs, including all 33 of the core Pok&#233;mon ROMs.
                                 </p>
-                                <br/>
+                                <br />
                                 <p class="italic mt-3 mb-0 pb-0 inline-flex flex-row text-sm">
                                     <span>&copy; Pok&eacute;mon Company</span>
                                     <span>&nbsp;</span>
@@ -148,13 +155,13 @@
                                 <!-- roms description -->
                                 <p class="inline-block">
                                     Here you will find all your <strong>Core Pok&#xE9;mon ROMs</strong>,
-                                    <wbr/>
+                                    <wbr />
                                     as well as some <b>Spin-Off Games</b>,
-                                    <wbr/>
+                                    <wbr />
                                     and even some <b>Pok&#233;mon ROM hacks</b>.
-                                    <wbr/>
-                                    <br/>
-                                    <br/>
+                                    <wbr />
+                                    <br />
+                                    <br />
                                     Feel free to download them for use with an <i>emulator</i>.
                                 </p>
                             </div>
