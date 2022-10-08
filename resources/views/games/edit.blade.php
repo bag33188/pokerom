@@ -63,7 +63,7 @@
                     </x-jet-button>
                 </div>
                 <div class="order-1 inline-block">
-                    <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY"
+                    <x-anchor-button :btn-type="App\Enums\AnchorButtonTypeEnum::SECONDARY"
                                      href="{{ route('games.show', ['game' => $game]) }}">
                         Cancel
                     </x-anchor-button>

@@ -19,7 +19,7 @@
             </x-list-group>
             @if($userIsAdmin)
                 <div class="row-start-2 row-end-3 col-start-1 col-end-2 justify-self-start">
-                    <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::PRIMARY"
+                    <x-anchor-button :btn-type="App\Enums\AnchorButtonTypeEnum::PRIMARY"
                                      :href="route('games.edit', ['game' => $game])">
                         Edit!
                     </x-anchor-button>
@@ -29,7 +29,7 @@
                 </div>
             @else
                 <div class="row-start-2 row-end-3 col-start-2 col-end-3 justify-self-end">
-                    <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY"
+                    <x-anchor-button :btn-type="App\Enums\AnchorButtonTypeEnum::SECONDARY"
                                      :href="route('games.index')">
                         Go Back
                     </x-anchor-button>

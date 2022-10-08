@@ -30,7 +30,7 @@
                         </x-list-group>
                         <div class="my-2 flex flex-row justify-center">
                             <x-anchor-button
-                                :btn-type="\App\Enums\AnchorButtonTypeEnum::PRIMARY"
+                                :btn-type="App\Enums\AnchorButtonTypeEnum::PRIMARY"
                                 :href="route('games.show', ['game' => $game])">
                                 Get Info!
                             </x-anchor-button>

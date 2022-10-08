@@ -31,7 +31,7 @@
                 @if($userIsAdmin)
                     <x-rom-file.delete :romFile="$romFile"/>
                 @else
-                    <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY"
+                    <x-anchor-button :btn-type="App\Enums\AnchorButtonTypeEnum::SECONDARY"
                                      :href="route('rom-files.index')">
                         Go Back!
                     </x-anchor-button>

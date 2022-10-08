@@ -146,7 +146,7 @@
         @else
             <div class="mt-3 no-select flex flex-row justify-between w-full">
                 <div class="order-1">
-                    <x-anchor-button :btn-type="\App\Enums\AnchorButtonTypeEnum::SECONDARY" :href="route('roms.index')">
+                    <x-anchor-button :btn-type="App\Enums\AnchorButtonTypeEnum::SECONDARY" :href="route('roms.index')">
                         Go Back
                     </x-anchor-button>
                 </div>
