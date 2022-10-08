@@ -49,7 +49,7 @@ class UpdateMatchingRom implements ShouldQueue
 
         $this->setMatchingRom($matchingRom);
 
-        return !$event->romFile->rom()->exists() && isset($matchingRom);
+        return !($event->romFile->rom()->exists() && is_null($matchingRom));
     }
 
     /**
