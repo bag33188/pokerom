@@ -53,7 +53,7 @@
         }
     }
 @endphp
-<div {!! $attributes->class(array_merge($conditionalAlertCssClasses, $universalAlertCssClasses)) !!}
+<div {{ $attributes->class(array_merge($conditionalAlertCssClasses, $universalAlertCssClasses)) }}
      role="alert"
      type="{{ $alertType->value }}">
     <p class="sm:inline text-lg">

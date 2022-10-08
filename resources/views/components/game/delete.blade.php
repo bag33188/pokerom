@@ -1,4 +1,4 @@
-<form {!! $attributes->merge(['class' => 'inline-block']) !!}
+<form {{ $attributes->merge(['class' => 'inline-block']) }}
       method="POST"
       action="{{ route('games.destroy', ['game' => $game]) }}">
     @csrf

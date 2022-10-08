@@ -5,7 +5,7 @@
         'p-2'
     ];
 @endphp
-<div {!! $attributes->merge(['class'=> joinCssClasses($tileClasses)]) !!}>
+<div {{ $attributes->merge(['class'=> joinCssClasses($tileClasses)]) }}>
     <div class="p-2 border rounded-md shadow-inner border-gray-300 flex flex-col">
         {{ $slot }}
     </div>
