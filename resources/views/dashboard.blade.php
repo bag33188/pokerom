@@ -76,7 +76,7 @@
             emulators.forEach((emulator, index) => {
                 let listItemElement = document.createElement("li");
                 let emulatorLinkElement = document.createElement("a");
-                listItemElement.id = `emulator-${(index + 1).valueOf().toString()}`;
+                listItemElement.id = `emulator-${index + 1}`;
 
                 emulatorLinkElement.id = `${emulator.name}-emulator-url`;
                 emulatorLinkElement.href = emulator.href;
