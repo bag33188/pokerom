@@ -129,9 +129,7 @@
                         <x-jet-application-logo class="!h-12 !w-auto no-select" />
                     </div>
                     <p class="text-lg sm:text-xl md:text-2xl">
-                        <span class="font-semibold">
-                            {!! config('app.web_name') !!}
-                        </span>
+                        <span class="font-semibold">{!! config('app.web_name') !!}</span>
                         <span class="font-bold">&#160;&#8209;&#xA0;</span>
                         <span class="italic">One Stop for all your Pok&eacute;mon ROMs</span>
                     </p>
