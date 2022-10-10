@@ -73,7 +73,7 @@
 
         <x-list-group @class(['shadow', 'no-select' => !$userIsAdmin]) x-data="{{ $alpineInitialUiState }}">
             <x-list-item class="pb-4">
-                <p @class($paragraphSectionClasses) @click={{ $toggleROMInfo }}>ROM Info</p>
+                <p @class($paragraphSectionClasses) @click={!! $toggleROMInfo !!}>ROM Info</p>
                 <x-list-group @class($innerListGroupClasses) x-show="romInfoOpened === true">
                     <x-list-item>ROM ID: <a class="underline"
                                             href="{{ route('roms.show', ['rom' => $rom]) }}">{{ $rom->id }}</a>
@@ -86,7 +86,7 @@
             </x-list-item> <!-- // end of ROM Info -->
             @if($rom->has_game)
                 <x-list-item class="pb-4">
-                    <p @class($paragraphSectionClasses) @click={{ $toggleGameInfo }}>Game Info</p>
+                    <p @class($paragraphSectionClasses) @click={!! $toggleGameInfo !!}>Game Info</p>
                     <x-list-group @class($innerListGroupClasses) x-show="gameInfoOpened === true">
                         <x-list-item>Game ID: <a class="underline"
                                                  href="{{ route('games.show', ['game' => $rom->game]) }}">{{ $rom->game->id }}</a>
@@ -103,7 +103,7 @@
             @endif <!-- // end of Game Info -->
             @if($rom->has_file)
                 <x-list-item class="pb-4">
-                    <p @class($paragraphSectionClasses) @click={{ $toggleROMFileInfo }}>
+                    <p @class($paragraphSectionClasses) @click={!! $toggleROMFileInfo !!}>
                         File Info
                     </p>
                     <x-list-group @class($innerListGroupClasses) x-show="romFileInfoOpened === true">
