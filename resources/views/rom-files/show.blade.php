@@ -25,11 +25,18 @@
                     <x-list-item>Content Hash (MD5):
                         <data value="{{ strtoupper($romFile->md5) }}"><code>{{ $romFile->md5 }}</code></data>
                     </x-list-item>
+                    @unless(is_null($romFile->rom))
+                        <x-list-item>
+                            <a href="{{ route('roms.show', ['rom' => $romFile->rom]) }}" class="underline">
+                                Go to ROM Data
+                            </a>
+                        </x-list-item>
+                    @endunless
                 </x-list-group>
             </div>
             <div class="row-start-2 row-end-3 col-start-2 col-end-3 justify-self-end">
                 @if($userIsAdmin)
-                    <x-rom-file.delete :romFile="$romFile"/>
+                    <x-rom-file.delete :romFile="$romFile" />
                 @else
                     <x-anchor-button :btn-type="App\Enums\AnchorButtonTypeEnum::SECONDARY"
                                      :href="route('rom-files.index')">
@@ -38,7 +45,7 @@
                 @endif
             </div>
             <div class="row-start-2 row-end-3 col-span-1 justify-self-start">
-                <x-rom-file.download :romFile="$romFile"/>
+                <x-rom-file.download :romFile="$romFile" />
             </div>
         </div>
     </div>
