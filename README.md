@@ -104,3 +104,9 @@ ________
 [//]: # ([php mongodb vendor manual]: https://www.php.net/manual/en/set.mongodb.php)
 [//]: # ([php mongodb driver tutorial]: https://www.php.net/manual/en/mongodb.tutorial.library.php)
 [//]: # ([mongodb php driver docs]: https://www.mongodb.com/docs/drivers/php/)
+
+Browser Compatibility
+---------------------
+| IE  | Chrome | Opera | Firefox | Edge | Safari | Mobile |
+|-----|--------|-------|---------|------|--------|--------|
+| 11  | Yes    | Yes   | Yes     | Yes  | Yes    | Yes    |
