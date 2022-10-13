@@ -75,9 +75,7 @@
             <x-list-item class="pb-4">
                 <p @class($paragraphSectionClasses) @click={!! $toggleROMInfo !!}>ROM Info</p>
                 <x-list-group @class($innerListGroupClasses) x-show="romInfoOpened === true">
-                    <x-list-item>
-                        ROM ID: <a class="underline" href="{{ url()->current() }}">{{ $rom->id }}</a>
-                    </x-list-item>
+                    <x-list-item>ROM ID: {{ $rom->id }}</x-list-item>
                     <x-list-item>ROM Name: {{ $rom->rom_name }}</x-list-item>
                     <x-list-item>ROM Size: {{ $romQueries->formatRomSizeSQL($rom->rom_size) }}</x-list-item>
                     <x-list-item class="border-b-0">ROM Type: {{ $rom->rom_type }}</x-list-item>
@@ -90,6 +88,7 @@
                     <x-list-group @class($innerListGroupClasses) x-show="gameInfoOpened === true">
                         <x-list-item>
                             Game ID: <a class="underline"
+                                        title="Go to Game Information"
                                         href="{{ route('games.show', ['game' => $rom->game]) }}">{{ $rom->game->id }}</a>
                         </x-list-item>
                         <x-list-item>Game Name: {{ $rom->game->game_name }} Version</x-list-item>
@@ -110,6 +109,7 @@
                     <x-list-group @class($innerListGroupClasses) x-show="romFileInfoOpened === true">
                         <x-list-item>
                             File ID: <a class="underline"
+                                        title="Go to File Information"
                                         href="{{ route('rom-files.show', ['romFile' => $rom->romFile]) }}">{{ $rom->romFile->_id }}</a>
                         </x-list-item>
                         <x-list-item>File Name: {{ $rom->romFile->filename }}</x-list-item>
