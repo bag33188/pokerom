@@ -76,7 +76,7 @@
             emulators.forEach((emulator, index) => {
                 let listItemElement = document.createElement("li");
                 let emulatorLinkElement = document.createElement("a");
-                listItemElement.id = `emulator-${(index + 1).valueOf().toString()}`;
+                listItemElement.id = `emulator-${index + 1}`;
 
                 emulatorLinkElement.id = `${emulator.name}-emulator-url`;
                 emulatorLinkElement.href = emulator.href;
@@ -128,10 +128,8 @@
                     <div class="mb-3 md:mb-auto">
                         <x-jet-application-logo class="!h-12 !w-auto no-select" />
                     </div>
-                    <p class="text-lg sm:text-xl md:text-2xl">
-                        <span class="font-semibold">
-                            {!! config('app.web_name') !!}
-                        </span>
+                    <p class="inline-flex flex-row space-x-1.5 text-lg sm:text-xl md:text-2xl">
+                        <span class="font-semibold">{!! config('app.web_name') !!}</span>
                         <span class="font-bold">&#160;&#8209;&#xA0;</span>
                         <span class="italic">One Stop for all your Pok&eacute;mon ROMs</span>
                     </p>
