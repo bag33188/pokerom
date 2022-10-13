@@ -2,8 +2,10 @@
 
 namespace Classes;
 
+use Date;
 use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
 use JetBrains\PhpStorm\ArrayShape;
+use MongoDB\BSON\ObjectId;
 
 # use JetBrains\PhpStorm\Internal\LanguageLevelTypeAware;
 
@@ -22,9 +24,9 @@ abstract class AbstractGridFSModel extends MongoDbModel
      *
      * **The ID of the file.**
      *
-     * @var string
+     * @var string|ObjectId
      */
-    public readonly string $_id;
+    public readonly string|ObjectId $_id;
 
     /**
      * chunkSize
@@ -70,9 +72,9 @@ abstract class AbstractGridFSModel extends MongoDbModel
      *
      * **Date file was uploaded.**
      *
-     * @var string
+     * @var Date|string
      */
-    public readonly string $uploadDate;
+    public readonly Date|string $uploadDate;
 
     /**
      * md5
