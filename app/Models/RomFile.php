@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Classes\AbstractGridFSModel as GridFSModel;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
+use Jenssegers\Mongodb\Relations\HasMany;
 use MongoDB\BSON\ObjectId;
-use Classes\AbstractGridFSModel as GridFSModel;
 
 /** @mixin GridFSModel */
 class RomFile extends MongoDbModel
@@ -29,6 +30,11 @@ class RomFile extends MongoDbModel
     public function rom(): BelongsTo
     {
         return $this->belongsTo(Rom::class, '_id', 'file_id');
+    }
+
+    public function romChunks(): HasMany
+    {
+        return $this->hasMany(RomChunk::class, '_id', 'files_id');
     }
 
     public function getObjectId(): ObjectId
