@@ -74,7 +74,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ## PHPStorm debug with Postman
 
 add this cookie to the current request: 
-> XDEBUG_SESSION=phpstorm; Path=/; Domain=pokerom.test; Expires=Tue, 16 Jan 2069 13:32:00 GMT;
+> `XDEBUG_SESSION=phpstorm; Path=/; Domain=pokerom.test; Expires=Tue, 16 Jan 2069 13:32:00 GMT;`
 
 ________
 
