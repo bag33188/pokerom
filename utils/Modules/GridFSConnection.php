@@ -39,7 +39,7 @@ class GridFSConnection
      */
     private function dsn(?bool $useFullMongoURI = null): string
     {
-        #!empty($useFullMongoURI) && $useFullMongoURI === true
+        #!is_null($useFullMongoURI) && $useFullMongoURI === true
         if ($useFullMongoURI) {
 
             list($username, $password) = array_values(

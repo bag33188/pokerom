@@ -25,7 +25,7 @@
                     <x-list-item>Content Hash (MD5):
                         <data value="{{ strtoupper($romFile->md5) }}"><code>{{ $romFile->md5 }}</code></data>
                     </x-list-item>
-                    @unless(is_null($romFile->rom))
+                    @unless(empty($romFile->rom))
                         <x-list-item>
                             <a href="{{ route('roms.show', ['rom' => $romFile->rom]) }}" class="underline">
                                 Go to ROM Data
