@@ -62,16 +62,16 @@
                     <div class="w-full h-full inline-flex flex-col justify-center">
                         @switch($messageType)
                             @case(FlashMessageTypes::SUCCESS->name)
-                                <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Success!' }}</h2>
+                                <h2 class="font-bold text-xl text-center">{{ session('header', 'Success!') }}</h2>
                                 @break
                             @case(FlashMessageTypes::ERROR->name)
-                                <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Oops!' }}</h2>
+                                <h2 class="font-bold text-xl text-center">{{ session('header', 'Oops!') }}</h2>
                                 @break
                             @case(FlashMessageTypes::NOTIFICATION->name)
-                                <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Notice!' }}</h2>
+                                <h2 class="font-bold text-xl text-center">{{ session('header', 'Notice!') }}</h2>
                                 @break
                             @default
-                                <h2 class="font-bold text-xl text-center">{{ session('header') ?? 'Flash!' }}</h2>
+                                <h2 class="font-bold text-xl text-center">{{ session('header', 'Flash!') }}</h2>
                         @endswitch
                         <p class="font-medium text-center w-full">{{ session('message') }}</p>
                     </div>
