@@ -14,7 +14,9 @@
                 <x-list-item>Game Type: {{ $gameQueries->formatGameTypeSQL($game->game_type) }}</x-list-item>
                 <x-list-item>Released on: {{ $game->date_released->format('l, F jS, Y') }}</x-list-item>
                 <x-list-item class="!border-b-0">
-                    <p>ROM: <span title="{{ $game->rom->id }}">{{ $game->rom->rom_name }}</span></p>
+                    <p>ROM: <a class="underline"
+                               href="{{ route('roms.show', ['rom' => $game->rom]) }}"
+                               title="{{ $game->rom->id }}">{{ $game->rom->rom_name }}</a></p>
                 </x-list-item>
             </x-list-group>
             @if($userIsAdmin)
