@@ -28,8 +28,8 @@ class FlashMessage extends Component
     {
         return view('components.flash-message', [
             'sessionHasMessage' => Session::has('message'),
-            'messageType' => strtoupper(Session::get('message-type') ?? ''),
-            'sessionFlashTimeout' => (int)session('timeout', 5000)
+            'messageType' => strtoupper(Session::get('message-type', 'default')),
+            'sessionFlashTimeout' => (int)(session('timeout', 5000))
         ]);
     }
 }
