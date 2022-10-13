@@ -61,8 +61,7 @@ class UpdateMatchingRom implements ShouldQueue
     public function handle(RomFileCreated $event): void
     {
         Rom::withoutEvents(function () use ($event) {
-            $matchingRomIsNull = is_null(self::$matchingRom);
-            if (!$matchingRomIsNull) {
+            if (isset(self::$matchingRom)) {
                 self::$matchingRom->has_file = true;
                 self::$matchingRom->file_id = $event->romFile->_id;
                 self::$matchingRom->rom_size = $event->romFile->calculateRomSizeFromLength();
