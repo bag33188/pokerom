@@ -114,10 +114,10 @@
 @endprepend
 @push('scripts')
     <script type="text/javascript">
-        loadCopyrightYear();
-        loadEmulatorLinks();
         removeCommentsFromParentNode('#emulator-links');
         removeCommentsFromParentNode('#copyright-year');
+        loadCopyrightYear();
+        loadEmulatorLinks();
     </script>
 @endpush
 <x-app-layout>
