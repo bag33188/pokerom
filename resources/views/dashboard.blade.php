@@ -193,7 +193,6 @@
                                     <br/>
                                     <br/>
                                     Feel free to download them for use with an <i>emulator</i>.
-                                    &nbsp;<b class="text-xl">&rarr;</b>
                                 </p>
                             </div>
                         </div>
