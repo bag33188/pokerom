@@ -18,7 +18,7 @@ class GridFSProcessor
     private readonly Bucket $gridFSBucket;
     private readonly string $gridFilesDiskPath;
 
-    public function __construct(private readonly GridFSConnection $gridFSConnection)
+    function __construct(private readonly GridFSConnection $gridFSConnection)
     {
         $this->gridFSBucket = $this->gridFSConnection->bucket;
     }

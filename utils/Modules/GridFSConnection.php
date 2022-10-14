@@ -26,7 +26,7 @@ class GridFSConnection
     public function __construct()
     {
         try {
-            $this->connectGfs();
+            $this->connectGFS();
         } catch (DriverRuntimeException $e) {
             throw new DriverRuntimeException("Error connecting to GridFS: {$e->getMessage()}");
         }
@@ -77,7 +77,7 @@ class GridFSConnection
      * @link https://www.php.net/manual/en/mongodb-driver-manager.construct.php
      * @return void
      */
-    private function connectGfs(): void
+    private function connectGFS(): void
     {
         $connection = new MongoClient(uri: $this->dsn(false), uriOptions: $this->parseDbCredentials());
         $db = $connection->selectDatabase($this->databaseName);
