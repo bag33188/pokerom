@@ -24,7 +24,7 @@ abstract class AbstractGridFSModel extends MongoDbModel
      *
      * **The ID of the file.**
      *
-     * @var string|ObjectId
+     * @var ObjectId|string
      */
     public readonly string|ObjectId $_id;
 
@@ -74,7 +74,7 @@ abstract class AbstractGridFSModel extends MongoDbModel
      *
      * @var Date|string
      */
-    public readonly Date|string $uploadDate;
+    public readonly string|Date $uploadDate;
 
     /**
      * md5
