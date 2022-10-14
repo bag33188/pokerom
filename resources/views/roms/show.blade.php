@@ -56,7 +56,7 @@
       'shadow-inner' => !$userIsAdmin,
     ];
     $paragraphSectionClasses = ["mt-1.5", "mb-3.5", "inline-block", "font-semibold", "cursor-pointer", "no-select"];
-    $paragraphHiddenContentClasses = ['font-bold', 'text-gray-400', 'text-xl', 'm-0', 'p-0', 'no-select'];
+    $paragraphHiddenContentClasses = ['font-bold', 'text-gray-400', 'text-xl', 'm-0', 'p-0', 'cursor-pointer', 'no-select'];
 
     $toggleROMInfo = Js::from('romInfoOpened = toggleInfo(romInfoOpened)');
     $toggleGameInfo = Js::from('gameInfoOpened = toggleInfo(gameInfoOpened)');
