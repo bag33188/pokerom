@@ -93,12 +93,31 @@
                 emulatorLinksList.appendChild(listItemElement);
             });
         };
+
+        function getCommentNodes(containerNode) {
+            const treeWalker = document.createTreeWalker(containerNode, NodeFilter.SHOW_COMMENT);
+            let comments = [];
+            while (treeWalker.nextNode()) {
+                comments.push(treeWalker.currentNode);
+            }
+            return comments;
+        }
+
+        const removeCommentsFromParentNode = (parentNodeSelector) => {
+            const parentNode = document.querySelector(parentNodeSelector);
+            let commentNodes = getCommentNodes(parentNode);
+            commentNodes.forEach((commentNode) => {
+                commentNode.remove();
+            });
+        };
     </script>
 @endprepend
 @push('scripts')
     <script type="text/javascript">
         loadCopyrightYear();
         loadEmulatorLinks();
+        removeCommentsFromParentNode('#emulator-links');
+        removeCommentsFromParentNode('#copyright-year');
     </script>
 @endpush
 <x-app-layout>
@@ -126,7 +145,7 @@
                     data-name="heading"
                     class="p-4 sm:px-20 md:p-6 bg-white border-b-2 border-gray-200 flex flex-col md:flex-row justify-start md:justify-between items-center">
                     <div class="mb-3 md:mb-auto">
-                        <x-jet-application-logo class="!h-12 !w-auto no-select" />
+                        <x-jet-application-logo class="!h-12 !w-auto no-select"/>
                     </div>
                     <p class="inline-flex flex-row space-x-1.5 text-lg sm:text-xl md:text-2xl">
                         <span class="font-semibold">{!! config('app.web_name') !!}</span>
@@ -143,12 +162,12 @@
                                 <!-- about description -->
                                 <p class="inline-block">
                                     This web app is a databank of Pok&#xE9;mon ROMs.
-                                    <wbr />
+                                    <wbr/>
                                     This databank contains
                                     <span id="adv-count"><!--more than-->{{ $romsDisplayCount }}+</span>
                                     ROMs, including all 33 of the core Pok&#233;mon ROMs.
                                 </p>
-                                <br />
+                                <br/>
                                 <p class="italic mt-3 mb-0 pb-0 inline-flex flex-row text-sm">
                                     <span>&copy; Pok&eacute;mon Company</span>
                                     <span>&nbsp;</span>
@@ -166,13 +185,13 @@
                                 <!-- roms description -->
                                 <p class="inline-block">
                                     Here you will find all your <strong>Core Pok&#xE9;mon ROMs</strong>,
-                                    <wbr />
+                                    <wbr/>
                                     as well as some <b>Spin-Off Games</b>,
-                                    <wbr />
+                                    <wbr/>
                                     and even some <b>Pok&#233;mon ROM hacks</b>.
-                                    <wbr />
-                                    <br />
-                                    <br />
+                                    <wbr/>
+                                    <br/>
+                                    <br/>
                                     Feel free to download them for use with an <i>emulator</i>.
                                 </p>
                             </div>
