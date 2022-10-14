@@ -21,7 +21,7 @@ class HomeController extends WebController
         $splitUserName = explode(_SPACE, $authUserName, 3);
         $romsWithFilesCount = $this->rom->has('romFile')->count();
 
-        return view('dashboard', [
+        return view('home', [
             'romsDisplayCount' => $romsWithFilesCount - 2, // subtract 2 from total count for display purposes
             'userFirstName' => ucfirst($splitUserName[0]),
         ]);

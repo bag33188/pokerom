@@ -124,7 +124,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             <div class="flex flex-row w-full justify-between">
-                <span class="order-0">{{ __('Dashboard') }}</span>
+                <span class="order-0">{{ __('Home') }}</span>
                 <span class="order-1">Welcome, {{ $userFirstName }}!</span>
             </div>
         </h2>

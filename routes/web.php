@@ -27,7 +27,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', HomeController::class)->name('dashboard');
+    Route::get('/home', HomeController::class)->name('home');
 
     Route::controller(RomController::class)->prefix('roms')->name('roms.')->group(function () {
         Route::get('/', 'index')->name('index');
