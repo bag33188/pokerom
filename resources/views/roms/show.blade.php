@@ -56,7 +56,7 @@
       'shadow-inner' => !$userIsAdmin,
     ];
     $paragraphSectionClasses = ["mt-1.5", "mb-3.5", "inline-block", "font-semibold", "cursor-pointer", "no-select"];
-    $paragraphHiddenContentClasses = ['font-bold', 'text-gray-400', 'text-xl', 'm-0', 'p-0'];
+    $paragraphHiddenContentClasses = ['font-bold', 'text-gray-400', 'text-xl', 'm-0', 'p-0', 'no-select'];
 
     $toggleROMInfo = Js::from('romInfoOpened = toggleInfo(romInfoOpened)');
     $toggleGameInfo = Js::from('gameInfoOpened = toggleInfo(gameInfoOpened)');
@@ -80,7 +80,7 @@
                     <x-list-item>ROM Size: {{ $romQueries->formatRomSizeSQL($rom->rom_size) }}</x-list-item>
                     <x-list-item class="border-b-0">ROM Type: {{ $rom->rom_type }}</x-list-item>
                 </x-list-group>
-                <p @class($paragraphHiddenContentClasses) x-show="!romInfoOpened" @click="romInfoOpened === true"
+                <p @class($paragraphHiddenContentClasses) x-show="!romInfoOpened" @click={!! $toggleROMInfo !!}
                    x-cloak>...</p>
             </x-list-item> <!-- // end of ROM Info -->
             @if($rom->has_game)
@@ -99,7 +99,7 @@
                             Release Date: {{ $rom->game->date_released->format('l, F jS, Y') }}
                         </x-list-item>
                     </x-list-group>
-                    <p @class($paragraphHiddenContentClasses) x-show="!gameInfoOpened" @click="gameInfoOpened === true"
+                    <p @class($paragraphHiddenContentClasses) x-show="!gameInfoOpened" @click={!! $toggleGameInfo !!}
                        x-cloak>...</p>
                 </x-list-item>
             @endif <!-- // end of Game Info -->
@@ -121,7 +121,7 @@
                         </x-list-item>
                     </x-list-group>
                     <p @class($paragraphHiddenContentClasses) x-show="!romFileInfoOpened"
-                       @click="romFileInfoOpened === true" x-cloak>...</p>
+                       @click={!! $toggleROMFileInfo !!} x-cloak>...</p>
                 </x-list-item>
             @endif <!-- // end of ROM File Info -->
         </x-list-group>
