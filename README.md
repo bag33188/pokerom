@@ -21,6 +21,7 @@ ________
 * [PHP GridFS Tutorial][]
 * [Vite Docs][]
 * [Tailwind CSS Docs][]
+* [Laravel Jetstream Docs][]
 
 [MariaDB Server Docs]: https://mariadb.com/kb/en/documentation/ "v10.9.3"
 [MongoDB Docs]: https://www.mongodb.com/docs/manual/ "v6.0"
@@ -30,6 +31,8 @@ ________
 [PHP GridFS Tutorial]: https://www.mongodb.com/docs/php-library/v1.13/tutorial/gridfs/ "v1.13"
 [Vite Docs]: https://vitejs.dev/guide "v3.1.3"
 [Tailwind CSS Docs]: https://tailwindcss.com/docs "v3.1.8"
+[Laravel Jetstream Docs]: https://jetstream.laravel.com/2.x/introduction.html "v2.4.1"
+
 
 [//]: # "Database Links:"
 [//]: # ([mongodb php driver page]: https://www.php.net/manual/en/mongodb.installation.pecl.php)
