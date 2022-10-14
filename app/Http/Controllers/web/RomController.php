@@ -31,7 +31,6 @@ class RomController extends WebController
     public function index(RomFileQueriesInterface $romFileQueries)
     {
         $roms = Rom::with(['romFile', 'game'])->get();
-
         return view('roms.index', [
             'roms' => $roms,
             'totalRomsSize' => $romFileQueries->getTotalSizeOfAllFilesThatHaveRoms(),

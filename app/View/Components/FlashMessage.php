@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Enums\FlashMessageTypeEnum as FlashMessageTypes;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -28,7 +29,7 @@ class FlashMessage extends Component
     {
         return view('components.flash-message', [
             'sessionHasMessage' => Session::has('message'),
-            'messageType' => strtoupper(Session::get('message-type', 'default')),
+            'messageType' => Session::get('message-type', FlashMessageTypes::DEFAULT),
             'sessionFlashTimeout' => (int)(session('timeout', 5000))
         ]);
     }
