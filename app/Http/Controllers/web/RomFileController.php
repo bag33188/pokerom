@@ -54,6 +54,7 @@ class RomFileController extends WebController
         );
         $sortByStringLength = fn(string $a, string $b): int => strlen($a) <=> strlen($b);
         usort($romFilesList, $sortByStringLength);
+
         return view('rom-files.create', [
             'romFilesList' => $romFilesList,
             'romFilesListCount' => count($romFilesList),
