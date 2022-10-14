@@ -24,7 +24,7 @@ class RomFile extends MongoDbModel
     public $timestamps = false;
 
     protected $casts = [
-        'uploadDate' => 'datetime'
+        'uploadDate' => 'datetime',
     ];
 
     public function rom(): BelongsTo
@@ -34,7 +34,7 @@ class RomFile extends MongoDbModel
 
     public function romChunks(): HasMany
     {
-        return $this->hasMany(RomChunk::class, '_id', 'files_id');
+        return $this->hasMany(RomChunk::class, 'files_id', '_id');
     }
 
     public function getObjectId(): ObjectId
