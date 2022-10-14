@@ -80,8 +80,8 @@
                     <x-list-item>ROM Size: {{ $romQueries->formatRomSizeSQL($rom->rom_size) }}</x-list-item>
                     <x-list-item class="border-b-0">ROM Type: {{ $rom->rom_type }}</x-list-item>
                 </x-list-group>
-                <p @class($paragraphHiddenContentClasses) x-show="!romInfoOpened" @click={!! $toggleROMInfo !!}
-                   x-cloak>...</p>
+                <p @class($paragraphHiddenContentClasses) x-show="!romInfoOpened" x-cloak @click={!! $toggleROMInfo !!}>
+                    ...</p>
             </x-list-item> <!-- // end of ROM Info -->
             @if($rom->has_game)
                 <x-list-item class="pb-4">
@@ -99,8 +99,8 @@
                             Release Date: {{ $rom->game->date_released->format('l, F jS, Y') }}
                         </x-list-item>
                     </x-list-group>
-                    <p @class($paragraphHiddenContentClasses) x-show="!gameInfoOpened" @click={!! $toggleGameInfo !!}
-                       x-cloak>...</p>
+                    <p @class($paragraphHiddenContentClasses) x-show="!gameInfoOpened" x-cloak
+                       @click={!! $toggleGameInfo !!}>...</p>
                 </x-list-item>
             @endif <!-- // end of Game Info -->
             @if($rom->has_file)
@@ -120,8 +120,8 @@
                             Designated Console: {{ $romFileRepository->determineConsole($rom->romFile) }}
                         </x-list-item>
                     </x-list-group>
-                    <p @class($paragraphHiddenContentClasses) x-show="!romFileInfoOpened"
-                       @click={!! $toggleROMFileInfo !!} x-cloak>...</p>
+                    <p @class($paragraphHiddenContentClasses) x-show="!romFileInfoOpened" x-cloak
+                       @click={!! $toggleROMFileInfo !!}>...</p>
                 </x-list-item>
             @endif <!-- // end of ROM File Info -->
         </x-list-group>
