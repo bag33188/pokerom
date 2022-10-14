@@ -1,5 +1,9 @@
 # Pok&eacute;ROM
 
+![pokerom-logo][]
+
+[pokerom-logo]: ./private/pokerom_logo.png "Pok&eacute;ROM"
+
 [comment]: <> (https://github.com/bag33188/new-pokerom)
 
 ## PHPStorm debug with Postman
