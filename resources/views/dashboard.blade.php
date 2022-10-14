@@ -192,7 +192,7 @@
                                     <wbr/>
                                     <br/>
                                     <br/>
-                                    Feel free to download them for use with an <i>emulator</i>.
+                                    Feel free to download them for use with an <u>emulator</u>.
                                 </p>
                             </div>
                         </div>
