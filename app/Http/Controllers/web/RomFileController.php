@@ -48,10 +48,12 @@ class RomFileController extends WebController
         $storageRomFilesList = Storage::disk('public')->files(ROM_FILES_DIRNAME);
         $matchRomFilePattern = fn(string $romFilename): false|int => preg_match("/([\w\-_]+)\.(gb[ac]?|3ds|xci|nds)$/i", $romFilename);
         $removeStorageNameFromRomFilename = fn(string $romFilename): string => str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $romFilename);
+
         $romFilesList = array_map(
             $removeStorageNameFromRomFilename,
             array_values(array_filter($storageRomFilesList, $matchRomFilePattern, ARRAY_FILTER_USE_BOTH))
         );
+
         $sortByStringLength = fn(string $a, string $b): int => strlen($a) <=> strlen($b);
         usort($romFilesList, $sortByStringLength);
 
