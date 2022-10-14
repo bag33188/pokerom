@@ -1,17 +1,16 @@
-# noinspection SpellCheckingInspectionForFile
-
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2022 at 12:40 PM
+-- Generation Time: Oct 14, 2022 at 09:33 PM
 -- Server version: 10.9.3-MariaDB
--- PHP Version: 8.1.6
+-- PHP Version: 8.1.10
 
 --
 -- set autocommit = {0|1}
 -- ALTER TABLE `table_name` AUTO_INCREMENT = `value`;
+-- # noinspection SpellCheckingInspectionForFile
 --
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -124,7 +123,7 @@ CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_SIZE` BIGINT UNSI
 /* !important
 return value length = 9;
 '262.14 MB'.length = 9;
-MAX_ROM_SIZE_LENGTH = 9; // ex. '164.28 MB'
+MAX_ROM_SIZE_LENGTH = 9; # ex. '164.28 MB'
 */
 END$$
 
@@ -153,7 +152,7 @@ DELIMITER ;
 --
 -- Table structure for table `failed_jobs`
 --
--- Creation: Sep 24, 2022 at 11:23 AM
+-- Creation: Oct 05, 2022 at 05:43 PM
 --
 
 DROP TABLE IF EXISTS `failed_jobs`;
@@ -181,7 +180,7 @@ TRUNCATE TABLE `failed_jobs`;
 --
 -- Table structure for table `games`
 --
--- Creation: Sep 24, 2022 at 11:23 AM
+-- Creation: Oct 06, 2022 at 01:38 AM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -292,7 +291,7 @@ DELIMITER ;
 --
 -- Table structure for table `migrations`
 --
--- Creation: Sep 24, 2022 at 11:23 AM
+-- Creation: Oct 05, 2022 at 05:43 PM
 --
 
 DROP TABLE IF EXISTS `migrations`;
@@ -330,7 +329,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 -- Table structure for table `password_resets`
 --
--- Creation: Sep 24, 2022 at 09:01 PM
+-- Creation: Oct 05, 2022 at 05:43 PM
 --
 
 DROP TABLE IF EXISTS `password_resets`;
@@ -356,7 +355,7 @@ TRUNCATE TABLE `password_resets`;
 --
 -- Table structure for table `personal_access_tokens`
 --
--- Creation: Sep 24, 2022 at 09:37 PM
+-- Creation: Oct 05, 2022 at 05:43 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -384,12 +383,19 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 TRUNCATE TABLE `personal_access_tokens`;
+--
+-- Dumping data for table `personal_access_tokens`
+--
+
+INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
+(1, 'App\\Models\\User', 1, 'auth_token', '14cc29c5a0770089c0d00f331e1aa7c4f35a57417c38919c3f66ed2c0682b9c3', '[\"*\"]', '2022-10-15 01:49:08', NULL, '2022-10-06 11:42:45', '2022-10-15 01:49:08');
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `roms`
 --
--- Creation: Sep 25, 2022 at 10:40 AM
+-- Creation: Oct 06, 2022 at 01:38 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -470,7 +476,8 @@ INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_typ
 --
 -- Table structure for table `sessions`
 --
--- Creation: Sep 24, 2022 at 11:23 AM
+-- Creation: Oct 05, 2022 at 05:43 PM
+-- Last update: Oct 14, 2022 at 07:28 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -494,12 +501,19 @@ CREATE TABLE `sessions` (
 --
 
 TRUNCATE TABLE `sessions`;
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('yi2V11fIoVfolJI8GjhvOl7GuzLcYCNk7FHH7WBU', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMHpwTjA4WmtUaGtSQTMxN3RtOUVjVjlKZUpVemswT0ZVM0VWM3I3QSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjQ6Imh0dHA6Ly9wb2tlcm9tLnRlc3QvaG9tZSI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkdFVHcmZIUy50TzZBSi5pS011dHdTLmoycWpGZlJtTFNzUzVzdW42ZElnN2RFSFFWWEtZdWEiO30=', 1665775690);
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
 --
--- Creation: Sep 24, 2022 at 11:23 AM
+-- Creation: Oct 05, 2022 at 05:43 PM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -538,8 +552,8 @@ TRUNCATE TABLE `users`;
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Brock Glatman', 'bglatman@outlook.com', NULL, '$2y$10$tUGrfHS.tO6AJ.iKMutwS.j2qjFfRmLSsS5sun6dIg7dEHQVXKYua', NULL, NULL, NULL, 'admin', 'zCgafosXGVFVwu8US36zWq1wTqivd5dc8jEjsfmXcgCZ99lPq4Qxpy5SKY5u', NULL, NULL, '2022-08-27 23:17:24', '2022-09-02 07:39:41'),
-(2, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$g4kXZ7ea8TNdwlySRo5bne1HoU6h/NOyRmul.J3fD5.5L5eu1sKBC', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-08-30 08:24:08', '2022-08-30 08:24:08');
+(1, 'Brock Glatman', 'bglatman@outlook.com', NULL, '$2y$10$tUGrfHS.tO6AJ.iKMutwS.j2qjFfRmLSsS5sun6dIg7dEHQVXKYua', NULL, NULL, NULL, 'admin', 'AT06VUNIiGH9KUxjDEqPqWYHNYjLi2UKePHfWIRbExnS0vOhAXomiFqaKTcS', NULL, NULL, '2022-08-27 23:17:24', '2022-09-02 07:39:41'),
+(2, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$VBrFySpV1GIGbgE8sAHdKexMAb4u4Om9nyoIGwKo1uTQWA2SzRfVO', NULL, NULL, NULL, 'user', 'scCAtMwPKEFFWOgbvIuBj1oV4YKxA5xDHe39ksiqFpW9dZa3APoXOtAlBsp4', NULL, NULL, '2022-08-30 08:24:08', '2022-10-14 03:09:56');
 
 --
 -- Indexes for dumped tables
@@ -631,7 +645,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `roms`
@@ -788,13 +802,6 @@ TRUNCATE TABLE `pma__column_info`;
 --
 
 TRUNCATE TABLE `pma__table_uiprefs`;
---
--- Dumping data for table `pma__table_uiprefs`
---
-
-INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
-('bag33188', 'pokerom_db', 'roms', '{\"sorted_col\":\"`roms`.`rom_size` DESC\"}', '2022-09-24 20:47:46');
-
 --
 -- Truncate table before insert `pma__tracking`
 --
