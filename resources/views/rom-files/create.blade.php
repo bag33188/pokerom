@@ -71,7 +71,7 @@
             romFilenameField.classList.add(...romFilenameDisabledClasses);
         };
 
-        let handleUploadRomFileForm = function() {
+        let handleUploadOnRomFileForm = function() {
             uploadRomFileForm.addEventListener("submit", function() {
                 tempDisableUploadBtn();
                 tempDisableRomFilesFormSelect();
@@ -81,7 +81,7 @@
 @endprepend
 @push('scripts')
     <script type="text/javascript">
-        handleUploadRomFileForm();
+        handleUploadOnRomFileForm();
     </script>
 @endpush
 <x-app-layout>
