@@ -30,7 +30,8 @@ Route::name('api.')->group(function () {
             status: HttpStatus::HTTP_OK,
             headers: array('X-Api-Version' => sprintf(
                 "%s Version %.2f",
-                config('app.name'), config('app.version')
+                str_replace(POKE_EACUTE, 'Poke', config('app.name')),
+                config('app.version')
             ))
         )
     )->name('version');
