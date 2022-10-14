@@ -31,10 +31,9 @@ ________
 [PHP GridFS Tutorial]: https://www.mongodb.com/docs/php-library/v1.13/tutorial/gridfs/ "v1.13"
 [Vite Docs]: https://vitejs.dev/guide "v3.1.3"
 [Tailwind CSS Docs]: https://tailwindcss.com/docs "v3.1.8"
-[Laravel Jetstream Docs]: https://jetstream.laravel.com/2.x/introduction.html "v2.4.1"
+[Laravel Jetstream Docs]: https://jetstream.laravel.com/2.x/introduction.html "v2.12.3"
 
-
-[//]: # "Database Links:"
+[//]: # "## Database Links:"
 [//]: # ([mongodb php driver page]: https://www.php.net/manual/en/mongodb.installation.pecl.php)
 [//]: # ([mongodb pecl extension]: https://pecl.php.net/package/mongodb "v1.13.0 - ts-x64, windows")
 [//]: # ([php mongodb vendor manual]: https://www.php.net/manual/en/set.mongodb.php)
