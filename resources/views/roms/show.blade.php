@@ -81,6 +81,7 @@
     <div class="py-6 px-5">
 
         <x-list-group @class(['shadow', 'no-select' => !$userIsAdmin]) x-data="{{ $alpineInitialUiState }}">
+
             <x-list-item class="pb-4">
                 <p @class($paragraphSectionClasses) {!! $toggleROMInfo !!}>ROM Info</p>
                 <x-list-group @class($innerListGroupClasses) x-show="romInfoOpened === true">
@@ -140,9 +141,11 @@
 
         @if($userIsAdmin)
             <div class="flex flex-row justify-between no-select">
+
                 <div class="order-0 mt-3">
                     <x-rom.delete :rom="$rom"/>
                 </div>
+
                 <div @class([
                     'order-1',
                     'mt-3',
@@ -154,6 +157,7 @@
                     'w-full',
                     'flex-wrap-reverse'
                 ])>
+
                     <div class="order-0">
                         <x-anchor-button :href="route('roms.edit', ['rom' => $rom])">
                             Edit!
@@ -174,6 +178,7 @@
                             </form>
                         </div>
                     @endif
+
                 </div>
             </div>
         @else
