@@ -95,7 +95,10 @@
                                 </h2>
                                 @break
                             @default
-                                <h2 class="font-bold text-xl text-center">{{ session('header', 'Flash!') }}</h2>
+                                <h2 class="font-bold text-xl text-center"
+                                    data-flash-type="{{ FlashMessageTypes::DEFAULT->name }}">
+                                    {{ session('header', 'Flash!') }}
+                                </h2>
                         @endswitch
                         <p class="font-medium text-center w-full">{{ session('message') }}</p>
                     </div>
