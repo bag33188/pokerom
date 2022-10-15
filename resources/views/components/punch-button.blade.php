@@ -137,7 +137,7 @@
     @case(PunchButtonType::BUTTON->value)
     @case(PunchButtonType::SUBMIT->value)
         <button
-            element-type="button"
+            data-element-type="html-button"
             {{ $attributes->class(['punch'])->merge(['type' => $btnType]) }}
             {{ $attributes->has('disabled') ? 'disabled' : '' }}
             @disabled(!$userIsAdmin)
@@ -172,7 +172,7 @@
                 </script>
             @endverbatim
         @endPrependOnce
-        <a element-type="anchor"
+        <a data-element-type="html-anchor"
             {{ $attributes->class(['punch', 'disabled' => !$userIsAdmin])->merge(['role' => $btnType]) }}>
             {{ $slot }}
         </a>
