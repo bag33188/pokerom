@@ -71,16 +71,28 @@
                     <div class="w-full h-full inline-flex flex-col justify-center">
                         @switch($messageType)
                             @case(FlashMessageTypes::SUCCESS)
-                                <h2 class="font-bold text-xl text-center">{{ session('header', 'Success!') }}</h2>
+                                <h2 class="font-bold text-xl text-center"
+                                    data-flash-type="{{ FlashMessageTypes::SUCCESS->name }}">
+                                    {{ session('header', 'Success!') }}
+                                </h2>
                                 @break
                             @case(FlashMessageTypes::NOTIFICATION)
-                                <h2 class="font-bold text-xl text-center">{{ session('header', 'Notice!') }}</h2>
+                                <h2 class="font-bold text-xl text-center"
+                                    data-flash-type="{{ FlashMessageTypes::NOTIFICATION->name }}">
+                                    {{ session('header', 'Notice!') }}
+                                </h2>
                                 @break
                             @case(FlashMessageTypes::ERROR)
-                                <h2 class="font-bold text-xl text-center">{{ session('header', 'Oops!') }}</h2>
+                                <h2 class="font-bold text-xl text-center"
+                                    data-flash-type="{{ FlashMessageTypes::ERROR->name }}">
+                                    {{ session('header', 'Oops!') }}
+                                </h2>
                                 @break
                             @case(FlashMessageTypes::WARNING)
-                                <h2 class="font-bold text-xl text-center">{{ session('header', 'Warning!') }}</h2>
+                                <h2 class="font-bold text-xl text-center"
+                                    data-flash-type="{{ FlashMessageTypes::WARNING->name }}">
+                                    {{ session('header', 'Warning!') }}
+                                </h2>
                                 @break
                             @default
                                 <h2 class="font-bold text-xl text-center">{{ session('header', 'Flash!') }}</h2>
