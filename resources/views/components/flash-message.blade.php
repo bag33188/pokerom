@@ -1,5 +1,21 @@
 @php
     use App\Enums\FlashMessageTypeEnum as FlashMessageTypes;
+
+    $successCssClasses = ['w-full', 'bg-green-100', 'border', 'border-green-400', 'text-green-700', 'px-3', 'py-2', 'rounded', 'relative'];
+    $warnCssClasses = ['w-full', 'bg-yellow-300', 'border', 'border-yellow-500', 'text-yellow-800', 'px-3', 'py-2', 'rounded', 'relative'];
+    $errorCssClasses = ['w-full', 'text-center', 'bg-red-100', 'border', 'border-red-400', 'text-red-700', 'px-3', 'py-2', 'rounded', 'relative'];
+    $notificationCssClasses = ['w-full', 'text-center', 'border', 'bg-blue-100', 'border-blue-400', 'text-blue-600', 'px-3', 'py-2', 'rounded', 'relative'];
+    $defaultCssClasses = ['w-full', 'text-center', 'bg-gray-200', 'border', 'border-gray-400', 'text-gray-600', 'px-3', 'py-2', 'rounded', 'relative'];
+
+    $flashMessageStyles = array();
+
+    match ($messageType) {
+        FlashMessageTypes::SUCCESS => $flashMessageStyles = $successCssClasses,
+        FlashMessageTypes::ERROR => $flashMessageStyles = $errorCssClasses,
+        FlashMessageTypes::WARNING => $flashMessageStyles = $warnCssClasses,
+        FlashMessageTypes::NOTIFICATION => $flashMessageStyles = $notificationCssClasses,
+        default => $flashMessageStyles = $defaultCssClasses,
+    };
 @endphp
 @pushOnce('scripts')
     @verbatim
@@ -23,23 +39,6 @@
         </script>
     @endverbatim
 @endPushOnce
-@php
-    $successCssClasses = ['w-full', 'bg-green-100', 'border', 'border-green-400', 'text-green-700', 'px-3', 'py-2', 'rounded', 'relative'];
-    $warnCssClasses = ['w-full', 'bg-yellow-300', 'border', 'border-yellow-500', 'text-yellow-800', 'px-3', 'py-2', 'rounded', 'relative'];
-    $errorCssClasses = ['w-full', 'text-center', 'bg-red-100', 'border', 'border-red-400', 'text-red-700', 'px-3', 'py-2', 'rounded', 'relative'];
-    $notificationCssClasses = ['w-full', 'text-center', 'border', 'bg-blue-100', 'border-blue-400', 'text-blue-600', 'px-3', 'py-2', 'rounded', 'relative'];
-    $defaultCssClasses = ['w-full', 'text-center', 'bg-gray-200', 'border', 'border-gray-400', 'text-gray-600', 'px-3', 'py-2', 'rounded', 'relative'];
-
-    $flashMessageStyles = array();
-
-    match ($messageType) {
-        FlashMessageTypes::SUCCESS => $flashMessageStyles = $successCssClasses,
-        FlashMessageTypes::ERROR => $flashMessageStyles = $errorCssClasses,
-        FlashMessageTypes::WARNING => $flashMessageStyles = $warnCssClasses,
-        FlashMessageTypes::NOTIFICATION => $flashMessageStyles = $notificationCssClasses,
-        default => $flashMessageStyles = $defaultCssClasses,
-    };
-@endphp
 @if($sessionHasMessage)
     <div {{ $attributes }}
          x-data="flashMessageData()"
