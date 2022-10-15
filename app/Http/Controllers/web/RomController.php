@@ -74,7 +74,8 @@ class RomController extends WebController
             'gameInfoOpened' => true,
             'romFileInfoOpened' => true
         ]);
-        $gameNameTitle = $rom->has_game === TRUE
+
+        $gameNameTitleHTML = $rom->has_game === TRUE
             ? sprintf('title="%s"', $rom->game->game_name)
             : '';
 
@@ -82,7 +83,7 @@ class RomController extends WebController
             'rom' => $rom,
             'userIsAdmin' => Auth::user()->isAdmin(),
             'alpineInitialUiState' => html_entity_decode($alpineUiData->toJson()),
-            'gameNameTitle' => $gameNameTitle
+            'gameNameTitle' => $gameNameTitleHTML
         ]);
     }
 
