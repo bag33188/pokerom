@@ -92,6 +92,7 @@
                 <p @class($paragraphHiddenContentClasses) x-show="!romInfoOpened" {!! $toggleROMInfo !!} x-cloak>
                     ...</p>
             </x-list-item> <!-- // end of ROM Info -->
+
             @if($rom->has_game)
                 <x-list-item class="pb-4">
                     <p @class($paragraphSectionClasses) {!! $toggleGameInfo !!}>Game Info</p>
@@ -112,6 +113,7 @@
                         ...</p>
                 </x-list-item>
             @endif <!-- // end of Game Info -->
+
             @if($rom->has_file)
                 <x-list-item class="pb-4">
                     <p @class($paragraphSectionClasses) {!! $toggleROMFileInfo !!}>
@@ -133,6 +135,7 @@
                        {!! $toggleROMFileInfo !!} x-cloak>...</p>
                 </x-list-item>
             @endif <!-- // end of ROM File Info -->
+
         </x-list-group>
 
         @if($userIsAdmin)
@@ -140,13 +143,23 @@
                 <div class="order-0 mt-3">
                     <x-rom.delete :rom="$rom"/>
                 </div>
-                <div
-                    class="order-1 mt-3 inline-flex flex-row-reverse justify-start space-x-2.5 space-x-reverse w-full flex-wrap-reverse">
+                <div @class([
+                    'order-1',
+                    'mt-3',
+                    'inline-flex',
+                    'flex-row-reverse',
+                    'justify-start',
+                    'space-x-2.5',
+                    'space-x-reverse',
+                    'w-full',
+                    'flex-wrap-reverse'
+                ])>
                     <div class="order-0">
                         <x-anchor-button :href="route('roms.edit', ['rom' => $rom])">
                             Edit!
                         </x-anchor-button>
                     </div>
+
                     @if(!$rom->has_file)
                         <div class="order-1" id="link-rom-{{ $rom->id }}-container">
                             <form
