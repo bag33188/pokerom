@@ -72,31 +72,31 @@
                         @switch($messageType)
                             @case(FlashMessageTypes::SUCCESS)
                                 <h2 class="font-bold text-xl text-center"
-                                    data-flash-type="{{ FlashMessageTypes::SUCCESS->name }}">
+                                    data-flash-type="{{ FlashMessageTypes::SUCCESS->value }}">
                                     {{ session('header', 'Success!') }}
                                 </h2>
                                 @break
                             @case(FlashMessageTypes::NOTIFICATION)
                                 <h2 class="font-bold text-xl text-center"
-                                    data-flash-type="{{ FlashMessageTypes::NOTIFICATION->name }}">
+                                    data-flash-type="{{ FlashMessageTypes::NOTIFICATION->value }}">
                                     {{ session('header', 'Notice!') }}
                                 </h2>
                                 @break
                             @case(FlashMessageTypes::ERROR)
                                 <h2 class="font-bold text-xl text-center"
-                                    data-flash-type="{{ FlashMessageTypes::ERROR->name }}">
+                                    data-flash-type="{{ FlashMessageTypes::ERROR->value }}">
                                     {{ session('header', 'Oops!') }}
                                 </h2>
                                 @break
                             @case(FlashMessageTypes::WARNING)
                                 <h2 class="font-bold text-xl text-center"
-                                    data-flash-type="{{ FlashMessageTypes::WARNING->name }}">
+                                    data-flash-type="{{ FlashMessageTypes::WARNING->value }}">
                                     {{ session('header', 'Warning!') }}
                                 </h2>
                                 @break
                             @default
                                 <h2 class="font-bold text-xl text-center"
-                                    data-flash-type="{{ FlashMessageTypes::DEFAULT->name }}">
+                                    data-flash-type="{{ FlashMessageTypes::DEFAULT->value }}">
                                     {{ session('header', 'Flash!') }}
                                 </h2>
                         @endswitch
