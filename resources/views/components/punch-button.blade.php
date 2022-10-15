@@ -126,9 +126,16 @@
         }
     </style>
 @endPushOnce
+@php
+    enum PunchButtonType: string {
+        case BUTTON = 'button';
+        case SUBMIT = 'submit';
+        case ANCHOR = 'anchor';
+    }
+@endphp
 @switch($btnType)
-    @case('button')
-    @case('submit')
+    @case(PunchButtonType::BUTTON->value)
+    @case(PunchButtonType::SUBMIT->value)
         <button
             element-type="button"
             {{ $attributes->class(['punch'])->merge(['type' => $btnType]) }}
@@ -138,7 +145,7 @@
             {{ $slot }}
         </button>
         @break
-    @case('anchor')
+    @case(PunchButtonType::ANCHOR->value)
         @prependOnce('scripts')
             @verbatim
                 <script type="text/javascript">
