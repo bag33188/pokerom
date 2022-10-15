@@ -70,13 +70,14 @@ class RomController extends WebController
     public function show(Rom $rom)
     {
         $alpineUiData = "{ romInfoOpened: true, gameInfoOpened: true, romFileInfoOpened: true }";
+        $gameNameTitle = $rom->has_game === TRUE
+            ? sprintf('title="%s"', $rom->game->game_name)
+            : '';
         return view('roms.show', [
             'rom' => $rom,
             'userIsAdmin' => Auth::user()->isAdmin(),
             'alpineInitialUiState' => html_entity_decode($alpineUiData),
-            'gameNameTitle' => $rom->has_game === TRUE
-                ? sprintf('title="%s"', $rom->game->game_name)
-                : ''
+            'gameNameTitle' => $gameNameTitle
         ]);
     }
 
