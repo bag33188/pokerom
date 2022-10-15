@@ -158,7 +158,7 @@
                      */
                     let disablePunchButton = function(buttonID) {
                         const button = document.getElementById(buttonID);
-                        if (button.getAttribute("data-type").toLowerCase() === "anchor") {
+                        if (button.getAttribute("data-element-type").toLowerCase() === "anchor") {
                             button.setAttribute("class", "punch disabled");
                             button.setAttribute("href", "javascript:void(0)");
                             button.setAttribute("target", "_blank");
