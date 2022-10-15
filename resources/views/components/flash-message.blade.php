@@ -73,11 +73,14 @@
                             @case(FlashMessageTypes::SUCCESS)
                                 <h2 class="font-bold text-xl text-center">{{ session('header', 'Success!') }}</h2>
                                 @break
+                            @case(FlashMessageTypes::NOTIFICATION)
+                                <h2 class="font-bold text-xl text-center">{{ session('header', 'Notice!') }}</h2>
+                                @break
                             @case(FlashMessageTypes::ERROR)
                                 <h2 class="font-bold text-xl text-center">{{ session('header', 'Oops!') }}</h2>
                                 @break
-                            @case(FlashMessageTypes::NOTIFICATION)
-                                <h2 class="font-bold text-xl text-center">{{ session('header', 'Notice!') }}</h2>
+                            @case(FlashMessageTypes::WARNING)
+                                <h2 class="font-bold text-xl text-center">{{ session('header', 'Warning!') }}</h2>
                                 @break
                             @default
                                 <h2 class="font-bold text-xl text-center">{{ session('header', 'Flash!') }}</h2>
