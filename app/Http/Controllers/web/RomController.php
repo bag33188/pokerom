@@ -73,6 +73,7 @@ class RomController extends WebController
         $gameNameTitle = $rom->has_game === TRUE
             ? sprintf('title="%s"', $rom->game->game_name)
             : '';
+
         return view('roms.show', [
             'rom' => $rom,
             'userIsAdmin' => Auth::user()->isAdmin(),
