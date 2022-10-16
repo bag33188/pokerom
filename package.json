@@ -3,7 +3,7 @@
     "license": "GPL-2.0-only",
     "version": "4.7.5",
     "repository": {
-        "url": "https://github.com/bag33188/new-pokerom",
+        "url": "https://github.com/bag33188/pokerom",
         "type": "git"
     },
     "private": true,
