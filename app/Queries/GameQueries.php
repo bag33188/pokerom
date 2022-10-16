@@ -20,9 +20,9 @@ class GameQueries implements GameQueriesInterface
     public function formatGameTypeSQL(string $game_type): string
     {
         $sql = /** @lang MariaDB */
-            "SELECT HIGH_PRIORITY FORMAT_GAME_TYPE(?) AS `gameType`";
+            "SELECT HIGH_PRIORITY FORMAT_GAME_TYPE(?) AS `game_type`";
         $query = DB::raw($sql);
-        return DB::selectOne($query, [$game_type])->gameType;
+        return DB::selectOne($query, [$game_type])->game_type;
     }
 
     public function getAllRomsWithNoGameSQL(): Collection
