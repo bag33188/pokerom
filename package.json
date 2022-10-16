@@ -10,7 +10,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "ide-helper": "NODE_ENV=development php artisan ide-helper:generate && php artisan ide-helper:meta"
+        "ide-helper": "php artisan ide-helper:generate && php artisan ide-helper:meta"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
