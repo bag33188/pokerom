@@ -4,6 +4,13 @@
 
 [comment]: <> (https://github.com/bag33188/new-pokerom)
 
+## About
+
+This particular website uses both relational and document-typed databases. 
+
+**MongoDB** is used for _storing/uploading ROM files and downloading ROMs_, 
+while **MariaDB** is used for _all other metadata and user data_.
+
 ## PHPStorm debug with Postman
 
 add this cookie to the current request:
