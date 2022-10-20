@@ -9,7 +9,19 @@ use Symfony\Component\Finder\Exception\DirectoryNotFoundException;
 
 class GridFSProcessor
 {
-    /** @var string|string[] */
+    /**
+     * laravel storage path-string that points to storage directory where files are searched for
+     *
+     * ## Example
+     *
+     * ```php
+     * 'storage/app/public/grid_files'
+     * // or
+     * ['storage', 'app', 'public', 'grid_files']
+     * ```
+     *
+     * @var string|string[]
+     */
     protected string|array $gridFilesStoragePath;
 
     protected int $contentUploadTransferSize;
@@ -61,22 +73,31 @@ class GridFSProcessor
             throw new Exception('GridFS storage path is not set.');
         }
 
+        // gridFilesStoragePath is defined as a string
         if (is_string($this->gridFilesStoragePath)) {
-            $this->gridFilesStoragePath = trim(strtolower($this->gridFilesStoragePath));
+            $this->gridFilesStoragePath = trim($this->gridFilesStoragePath);
 
+            // if gridFilesStoragePath starts with the storage directory, remove it from the string
             if (str_starts_with(strtolower($this->gridFilesStoragePath), 'storage'))
                 $this->gridFilesStoragePath = str_replace('storage/', '', $this->gridFilesStoragePath);
 
+            // replace all backslashes with forward slashes
             $this->gridFilesDiskPath = preg_replace('/\x{5C}/u', DIRECTORY_SEPARATOR, storage_path($this->gridFilesStoragePath));
         }
 
+        // gridFilesStoragePath is defined as an array
         if (is_array($this->gridFilesStoragePath)) {
+            // clean up array values
+            $this->gridFilesStoragePath = array_values(array_map(fn(string $path): string => trim($path), $this->gridFilesStoragePath));
+
+            // if gridFilesStoragePath first array item is the storage directory, remove it from the array
             if (strtolower($this->gridFilesStoragePath[0]) === 'storage') unset($this->gridFilesStoragePath[0]);
 
-            $this->gridFilesStoragePath = array_values(array_map(fn($path) => trim(strtolower($path)), $this->gridFilesStoragePath));
+            // join storage path array into a string
             $this->gridFilesDiskPath = storage_path(implode(DIRECTORY_SEPARATOR, $this->gridFilesStoragePath));
         }
 
+        // check if gridFilesDiskPath is an existing directory
         if (!is_dir($this->gridFilesDiskPath)) {
             throw new DirectoryNotFoundException("GridFS storage path '{$this->gridFilesDiskPath}' does not exist.");
         }

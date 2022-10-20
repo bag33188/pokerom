@@ -6,21 +6,51 @@ use MongoDB\Client as MongoClient;
 use MongoDB\Driver\Exception\RuntimeException as DriverRuntimeException;
 use MongoDB\GridFS\Bucket;
 
+define('MONGO_AUTH_METHODS', array(
+    0 => 'DEFAULT',
+    1 => 'SCRAM-SHA-1',
+    256 => 'SCRAM-SHA-256'
+));
+
 class GridFSConnection
 {
-    protected string $host = 'localhost';
+    // CONNECTION PROPERTIES //
+    protected string $host = '127.0.0.1';
     protected int $port = 27017;
+    protected string $databaseName = 'test';
     protected bool $useAuth = false;
 
+    // AUTH PROPERTIES //
     protected string $authDatabase = 'admin';
-    protected string $authMechanism = 'SCRAM-SHA-1';
+    protected string $authMechanism = 'DEFAULT';
+    /**
+     * laravel {@see \Illuminate\Support\Facades\Config config} path-string that points to username value
+     *
+     * ## Example
+     *
+     * `'database.connections.mongodb.username'`
+     *
+     * @var string
+     */
     protected string $usernameConfigPath;
+    /**
+     * laravel {@see \Illuminate\Support\Facades\Config config} path-string that points to password value
+     *
+     * ## Example
+     *
+     * `'database.connections.mongodb.password'`
+     *
+     * @var string
+     */
     protected string $passwordConfigPath;
+    /** @var string allow for raw username if config path is n/a */
+    protected string $username;
+    /** @var string allow for raw password if config path is n/a */
+    protected string $password;
 
-    public string $databaseName = 'test';
-    public string $bucketName = 'fs';
-    public int $chunkSize = 0x3FC00;
-
+    // GRIDFS PROPERTIES //
+    protected string $bucketName = 'fs';
+    protected int $chunkSize = 0x3FC00;
     public readonly Bucket $bucket;
 
     public function __construct()
@@ -34,40 +64,18 @@ class GridFSConnection
 
     /**
      * @link https://www.mongodb.com/docs/manual/reference/connection-string/
-     * @param bool|null $useFullMongoURI
      * @return string
      */
-    private function dsn(?bool $useFullMongoURI = null): string
+    private function dsn(): string
     {
-        #!is_null($useFullMongoURI) && $useFullMongoURI === true
-        if ($useFullMongoURI) {
-
-            list($username, $password) = array_values(
-                config()->getMany([
-                    $this->usernameConfigPath,
-                    $this->passwordConfigPath,
-                ])
-            );
-
-            $dsn = _SPACE .
-                'mongodb' . '://' .
-                "${username}:${password}" . '@' .
-                "{$this->host}:{$this->port}" . '/' .
-                $this->databaseName . '?' .
-                "authSource={$this->authDatabase}" . '&' .
-                "authMechanism={$this->authMechanism}";
-
-            return ltrim($dsn);
-        } else {
-            return "mongodb://{$this->host}:{$this->port}/";
-        }
+        return "mongodb://{$this->host}:{$this->port}/";
     }
 
     private function parseDbCredentials(): array
     {
         return $this->useAuth ? [
-            'username' => config($this->usernameConfigPath),
-            'password' => config($this->passwordConfigPath),
+            'username' => $this->getUsername(),
+            'password' => $this->getPassword(),
             'authSource' => $this->authDatabase,
             'authMechanism' => $this->authMechanism
         ] : [];
@@ -85,5 +93,33 @@ class GridFSConnection
             'chunkSizeBytes' => $this->chunkSize,
             'bucketName' => $this->bucketName
         ]);
+    }
+
+    private function getUsername(): string
+    {
+        return empty($this->usernameConfigPath) ? $this->username : config($this->usernameConfigPath);
+    }
+
+    private function getPassword(): string
+    {
+        return empty($this->passwordConfigPath) ? $this->password : config($this->passwordConfigPath);
+    }
+
+    // todo: remove these ??
+
+    /**
+     * @return string
+     */
+    public function get_bucket_name(): string
+    {
+        return $this->bucketName;
+    }
+
+    /**
+     * @return string
+     */
+    public function get_database_name(): string
+    {
+        return $this->databaseName;
     }
 }
