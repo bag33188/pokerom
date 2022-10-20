@@ -87,7 +87,7 @@ class GridFSConnection
      */
     private function connectGFS(): void
     {
-        $connection = new MongoClient(uri: $this->dsn(false), uriOptions: $this->parseDbCredentials());
+        $connection = new MongoClient(uri: $this->dsn(), uriOptions: $this->parseDbCredentials());
         $db = $connection->selectDatabase($this->databaseName);
         $this->bucket = $db->selectGridFSBucket([
             'chunkSizeBytes' => $this->chunkSize,
