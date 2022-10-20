@@ -6,11 +6,11 @@ use MongoDB\Client as MongoClient;
 use MongoDB\Driver\Exception\RuntimeException as DriverRuntimeException;
 use MongoDB\GridFS\Bucket;
 
-define('MONGO_AUTH_METHODS', array(
-    0 => 'DEFAULT',
-    1 => 'SCRAM-SHA-1',
-    256 => 'SCRAM-SHA-256'
-));
+# define('MONGO_AUTH_METHODS', array(
+#     0 => 'DEFAULT',
+#     1 => 'SCRAM-SHA-1',
+#     256 => 'SCRAM-SHA-256'
+# ));
 
 class GridFSConnection
 {
@@ -103,23 +103,5 @@ class GridFSConnection
     private function getPassword(): string
     {
         return empty($this->passwordConfigPath) ? $this->password : config($this->passwordConfigPath);
-    }
-
-    // todo: remove these ??
-
-    /**
-     * @return string
-     */
-    public function get_bucket_name(): string
-    {
-        return $this->bucketName;
-    }
-
-    /**
-     * @return string
-     */
-    public function get_database_name(): string
-    {
-        return $this->databaseName;
     }
 }

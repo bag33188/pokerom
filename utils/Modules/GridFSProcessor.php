@@ -69,12 +69,14 @@ class GridFSProcessor
      */
     private function parseGridStorageDirectory(): void
     {
+        // make sure storage path is defined
         if (empty($this->gridFilesStoragePath)) {
             throw new Exception('GridFS storage path is not set.');
         }
 
         // gridFilesStoragePath is defined as a string
         if (is_string($this->gridFilesStoragePath)) {
+            // trim string
             $this->gridFilesStoragePath = trim($this->gridFilesStoragePath);
 
             // if gridFilesStoragePath starts with the storage directory, remove it from the string
@@ -87,7 +89,7 @@ class GridFSProcessor
 
         // gridFilesStoragePath is defined as an array
         if (is_array($this->gridFilesStoragePath)) {
-            // clean up array values
+            // trim array values
             $this->gridFilesStoragePath = array_values(array_map(fn(string $path): string => trim($path), $this->gridFilesStoragePath));
 
             // if gridFilesStoragePath first array item is the storage directory, remove it from the array
