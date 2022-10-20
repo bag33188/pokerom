@@ -28,7 +28,8 @@ class UserController extends ApiController
         return response()->json([
             'success' => true,
             'user' => $currentUser,
-            'token' => $authToken
+            'token' => $authToken,
+            'role' => $currentUser->role,
         ]);
     }
 
@@ -61,6 +62,8 @@ class UserController extends ApiController
             'token' => $newBearerToken,
             'user' => $user,
             'success' => true,
+            'role' => $user->role,
+            'message' => 'You have successfully logged in.'
         ]);
     }
 
