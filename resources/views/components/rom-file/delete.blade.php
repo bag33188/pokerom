@@ -40,5 +40,5 @@
     @method('DELETE')
     @csrf
 
-    <x-jet-danger-button type="submit" id="{{ $deleteRomFileBtnId }}">DELETE!</x-jet-danger-button>
+    <x-jet-danger-button type="submit" :id="$deleteRomFileBtnId">DELETE!</x-jet-danger-button>
 </form>
