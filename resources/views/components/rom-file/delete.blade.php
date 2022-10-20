@@ -10,19 +10,21 @@
         </style>
     @endpush
     @push('scripts')
-        <script type="text/javascript">
-            /**
-             * Disabled the delete button on the client
-             * while the server is in the process of deleting the rom file.
-             *
-             * @param {string} deleteBtnId
-             */
-            function disableDeleteBtn(deleteBtnId) {
-                const deleteBtn = document.getElementById(deleteBtnId);
-                deleteBtn.disabled = true;
-                deleteBtn.classList.add("not-allowed");
-            }
-        </script>
+        @verbatim
+            <script type="text/javascript">
+                /**
+                 * Disabled the delete button on the client
+                 * while the server is in the process of deleting the rom file.
+                 *
+                 * @param {string} deleteBtnId
+                 */
+                function disableDeleteBtn(deleteBtnId) {
+                    const deleteBtn = document.getElementById(deleteBtnId);
+                    deleteBtn.disabled = true;
+                    deleteBtn.classList.add("not-allowed");
+                }
+            </script>
+        @endverbatim
     @endpush
 @endonce
 @php
