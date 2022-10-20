@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "game_name": "Pokémon Red",
+        "game_name": "Pok\u00e9mon Red",
         "game_type": "Core",
         "date_released": "1998-09-28",
         "generation": 1,
@@ -13,7 +13,7 @@
     },
     {
         "id": 2,
-        "game_name": "Pokémon Blue",
+        "game_name": "Pok\u00e9mon Blue",
         "game_type": "Core",
         "date_released": "1998-09-28",
         "generation": 1,
@@ -25,7 +25,7 @@
     },
     {
         "id": 3,
-        "game_name": "Pokémon Green (JP)",
+        "game_name": "Pok\u00e9mon Green (JP)",
         "game_type": "Core",
         "date_released": "1996-02-27",
         "generation": 1,
@@ -37,7 +37,7 @@
     },
     {
         "id": 4,
-        "game_name": "Pokémon Yellow",
+        "game_name": "Pok\u00e9mon Yellow",
         "game_type": "Core",
         "date_released": "1999-10-18",
         "generation": 1,
@@ -49,7 +49,7 @@
     },
     {
         "id": 5,
-        "game_name": "Pokémon Gold",
+        "game_name": "Pok\u00e9mon Gold",
         "game_type": "Core",
         "date_released": "2000-10-15",
         "generation": 2,
@@ -61,7 +61,7 @@
     },
     {
         "id": 6,
-        "game_name": "Pokémon Silver",
+        "game_name": "Pok\u00e9mon Silver",
         "game_type": "Core",
         "date_released": "2000-10-15",
         "generation": 2,
@@ -73,7 +73,7 @@
     },
     {
         "id": 7,
-        "game_name": "Pokémon Crystal",
+        "game_name": "Pok\u00e9mon Crystal",
         "game_type": "Core",
         "date_released": "2001-08-29",
         "generation": 2,
@@ -85,7 +85,7 @@
     },
     {
         "id": 8,
-        "game_name": "Pokémon Ruby",
+        "game_name": "Pok\u00e9mon Ruby",
         "game_type": "Core",
         "date_released": "2003-03-19",
         "generation": 3,
@@ -97,7 +97,7 @@
     },
     {
         "id": 9,
-        "game_name": "Pokémon Sapphire",
+        "game_name": "Pok\u00e9mon Sapphire",
         "game_type": "Core",
         "date_released": "2003-03-19",
         "generation": 3,
@@ -109,7 +109,7 @@
     },
     {
         "id": 10,
-        "game_name": "Pokémon Emerald",
+        "game_name": "Pok\u00e9mon Emerald",
         "game_type": "Core",
         "date_released": "2005-05-01",
         "generation": 3,
@@ -121,7 +121,7 @@
     },
     {
         "id": 11,
-        "game_name": "Pokémon FireRed",
+        "game_name": "Pok\u00e9mon FireRed",
         "game_type": "Core",
         "date_released": "2004-09-09",
         "generation": 3,
@@ -133,7 +133,7 @@
     },
     {
         "id": 12,
-        "game_name": "Pokémon LeafGreen",
+        "game_name": "Pok\u00e9mon LeafGreen",
         "game_type": "Core",
         "date_released": "2004-09-09",
         "generation": 3,
@@ -145,7 +145,7 @@
     },
     {
         "id": 13,
-        "game_name": "Pokémon Diamond",
+        "game_name": "Pok\u00e9mon Diamond",
         "game_type": "Core",
         "date_released": "2007-04-22",
         "generation": 4,
@@ -157,7 +157,7 @@
     },
     {
         "id": 14,
-        "game_name": "Pokémon Pearl",
+        "game_name": "Pok\u00e9mon Pearl",
         "game_type": "Core",
         "date_released": "2007-04-22",
         "generation": 4,
@@ -169,7 +169,7 @@
     },
     {
         "id": 15,
-        "game_name": "Pokémon Platinum",
+        "game_name": "Pok\u00e9mon Platinum",
         "game_type": "Core",
         "date_released": "2009-03-22",
         "generation": 4,
@@ -181,7 +181,7 @@
     },
     {
         "id": 16,
-        "game_name": "Pokémon HeartGold",
+        "game_name": "Pok\u00e9mon HeartGold",
         "game_type": "Core",
         "date_released": "2010-03-14",
         "generation": 4,
@@ -193,7 +193,7 @@
     },
     {
         "id": 17,
-        "game_name": "Pokémon SoulSilver",
+        "game_name": "Pok\u00e9mon SoulSilver",
         "game_type": "Core",
         "date_released": "2010-03-14",
         "generation": 4,
@@ -205,7 +205,7 @@
     },
     {
         "id": 18,
-        "game_name": "Pokémon Black",
+        "game_name": "Pok\u00e9mon Black",
         "game_type": "Core",
         "date_released": "2011-03-06",
         "generation": 5,
@@ -217,7 +217,7 @@
     },
     {
         "id": 19,
-        "game_name": "Pokémon White",
+        "game_name": "Pok\u00e9mon White",
         "game_type": "Core",
         "date_released": "2011-03-06",
         "generation": 5,
@@ -229,7 +229,7 @@
     },
     {
         "id": 20,
-        "game_name": "Pokémon Black 2",
+        "game_name": "Pok\u00e9mon Black 2",
         "game_type": "Core",
         "date_released": "2012-10-07",
         "generation": 5,
@@ -241,7 +241,7 @@
     },
     {
         "id": 21,
-        "game_name": "Pokémon White 2",
+        "game_name": "Pok\u00e9mon White 2",
         "game_type": "Core",
         "date_released": "2012-10-07",
         "generation": 5,
@@ -253,7 +253,7 @@
     },
     {
         "id": 22,
-        "game_name": "Pokémon X",
+        "game_name": "Pok\u00e9mon X",
         "game_type": "Core",
         "date_released": "2013-10-12",
         "generation": 6,
@@ -265,7 +265,7 @@
     },
     {
         "id": 23,
-        "game_name": "Pokémon Y",
+        "game_name": "Pok\u00e9mon Y",
         "game_type": "Core",
         "date_released": "2013-10-12",
         "generation": 6,
@@ -277,7 +277,7 @@
     },
     {
         "id": 24,
-        "game_name": "Pokémon Omega Ruby",
+        "game_name": "Pok\u00e9mon Omega Ruby",
         "game_type": "Core",
         "date_released": "2014-11-21",
         "generation": 6,
@@ -289,7 +289,7 @@
     },
     {
         "id": 25,
-        "game_name": "Pokémon Alpha Sapphire",
+        "game_name": "Pok\u00e9mon Alpha Sapphire",
         "game_type": "Core",
         "date_released": "2014-11-21",
         "generation": 6,
@@ -301,7 +301,7 @@
     },
     {
         "id": 26,
-        "game_name": "Pokémon Sun",
+        "game_name": "Pok\u00e9mon Sun",
         "game_type": "Core",
         "date_released": "2016-11-18",
         "generation": 7,
@@ -313,7 +313,7 @@
     },
     {
         "id": 27,
-        "game_name": "Pokémon Moon",
+        "game_name": "Pok\u00e9mon Moon",
         "game_type": "Core",
         "date_released": "2016-11-18",
         "generation": 7,
@@ -325,7 +325,7 @@
     },
     {
         "id": 28,
-        "game_name": "Pokémon Ultra Sun",
+        "game_name": "Pok\u00e9mon Ultra Sun",
         "game_type": "Core",
         "date_released": "2017-11-17",
         "generation": 7,
@@ -337,7 +337,7 @@
     },
     {
         "id": 29,
-        "game_name": "Pokémon Ultra Moon",
+        "game_name": "Pok\u00e9mon Ultra Moon",
         "game_type": "Core",
         "date_released": "2017-11-17",
         "generation": 7,
@@ -349,7 +349,7 @@
     },
     {
         "id": 30,
-        "game_name": "Pokémon Sword",
+        "game_name": "Pok\u00e9mon Sword",
         "game_type": "Core",
         "date_released": "2019-11-15",
         "generation": 8,
@@ -361,7 +361,7 @@
     },
     {
         "id": 31,
-        "game_name": "Pokémon Shield",
+        "game_name": "Pok\u00e9mon Shield",
         "game_type": "Core",
         "date_released": "2019-11-15",
         "generation": 8,
@@ -373,7 +373,7 @@
     },
     {
         "id": 32,
-        "game_name": "Pokémon Brilliant Diamond",
+        "game_name": "Pok\u00e9mon Brilliant Diamond",
         "game_type": "Core",
         "date_released": "2021-11-19",
         "generation": 8,
@@ -385,7 +385,7 @@
     },
     {
         "id": 33,
-        "game_name": "Pokémon Shining Pearl",
+        "game_name": "Pok\u00e9mon Shining Pearl",
         "game_type": "Core",
         "date_released": "2021-11-19",
         "generation": 8,
@@ -397,7 +397,7 @@
     },
     {
         "id": 34,
-        "game_name": "Pokémon Let's Go Pikachu",
+        "game_name": "Pok\u00e9mon Let's Go Pikachu",
         "game_type": "Spin-Off",
         "date_released": "2018-11-16",
         "generation": 7,
@@ -409,7 +409,7 @@
     },
     {
         "id": 35,
-        "game_name": "Pokémon Let's Go Eevee",
+        "game_name": "Pok\u00e9mon Let's Go Eevee",
         "game_type": "Spin-Off",
         "date_released": "2018-11-16",
         "generation": 7,
@@ -421,7 +421,7 @@
     },
     {
         "id": 36,
-        "game_name": "Pokémon Prism",
+        "game_name": "Pok\u00e9mon Prism",
         "game_type": "Hack",
         "date_released": "2016-12-25",
         "generation": 0,
@@ -433,7 +433,7 @@
     },
     {
         "id": 37,
-        "game_name": "Pokémon Brown",
+        "game_name": "Pok\u00e9mon Brown",
         "game_type": "Hack",
         "date_released": "2012-06-15",
         "generation": 0,
@@ -445,7 +445,7 @@
     },
     {
         "id": 38,
-        "game_name": "Pokémon Genesis",
+        "game_name": "Pok\u00e9mon Genesis",
         "game_type": "Hack",
         "date_released": "2019-08-23",
         "generation": 0,
@@ -457,7 +457,7 @@
     },
     {
         "id": 39,
-        "game_name": "Pokémon Ash Gray",
+        "game_name": "Pok\u00e9mon Ash Gray",
         "game_type": "Hack",
         "date_released": "2009-05-31",
         "generation": 1,
@@ -469,7 +469,7 @@
     },
     {
         "id": 40,
-        "game_name": "Pokémon Renegade Platinum",
+        "game_name": "Pok\u00e9mon Renegade Platinum",
         "game_type": "Hack",
         "date_released": "2019-04-16",
         "generation": 4,
@@ -481,7 +481,7 @@
     },
     {
         "id": 41,
-        "game_name": "Pokémon Legends: Arceus",
+        "game_name": "Pok\u00e9mon Legends: Arceus",
         "game_type": "Spin-Off",
         "date_released": "2022-12-08",
         "generation": 8,
@@ -493,7 +493,7 @@
     },
     {
         "id": 42,
-        "game_name": "Pokémon Super Mystery Dungeon",
+        "game_name": "Pok\u00e9mon Super Mystery Dungeon",
         "game_type": "Spin-Off",
         "date_released": "2022-01-01",
         "generation": 6,
