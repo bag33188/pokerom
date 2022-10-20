@@ -34,7 +34,6 @@ class Download extends Component
                   action="{{ route('rom-files.download', ['romFile' => $romFile]) }}"
                   name="download-romFile-{{ $romFile->_id }}-form"
                   enctype="multipart/form-data">
-
                 @method('GET')
                 @csrf
 
