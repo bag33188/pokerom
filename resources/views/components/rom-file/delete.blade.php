@@ -1,5 +1,8 @@
 @once
     @push('styles')
+        @env('local')
+            <!--suppress CssUnusedSymbol -->
+        @endenv
         <style {!! 'type="text/css"' !!}>
             .not-allowed {
                 cursor: not-allowed !important;
