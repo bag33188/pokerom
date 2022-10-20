@@ -8,6 +8,7 @@ enum FlashMessageTypeEnum: string
 {
     use EnumMethods {
         names as public;
+        values as public;
     }
 
     case SUCCESS = 'success';             // green
