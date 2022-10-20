@@ -84,6 +84,7 @@ Route::name('api.')->group(function () {
             Route::get('/{romFileId}', 'show')->name('show');
             Route::delete('/{romFileId}', 'destroy')->name('destroy');
             Route::get('/{romFileId}/download', 'download')->name('download');
+            Route::get('/list/files', 'listRomFiles')->name('listFiles');
         });
 
     });
