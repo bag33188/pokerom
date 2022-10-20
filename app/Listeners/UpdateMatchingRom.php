@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Enums\FlashMessageTypeEnum;
 use App\Events\RomFileCreated;
 use App\Interfaces\RomQueriesInterface;
 use App\Models\Rom;
@@ -48,8 +49,7 @@ class UpdateMatchingRom implements ShouldQueue
         $matchingRom = $this->romQueries->findRomMatchingRomFile($event->romFile);
 
         $this->setMatchingRom($matchingRom);
-
-        return !($event->romFile->rom()->exists() && is_null($matchingRom));
+        return $event->romFile->rom()->exists() == false && is_null($matchingRom) == false;
     }
 
     /**
@@ -61,12 +61,17 @@ class UpdateMatchingRom implements ShouldQueue
     public function handle(RomFileCreated $event): void
     {
         Rom::withoutEvents(function () use ($event) {
-            if (isset(self::$matchingRom)) {
-                self::$matchingRom->has_file = true;
-                self::$matchingRom->file_id = $event->romFile->_id;
-                self::$matchingRom->rom_size = $event->romFile->calculateRomSizeFromLength();
-                self::$matchingRom->save();
-            }
+            self::$matchingRom->has_file = true;
+            self::$matchingRom->file_id = $event->romFile->_id;
+            self::$matchingRom->rom_size = $event->romFile->calculateRomSizeFromLength();
+            self::$matchingRom->save();
+            $this->flashSuccessMessage();
         });
+    }
+
+    private function flashSuccessMessage(): void
+    {
+        session()->flash('message', 'Successfully updated matching ROM ' . self::$matchingRom->rom_name);
+        session()->flash('message-type', FlashMessageTypeEnum::SUCCESS);
     }
 }

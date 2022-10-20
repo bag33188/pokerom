@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Enums\FlashMessageTypeEnum;
 use App\Events\AttemptRomLinkToRomFile;
 use App\Interfaces\RomQueriesInterface;
 use App\Models\RomFile;
@@ -49,5 +50,12 @@ class LinkRomToRomFile implements ShouldQueue
     {
         $this->romQueries->updateRomFromRomFileDataSQL($event->rom, self::$matchingRomFile);
         # $event->rom->refresh(); // cannot refresh ROM here, does not work
+        $this->flashSuccessMessage();
+    }
+
+    private function flashSuccessMessage(): void
+    {
+        session()->flash('message', 'Successfully linked ROM with matching ROM File ' . self::$matchingRomFile->filename);
+        session()->flash('message-type', FlashMessageTypeEnum::SUCCESS);
     }
 }
