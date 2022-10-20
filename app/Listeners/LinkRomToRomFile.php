@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Actions\ApiMethodsTrait;
 use App\Enums\FlashMessageTypeEnum;
 use App\Events\AttemptRomLinkToRomFile;
 use App\Interfaces\RomQueriesInterface;
@@ -12,6 +13,9 @@ use Illuminate\Queue\InteractsWithQueue;
 class LinkRomToRomFile implements ShouldQueue
 {
     use InteractsWithQueue;
+    use ApiMethodsTrait {
+        isApiRequest as private;
+    }
 
     private static ?RomFile $matchingRomFile;
 
@@ -55,7 +59,9 @@ class LinkRomToRomFile implements ShouldQueue
 
     private function flashSuccessMessage(): void
     {
-        session()->flash('message', 'Successfully linked ROM with matching ROM File ' . self::$matchingRomFile->filename);
-        session()->flash('message-type', FlashMessageTypeEnum::SUCCESS);
+        if (!$this->isApiRequest()) {
+            session()->flash('message', 'Successfully linked ROM with matching ROM File ' . self::$matchingRomFile->filename);
+            session()->flash('message-type', FlashMessageTypeEnum::SUCCESS);
+        }
     }
 }

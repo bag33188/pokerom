@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Actions\ApiMethodsTrait;
 use App\Enums\FlashMessageTypeEnum;
 use App\Events\RomFileCreated;
 use App\Interfaces\RomQueriesInterface;
@@ -12,6 +13,9 @@ use Illuminate\Queue\InteractsWithQueue;
 class UpdateMatchingRom implements ShouldQueue
 {
     use InteractsWithQueue;
+    use ApiMethodsTrait {
+        isApiRequest as private;
+    }
 
     public bool $afterCommit = true;
 
@@ -71,7 +75,9 @@ class UpdateMatchingRom implements ShouldQueue
 
     private function flashSuccessMessage(): void
     {
-        session()->flash('message', 'Successfully updated matching ROM ' . self::$matchingRom->rom_name);
-        session()->flash('message-type', FlashMessageTypeEnum::SUCCESS);
+        if (!$this->isApiRequest()) {
+            session()->flash('message', 'Successfully updated matching ROM ' . self::$matchingRom->rom_name);
+            session()->flash('message-type', FlashMessageTypeEnum::SUCCESS);
+        }
     }
 }

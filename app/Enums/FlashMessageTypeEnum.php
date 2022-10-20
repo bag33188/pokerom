@@ -6,10 +6,7 @@ use App\Actions\EnumMethodsTrait as EnumMethods;
 
 enum FlashMessageTypeEnum: string
 {
-    use EnumMethods {
-        names as public;
-        values as public;
-    }
+    use EnumMethods;
 
     case SUCCESS = 'success';             // green
     case WARNING = 'warning';             // yellow
