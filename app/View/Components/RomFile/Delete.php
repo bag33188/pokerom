@@ -14,6 +14,7 @@ class Delete extends Component
     /**
      * Create a new component instance.
      *
+     * @param RomFile $romFile
      * @return void
      */
     public function __construct(RomFile $romFile)
