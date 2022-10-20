@@ -44,7 +44,8 @@ class RomFileController extends ApiController
         $romFileUpload = $this->romFileRepository->uploadToGrid($request->json('rom_filename'));
         return response()->json([
             'message' => 'Rom file uploaded successfully!',
-            'rom_file' => $romFileUpload,
+            'data' => $romFileUpload,
+            'success' => true,
         ], HttpStatus::HTTP_CREATED);
     }
 
