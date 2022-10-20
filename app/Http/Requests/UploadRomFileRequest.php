@@ -33,7 +33,7 @@ class UploadRomFileRequest extends FormRequest
                 'required',
                 'string',
                 new RomFilenameRule,
-                Rule::unique($this->romFilesCollection(), 'filename')
+                Rule::unique($this->getRomFilesCollectionReference(), 'filename')
             ]
         );
     }
@@ -45,15 +45,25 @@ class UploadRomFileRequest extends FormRequest
         ];
     }
 
-    private function romFilesCollection(): string
+    private function getRomFilesCollectionReference(): string
     {
         $this->setContainer(Container::getInstance());
+
+        /**
+         * ROM Files Collection Reference Name (MongoDB-GridFS)
+         * @var string $romFilesCollectionReference
+         * @noinspection PhpUnusedLocalVariableInspection, PhpRedundantVariableDocTypeInspection
+         */
+        $romFilesCollectionReference = 'null';
+
         try {
             $romFile = $this->container->make(RomFile::class);
-            return "{$romFile->getConnectionName()}.{$romFile->getTable()}";
+            $romFilesCollectionReference = "{$romFile->getConnectionName()}.{$romFile->getTable()}";
         } catch (BindingResolutionException $e) {
             # $e->getMessage();
-            return RomFile::class;
+            $romFilesCollectionReference = RomFile::class;
+        } finally {
+            return $romFilesCollectionReference;
         }
     }
 }
