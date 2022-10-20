@@ -64,7 +64,7 @@
                     <button type="button"
                             @click="show_flash_message = false"
                             class="text-red-500 text-3xl font-black">
-                        &times;
+                        {!! "&times;" !!}
                     </button>
                 </div>
                 <div class="col-start-1 col-end-3 row-span-full justify-self-center w-full order-0">
