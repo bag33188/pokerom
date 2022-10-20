@@ -132,7 +132,7 @@ class RomController extends WebController
         AttemptRomLinkToRomFile::dispatchUnless($rom->has_file === TRUE, $rom);
         $rom->refresh();
         return !is_null($rom->file_id)
-            ? response()->redirectTo(route('roms.index'))->banner('ROM File linked successfully! ' . $rom->getRomFileName())
+            ? response()->redirectTo(route('roms.index')) # ->banner('ROM File linked successfully! ' . $rom->getRomFileName())
             : response()->redirectTo(route('roms.show', ['rom' => $rom]))->dangerBanner('ROM File link failed! ' . $rom->getRomFileName());
     }
 }
