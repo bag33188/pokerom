@@ -44,7 +44,8 @@ class RomFile extends MongoDbModel
 
     public function calculateRomSizeFromLength(): int
     {
-        return (int)ceil($this->attributes['length'] / 0x400 /* 1024 */);
+        $baseUnitValue = 0x400; // 1024
+        return (int)ceil($this->attributes['length'] / $baseUnitValue);
     }
 
     protected function serializeDate(DateTimeInterface $date): string
@@ -60,7 +61,7 @@ class RomFile extends MongoDbModel
 
     public function getChunkSizeInBits(): int
     {
-        return $this->attributes['chunkSize'] * 0x08;
+        return $this->attributes['chunkSize'] * 8;
     }
 
     public static function normalizeRomFilename(string &$romFilename): void
