@@ -1,8 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Re-Index ROM File Metadata and Chunks" type="DatabaseScript">
-    <data-source id="917919d1-e0d1-4429-a7fb-56e6e7ddf94d" />
-    <script-text>// db.rom.files.reIndex();
-// db.rom.chunks.reIndex();</script-text>
-    <method v="2" />
-  </configuration>
-</component>
