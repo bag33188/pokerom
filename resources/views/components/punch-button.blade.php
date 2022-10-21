@@ -167,6 +167,6 @@
         </a>
         @break
     @default
-        <p style="color: #F00 !important;">ERROR: <b>invalid button type</b></p>
+        <p style="color: #F00 !important;">ERROR: <b>invalid button type</b>: <em>{{ $btnType }}</em></p>
         @break
 @endswitch
