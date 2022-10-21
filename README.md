@@ -47,13 +47,14 @@ ________
 [//]: # ([php mongodb driver tutorial]: https://www.php.net/manual/en/mongodb.tutorial.library.php)
 [//]: # ([mongodb php driver docs]: https://www.mongodb.com/docs/drivers/php/)
 
+[comment]: <> "`db.rom.chunks.countDocuments() == 88628`"
+
 Browser Compatibility
 ---------------------
 | IE  | Chrome | Opera | Firefox | Edge | Safari | Mobile |
 |-----|--------|-------|---------|------|--------|--------|
 | 11  | Yes    | Yes   | Yes     | Yes  | Yes    | Yes    |
 
-[comment]: <> "`db.rom.chunks.countDocuments() == 88628`"
 
 [//]: # (pokerom image archive sources)
 [pokerom_logo_website]: https://lostmediawiki.com/Pok%C3%A9ROM_%28partially_lost_Pok%C3%A9mon_edutainment_series;_2000%29 "website containing original pokerom image asset"
