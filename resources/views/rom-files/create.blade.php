@@ -61,18 +61,15 @@
                 "no-select"
             ];
 
-            @env('local')
-            // IMPORTANT!!!
-            // cannot set disabled attribute on select element since it will nullify the data being sent to the server
-            // bad: romFilenameField.disabled = true;
-
-            // remove all pointer events instead
-            @endenv
+            {{--IMPORTANT!!!--}}
+            {{--cannot set disabled attribute on select element since it will nullify the data being sent to the server--}}
+            {{--bad: romFilenameField.disabled = true;--}}
+            {{--remove all pointer events instead--}}
             romFilenameField.classList.add(...romFilenameDisabledClasses);
         };
 
-        let handleUploadOnRomFileForm = function() {
-            uploadRomFileForm.addEventListener("submit", function() {
+        let handleUploadOnRomFileForm = function () {
+            uploadRomFileForm.addEventListener("submit", function () {
                 tempDisableUploadBtn();
                 tempDisableRomFilesFormSelect();
             });
@@ -100,7 +97,7 @@
     <div class="container mx-auto w-full">
         @unless($romFilesListCount === 0)
             <div class="p-6">
-                <x-jet-validation-errors class="mb-4" />
+                <x-jet-validation-errors class="mb-4"/>
 
                 <form name="upload-romFile-form"
                       method="POST"
@@ -110,7 +107,7 @@
                     @method('POST')
 
                     <div class="flex flex-col">
-                        <x-form-select-label class="!font-semibold" for="romFile" text="Select ROM File" />
+                        <x-form-select-label class="!font-semibold" for="romFile" text="Select ROM File"/>
                         <x-form-select class="shadow" name="rom_filename" id="romFile">
                             @foreach($romFilesList as $romFileListing)
                                 <option

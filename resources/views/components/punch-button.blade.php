@@ -1,8 +1,8 @@
 @pushOnce('styles')
     @env('local')
-        <!--suppress CssUnresolvedCustomProperty -->
+        <!--suppress CssUnknownProperty, CssUnusedSymbol, CssUnresolvedCustomProperty -->
     @endenv
-    <style {!! 'type="text/css"' !!}>
+    <style {!! 'type="text/css"' !!} module>
         :root {
             --borderline-black: #111111;
             --borderline-agean: #1f3053;
@@ -10,11 +10,7 @@
             --borderline-denim: #1d2c4d;
             --borderline-cerulean: #87adff;
         }
-    </style>
-    @env('local')
-        <!--suppress CssUnknownProperty, CssUnusedSymbol -->
-    @endenv
-    <style {!! 'type="text/css"' !!}>
+
         a.punch,
         button.punch {
             --deep-navy: #1f2d4d;
@@ -149,14 +145,7 @@
         @prependOnce('scripts')
             @verbatim
                 <script type="text/javascript">
-                    /**
-                     * @name disablePunchButton
-                     * @description Invoke this function to disable the punch button if you are using it as an {@link HTMLAnchorElement anchor tag}.
-                     * @summary Disables the button, nullifies the hyperlink, and removes any pointer events
-                     * @param {string} buttonID ID of the punch button {@link HTMLAnchorElement anchor tag} to disable
-                     * @returns {boolean} Returns true if the button was disabled, false if the button was not disabled
-                     */
-                    let disablePunchButton = function(buttonID) {
+                    let disablePunchButton = function (buttonID) {
                         const button = document.getElementById(buttonID);
                         if (button.getAttribute("data-element-type").toLowerCase() === "anchor") {
                             button.setAttribute("class", "punch disabled");
