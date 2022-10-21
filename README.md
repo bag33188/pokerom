@@ -54,3 +54,7 @@ Browser Compatibility
 | 11  | Yes    | Yes   | Yes     | Yes  | Yes    | Yes    |
 
 [comment]: <> "`db.rom.chunks.countDocuments() == 88628`"
+
+[//]: # (pokerom image archive sources)
+[pokerom_logo_website]: https://lostmediawiki.com/Pok%C3%A9ROM_%28partially_lost_Pok%C3%A9mon_edutainment_series;_2000%29 "website containing original pokerom image asset"
+[pokerom_logo_image]: https://lostmediawiki.com/images/3/32/Pokerom_title.png "original image for pokerom"
