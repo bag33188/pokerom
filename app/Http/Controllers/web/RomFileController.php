@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller as WebController;
 use App\Http\Requests\UploadRomFileRequest;
+use App\Interfaces\RomFileQueriesInterface;
 use App\Interfaces\RomFileRepositoryInterface;
 use App\Models\RomFile;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -12,7 +13,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Storage;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -43,19 +43,9 @@ class RomFileController extends WebController
         ]);
     }
 
-    public function create(): Application|Factory|View
+    public function create(RomFileQueriesInterface $romFileQueries): Application|Factory|View
     {
-        $storageRomFilesList = Storage::disk('public')->files(ROM_FILES_DIRNAME);
-        $matchRomFilePattern = fn(string $romFilename): false|int => preg_match("/([\w\-_]+)\.(gb[ac]?|3ds|xci|nds)$/i", $romFilename);
-        $removeStorageNameFromRomFilename = fn(string $romFilename): string => str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $romFilename);
-
-        $romFilesList = array_map(
-            $removeStorageNameFromRomFilename,
-            array_values(array_filter($storageRomFilesList, $matchRomFilePattern, ARRAY_FILTER_USE_BOTH))
-        );
-
-        $sortByStringLength = fn(string $a, string $b): int => strlen($a) <=> strlen($b);
-        usort($romFilesList, $sortByStringLength);
+        $romFilesList = $romFileQueries->getListOfRomFilesInStorageDirectory();
 
         return view('rom-files.create', [
             'romFilesList' => $romFilesList,
