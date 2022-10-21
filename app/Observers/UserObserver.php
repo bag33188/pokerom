@@ -13,6 +13,8 @@ class UserObserver
 {
     use ApiMethods;
 
+    // make sure db transaction is committed successfully.
+    // user data is more sensitive
     protected bool $afterCommit = true;
 
     public function __construct(private readonly UserRepositoryInterface $userRepository)
@@ -26,10 +28,12 @@ class UserObserver
 
     public function updated(User $user): void
     {
-        $requestIsApiEndpoint = $this->isApiRequest();
         $passwordHasChanged = $user->isDirty("password");
 
-        if ($passwordHasChanged || $requestIsApiEndpoint) $this->userRepository->revokeApiTokens($user);
+        // revoke any existing tokens if password has changed
+        // or user is updating from API endpoint
+        if ($passwordHasChanged || $this->isApiRequest())
+            $this->userRepository->revokeApiTokens($user);
     }
 
     public function deleted(User $user): void

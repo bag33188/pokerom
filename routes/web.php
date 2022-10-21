@@ -37,7 +37,7 @@ Route::middleware([
         Route::post('/store', 'store')->name('store');
         Route::put('/{rom}', 'update')->name('update');
         Route::delete('/{rom}', 'destroy')->name('destroy');
-        Route::patch('/{rom}/link-file', 'linkFile')->name('link-file');
+        Route::patch('/{rom}/link-file', 'linkRomToRomFile')->name('link-file');
     });
 
     Route::controller(GameController::class)->prefix('games')->name('games.')->group(function () {

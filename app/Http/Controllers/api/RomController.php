@@ -22,7 +22,7 @@ class RomController extends ApiController
      *
      * @return RomCollection
      */
-    public function index()
+    public function index(): RomCollection
     {
         $roms = Rom::all();
         return new RomCollection($roms);
@@ -47,8 +47,11 @@ class RomController extends ApiController
     public function linkRomToRomFile(int $romId): JsonResponse
     {
         $rom = Rom::findOrFail($romId);
+
         $this->authorize('update', $rom);
+
         AttemptRomLinkToRomFile::dispatchUnless($rom->has_file === TRUE, $rom); // <== auto refreshes rom resource
+
         if ($rom->has_file === TRUE) {
             return Response::json([
                 'message' => "ROM File found and linked! file id: " . $rom->romFile->_id,

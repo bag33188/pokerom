@@ -127,7 +127,7 @@ class RomController extends WebController
         return response()->redirectTo(route('roms.index'))->banner('Rom deleted successfully! ' . $rom->rom_name);
     }
 
-    public function linkFile(Rom $rom)
+    public function linkRomToRomFile(Rom $rom)
     {
         AttemptRomLinkToRomFile::dispatchUnless($rom->has_file === TRUE, $rom);
         $rom->refresh();

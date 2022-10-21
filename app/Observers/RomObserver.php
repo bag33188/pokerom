@@ -28,6 +28,7 @@ class RomObserver
     public function updated(Rom $rom): void
     {
         AttemptRomLinkToRomFile::dispatchIf($rom->has_file === FALSE, $rom);
+        $rom->refresh(); // <== this works (from observer class)
     }
 
     public function deleting(Rom $rom): void

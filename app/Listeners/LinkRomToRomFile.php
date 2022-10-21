@@ -17,6 +17,8 @@ class LinkRomToRomFile implements ShouldQueue
         isApiRequest as private;
     }
 
+    public bool $afterCommit = false;
+
     private static ?RomFile $matchingRomFile;
 
     /**

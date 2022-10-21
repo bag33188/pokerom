@@ -66,7 +66,7 @@ Route::name('api.')->group(function () {
             Route::put('/{romId}', 'update')->name('update');
             Route::patch('/{romId}', 'update')->name('edit');
             Route::delete('/{romId}', 'destroy')->name('destroy');
-            Route::patch('/{romId}/link-file', 'linkRomToRomFile')->name('linkFile');
+            Route::patch('/{romId}/link-file', 'linkRomToRomFile')->name('link-file');
         });
 
         Route::controller(GameController::class)->prefix('games')->name('games.')->group(function () {

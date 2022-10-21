@@ -17,6 +17,8 @@ class UpdateMatchingRom implements ShouldQueue
         isApiRequest as private;
     }
 
+    // make sure ROM file has been successfully uploaded and
+    // stored in the grid (mongodb transaction) before updating ROM
     public bool $afterCommit = true;
 
     /**
