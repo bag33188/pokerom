@@ -24,16 +24,12 @@
                             Uploaded On: {{ $romFileQueries->formatUploadDate(...$uploadDateFormattingParams) }}
                         </p>
                         <p class="inline-block">
-                            @php
-                                $romIdHtml = null;
-                                if ($romFile->rom) {
-                                    $romIdHtml = "<span class=\"font-semibold\">{$romFile->rom->getKey()}</span>";
-                                } else {
-                                    $noAssocRomTitle = 'This ROM File does not yet have a ROM resource linked to it.';
-                                    $romIdHtml = "<span class=\"font-semibold\" title=\"$noAssocRomTitle\">No Assoc. ROM</span>";
-                                }
-                            @endphp
-                            <span>ROM ID:&nbsp;{!! $romIdHtml !!}</span>
+                            @if($romFile->rom)
+                                <span class="font-semibold">ROM ID: {{$romFile->rom->getKey()}}</span>
+                            @else
+                                <span class="font-semibold"
+                                      title="This ROM File does not yet have a ROM resource linked to it.">No Assoc. ROM</span>
+                            @endif
                         </p>
                         <div class="mt-2 flex flex-row justify-between">
                             <x-rom-file.download class="order-0" :romFile="$romFile"/>
