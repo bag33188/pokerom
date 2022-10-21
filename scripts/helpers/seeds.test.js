@@ -21,7 +21,7 @@ const seedData = {
 
 let { gamesData, romsData, romFilesData } = seedData;
 
-gamesData = gamesData.valueOf().map((gameData) => {
+gamesData = gamesData.map((gameData) => {
     // delete gameData["id"];
     delete gameData["created_at"];
     delete gameData["updated_at"];
@@ -40,7 +40,7 @@ gamesData = gamesData.valueOf().map((gameData) => {
     return gameData;
 });
 
-romsData = romsData.valueOf().map((romData) => {
+romsData = romsData.map((romData) => {
     // delete romData["id"];
     delete romData["created_at"];
     delete romData["updated_at"];
@@ -52,7 +52,7 @@ romsData = romsData.valueOf().map((romData) => {
     return romData;
 });
 
-romFilesData = romFilesData.valueOf().map((romFileData) => {
+romFilesData = romFilesData.map((romFileData) => {
     // delete romFileData["_id"];
     delete romFileData["uploadDate"];
     // delete romFileData["md5"];
