@@ -34,7 +34,7 @@ class RomController extends ApiController
      * @param StoreRomRequest $request
      * @return JsonResponse
      */
-    public function store(StoreRomRequest $request)
+    public function store(StoreRomRequest $request): JsonResponse
     {
         $rom = Rom::create($request->all());
 
@@ -42,6 +42,8 @@ class RomController extends ApiController
     }
 
     /**
+     * @param int $romId
+     * @return JsonResponse
      * @throws AuthorizationException
      */
     public function linkRomToRomFile(int $romId): JsonResponse
@@ -70,7 +72,7 @@ class RomController extends ApiController
      * @param int $romId
      * @return RomResource
      */
-    public function show(int $romId)
+    public function show(int $romId): RomResource
     {
         $rom = Rom::findOrFail($romId);
 
@@ -84,7 +86,7 @@ class RomController extends ApiController
      * @param int $romId
      * @return RomResource
      */
-    public function update(UpdateRomRequest $request, int $romId)
+    public function update(UpdateRomRequest $request, int $romId): RomResource
     {
         $rom = Rom::findOrFail($romId);
         $rom->update($request->all());
@@ -98,7 +100,7 @@ class RomController extends ApiController
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function destroy(int $romId)
+    public function destroy(int $romId): JsonResponse
     {
         $rom = Rom::findOrFail($romId);
         $this->authorize('delete', $rom);

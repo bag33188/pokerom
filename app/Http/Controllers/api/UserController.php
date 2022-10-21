@@ -79,16 +79,18 @@ class UserController extends ApiController
     }
 
     /**
+     * @param int $userId
+     * @return UserResource
      * @throws AuthorizationException
      */
-    public function show(int $userId)
+    public function show(int $userId): UserResource
     {
         $user = User::findOrFail($userId);
         $this->authorize('view', $user);
         return new UserResource($user);
     }
 
-    public function update(UpdateUserRequest $request, int $userId)
+    public function update(UpdateUserRequest $request, int $userId): UserResource
     {
         $user = User::findOrFail($userId);
         $user->update($request->all());

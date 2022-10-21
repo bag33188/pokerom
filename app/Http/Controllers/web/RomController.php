@@ -28,7 +28,7 @@ class RomController extends WebController
      * @param RomFileQueriesInterface $romFileQueries
      * @return Application|Factory|View
      */
-    public function index(RomFileQueriesInterface $romFileQueries)
+    public function index(RomFileQueriesInterface $romFileQueries): Application|Factory|View
     {
         $roms = Rom::with(['romFile', 'game'])->get();
         return view('roms.index', [
@@ -44,7 +44,7 @@ class RomController extends WebController
      *
      * @return Application|Factory|View
      */
-    public function create()
+    public function create(): Application|Factory|View
     {
         return view('roms.create');
     }
@@ -67,7 +67,7 @@ class RomController extends WebController
      * @param Rom $rom
      * @return Application|Factory|View
      */
-    public function show(Rom $rom)
+    public function show(Rom $rom): Application|Factory|View
     {
         $alpineUiData = collect([
             'romInfoOpened' => true,

@@ -70,7 +70,8 @@
                 </x-list-group>
                 <p @class($paragraphHiddenContentClasses) x-show="!romInfoOpened"
                    @click="romInfoOpened = !romInfoOpened" x-cloak>
-                    ...</p>
+                    ...
+                </p>
             </x-list-item> <!-- // end of ROM Info -->
 
             @if($rom->has_game)
@@ -91,7 +92,8 @@
                     </x-list-group>
                     <p @class($paragraphHiddenContentClasses) x-show="!gameInfoOpened"
                        @click="gameInfoOpened = !gameInfoOpened" x-cloak>
-                        ...</p>
+                        ...
+                    </p>
                 </x-list-item>
             @endif <!-- // end of Game Info -->
 

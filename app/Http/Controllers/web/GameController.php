@@ -38,9 +38,10 @@ class GameController extends WebController
     /**
      * Show the form for creating a new resource.
      *
+     * @param GameQueriesInterface $gameQueries
      * @return Application|Factory|View
      */
-    public function create(GameQueriesInterface $gameQueries)
+    public function create(GameQueriesInterface $gameQueries): Application|Factory|View
     {
         $romsWithNoGameRelationship = $gameQueries->getAllRomsWithNoGameSQL();
         return view('games.create', ['romsWithNoAssocGame' => $romsWithNoGameRelationship]);
@@ -66,7 +67,7 @@ class GameController extends WebController
      * @param Game $game
      * @return Application|Factory|View
      */
-    public function show(Game $game)
+    public function show(Game $game): Application|Factory|View
     {
         return view('games.show', [
             'game' => $game,
@@ -80,7 +81,7 @@ class GameController extends WebController
      * @param Game $game
      * @return Application|Factory|View
      */
-    public function edit(Game $game)
+    public function edit(Game $game): Application|Factory|View
     {
         $replaceEacuteUnicodeCharWithTheLetterE = fn(string $value): string => str_replace(_EACUTE, "\u{0065}" /* the letter `e` */, $value);
         return view('games.edit', [

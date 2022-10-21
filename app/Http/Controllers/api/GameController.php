@@ -20,7 +20,7 @@ class GameController extends ApiController
      *
      * @return GameCollection
      */
-    public function index()
+    public function index(): GameCollection
     {
         $games = Game::all();
         return new GameCollection($games);
@@ -32,7 +32,7 @@ class GameController extends ApiController
      * @param StoreGameRequest $request
      * @return JsonResponse
      */
-    public function store(StoreGameRequest $request)
+    public function store(StoreGameRequest $request): JsonResponse
     {
         $romId = $request->input('rom_id');
         $rom = Rom::findOrFail($romId);
@@ -46,7 +46,7 @@ class GameController extends ApiController
      * @param int $gameId
      * @return GameResource
      */
-    public function show(int $gameId)
+    public function show(int $gameId): GameResource
     {
         $game = Game::findOrFail($gameId);
         return new GameResource($game);
@@ -59,7 +59,7 @@ class GameController extends ApiController
      * @param int $gameId
      * @return GameResource
      */
-    public function update(UpdateGameRequest $request, int $gameId)
+    public function update(UpdateGameRequest $request, int $gameId): GameResource
     {
         $game = Game::findOrFail($gameId);
         $game->update($request->all());
@@ -73,7 +73,7 @@ class GameController extends ApiController
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function destroy(int $gameId)
+    public function destroy(int $gameId): JsonResponse
     {
         $game = Game::findOrFail($gameId);
         $this->authorize('delete', $game);
@@ -81,6 +81,6 @@ class GameController extends ApiController
         return response()->json([
             'message' => 'Game deleted successfully! ' . $game->game_name,
             'success' => true
-        ]);
+        ], HttpStatus::HTTP_OK);
     }
 }

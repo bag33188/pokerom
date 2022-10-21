@@ -28,7 +28,7 @@ class RomFileController extends ApiController
      *
      * @return RomFileCollection
      */
-    public function index()
+    public function index(): RomFileCollection
     {
         Gate::authorize('viewAny-romFile');
         $romFiles = RomFile::all();
@@ -36,9 +36,11 @@ class RomFileController extends ApiController
     }
 
     /**
+     * @param UploadRomFileRequest $request
+     * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function upload(UploadRomFileRequest $request)
+    public function upload(UploadRomFileRequest $request): JsonResponse
     {
         $this->authorize('create', RomFile::class);
         $romFileUpload = $this->romFileRepository->uploadToGrid($request->json('rom_filename'));
@@ -88,7 +90,7 @@ class RomFileController extends ApiController
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function destroy(string $romFileId)
+    public function destroy(string $romFileId): JsonResponse
     {
         $romFile = RomFile::findOrFail($romFileId);
         $this->authorize('delete', $romFile);
@@ -99,7 +101,11 @@ class RomFileController extends ApiController
         ]);
     }
 
-    public function listRomFiles(RomFileQueriesInterface $romFileQueries)
+    /**
+     * @param RomFileQueriesInterface $romFileQueries
+     * @return JsonResponse
+     */
+    public function listRomFiles(RomFileQueriesInterface $romFileQueries): JsonResponse
     {
         Gate::authorize('viewAny-romFile');
         $romFilesList = $romFileQueries->getListOfRomFilesInStorageDirectory();
