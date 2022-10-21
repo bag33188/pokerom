@@ -3,10 +3,10 @@
 namespace App\Exceptions;
 
 use App\Actions\ApiMethodsTrait as ApiMethods;
+use Classes\AbstractApplicationException as ApplicationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Classes\AbstractApplicationException as ApplicationException;
 
 /** Handled when there is an error querying `MariaDB` */
 class SqlQueryException extends ApplicationException
@@ -19,6 +19,7 @@ class SqlQueryException extends ApplicationException
     public function render(Request $request): false|JsonResponse|RedirectResponse
     {
         if (!$this->isApiRequest() and !$this->isLivewireRequest()) {
+            /** @noinspection PhpVoidFunctionResultUsedInspection */
             return redirect()->to(url()->previous())->dangerBanner($this->getMessage());
         } else if ($this->isApiRequest()) {
             $mariadb = config('database.connections.mysql');

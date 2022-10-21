@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpVoidFunctionResultUsedInspection */
 
 namespace App\Http\Controllers\Web;
 
@@ -52,7 +52,7 @@ class GameController extends WebController
      * @param StoreGameRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreGameRequest $request)
+    public function store(StoreGameRequest $request): RedirectResponse
     {
         $romId = $request->input('rom_id');
         $rom = Rom::findOrFail($romId);
@@ -96,7 +96,7 @@ class GameController extends WebController
      * @param Game $game
      * @return RedirectResponse
      */
-    public function update(UpdateGameRequest $request, Game $game)
+    public function update(UpdateGameRequest $request, Game $game): RedirectResponse
     {
         $game->update($request->all());
         return response()->redirectTo(route('games.index'))->banner('Game updated successfully! ' . $game->game_name);
@@ -109,7 +109,7 @@ class GameController extends WebController
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function destroy(Game $game)
+    public function destroy(Game $game): RedirectResponse
     {
         $this->authorize('delete', $game);
         $game->delete();

@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpVoidFunctionResultUsedInspection */
 
 namespace App\Http\Controllers\Web;
 
@@ -79,11 +79,13 @@ class RomFileController extends WebController
 
     public function show(RomFile $romFile, RomFileQueriesInterface $romFileQueries): Application|Factory|View
     {
+        $uploadDateInCPUFormat = $romFileQueries->formatUploadDate($romFile->uploadDate, DATE_W3C, 'GMT');
+        $uploadDateInReadableFormat = $romFileQueries->formatUploadDate($romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'PST8PDT');
         return view('rom-files.show', [
             'romFile' => $romFile,
             'userIsAdmin' => Auth::user()->isAdmin(),
-            'cpuUploadDate' => $romFileQueries->formatUploadDate($romFile->uploadDate, DATE_W3C, 'GMT'),
-            'readableUploadDate' => $romFileQueries->formatUploadDate($romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'PST8PDT')
+            'cpuUploadDate' => $uploadDateInCPUFormat,
+            'readableUploadDate' => $uploadDateInReadableFormat
         ]);
     }
 
@@ -94,7 +96,7 @@ class RomFileController extends WebController
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function destroy(RomFile $romFile)
+    public function destroy(RomFile $romFile): RedirectResponse
     {
         $this->authorize('delete', $romFile);
         $this->romFileRepository->deleteFromGrid($romFile);

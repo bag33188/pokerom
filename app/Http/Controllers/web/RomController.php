@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpVoidFunctionResultUsedInspection */
 
 namespace App\Http\Controllers\Web;
 
@@ -55,7 +55,7 @@ class RomController extends WebController
      * @param StoreRomRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreRomRequest $request)
+    public function store(StoreRomRequest $request): RedirectResponse
     {
         $rom = Rom::create($request->all());
         return response()->redirectTo(route('roms.index'))->banner('Rom created successfully! ' . $rom->rom_name);
@@ -107,7 +107,7 @@ class RomController extends WebController
      * @param Rom $rom
      * @return RedirectResponse
      */
-    public function update(UpdateRomRequest $request, Rom $rom)
+    public function update(UpdateRomRequest $request, Rom $rom): RedirectResponse
     {
         $rom->update($request->all());
         return response()->redirectTo(route('roms.index'))->banner('Rom updated successfully! ' . $rom->rom_name);
@@ -120,7 +120,7 @@ class RomController extends WebController
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function destroy(Rom $rom)
+    public function destroy(Rom $rom): RedirectResponse
     {
         $this->authorize('delete', $rom);
         Rom::destroy($rom->id);
