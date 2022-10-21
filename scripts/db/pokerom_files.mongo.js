@@ -1,4 +1,4 @@
-// noinspection JSUnresolvedFunction,JSUnresolvedVariable,ES6ConvertVarToLetConst
+// noinspection JSUnresolvedFunction,JSUnresolvedVariable,ES6ConvertVarToLetConst,JSCheckFunctionSignatures
 
 conn = new Mongo("localhost:27017");
 
