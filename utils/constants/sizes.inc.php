@@ -1,0 +1,26 @@
+<?php
+/*
+ * Validation Size Values
+ */
+
+// SIZES //
+
+/** Unit: _`KB/1024`_, value: **`17` Gibibytes** */
+const MAX_ROM_SIZE = 17825792;
+const MIN_ROM_SIZE = 1020;
+
+const MAX_GAME_GENERATION_VALUE = 9;
+const MIN_GAME_GENERATION_VALUE = 0;
+
+
+// Database //
+
+const BCRYPT_PASSWORD_LENGTH = 60;
+const OBJECT_ID_LENGTH = 24;
+const SESSION_ID_LENGTH = 40;
+const IP_ADDRESS_LENGTH = 45;
+const PERSONAL_ACCESS_TOKEN_LENGTH = 64;
+const PERSONAL_ACCESS_TOKEN_NAME_LENGTH = (2 ** 8) - 1;
+const PROFILE_PHOTO_URI_LENGTH = 2048;
+const PASSWORD_RESET_TOKEN_LENGTH = 60;
+const MD5_HASH_LENGTH = 32;

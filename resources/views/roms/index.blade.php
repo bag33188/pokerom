@@ -14,11 +14,6 @@
     $htmlRomTableColumns = ['ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information'];
 
     $romsWithFilesCount = $romQueries->getCountOfRomsThatHaveROMFiles();
-
-    function strip_quotes(string $value): string {
-        $quoteRegExp = "/([\x{22}\x{27}])|(\x{26}(?:quot|apos|\x{23}0?3[94])\x{3B})/iu";
-        return (string)preg_replace($quoteRegExp, '', $value);
-    }
 @endphp
 <x-app-layout>
     <x-slot:header>

@@ -1,13 +1,33 @@
 @inject('romFileQueries', 'App\Interfaces\RomFileQueriesInterface')
+@php
+    $showHideBtnClasses = [
+      'bg-rose-500',
+      'hover:bg-rose-600',
+      'text-white',
+      'font-bold',
+      'py-2',
+      'px-4',
+      'shadow-md',
+      'rounded'
+    ];
+@endphp
 <x-app-layout>
     <x-slot:header>
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Pok&eacute;mon ROM Files</h2>
         <h5 class="text-center">{{ $romFiles->count() }} Total ROM Files</h5>
     </x-slot:header>
-    <div class="container m-auto p-0.5">
+    <div class="container m-auto p-0.5" x-data="{!! strip_quotes(collect(['open' => true])->toJson()) !!}">
         <x-flash-message/>
         @unless($romFiles->count() < 1)
-            <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mx-4 mb-4 mt-3.5 items-center">
+            <div class="w-full text-center my-2.5">
+                <button type="button" @class($showHideBtnClasses) @click="open = !open">
+                    <span x-show="open">Hide</span>
+                    <span x-show="!open" x-cloak>Show</span>
+                    <span>ROM Files</span>
+                </button>
+            </div>
+            <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mx-4 mb-4 mt-3.5 items-center"
+                 x-show="open === true">
                 @foreach($romFiles as $romFile)
                     <x-tile :data-romFile-id="$romFile->_id" class="justify-self-center">
                         <p class="inline-block">File ID: {{ $romFile->_id }}</p>
