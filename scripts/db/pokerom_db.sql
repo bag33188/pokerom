@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2022 at 09:33 PM
+-- Generation Time: Oct 21, 2022 at 10:30 PM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.10
 
@@ -180,7 +180,7 @@ TRUNCATE TABLE `failed_jobs`;
 --
 -- Table structure for table `games`
 --
--- Creation: Oct 06, 2022 at 01:38 AM
+-- Creation: Oct 21, 2022 at 05:14 PM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -395,7 +395,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 --
 -- Table structure for table `roms`
 --
--- Creation: Oct 06, 2022 at 01:38 AM
+-- Creation: Oct 21, 2022 at 05:14 PM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -477,7 +477,7 @@ INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Oct 05, 2022 at 05:43 PM
--- Last update: Oct 14, 2022 at 07:28 PM
+-- Last update: Oct 21, 2022 at 08:29 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -506,7 +506,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('yi2V11fIoVfolJI8GjhvOl7GuzLcYCNk7FHH7WBU', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMHpwTjA4WmtUaGtSQTMxN3RtOUVjVjlKZUpVemswT0ZVM0VWM3I3QSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjQ6Imh0dHA6Ly9wb2tlcm9tLnRlc3QvaG9tZSI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkdFVHcmZIUy50TzZBSi5pS011dHdTLmoycWpGZlJtTFNzUzVzdW42ZElnN2RFSFFWWEtZdWEiO30=', 1665775690);
+('Ywb8McQQG9vIWRbgKYD3qD6eKe9AEZhwdpEB3PMH', 1, '192.168.86.57', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiSnZQZlN0NUtFYkh2S21BNnVNV3AwQlpMVFJVTG0zWEt1RkZrRm1RcCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI0OiJodHRwOi8vcG9rZXJvbS50ZXN0L3JvbXMiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJHRVR3JmSFMudE82QUouaUtNdXR3Uy5qMnFqRmZSbUxTc1M1c3VuNmRJZzdkRUhRVlhLWXVhIjt9', 1666384183);
 
 -- --------------------------------------------------------
 
