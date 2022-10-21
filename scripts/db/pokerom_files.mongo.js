@@ -72,6 +72,10 @@ db.rom.files.createIndex(
     { filename: 1 },
     { unique: true, partialFilterExpression: { filename: { $exists: true } } }
 );
+db.rom.files.createIndex(
+    { filename: "text", "metadata.romType": "text" },
+    { sparse: true }
+);
 
 db.createCollection("rom.chunks", {
     validator: {
@@ -103,6 +107,16 @@ var aggregationsObj = {"Calc Total ROMs Size Bytes":[{"$group":{"_id":null,"tota
 
 db.rom.files.aggregate(aggregationsArr[0].pipeline);
 db.rom.files.aggregate(aggregationsObj["Proper Rom Files Sort"]);
+
+db.rom.files
+    .find({ $text: { $search: "GBC" } }, { score: { $meta: "textScore" } })
+    .sort({ score: { $meta: "textScore" } });
+db.rom.files
+    .find(
+        { $text: { $search: '"POKEMON_PL_CPUE01"' } },
+        { score: { $meta: "textScore" } }
+    )
+    .sort({ score: { $meta: "textScore" } });
 
 /*
 db.rom.files.reIndex();
