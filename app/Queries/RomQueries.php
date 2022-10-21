@@ -23,12 +23,12 @@ class RomQueries implements RomQueriesInterface
 
         // https://laravel.com/docs/9.x/queries#or-where-clauses
         return $this->rom
-            ->where('rom_name', '=', $romName) # AND
-            ->where('rom_type', '=', $romType) # AND
-            ->where(function (EloquentBuilder $query) { # (
+            ->where('rom_name', '=', $romName)              # AND
+            ->where('rom_type', '=', $romType)              # AND
+            ->where(function (EloquentBuilder $query) {                    # (
                 $query
-                    ->where('has_file', '=', FALSE) # OR
-                    ->orWhere('file_id', '=', NULL); # )
+                    ->where('has_file', '=', FALSE)   # OR
+                    ->orWhere('file_id', '=', NULL);  # )
             })->first();
     }
 
