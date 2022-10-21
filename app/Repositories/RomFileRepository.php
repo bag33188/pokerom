@@ -9,9 +9,6 @@ use App\Jobs\ProcessRomFileDeletion;
 use App\Jobs\ProcessRomFileDownload;
 use App\Jobs\ProcessRomFileUpload;
 use App\Models\RomFile;
-use DateTime;
-use DateTimeZone;
-use Exception;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
@@ -54,14 +51,4 @@ class RomFileRepository implements RomFileRepositoryInterface
         };
     }
 
-    public function formatUploadDate(string $uploadDate, string $dateTimeFormat, string $timezone): string
-    {
-        try {
-            $uploadDateTime = new DateTime($uploadDate);
-            $uploadTimeZone = new DateTimeZone($timezone);
-            return $uploadDateTime->setTimezone($uploadTimeZone)->format($dateTimeFormat);
-        } catch (Exception $e) {
-            return $e->getMessage() ?? 'Invalid date/datetime';
-        }
-    }
 }

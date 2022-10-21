@@ -37,7 +37,7 @@ class RomQueries implements RomQueriesInterface
         $sql = /** @lang MariaDB */
             "SELECT HIGH_PRIORITY FORMAT_ROM_SIZE(?) AS `rom_size`";
         $query = DB::raw($sql);
-        return DB::selectOne($query, [$rom_size])->rom_size;
+        return DB::scalar($query, [$rom_size]);
     }
 
     public function updateRomFromRomFileDataSQL(Rom $rom, RomFile $romFile): bool

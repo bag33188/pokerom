@@ -13,6 +13,4 @@ interface RomFileRepositoryInterface
     function deleteFromGrid(RomFile $romFile): RomFile;
 
     function determineConsole(RomFile $romFile): string;
-
-    function formatUploadDate(string $uploadDate, string $dateTimeFormat, string $timezone): string;
 }

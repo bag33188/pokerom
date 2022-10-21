@@ -1,4 +1,4 @@
-@inject('romFileRepository', 'App\Interfaces\RomFileRepositoryInterface')
+@inject('romFileQueries', 'App\Interfaces\RomFileQueriesInterface')
 <x-app-layout>
     <x-slot:header>
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Pok&eacute;mon ROM Files</h2>
@@ -21,7 +21,7 @@
                                     'America/Los_Angeles'
                                 ];
                             @endphp
-                            Uploaded On: {{ $romFileRepository->formatUploadDate(...$uploadDateFormattingParams) }}
+                            Uploaded On: {{ $romFileQueries->formatUploadDate(...$uploadDateFormattingParams) }}
                         </p>
                         <p class="inline-block">
                             @php

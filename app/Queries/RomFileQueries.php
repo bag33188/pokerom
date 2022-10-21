@@ -4,6 +4,9 @@ namespace App\Queries;
 
 use App\Interfaces\RomFileQueriesInterface;
 use App\Models\RomFile;
+use DateTime;
+use DateTimeZone;
+use Exception;
 use Illuminate\Support\Facades\Storage;
 
 class RomFileQueries implements RomFileQueriesInterface
@@ -35,5 +38,16 @@ class RomFileQueries implements RomFileQueriesInterface
         usort($romFilesList, $sortByStringLength);
 
         return $romFilesList;
+    }
+
+    public function formatUploadDate(string $uploadDate, string $dateTimeFormat, string $timezone): string
+    {
+        try {
+            $uploadDateTime = new DateTime($uploadDate);
+            $uploadTimeZone = new DateTimeZone($timezone);
+            return $uploadDateTime->setTimezone($uploadTimeZone)->format($dateTimeFormat);
+        } catch (Exception $e) {
+            return $e->getMessage() ?? 'Invalid date/datetime';
+        }
     }
 }
