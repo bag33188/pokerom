@@ -1,9 +1,7 @@
 @inject('romFileRepository', 'App\Interfaces\RomFileRepositoryInterface')
 @inject('romQueries', 'App\Interfaces\RomQueriesInterface')
 @push('styles')
-    @env('local')
-        <!--suppress CssUnusedSymbol, CssUnknownProperty, SpellCheckingInspection -->
-    @endenv
+    <!--suppress CssUnusedSymbol, CssUnknownProperty, SpellCheckingInspection -->
     <style {!! 'type="text/css"'; !!}>
         .no-select {
             -webkit-touch-callout: none; /* iOS Safari */

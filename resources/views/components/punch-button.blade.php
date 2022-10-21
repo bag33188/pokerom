@@ -3,17 +3,17 @@
         <!--suppress CssUnknownProperty, CssUnusedSymbol, CssUnresolvedCustomProperty -->
     @endenv
     <style {!! 'type="text/css"' !!} module>
-        :root {
+        .punch {
             --borderline-black: #111111;
             --borderline-agean: #1f3053;
             --borderline-sky-blue: #5c8bee;
             --borderline-denim: #1d2c4d;
             --borderline-cerulean: #87adff;
+            --deep-navy: #1f2d4d;
         }
 
         a.punch,
         button.punch {
-            --deep-navy: #1f2d4d;
             display: inline-block !important;
             background: #4162a8 !important;
             border-top: 1px solid #38538c !important;
@@ -144,6 +144,7 @@
     @case(PunchButtonType::ANCHOR->value)
         @prependOnce('scripts')
             <script type="text/javascript">
+                // for activated a disabled-like state that would not otherwise exist on an HTML anchor element
                 let disablePunchButton = function (buttonID) {
                     const button = document.getElementById(buttonID);
                     if (button.getAttribute("data-element-type").toLowerCase() === "anchor") {
@@ -165,6 +166,6 @@
         </a>
         @break
     @default
-        <p style="color: #F00 !important;">ERROR: <b>Invalid button type</b>: <samp>{{ $btnType }}</samp></p>
+        <p style="color: #F00 !important;">ERROR:&nbsp;<b>Invalid button type</b>:&nbsp;<samp>{{ $btnType }}</samp></p>
         @break
 @endswitch
