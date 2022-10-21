@@ -48,6 +48,16 @@
         'cursor-pointer',
         'no-select'
     ];
+
+    $gameNameTitle = $rom->has_game === TRUE
+        ? sprintf('title="%s"', $rom->game->game_name)
+        : '';
+
+    $alpineUiData = collect([
+        'romInfoOpened' => true,
+        'gameInfoOpened' => true,
+        'romFileInfoOpened' => true
+    ]);
 @endphp
 <x-app-layout>
     <x-slot:header>
@@ -58,7 +68,8 @@
 
     <div class="py-6 px-5">
 
-        <x-list-group @class(['shadow', 'no-select' => !$userIsAdmin]) x-data="{{ $alpineInitialUiState }}">
+        <x-list-group
+            @class(['shadow', 'no-select' => !$userIsAdmin]) x-data="{{ strip_quotes($alpineUiData->toJson()) }}">
 
             <x-list-item class="pb-4">
                 <p @class($paragraphSectionClasses) @click="romInfoOpened = !romInfoOpened">ROM Info</p>

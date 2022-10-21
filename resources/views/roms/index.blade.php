@@ -22,7 +22,7 @@
             <h5 class="text-center">{{ $totalRomsCount }} Total ROMs</h5>
         @endunless
     </x-slot:header>
-    <div x-data="{!! strip_quotes(collect(['open' => true])->toJson()) !!}" class="mb-3 mx-3">
+    <div x-data="{{ strip_quotes(collect(['open' => true])->toJson()) }}" class="mb-3 mx-3">
         <x-flash-message/>
         @unless($totalRomsCount === 0)
             <div class="w-full text-center my-2.5">

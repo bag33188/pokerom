@@ -16,7 +16,7 @@
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Pok&eacute;mon ROM Files</h2>
         <h5 class="text-center">{{ $romFiles->count() }} Total ROM Files</h5>
     </x-slot:header>
-    <div class="container m-auto p-0.5" x-data="{!! strip_quotes(collect(['open' => true])->toJson()) !!}">
+    <div class="container m-auto p-0.5" x-data="{{ strip_quotes(collect(['open' => true])->toJson()) }}">
         <x-flash-message/>
         @unless($romFiles->count() < 1)
             <div class="w-full text-center my-2.5">

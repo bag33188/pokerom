@@ -16,7 +16,7 @@
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">Pok&eacute;mon Games Library</h2>
         <h5 class="text-center">{{ $games->count() }} Total Games</h5>
     </x-slot:header>
-    <div class="container mx-auto my-3.5" x-data="{!! strip_quotes(collect(['open' => true])->toJson()) !!}">
+    <div class="container mx-auto my-3.5" x-data="{{ strip_quotes(collect(['open' => true])->toJson()) }}">
         <x-flash-message/>
         @unless($games->count() < 1)
             <div class="w-full text-center my-2.5">
