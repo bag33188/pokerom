@@ -19,7 +19,6 @@ class MongoWriteException extends ApplicationException
     public function render(Request $request): false|JsonResponse|RedirectResponse
     {
         if (!$this->isApiRequest() and !$this->isLivewireRequest()) {
-            /** @noinspection PhpVoidFunctionResultUsedInspection */
             return redirect()->to(url()->previous())->dangerBanner($this->getMessage());
         } else if ($this->isApiRequest()) {
             $gridfs = config('database.connections.mongodb');
