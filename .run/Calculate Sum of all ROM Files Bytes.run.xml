@@ -1,0 +1,22 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Calculate Sum of all ROM Files Bytes" type="DatabaseScript">
+    <data-source id="917919d1-e0d1-4429-a7fb-56e6e7ddf94d" />
+    <script-text>db.rom.files.aggregate([
+	{ $group: { _id: null, total_length: { $sum: &quot;$length&quot; } } },
+	{
+		$addFields: {
+			total_size: { $toString: { $toLong: &quot;$total_length&quot; } },
+		},
+	},
+	{
+		$project: {
+			_id: 0,
+			total_length: 1,
+			total_size: { $concat: [&quot;$total_size&quot;, &quot; &quot;, &quot;Bytes&quot;] },
+		},
+	},
+	{ $limit: 1 },
+]);</script-text>
+    <method v="2" />
+  </configuration>
+</component>
