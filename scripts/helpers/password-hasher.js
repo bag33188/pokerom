@@ -1,3 +1,5 @@
+// noinspection JSUnresolvedFunction
+
 /**
  * @name password-generator
  * @description NodeJS Password Hash Generator Using BcryptJS
