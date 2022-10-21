@@ -25,6 +25,8 @@ class RomFileController extends WebController
     {
     }
 
+    private const CPU_DATE_FORMAT = 'm-d-Y, h:i:s A (T, I)';
+
     /**
      * Display a listing of the resource.
      *
@@ -40,6 +42,10 @@ class RomFileController extends WebController
 
         return view('rom-files.index', [
             'romFiles' => $romFiles,
+            'uploadDateParams' => [
+                'format' => self::CPU_DATE_FORMAT,
+                'timezone' => 'America/Los_Angeles'
+            ]
         ]);
     }
 
@@ -82,7 +88,7 @@ class RomFileController extends WebController
         $uploadDateInCPUFormat = $romFileQueries->formatUploadDate($romFile->uploadDate, DATE_W3C, 'GMT');
         $uploadDateInReadableFormat = $romFileQueries->formatUploadDate(
             $romFile->uploadDate,
-            'm-d-Y, h:i:s A (T, I)',
+            self::CPU_DATE_FORMAT,
             'PST8PDT'
         );
 

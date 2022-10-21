@@ -14,21 +14,17 @@
                         <p class="inline-block">Filename: {{ $romFile->filename }}</p>
                         <p class="inline-block">Filesize: {{ $romFile->length }} Bytes</p>
                         <p class="inline-block">
-                            @php
-                                $uploadDateFormattingParams = [
-                                    $romFile->uploadDate,
-                                    'm-d-Y, h:i:s A (T, I)',
-                                    'America/Los_Angeles'
-                                ];
-                            @endphp
-                            Uploaded On: {{ $romFileQueries->formatUploadDate(...$uploadDateFormattingParams) }}
+                            Uploaded
+                            On: {{ $romFileQueries->formatUploadDate($romFile->uploadDate, ...array_values($uploadDateParams)) }}
                         </p>
                         <p class="inline-block">
                             @if($romFile->rom)
-                                <span class="font-semibold">ROM ID: {{$romFile->rom->getKey()}}</span>
+                                <span class="font-semibold">ROM ID: {{ $romFile->rom->id }}</span>
                             @else
                                 <span class="font-semibold"
-                                      title="This ROM File does not yet have a ROM resource linked to it.">No Assoc. ROM</span>
+                                      title="This ROM File does not yet have a ROM resource linked to it.">
+                                    No Assoc. ROM
+                                </span>
                             @endif
                         </p>
                         <div class="mt-2 flex flex-row justify-between">
