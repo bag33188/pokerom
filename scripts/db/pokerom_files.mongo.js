@@ -257,6 +257,10 @@ var aggregationsObj = {
     ],
 };
 
+/*
+db.rom.files.reIndex();
+db.rom.chunks.reIndex();
+
 db.rom.files.aggregate(aggregationsArr[0].pipeline);
 db.rom.files.aggregate(aggregationsObj["Proper Rom Files Sort"]);
 
@@ -269,8 +273,4 @@ db.rom.files
         { score: { $meta: "textScore" } }
     )
     .sort({ score: { $meta: "textScore" } });
-
-/*
-db.rom.files.reIndex();
-db.rom.chunks.reIndex();
 */
