@@ -7,7 +7,7 @@ use App\Models\RomFile;
 
 interface RomQueriesInterface
 {
-    function formatRomSizeSQL(int $rom_size): string;
+    function formatRomSizeSQL(int $romSize): string;
 
     function updateRomFromRomFileDataSQL(Rom $rom, RomFile $romFile): bool;
 

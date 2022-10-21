@@ -25,19 +25,19 @@ class RomQueries implements RomQueriesInterface
         return $this->rom
             ->where('rom_name', '=', $romName)              # AND
             ->where('rom_type', '=', $romType)              # AND
-            ->where(function (EloquentBuilder $query) {                    # (
+            ->where(function (EloquentBuilder $query) {                     # (
                 $query
                     ->where('has_file', '=', FALSE)   # OR
                     ->orWhere('file_id', '=', NULL);  # )
             })->first();
     }
 
-    public function formatRomSizeSQL(int $rom_size): string
+    public function formatRomSizeSQL(int $romSize): string
     {
         $sql = /** @lang MariaDB */
             "SELECT HIGH_PRIORITY FORMAT_ROM_SIZE(?) AS `rom_size`";
         $query = DB::raw($sql);
-        return DB::scalar($query, [$rom_size]);
+        return DB::scalar($query, [$romSize]);
     }
 
     public function updateRomFromRomFileDataSQL(Rom $rom, RomFile $romFile): bool

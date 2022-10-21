@@ -17,13 +17,13 @@ class GameQueries implements GameQueriesInterface
         $this->game = $game;
     }
 
-    public function formatGameTypeSQL(string $game_type): string
+    public function formatGameTypeSQL(string $gameType): string
     {
         $sql = /** @lang MariaDB */
             "SELECT HIGH_PRIORITY FORMAT_GAME_TYPE(?) AS `game_type`";
         $query = DB::raw($sql);
         // https://laravel.com/docs/9.x/database#selecting-scalar-values
-        return DB::scalar($query, [$game_type]);
+        return DB::scalar($query, [$gameType]);
     }
 
     public function getAllRomsWithNoGameSQL(): Collection

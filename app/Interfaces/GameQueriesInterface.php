@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface GameQueriesInterface
 {
-    function formatGameTypeSQL(string $game_type): string;
+    function formatGameTypeSQL(string $gameType): string;
 
     function getAllRomsWithNoGameSQL(): Collection;
 
