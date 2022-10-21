@@ -22,6 +22,7 @@ class GameQueries implements GameQueriesInterface
         $sql = /** @lang MariaDB */
             "SELECT HIGH_PRIORITY FORMAT_GAME_TYPE(?) AS `game_type`";
         $query = DB::raw($sql);
+        // https://laravel.com/docs/9.x/database#selecting-scalar-values
         return DB::scalar($query, [$game_type]);
     }
 
