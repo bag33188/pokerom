@@ -19,6 +19,7 @@ class ProcessRomFileUpload implements ShouldQueue
     /**
      * Create a new job instance.
      *
+     * @param string $romFilename
      * @return void
      */
     public function __construct(string $romFilename)

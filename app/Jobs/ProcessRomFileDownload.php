@@ -20,6 +20,7 @@ class ProcessRomFileDownload implements ShouldQueue
     /**
      * Create a new job instance.
      *
+     * @param ObjectId $romFileId
      * @return void
      */
     public function __construct(ObjectId $romFileId)

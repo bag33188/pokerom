@@ -14,6 +14,7 @@ class Alert extends Component
     /**
      * Create a new component instance.
      *
+     * @param AlertType $alertType
      * @return void
      */
     public function __construct(AlertType $alertType = AlertType::NORMAL)
