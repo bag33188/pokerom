@@ -80,7 +80,12 @@ class RomFileController extends WebController
     public function show(RomFile $romFile, RomFileQueriesInterface $romFileQueries): Application|Factory|View
     {
         $uploadDateInCPUFormat = $romFileQueries->formatUploadDate($romFile->uploadDate, DATE_W3C, 'GMT');
-        $uploadDateInReadableFormat = $romFileQueries->formatUploadDate($romFile->uploadDate, 'm-d-Y, h:i:s A (T, I)', 'PST8PDT');
+        $uploadDateInReadableFormat = $romFileQueries->formatUploadDate(
+            $romFile->uploadDate,
+            'm-d-Y, h:i:s A (T, I)',
+            'PST8PDT'
+        );
+
         return view('rom-files.show', [
             'romFile' => $romFile,
             'userIsAdmin' => Auth::user()->isAdmin(),
@@ -100,6 +105,8 @@ class RomFileController extends WebController
     {
         $this->authorize('delete', $romFile);
         $this->romFileRepository->deleteFromGrid($romFile);
-        return response()->redirectTo(route('rom-files.index'))->banner('Rom file deleted successfully! ' . $romFile->filename);
+        return response()
+            ->redirectTo(route('rom-files.index'))
+            ->banner('Rom file deleted successfully! ' . $romFile->filename);
     }
 }
