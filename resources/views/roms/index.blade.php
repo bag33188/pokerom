@@ -16,7 +16,8 @@
     $romsWithFilesCount = $romQueries->getCountOfRomsThatHaveROMFiles();
 
     function strip_quotes(string $value): string {
-        return (string)preg_replace("/([\x{22}\x{27}])|(\x{26}(?:quot|apos|\x{23}0?3[94])\x{3B})/iu", '', $value);
+        $quoteRegExp = "/([\x{22}\x{27}])|(\x{26}(?:quot|apos|\x{23}0?3[94])\x{3B})/iu";
+        return (string)preg_replace($quoteRegExp, '', $value);
     }
 @endphp
 <x-app-layout>
@@ -26,14 +27,14 @@
             <h5 class="text-center">{{ $totalRomsCount }} Total ROMs</h5>
         @endunless
     </x-slot:header>
-    <div x-data="{!! strip_quotes(collect(['open' => true])->toJson(JSON_FORCE_OBJECT)) !!}" class="mb-3 mx-3">
+    <div x-data="{!! strip_quotes(collect(['open' => true])->toJson()) !!}" class="mb-3 mx-3">
         <x-flash-message/>
         @unless($totalRomsCount === 0)
             <div class="w-full text-center my-2.5">
                 <button type="button" @class($showHideBtnClasses) @click="open = !open">
                     <span x-show="open">Hide</span>
                     <span x-show="!open" x-cloak>Show</span>
-                    <span><!--&nbsp;-->ROMs</span>
+                    <span>ROMs</span>
                 </button>
             </div>
             <table class="w-full test-sm text-left text-gray-800 table-auto border-2" x-show="open === true">
