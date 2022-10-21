@@ -27,7 +27,7 @@ class FileUploader
      * @param string $filename
      * @param int $fileBufferSize
      */
-    public function __construct($fileStream, string $filename, int $fileBufferSize = 0o776000)
+    public function __construct($fileStream, string $filename, int $fileBufferSize = 0x3FC00)
     {
         $this->fileStream = $fileStream;
         $this->fileHandle = self::openFileForBinaryReading($filename);
@@ -58,7 +58,6 @@ class FileUploader
     {
         while (!$this->isEndOfFile()) {
             $this->writeToStream();
-            self::flushBufferUpStream();
         }
     }
 
@@ -80,14 +79,5 @@ class FileUploader
     private static function openFileForBinaryReading(string $filename)
     {
         return fopen($filename, 'rb'); // `rb` mode = read+binary
-    }
-
-    /**
-     * flush and send output buffer
-     * @return void
-     */
-    private static function flushBufferUpStream(): void
-    {
-        ob_flush();
     }
 }

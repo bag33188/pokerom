@@ -23,7 +23,7 @@ class FileDownloader
      * @param resource $fileStream
      * @param int $fileBufferSize
      */
-    public function __construct($fileStream, int $fileBufferSize = 0o776000)
+    public function __construct($fileStream, int $fileBufferSize = 0x3FC00)
     {
         $this->fileStream = $fileStream;
         $this->fileBufferSize = $fileBufferSize;
@@ -64,7 +64,6 @@ class FileDownloader
     {
         while (!$this->isEndOfFile()) {
             $this->printOutCurrentFileBuffer();
-            self::flushBufferDownStream();
         }
     }
 
@@ -72,14 +71,5 @@ class FileDownloader
     {
         $this->printBytesIfNotEndOfFile();
         $this->closeFileStream();
-    }
-
-    /**
-     * flush output buffer
-     * @return void
-     */
-    private static function flushBufferDownStream(): void
-    {
-        flush();
     }
 }
