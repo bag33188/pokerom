@@ -143,23 +143,21 @@
         @break
     @case(PunchButtonType::ANCHOR->value)
         @prependOnce('scripts')
-            @verbatim
-                <script type="text/javascript">
-                    let disablePunchButton = function (buttonID) {
-                        const button = document.getElementById(buttonID);
-                        if (button.getAttribute("data-element-type").toLowerCase() === "anchor") {
-                            button.setAttribute("class", "punch disabled");
-                            button.setAttribute("href", "javascript:void(0)");
-                            button.setAttribute("target", "_blank");
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    };
+            <script type="text/javascript">
+                let disablePunchButton = function (buttonID) {
+                    const button = document.getElementById(buttonID);
+                    if (button.getAttribute("data-element-type").toLowerCase() === "anchor") {
+                        button.setAttribute("class", "punch disabled");
+                        button.setAttribute("href", "javascript:void(0)");
+                        button.setAttribute("target", "_blank");
+                        return true;
+                    } else {
+                        return false;
+                    }
+                };
 
-                    window.disablePunchButton = disablePunchButton;
-                </script>
-            @endverbatim
+                window.disablePunchButton = disablePunchButton;
+            </script>
         @endPrependOnce
         <a data-element-type="html-anchor"
             {{ $attributes->class(['punch', 'disabled' => !$userIsAdmin])->merge(['role' => $btnType]) }}>
@@ -167,6 +165,6 @@
         </a>
         @break
     @default
-        <p style="color: #F00 !important;">ERROR: <b>invalid button type</b>: <em>{{ $btnType }}</em></p>
+        <p style="color: #F00 !important;">ERROR: <b>Invalid button type</b>: <samp>{{ $btnType }}</samp></p>
         @break
 @endswitch

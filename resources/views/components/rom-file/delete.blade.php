@@ -10,15 +10,13 @@
         </style>
     @endpush
     @push('scripts')
-        @verbatim
-            <script type="text/javascript">
-                function disableDeleteBtn(deleteBtnId) {
-                    const deleteBtn = document.getElementById(deleteBtnId);
-                    deleteBtn.disabled = true;
-                    deleteBtn.classList.add("not-allowed");
-                }
-            </script>
-        @endverbatim
+        <script type="text/javascript">
+            function disableDeleteBtn(deleteBtnId) {
+                const deleteBtn = document.getElementById(deleteBtnId);
+                deleteBtn.disabled = true;
+                deleteBtn.classList.add("not-allowed");
+            }
+        </script>
     @endpush
 @endonce
 @php
