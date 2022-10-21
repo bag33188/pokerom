@@ -9,7 +9,7 @@
         @unless($romFiles->count() < 1)
             <div class="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 mx-4 mb-4 mt-3.5 items-center">
                 @foreach($romFiles as $romFile)
-                    <x-tile class="justify-self-center">
+                    <x-tile :data-romFile-id="$romFile->_id" class="justify-self-center">
                         <p class="inline-block">File ID: {{ $romFile->_id }}</p>
                         <p class="inline-block">Filename: {{ $romFile->filename }}</p>
                         <p class="inline-block">Filesize: {{ $romFile->length }} Bytes</p>

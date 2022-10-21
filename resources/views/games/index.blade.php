@@ -5,12 +5,12 @@
         <h5 class="text-center">{{ $games->count() }} Total Games</h5>
     </x-slot:header>
     <div class="container mx-auto my-3.5">
-        <x-flash-message />
+        <x-flash-message/>
         @unless($games->count() < 1)
             <div
                 class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 justify-items-center my-1.5 pb-4">
                 @foreach($games as $game)
-                    <x-card :heading="$game->game_name">
+                    <x-card :data-game-id="$game->id" :heading="$game->game_name">
                         <div class="flex flex-col h-full">
                             <x-list-group class="divide-y-2 divide-gray-100 border">
                                 <x-list-item class="p-3 hover:bg-blue-600 hover:text-blue-200 !border-b-0">
@@ -41,7 +41,7 @@
                 @endforeach
             </div>
         @else
-            <x-alert :alertType="App\Enums\AlertTypeEnum::ERROR" heading="Sorry!" message="No Games in database" />
+            <x-alert :alertType="App\Enums\AlertTypeEnum::ERROR" heading="Sorry!" message="No Games in database"/>
         @endunless
     </div>
 </x-app-layout>

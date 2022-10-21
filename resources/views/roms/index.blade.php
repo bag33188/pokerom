@@ -66,7 +66,7 @@
                 </thead>
                 <tbody>
                 @foreach($roms as $rom)
-                    <tr class="border odd:bg-white even:bg-gray-100" data-rom-id="{{ $rom->id }}">
+                    <tr data-rom-id="{{ $rom->id }}" class="border odd:bg-white even:bg-gray-100">
                         <td class="px-6 py-4">{{ $rom->rom_name }}</td>
                         <td class="px-6 py-4">{{ $romQueries->formatRomSizeSQL($rom->rom_size) }}</td>
                         <td class="px-6 py-4">{{ strtolower($rom->rom_type) }}</td>
