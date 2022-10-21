@@ -14,32 +14,11 @@
     $htmlRomTableColumns = ['ROM Name', 'ROM Size', 'ROM Type', 'Game Name', 'Download', 'Information'];
 
     $romsWithFilesCount = $romQueries->getCountOfRomsThatHaveROMFiles();
-@endphp
-@push('scripts')
-    @verbatim
-        <script type="text/javascript">
-            /**
-             * @name toggleContent
-             * @param {boolean} contentOpened
-             * @returns {boolean}
-             */
-            function toggleContent(contentOpened) {
-                contentOpened = !contentOpened;
-                return contentOpened;
-            }
 
-            /**
-             * @name initROMsUiStateData
-             * @returns {ROMsUIAlpineState}
-             */
-            function initROMsUiStateData() {
-                return {
-                    open: true
-                };
-            }
-        </script>
-    @endverbatim
-@endpush
+    function strip_quotes(string $value): string {
+        return (string)preg_replace("/([\x{22}\x{27}])|(\x{26}(?:quot|apos|\x{23}0?3[94])\x{3B})/iu", '', $value);
+    }
+@endphp
 <x-app-layout>
     <x-slot:header>
         <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900">ROMs</h2>
@@ -47,11 +26,11 @@
             <h5 class="text-center">{{ $totalRomsCount }} Total ROMs</h5>
         @endunless
     </x-slot:header>
-    <div x-data="initROMsUiStateData()" class="mb-3 mx-3">
+    <div x-data="{!! strip_quotes(collect(['open' => true])->toJson(JSON_FORCE_OBJECT)) !!}" class="mb-3 mx-3">
         <x-flash-message/>
         @unless($totalRomsCount === 0)
             <div class="w-full text-center my-2.5">
-                <button type="button" @class($showHideBtnClasses) @click="open = toggleContent(open)">
+                <button type="button" @class($showHideBtnClasses) @click="open = !open">
                     <span x-show="open">Hide</span>
                     <span x-show="!open" x-cloak>Show</span>
                     <span><!--&nbsp;-->ROMs</span>

@@ -15,8 +15,8 @@
             /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
         }
 
+        {{-- only apply styles to link file btn if user is admin --}}
         @if($userIsAdmin)
-        @verbatim
         @media (max-width: 433px) {
             #link-rom-{{ $rom->id }}-container {
                 margin-bottom: 0.75rem;
@@ -29,24 +29,8 @@
                 margin-left: 0.75rem;
             }
         }
-        @endverbatim
         @endif
     </style>
-@endpush
-@push('scripts')
-    @verbatim
-        <script type="text/javascript">
-            /**
-             * @name toggleInfo
-             * @param {boolean} infoOpened
-             * @returns {boolean}
-             */
-            function toggleInfo(infoOpened) {
-                infoOpened = !infoOpened;
-                return infoOpened;
-            }
-        </script>
-    @endverbatim
 @endpush
 @php
     $innerListGroupClasses = [
@@ -66,10 +50,6 @@
         'cursor-pointer',
         'no-select'
     ];
-
-    $toggleROMInfo = '@click=' . Js::from('romInfoOpened = toggleInfo(romInfoOpened)');
-    $toggleGameInfo = '@click=' . Js::from('gameInfoOpened = toggleInfo(gameInfoOpened)');
-    $toggleROMFileInfo = '@click=' . Js::from('romFileInfoOpened = toggleInfo(romFileInfoOpened)');
 @endphp
 <x-app-layout>
     <x-slot:header>
@@ -83,20 +63,21 @@
         <x-list-group @class(['shadow', 'no-select' => !$userIsAdmin]) x-data="{{ $alpineInitialUiState }}">
 
             <x-list-item class="pb-4">
-                <p @class($paragraphSectionClasses) {!! $toggleROMInfo !!}>ROM Info</p>
+                <p @class($paragraphSectionClasses) @click="romInfoOpened = !romInfoOpened">ROM Info</p>
                 <x-list-group @class($innerListGroupClasses) x-show="romInfoOpened === true">
                     <x-list-item>ROM ID: {{ $rom->id }}</x-list-item>
                     <x-list-item>ROM Name: {{ $rom->rom_name }}</x-list-item>
                     <x-list-item>ROM Size: {{ $romQueries->formatRomSizeSQL($rom->rom_size) }}</x-list-item>
                     <x-list-item class="border-b-0">ROM Type: {{ $rom->rom_type }}</x-list-item>
                 </x-list-group>
-                <p @class($paragraphHiddenContentClasses) x-show="!romInfoOpened" {!! $toggleROMInfo !!} x-cloak>
+                <p @class($paragraphHiddenContentClasses) x-show="!romInfoOpened"
+                   @click="romInfoOpened = !romInfoOpened" x-cloak>
                     ...</p>
             </x-list-item> <!-- // end of ROM Info -->
 
             @if($rom->has_game)
                 <x-list-item class="pb-4">
-                    <p @class($paragraphSectionClasses) {!! $toggleGameInfo !!}>Game Info</p>
+                    <p @class($paragraphSectionClasses) @click="gameInfoOpened = !gameInfoOpened">Game Info</p>
                     <x-list-group @class($innerListGroupClasses) x-show="gameInfoOpened === true">
                         <x-list-item>
                             Game ID: <a class="underline"
@@ -110,14 +91,15 @@
                             Release Date: {{ $rom->game->date_released->format('l, F jS, Y') }}
                         </x-list-item>
                     </x-list-group>
-                    <p @class($paragraphHiddenContentClasses) x-show="!gameInfoOpened" {!! $toggleGameInfo !!} x-cloak>
+                    <p @class($paragraphHiddenContentClasses) x-show="!gameInfoOpened"
+                       @click="gameInfoOpened = !gameInfoOpened" x-cloak>
                         ...</p>
                 </x-list-item>
             @endif <!-- // end of Game Info -->
 
             @if($rom->has_file)
                 <x-list-item class="pb-4">
-                    <p @class($paragraphSectionClasses) {!! $toggleROMFileInfo !!}>
+                    <p @class($paragraphSectionClasses) @click="romFileInfoOpened = !romFileInfoOpened">
                         File Info
                     </p>
                     <x-list-group @class($innerListGroupClasses) x-show="romFileInfoOpened === true">
@@ -133,7 +115,7 @@
                         </x-list-item>
                     </x-list-group>
                     <p @class($paragraphHiddenContentClasses) x-show="!romFileInfoOpened"
-                       {!! $toggleROMFileInfo !!} x-cloak>...</p>
+                       @click="romFileInfoOpened = !romFileInfoOpened" x-cloak>...</p>
                 </x-list-item>
             @endif <!-- // end of ROM File Info -->
 

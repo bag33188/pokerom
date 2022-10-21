@@ -20,24 +20,10 @@
         };
 
         const loadEmulatorLinks = () => {
-            /** @type HTMLUListElement */
             const emulatorLinksList = document.getElementById("emulator-links");
 
-            /**
-             * these classes are under the `saved`/`safe` array/list in tailwind config due to
-             * classes **not being able to be generated** at build time when hardcoded in js
-             *
-             * @constant
-             * @name anchorClasses
-             * @type {string[]}
-             */
             const anchorClasses = ["underline", "text-blue-400", "hover:text-blue-500"];
 
-            /**
-             * @name emulators
-             * @type {Array<EmulatorObject>}
-             * @description Array of nintendo emulator data for use with making an _unordered_ {@link HTMLLIElement List} of {@link HTMLAnchorElement HTML Anchor Elements}
-             */
             let emulators = [
                 {
                     href: "https://desmume.org/",

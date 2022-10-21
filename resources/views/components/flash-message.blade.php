@@ -17,32 +17,10 @@
         default => $flashMessageStyles = $defaultCssClasses,
     };
 @endphp
-@pushOnce('scripts')
-    @verbatim
-        <script type="text/javascript">
-            /**
-             * @name flashMessageData
-             * @returns {FlashMessageObject}
-             */
-            function flashMessageData() {
-                return {
-                    show_flash_message: true
-                };
-            }
-
-            /**
-             * @name flashMessageIsVisible
-             * @param {boolean} show_flash_message
-             * @returns {boolean}
-             */
-            const flashMessageIsVisible = (show_flash_message) => show_flash_message === true;
-        </script>
-    @endverbatim
-@endPushOnce
 @if($sessionHasMessage)
     <div {{ $attributes }}
-         x-data="flashMessageData()"
-         x-show="flashMessageIsVisible(show_flash_message)"
+         x-data="{show_flash_message: true}"
+         x-show="show_flash_message === true"
          x-init="setTimeout(() => (show_flash_message = false), {{ Js::from($sessionFlashTimeout) }})"
     >
         <div class="mx-3.5 my-3">
