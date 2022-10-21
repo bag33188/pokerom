@@ -49,11 +49,11 @@
         'no-select'
     ];
 
-    $gameNameTitle = $rom->has_game === TRUE
-        ? sprintf('title="%s"', $rom->game->game_name)
+    $gameNameTitleAttribute = $rom->has_game === TRUE
+        ? sprintf('title="%s Version"', $rom->game->game_name)
         : '';
 
-    $alpineUiData = collect([
+    $romInfoUiData = collect([
         'romInfoOpened' => true,
         'gameInfoOpened' => true,
         'romFileInfoOpened' => true
@@ -61,7 +61,7 @@
 @endphp
 <x-app-layout>
     <x-slot:header>
-        <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900" {!! $gameNameTitle !!}>
+        <h2 class="text-2xl text-center font-semibold leading-tight text-gray-900" {!! $gameNameTitleAttribute !!}>
             {{ $rom->rom_name }} Information
         </h2>
     </x-slot:header>
@@ -69,7 +69,8 @@
     <div class="py-6 px-5">
 
         <x-list-group
-            @class(['shadow', 'no-select' => !$userIsAdmin]) x-data="{{ strip_quotes($alpineUiData->toJson()) }}">
+            @class(['shadow', 'no-select' => !$userIsAdmin])
+            x-data="{{ strip_quotes($romInfoUiData->toJson()) }}">
 
             <x-list-item class="pb-4">
                 <p @class($paragraphSectionClasses) @click="romInfoOpened = !romInfoOpened">ROM Info</p>
