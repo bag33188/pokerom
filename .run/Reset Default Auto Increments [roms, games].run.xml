@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Reset Default Auto Increments (roms, games)" type="DatabaseScript">
+  <configuration default="false" name="Reset Default Auto Increments [roms, games]" type="DatabaseScript">
     <data-source id="ffcae544-a18f-46a0-89c9-2d80091ec941" />
     <script-text>ALTER TABLE `roms` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 ALTER TABLE `games` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;</script-text>

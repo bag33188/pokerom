@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Reset Default Auto Increments [users, personal_access_tokens]" type="DatabaseScript">
+    <data-source id="ffcae544-a18f-46a0-89c9-2d80091ec941" />
+    <script-text>ALTER TABLE `users` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `personal_access_tokens` MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;</script-text>
+    <method v="2" />
+  </configuration>
+</component>

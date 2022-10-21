@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Count Total ROM File Chunk Documents" type="DatabaseScript">
+    <data-source id="917919d1-e0d1-4429-a7fb-56e6e7ddf94d" />
+    <script-text>db.rom.chunks.countDocuments();</script-text>
+    <method v="2" />
+  </configuration>
+</component>
