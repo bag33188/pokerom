@@ -13,10 +13,12 @@ class UserRepository implements UserRepositoryInterface
         return $user->tokens()->delete();
     }
 
-    public function generateApiToken(User $user): string
+    public function generateApiToken(User $user, string $tokenName = API_TOKEN_KEY, array $abilities = []): string
     {
-        $abilities = $user->isAdmin() ? ["*"] : [];
-        return $user->createToken(API_TOKEN_KEY, $abilities)->plainTextToken;
+        if ($user->isAdmin()) {
+            $abilities = ['*'];
+        }
+        return $user->createToken($tokenName, $abilities)->plainTextToken;
     }
 
     public function getCurrentUserBearerToken(Request $request): ?string

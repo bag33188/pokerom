@@ -51,13 +51,13 @@ class UserController extends ApiController
             $iv_length = openssl_cipher_iv_length($ciphering_algorithm);
             $initialization_vector = openssl_random_pseudo_bytes($iv_length, $strong_result);
             $options = 0; # OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING
-            $encrypted = openssl_encrypt($userApiToken, $ciphering_algorithm, $encryption_key, $options, $initialization_vector);
-            $decrypted = openssl_decrypt($encrypted, $ciphering_algorithm, $encryption_key, $options, $initialization_vector);
+            $encryptedUserAuthToken = openssl_encrypt($userApiToken, $ciphering_algorithm, $encryption_key, $options, $initialization_vector);
+            $decryptedUserAuthToken = openssl_decrypt($encryptedUserAuthToken, $ciphering_algorithm, $encryption_key, $options, $initialization_vector);
 
 
             return response()->json([
                 'success' => true,
-                'token' => $decrypted,
+                'token' => $userApiToken,
             ], HttpStatus::HTTP_OK, ['X-Auth-Type' => 'Bearer Token']);
         } catch (AuthorizationException $e) {
             return response()->json([
@@ -98,11 +98,11 @@ class UserController extends ApiController
     public function login(LoginUserRequest $request): JsonResponse
     {
         $user = $request->input('user');
-        $newBearerToken = $this->userRepository->generateApiToken($user);
+        $newBearerToken = $this->userRepository->generateApiToken($user, API_TOKEN_KEY);
         return response()->json([
-            'token' => $newBearerToken,
-            'user' => $user,
             'success' => true,
+            'token' => $newBearerToken,
+            # 'user' => $user, // do we really need to return the user object??
             'role' => $user->role,
             'message' => 'You have successfully logged in.'
         ]);

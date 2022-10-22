@@ -9,7 +9,7 @@ interface UserRepositoryInterface
 {
     function revokeApiTokens(User $user): int;
 
-    function generateApiToken(User $user): string;
+    function generateApiToken(User $user, string $tokenName, array $abilities): string;
 
     function getCurrentUserBearerToken(Request $request): string|null;
 }
