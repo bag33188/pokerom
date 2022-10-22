@@ -59,6 +59,6 @@ class Game extends Model
 
     public static function slugifyGameName(string $gameName): string
     {
-        return Str::slug($gameName, '-', 'en');
+        return Str::slug($gameName);
     }
 }
