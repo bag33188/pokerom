@@ -10,7 +10,10 @@
         "databank",
         "pokerom"
     ],
-    "license": "GPL-2.0-only",
+    "license": [
+        "GPL-2.0-only",
+        "Apache-2.0"
+    ],
     "readme": "./README.md",
     "homepage": "https://github.com/bag33188/pokerom",
     "authors": [

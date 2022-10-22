@@ -1,17 +1,18 @@
 {
     "name": "pokerom",
-    "license": "GPL-2.0-only",
+    "license": "(Apache-2.0 OR GPL-2.0-only)",
     "version": "4.7.5",
     "description": "An online databank for downloading Pokemon ROMs.",
     "keywords": [
         "pokemon",
         "roms",
         "databank",
-        "pokerom"
+        "pokerom",
+        "full stack web app"
     ],
     "homepage": "https://github.com/bag33188/pokerom",
     "repository": {
-        "url": "https://github.com/bag33188/pokerom",
+        "url": "https://github.com/bag33188/pokerom.git",
         "type": "git"
     },
     "bugs": {
