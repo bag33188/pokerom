@@ -23,7 +23,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $this->currentUserIdMatchesRequestedUserId($user, $model);
+        return $user->id === $model->id;
     }
 
     /**
@@ -35,7 +35,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $this->currentUserIdMatchesRequestedUserId($user, $model);
+        return $user->id === $model->id;
     }
 
     /**
@@ -47,17 +47,6 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $this->currentUserIdMatchesRequestedUserId($user, $model);
-    }
-
-    private function currentUserIdMatchesRequestedUserId(User $currentUser, User $requestedUser): bool
-    {
-        // note that:
-        # request()->user() == auth()->user() && \Request::user() === \Auth::user()
-
-        return
-            (string)$currentUser->getAttributeValue('id')
-            ===
-            (string)$requestedUser->getAttributeValue('id');
+        return $user->id === $model->id;
     }
 }

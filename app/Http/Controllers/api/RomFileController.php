@@ -30,12 +30,6 @@ class RomFileController extends ApiController
      */
     public function index(): RomFileCollection
     {
-        # if (Gate::allows('viewAny', RomFile::class) || \Request::user()->tokenCan('viewAny-romFile')) {
-        # $romFiles = RomFile::all();
-        # return new RomFileCollection($romFiles);
-        # } else {
-        # abort(HttpStatus::HTTP_FORBIDDEN);
-        # }
         Gate::authorize('viewAny-romFile');
         $romFiles = RomFile::all();
         return new RomFileCollection($romFiles);

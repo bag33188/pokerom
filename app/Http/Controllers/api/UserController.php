@@ -10,7 +10,7 @@ use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
-use Exception;
+use Gate;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -24,54 +24,27 @@ class UserController extends ApiController
 
     public function me(Request $request): JsonResponse
     {
-        $authToken = $this->userRepository->getCurrentUserBearerToken($request);
         $currentUser = $request->user();
+        Gate::authorize('view-currentUserData', $currentUser);
+        $authToken = $this->userRepository->getCurrentUserBearerToken($request);
         return response()->json([
             'success' => true,
             'user' => $currentUser,
             'token' => $authToken,
             'role' => $currentUser->role,
-        ]);
+        ], HttpStatus::HTTP_OK);
     }
 
-
-    /**
-     * @throws Exception
-     */
     public function token(Request $request): JsonResponse
     {
-        try {
-            $currentUser = $request->user();
-            $this->authorize('view', $currentUser);
-            $userApiToken = $this->userRepository->getCurrentUserBearerToken($request);
+        $currentUser = $request->user();
+        Gate::authorize('view-currentUserData', $currentUser);
+        $userApiToken = $this->userRepository->getCurrentUserBearerToken($request);
 
-
-            ### $encryption_key = random_bytes(strlen($currentUser->password) + 4);
-            ### $ciphering_algorithm = "AES-256-CTR"; # $method = 'aes-256-cbc'; // AES-256-GCM
-            ### $iv_length = openssl_cipher_iv_length($ciphering_algorithm);
-            ### $initialization_vector = openssl_random_pseudo_bytes($iv_length, $strong_result);
-            ### $options = 0; # OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING
-            ### $encryptedUserAuthToken = openssl_encrypt($userApiToken, $ciphering_algorithm, $encryption_key, $options, $initialization_vector);
-            ### $decryptedUserAuthToken = openssl_decrypt($encryptedUserAuthToken, $ciphering_algorithm, $encryption_key, $options, $initialization_vector);
-
-
-            return response()->json([
-                'success' => true,
-                'token' => $userApiToken,
-            ], HttpStatus::HTTP_OK, ['X-Auth-Type' => 'Bearer Token']);
-        } catch (AuthorizationException $e) {
-            return response()->json([
-                'success' => false,
-                'message' => $e->getMessage() ?? 'Error: Unauthorized',
-                'token' => NULL
-            ], HttpStatus::HTTP_UNAUTHORIZED);
-        } catch (Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Error: appropriate level of "randomness" was not achieved.',
-                'token' => "Failed to parse token"
-            ], HttpStatus::HTTP_I_AM_A_TEAPOT);
-        }
+        return response()->json([
+            'success' => true,
+            'token' => $userApiToken,
+        ], HttpStatus::HTTP_OK, ['X-Auth-Type' => 'Bearer Token']);
     }
 
     /**
