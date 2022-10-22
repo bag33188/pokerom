@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\RomFile;
+use App\Rules\MaxLengthRule;
 use App\Rules\MinLengthRule;
 use App\Rules\RomFilenameRule;
 use Exception;
@@ -35,6 +36,7 @@ class UploadRomFileRequest extends FormRequest
                 'required',
                 'string',
                 new MinLengthRule(MIN_ROM_FILENAME_LENGTH),
+                new MaxLengthRule(MAX_ROM_FILENAME_LENGTH),
                 new RomFilenameRule,
                 Rule::unique($romFilesCollection, 'filename')
             ]
