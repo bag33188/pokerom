@@ -59,8 +59,8 @@ class UserController extends ApiController
         $user = User::create($request->all());
 
         return response()->json([
-            'user' => $user,
             'success' => true,
+            'user' => $user,
             'message' => 'You have successfully registered! Now you can login.'
         ], HttpStatus::HTTP_CREATED);
     }
@@ -72,9 +72,9 @@ class UserController extends ApiController
         return response()->json([
             'success' => true,
             'token' => $newBearerToken,
+            'message' => 'You have successfully logged in.',
             'user' => $user,
-            'message' => 'You have successfully logged in.'
-        ]);
+        ], HttpStatus::HTTP_OK);
     }
 
     public function logout(Request $request): JsonResponse
@@ -85,7 +85,7 @@ class UserController extends ApiController
         return response()->json([
             'success' => true,
             'message' => "$userFirstName, You have been logged out!"
-        ]);
+        ], HttpStatus::HTTP_OK);
     }
 
     /**
