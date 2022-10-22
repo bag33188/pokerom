@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
             View::share('view_name', $view_name);
         });
 
-        // use like so
+        // use like so:
         // @mdyDate($game->dateReleased)
         Blade::directive('mdyDate', function (string|\Date|\DateTime $expression): string {
             $fmt = 'm/d/Y'; // 01/01/2021 (month/day/year)

@@ -60,7 +60,8 @@ class Handler extends ExceptionHandler
             //
         });
 
-        $this->renderable(fn(BulkWriteException $e) => throw $this->container->make(MongoWriteException::class,
+        $this->renderable(fn(BulkWriteException $e) => throw $this->container->make(
+            MongoWriteException::class,
             [
                 'message' => $e->getMessage(),
                 'code' => HttpStatus::HTTP_CONFLICT,
@@ -70,7 +71,8 @@ class Handler extends ExceptionHandler
             ]
         ));
 
-        $this->renderable(fn(QueryException $e) => throw $this->container->make(SqlQueryException::class,
+        $this->renderable(fn(QueryException $e) => throw $this->container->make(
+            SqlQueryException::class,
             [
                 'message' => $e->getMessage(),
                 'code' => HttpStatus::HTTP_CONFLICT,
@@ -82,7 +84,8 @@ class Handler extends ExceptionHandler
 
         if ($this->isApiRequest() and !$this->isLivewireRequest()) {
 
-            $this->renderable(fn(AuthenticationException $e) => throw $this->container->make(ApiAuthException::class, [
+            $this->renderable(fn(AuthenticationException $e) => throw $this->container->make(
+                ApiAuthException::class, [
                     'message' => $e->getMessage(),
                     'code' => HttpStatus::HTTP_UNAUTHORIZED,
                     'headers' => [
@@ -91,7 +94,8 @@ class Handler extends ExceptionHandler
                 ]
             ));
 
-            $this->renderable(fn(NotFoundHttpException $e) => throw $this->container->make(NotFoundException::class,
+            $this->renderable(fn(NotFoundHttpException $e) => throw $this->container->make(
+                NotFoundException::class,
                 [
                     'message' => $e->getMessage(),
                     'code' => $this->determineErrorCodeFromException($e),
