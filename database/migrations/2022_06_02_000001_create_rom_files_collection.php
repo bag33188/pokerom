@@ -22,10 +22,15 @@ return new class extends Migration {
     public function up(): void
     {
         if (config('database.connections.mongodb.gridfs.allowMigrations', false) === true) {
-            Schema::connection($this->connection)->create('rom.files', function (Blueprint $collection) {
+
+            $metadataRomTypes = collect(ROMFILE_TYPES)->map(
+                fn(string $romType): string => str_replace(_FULLSTOP, '', $romType)
+            )->toArray();
+
+            Schema::connection($this->connection)->create('rom.files', function (Blueprint $collection) use ($metadataRomTypes) {
                 $collection->index(
                     columns: ['length', 'filename'],
-                    name: 'length_1_filename_1',
+                    name: 'length_1_filename_1', // length: ascending, filename: ascending
                     options: [
                         'unique' => true,
                         'partialFilterExpression' => [
@@ -38,10 +43,8 @@ return new class extends Migration {
                 $collection->unsignedBigInteger('length');
                 $collection->dateTime('uploadDate');
                 $collection->char('md5', MD5_HASH_LENGTH);
-                $collection->enum('metadata.romType', collect(ROMFILE_TYPES)->map(
-                    fn(string $type): string => str_replace('.', '', $type))->toArray()
-                );
-                $collection->string('metadata.contentType', 36);
+                $collection->enum('metadata.romType', $metadataRomTypes);
+                $collection->string('metadata.contentType', METADATA_CONTENT_TYPE_LENGTH);
             });
         }
     }

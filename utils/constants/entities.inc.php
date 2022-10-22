@@ -8,8 +8,10 @@
 const _EACUTE = "\u{00E9}";
 /** **&Eacute;** , uppercase version of {@see _EACUTE} */
 const U_EACUTE = "\u{00C9}";
-/** Unicode's entity for a space char */
+/** Unicode entity for a space char */
 const _SPACE = "\u{0020}";
+/** Unicode entity for a fullstop period. */
+const _FULLSTOP = "\u{002E}";
 
 
 /** directory that contains all bin rom files */
