@@ -42,7 +42,9 @@ return new class extends Migration {
                 $collection->unsignedBigInteger('length');
                 $collection->dateTime('uploadDate');
                 $collection->char('md5', MD5_HASH_LENGTH);
-                $collection->enum('metadata.romType', ROMFILE_TYPES);
+                $collection->enum('metadata.romType', collect(ROMFILE_TYPES)->map(
+                    fn(string $type): string => str_replace('.', '', $type))->toArray()
+                );
                 $collection->string('metadata.contentType', 36);
             });
         }
