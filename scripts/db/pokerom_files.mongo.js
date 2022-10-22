@@ -1,4 +1,4 @@
-// noinspection JSUnresolvedFunction,JSUnresolvedVariable,ES6ConvertVarToLetConst,JSCheckFunctionSignatures
+// noinspection JSUnresolvedFunction,JSUnresolvedVariable,ES6ConvertVarToLetConst,JSCheckFunctionSignatures,JSUnusedGlobalSymbols
 
 conn = new Mongo("localhost:27017");
 
@@ -85,6 +85,7 @@ db.createCollection("rom.chunks", {
             properties: {
                 files_id: {
                     bsonType: "objectId",
+                    description: "References rom.files._id",
                 },
                 data: {
                     bsonType: "binData",
@@ -255,23 +256,10 @@ var aggregationsObj = {
     ],
 };
 
-// prettier-ignore
-var aggregationsArr = [{name:"Calc Total ROMs Size Bytes",pipeline:[{$group:{_id:null,total_length:{$sum:"$length"}}},{$addFields:{total_size:{$toString:{$toLong:"$total_length"}}}},{$project:{_id:0,total_length:1,total_size:{$concat:["$total_size"," ","Bytes"]}}},{$limit:1},]},{name:"Calc Total ROMs Size Gibibytes",pipeline:[{$group:{_id:null,total_length:{$sum:"$length"}}},{$addFields:{total_size:{$toString:{$round:[{$toDouble:{$divide:["$total_length",{$pow:[1024,3]},]}},2,]}}}},{$project:{_id:0,total_length:{$toDecimal:{$divide:["$total_length",{$pow:[1024,3]},]}},total_size:{$concat:["$total_size"," ","Gibibytes"]}}},{$limit:1},]},{name:"Filter GB ROMs",pipeline:[{$sort:{length:-1,filename:1,uploadDate:1}},{$match:{filename:{$regex:"^[\\w\\d\\-_]+\\.gb$",$options:"i"}}},]},{name:"Filter 3DS ROMs",pipeline:[{$sort:{length:-1,filename:1,uploadDate:1}},{$match:{filename:{$regex:"^[\\w\\d\\-_]+\\.3ds$",$options:"i"}}},]},{name:"Filter GBA ROMs",pipeline:[{$sort:{length:-1,filename:1,uploadDate:1}},{$match:{filename:{$regex:"^[\\w\\d\\-_]+\\.gba$",$options:"i"}}},]},{name:"Filter GBC ROMs",pipeline:[{$sort:{length:-1,filename:1,uploadDate:1}},{$match:{filename:{$regex:"^[\\w\\d\\-_]+\\.gbc$",$options:"i"}}},]},{name:"Filter NDS ROMs",pipeline:[{$sort:{length:-1,filename:1,uploadDate:1}},{$match:{filename:{$regex:"^[\\w\\d\\-_]+\\.nds$",$options:"i"}}},]},{name:"Filter XCI ROMs",pipeline:[{$sort:{length:-1,filename:1,uploadDate:1}},{$match:{filename:{$regex:"^[\\w\\d\\-_]+\\.xci$",$options:"i"}}},]},{name:"Proper Rom Files Sort",pipeline:[{$addFields:{field_length:{$strLenCP:"$filename"}}},{$sort:{length:1,field_length:1,uploadDate:-1}},{$unset:"field_length"},]},{name:"Show Rom Sizes (KB)",pipeline:[{$addFields:{rom_size:{$ceil:{$divide:["$length",1024]}}}},{$project:{filename:1,length:1,chunkSize:1,uploadDate:1,md5:1,rom_size:{$concat:[{$toString:{$toLong:"$rom_size"}}," ","KB",]}}},]},{name:"Sort ROM Files By Length (Descending)",pipeline:[{$sort:{length:-1}},]},{name:"Count ROM Files",pipeline:[{$count:"id"},{$addFields:{rom_files_count:{$toInt:"$id"}}},{$project:{id:0}},]},{name:"rom.files Metadata",pipeline:[{$addFields:{romFileType:{$split:["$filename","."]}}},{$project:{romFileType:{$toUpper:{$arrayElemAt:["$romFileType",1]}},filename:1,uploadDate:1,md5:1,chunkSize:1,length:1}},{$addFields:{metadata:{romType:"$romFileType",contentType:"application/octet-stream"}}},{$project:{romFileType:0}},]}];
-
 /*
 db.rom.files.reIndex();
 db.rom.chunks.reIndex();
 
-db.rom.files.aggregate(aggregationsArr[0].pipeline);
 db.rom.files.aggregate(aggregationsObj["Proper Rom Files Sort"]);
-
-db.rom.files
-    .find({ $text: { $search: "GBC" } }, { score: { $meta: "textScore" } })
-    .sort({ score: { $meta: "textScore" } });
-db.rom.files
-    .find(
-        { $text: { $search: '"POKEMON_PL_CPUE01"' } },
-        { score: { $meta: "textScore" } }
-    )
-    .sort({ score: { $meta: "textScore" } });
+db.rom.files.aggregate(aggregationsObj["Calc Total ROMs Size Gibibytes"]);
 */
