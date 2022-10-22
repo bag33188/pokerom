@@ -12,11 +12,15 @@ use App\Models\RomFile;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
+    public function __construct(private readonly RomFile $romFile)
+    {
+    }
+
     public function uploadToGrid(string $romFilename): RomFile
     {
-        RomFile::normalizeRomFilename($romFilename);
+        $this->romFile->normalizeRomFilename($romFilename);
         ProcessRomFileUpload::dispatch($romFilename);
-        $romFile = RomFile::where('filename', $romFilename)->first();
+        $romFile = $this->romFile->where('filename', $romFilename)->first();
         RomFileCreated::dispatch($romFile);
         return $romFile;
     }
@@ -39,7 +43,7 @@ class RomFileRepository implements RomFileRepositoryInterface
 
     public function determineConsole(RomFile $romFile): string
     {
-        $fileType = $romFile->getFileType(includeFullStop: false);
+        $fileType = $romFile->getFileExtension();
         return match (strtoupper($fileType)) {
             'GB' => 'Gameboy',
             'GBC' => 'Gameboy Color',

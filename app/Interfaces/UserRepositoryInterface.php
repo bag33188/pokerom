@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 interface UserRepositoryInterface
 {
-    function revokeApiTokens(User $user): int;
+    function revokeApiTokens(User $user, bool $revokeAll): int;
 
     function generateApiToken(User $user, string $tokenName, array $tokenAbilities): string;
 

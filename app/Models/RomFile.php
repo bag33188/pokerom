@@ -63,10 +63,9 @@ class RomFile extends Model
         return $date->format('Y-m-d H:i:s');
     }
 
-    public function getFileType(bool $includeFullStop = true): string
+    public function getFileExtension(): string
     {
-        $romFileType = explode(_FULLSTOP, $this->attributes['filename'], 2)[1];
-        return $includeFullStop === false ? $romFileType : _FULLSTOP . $romFileType;
+        return explode(_FULLSTOP, $this->attributes['filename'], 2)[1];
     }
 
     public function getChunkSizeInBits(): int
