@@ -67,14 +67,15 @@ return [
             'driver' => 'mongodb',
             'host' => env('DB_HOST_SECOND', 'localhost'),
             'port' => env('DB_PORT_SECOND', 27017),
-            'database' => env('DB_DATABASE_SECOND'),
-            'username' => env('DB_USERNAME_SECOND', 'brock'),
-            'password' => env('DB_PASSWORD_SECOND', 'secret'),
+            'database' => env('DB_DATABASE_SECOND', 'forge'),
+            'username' => env('DB_USERNAME_SECOND', ''),
+            'password' => env('DB_PASSWORD_SECOND', ''),
             'options' => [
                 // here you can pass more settings to the Mongo Driver Manager
                 // see https://www.php.net/manual/en/mongodb-driver-manager.construct.php under "Uri Options" for a list of complete parameters that you can use
 
                 'database' => env('DB_AUTHENTICATION_DATABASE', 'admin'), // required with Mongo 3+
+
                 'authMechanism' => env('DB_AUTHENTICATION_MECHANISM'),
                 'authSource' => env('DB_AUTHENTICATION_DATABASE'),
             ],

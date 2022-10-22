@@ -14,7 +14,7 @@ abstract class AbstractApplicationException extends Exception
 {
     protected array $headers = [];
 
-    function __construct(string $message = "", int $code = 0, array $headers = [], ?Throwable $previous = null)
+    public function __construct(string $message = "", int $code = 0, array $headers = [], ?Throwable $previous = null)
     {
         $this->headers = $headers;
         parent::__construct($message, $code, $previous);
