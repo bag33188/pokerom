@@ -28,6 +28,10 @@ return new class extends Migration {
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();
         });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->char('remember_token', 60)->change();
+        });
     }
 
     /**
@@ -38,5 +42,8 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::dropIfExists('users');
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('remember_token', 100)->change();
+        });
     }
 };

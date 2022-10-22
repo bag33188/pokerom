@@ -24,10 +24,14 @@ return new class extends Migration {
                 ->references('id')->on('users')
                 ->onDelete(ConstraintOption::CASCADE->value)
                 ->onUpdate(ConstraintOption::RESTRICT->value);
-            $table->string('ip_address', IP_ADDRESS_LENGTH)->nullable();
+            $table->ipAddress()->nullable();
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
+        });
+
+        Schema::table('sessions', function (Blueprint $table) {
+            $table->string('ip_address', IP_ADDRESS_LENGTH)->change();
         });
     }
 

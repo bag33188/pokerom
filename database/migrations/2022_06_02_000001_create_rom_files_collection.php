@@ -27,7 +27,16 @@ return new class extends Migration {
                 fn(string $romType): string => str_replace(_FULLSTOP, '', $romType)
             )->toArray();
 
-            Schema::connection($this->connection)->create('rom.files', function (Blueprint $collection) use ($metadataRomTypes) {
+            Schema::create('rom.files', function (Blueprint $collection) use ($metadataRomTypes) {
+                $collection->unsignedMediumInteger('chunkSize');
+                $collection->string('filename', MAX_ROM_FILENAME_LENGTH);
+                $collection->unsignedBigInteger('length');
+                $collection->dateTime('uploadDate');
+                $collection->char('md5', MD5_HASH_LENGTH);
+                $collection->json('metadata');
+                $collection->enum('metadata.romType', $metadataRomTypes);
+                $collection->string('metadata.contentType', METADATA_CONTENT_TYPE_LENGTH);
+
                 $collection->index(
                     columns: ['length', 'filename'],
                     name: 'length_1_filename_1', // length: ascending, filename: ascending
@@ -38,14 +47,8 @@ return new class extends Migration {
                         ]
                     ]
                 );
-                $collection->unsignedMediumInteger('chunkSize');
-                $collection->string('filename', MAX_ROM_FILENAME_LENGTH);
-                $collection->unsignedBigInteger('length');
-                $collection->dateTime('uploadDate');
-                $collection->char('md5', MD5_HASH_LENGTH);
-                $collection->json('metadata');
-                $collection->enum('metadata.romType', $metadataRomTypes);
-                $collection->string('metadata.contentType', METADATA_CONTENT_TYPE_LENGTH);
+
+                // TODO: find a way to implement aggregate text search index
             });
         }
     }

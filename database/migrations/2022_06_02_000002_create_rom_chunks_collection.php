@@ -16,19 +16,21 @@ return new class extends Migration {
     public function up(): void
     {
         if (config('database.connections.mongodb.gridfs.allowMigrations', false) === true) {
-            Schema::connection($this->connection)->create('rom.chunks', function (Blueprint $collection) {
+            Schema::create('rom.chunks', function (Blueprint $collection) {
                 $filesIdIndexName = 'files_id_1_n_1'; // files_id: ascending, n: ascending
+
+                $collection->unsignedInteger('n');
+                $collection->binary('data');
+                $collection->char('files_id', OBJECT_ID_LENGTH);
+                $collection->foreign('files_id', $filesIdIndexName . '_foreign')
+                    ->references('_id')
+                    ->on('rom.files');
+
                 $collection->index(
                     columns: ['files_id', 'n'],
                     name: $filesIdIndexName,
                     options: ['unique' => true]
                 );
-                $collection->unsignedInteger('n');
-                $collection->binary('data');
-                $collection->char('files_id', OBJECT_ID_LENGTH);
-                $collection->foreign('files_id', $filesIdIndexName)
-                    ->references('_id')
-                    ->on('rom.files');
             });
         }
     }

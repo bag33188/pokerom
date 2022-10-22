@@ -32,6 +32,10 @@ return new class extends Migration {
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
         });
+
+        Schema::table('personal_access_tokens', function (Blueprint $table) {
+            $table->string('tokenable_type', 96)->change(); // <-- part of `morphs('tokenable')`
+        });
     }
 
     /**
@@ -41,6 +45,9 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        Schema::table('personal_access_tokens', function (Blueprint $table) {
+            $table->string('tokenable_type', 255)->change(); // <-- part of `morphs('tokenable')`
+        });
         Schema::dropIfExists('personal_access_tokens');
     }
 };
