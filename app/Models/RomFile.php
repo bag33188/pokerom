@@ -18,7 +18,7 @@ class RomFile extends Model
     protected $collection = 'rom.files';
     protected $table = 'rom.files'; /*! <- don't delete!! use for eloquent helper code */
     protected $primaryKey = '_id';
-    protected $keyType = 'object';
+    protected $keyType = 'string';
     public $incrementing = false;
     public $timestamps = false;
 
