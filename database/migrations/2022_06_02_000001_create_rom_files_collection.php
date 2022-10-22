@@ -43,6 +43,7 @@ return new class extends Migration {
                 $collection->unsignedBigInteger('length');
                 $collection->dateTime('uploadDate');
                 $collection->char('md5', MD5_HASH_LENGTH);
+                $collection->json('metadata');
                 $collection->enum('metadata.romType', $metadataRomTypes);
                 $collection->string('metadata.contentType', METADATA_CONTENT_TYPE_LENGTH);
             });
