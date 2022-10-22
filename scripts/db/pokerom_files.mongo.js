@@ -6,7 +6,7 @@ db = conn.getDB("admin");
 
 db.createUser({
     user: "brock",
-    pwd: "3931Sunflower!", // passwordPrompt()
+    pwd: "3931Sunflower!", /* passwordPrompt() */
     roles: [{ role: "dbAdmin", db: "pokerom_files" }],
 });
 
@@ -34,8 +34,8 @@ db.createCollection("rom.files", {
                 },
                 length: {
                     bsonType: ["int", "long"],
-                    minimum: 1044480, // 1020 Kibibytes (base 1024)
-                    maximum: 18253611008, // 17 Gibibytes (base 1024)
+                    minimum: 1044480,
+                    maximum: 18253611008,
                     description:
                         "length can either be int32 or int64. ranges are 1044480 (1020 kibibytes) through 18253611008 (17 gibibytes)",
                 },
