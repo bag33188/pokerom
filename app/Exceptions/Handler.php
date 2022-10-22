@@ -10,6 +10,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
 use MongoDB\Driver\Exception\BulkWriteException;
+use Psr\Container\{ContainerExceptionInterface, NotFoundExceptionInterface};
 use Psr\Log\LogLevel;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -36,6 +37,8 @@ class Handler extends ExceptionHandler
      */
     protected $dontReport = [
         //
+        NotFoundExceptionInterface::class,
+        ContainerExceptionInterface::class,
     ];
 
     /**
