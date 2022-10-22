@@ -1,3 +1,5 @@
+# noinspection SpellCheckingInspectionForFile
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
@@ -10,7 +12,6 @@
 --
 -- set autocommit = {0|1}
 -- ALTER TABLE `table_name` AUTO_INCREMENT = `value`;
--- # noinspection SpellCheckingInspectionForFile
 --
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
