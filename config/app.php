@@ -220,6 +220,8 @@ return [
         'GameQueries' => \App\Facades\GameQueriesFacade::class,
         'RomQueries' => \App\Facades\RomQueriesFacade::class,
         'RomFileQueries' => \App\Facades\RomFileQueriesFacade::class,
+        'RomFileRepository' => \App\Facades\RomFileRepositoryFacade::class,
+        'UserRepository' => \App\Facades\UserRepositoryFacade::class,
     ])->toArray(),
 
 ];
