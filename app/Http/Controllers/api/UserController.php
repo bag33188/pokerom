@@ -10,6 +10,7 @@ use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -34,25 +35,29 @@ class UserController extends ApiController
     }
 
 
+    /**
+     * @throws Exception
+     */
     public function token(Request $request): JsonResponse
     {
         try {
             $currentUser = $request->user();
             $this->authorize('view', $currentUser);
             $userApiToken = $this->userRepository->getCurrentUserBearerToken($request);
-
-            $encryption_key = random_bytes(strlen($currentUser->password));
+            $encryption_key = random_bytes(strlen($currentUser->password) + 4);
             $ciphering_algorithm = "AES-256-CTR";
             # $method = 'aes-256-cbc'; // AES-256-GCM
             $options = 0; # OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING
             $ivlen = openssl_cipher_iv_length($ciphering_algorithm);
-            $initialization_vector = openssl_random_pseudo_bytes($ivlen);
+            $strong_result = NULL;
+            $initialization_vector = openssl_random_pseudo_bytes($ivlen, $strong_result);
             $encrypted = openssl_encrypt($userApiToken, $ciphering_algorithm, $encryption_key, $options, $initialization_vector);
             $decrypted = openssl_decrypt($encrypted, $ciphering_algorithm, $encryption_key, $options, $initialization_vector);
 
             return response()->json([
                 'success' => true,
                 'token' => $decrypted,
+                # 'strong_result' => $strong_result,
             ], HttpStatus::HTTP_OK, ['X-Auth-Type' => 'Bearer Token']);
         } catch (AuthorizationException $e) {
             return response()->json([
