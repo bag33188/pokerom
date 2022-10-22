@@ -29,3 +29,15 @@ const MIN_USER_PASSWORD_LENGTH = 8;
 
 const MIN_ROM_FILENAME_LENGTH = 3; // includes filename and extension
 const MAX_ROM_FILENAME_LENGTH = 32; // includes filename and extension
+
+// Database //
+
+const BCRYPT_PASSWORD_LENGTH = 60;
+const OBJECT_ID_LENGTH = 24;
+const SESSION_ID_LENGTH = 40;
+const IP_ADDRESS_LENGTH = 45;
+const PERSONAL_ACCESS_TOKEN_LENGTH = 64;
+const PERSONAL_ACCESS_TOKEN_NAME_LENGTH = (2 ** 8) - 1;
+// const PROFILE_PHOTO_URI_LENGTH = 2048;
+const PASSWORD_RESET_TOKEN_LENGTH = 60;
+const MD5_HASH_LENGTH = 32;

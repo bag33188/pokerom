@@ -5,7 +5,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2022 at 06:51 AM
+-- Generation Time: Oct 22, 2022 at 07:09 AM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.10
 
@@ -129,7 +129,7 @@ MAX_ROM_SIZE_LENGTH = 9; # ex. '164.28 MB'
 END$$
 
 DROP FUNCTION IF EXISTS `SPLIT_STRING`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(256), `SEPARATOR` VARCHAR(1), `POSITION` SMALLINT) RETURNS VARCHAR(128) CHARSET utf8mb4 COMMENT 'Splits a string based on a given delimiter.' BEGIN
+CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(255), `SEPARATOR` VARCHAR(1), `POSITION` SMALLINT) RETURNS VARCHAR(128) CHARSET utf8mb4 COMMENT 'Splits a string based on a given delimiter.' BEGIN
     DECLARE `max_results` SMALLINT;
 
     -- get max number of items
@@ -357,7 +357,6 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Oct 21, 2022 at 11:54 PM
--- Last update: Oct 22, 2022 at 03:19 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -397,7 +396,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 --
 -- Table structure for table `roms`
 --
--- Creation: Oct 22, 2022 at 04:39 AM
+-- Creation: Oct 22, 2022 at 04:59 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -479,7 +478,6 @@ INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Oct 05, 2022 at 05:43 PM
--- Last update: Oct 22, 2022 at 04:02 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -531,7 +529,7 @@ CREATE TABLE `users` (
   `role` enum('admin','user','guest') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `current_team_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `profile_photo_path` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `profile_photo_path` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
