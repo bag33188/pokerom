@@ -72,7 +72,8 @@ class UserController extends ApiController
         $apiTokenName = sprintf("%s_%s_%u", API_TOKEN_KEY, Str::slug($user->name, '_'), $user->id);
         $bearerToken = $this->userRepository->generateApiToken($user, $apiTokenName);
 
-        $userJSON = json_encode(collect($user->toArray())->filter(fn(mixed $value, string $key): bool => in_array($key, ['id', 'role', 'name', 'email'])));
+        $removeExtraProps = fn(int|string $value, string $key): bool => in_array($key, ['id', 'role', 'name', 'email']);
+        $userJSON = json_encode(collect($user->toArray())->filter($removeExtraProps));
 
         return response()->json([
             'success' => true,
