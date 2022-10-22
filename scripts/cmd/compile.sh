@@ -34,8 +34,7 @@ compile() {
         cd ../..
     fi
 
-    # composer install && composer update
-    composer update && composer install
+    composer install && composer update
     npm install && npm update
     npm run build
 

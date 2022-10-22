@@ -11,7 +11,7 @@ REM SETX POKEROM "%USERPROFILE%\PhpstormProjects\pokerom" /m
 
 :REFRESH_DEPENDENCIES
     REM escape newlines for sequencing commands
-    composer install && composer update && <NUL ^
+    composer update && composer install && <NUL ^
     npm install && npm update && <NUL ^
     npm run build
 EXIT /b 0
