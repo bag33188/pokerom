@@ -71,12 +71,14 @@ class UserController extends ApiController
         $user = $request->input('user');
         $apiTokenName = sprintf("%s_%s_%u", API_TOKEN_KEY, Str::slug($user->name, '_'), $user->id);
         $bearerToken = $this->userRepository->generateApiToken($user, $apiTokenName);
+
+        $userJSON = json_encode(collect($user->toArray())->filter(fn(mixed $value, string $key): bool => in_array($key, ['id', 'role', 'name', 'email'])));
+
         return response()->json([
             'success' => true,
             'token' => $bearerToken,
             'message' => 'You have successfully logged in.',
-            'user' => $user,
-        ], HttpStatus::HTTP_OK);
+        ], HttpStatus::HTTP_OK, ['X-User-Data' => $userJSON]);
     }
 
     public function logout(Request $request): JsonResponse
