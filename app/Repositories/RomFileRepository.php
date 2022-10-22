@@ -9,7 +9,6 @@ use App\Jobs\ProcessRomFileDeletion;
 use App\Jobs\ProcessRomFileDownload;
 use App\Jobs\ProcessRomFileUpload;
 use App\Models\RomFile;
-use MongoDB\BSON\ObjectId;
 
 class RomFileRepository implements RomFileRepositoryInterface
 {
@@ -24,7 +23,7 @@ class RomFileRepository implements RomFileRepositoryInterface
 
     public function downloadFromGrid(RomFile $romFile): RomFile
     {
-        $romFileId = new ObjectId($romFile->_id);
+        $romFileId = $romFile->getKeyAsObjectId();
         ProcessRomFileDownload::dispatchNow($romFileId);
         return $romFile;
     }
@@ -34,7 +33,7 @@ class RomFileRepository implements RomFileRepositoryInterface
         // clone romFile object for use in method's return value
         $romFileClone = $romFile->replicateQuietly(); // mute extraneous events while cloning
         RomFileDeleting::dispatch($romFile);
-        ProcessRomFileDeletion::dispatchSync($romFile->getObjectId());
+        ProcessRomFileDeletion::dispatchSync($romFile->getKeyAsObjectId());
         return $romFileClone;
     }
 

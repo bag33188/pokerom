@@ -22,6 +22,6 @@ class RomChunk extends MongoDbModel
 
     public function romFile(): BelongsTo
     {
-        return $this->belongsTo(RomFile::class, 'files_id', '_id');
+        return $this->belongsTo(RomFile::class, 'files_id', '_id', 'romFile');
     }
 }

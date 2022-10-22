@@ -34,13 +34,16 @@ class RomFile extends MongoDbModel
 
     public function romChunks(): HasMany
     {
+        //C:\Users\bglat\PhpstormProjects\pokerom\vendor\jenssegers\mongodb\src\Eloquent\Model.php
+        //\Jenssegers\Mongodb\Eloquent\Model::getIdAttribute
+        //https://github.com/jenssegers/laravel-mongodb/issues/1902#issuecomment-882694504
         return $this->hasMany(RomChunk::class, 'files_id', '_id');
     }
-    //
-    // public function getObjectId(): ObjectId
-    // {
-    //     return new ObjectId(strval($this->getKey()));
-    // }
+
+    public function getKeyAsObjectId(): ObjectId
+    {
+        return new ObjectId(strval($this->getKey()));
+    }
 
     public function calculateRomSizeFromLength(): int
     {
