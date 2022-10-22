@@ -2,9 +2,26 @@
     "name": "pokerom",
     "license": "GPL-2.0-only",
     "version": "4.7.5",
+    "description": "An online databank for downloading Pokemon ROMs.",
+    "keywords": [
+        "pokemon",
+        "roms",
+        "databank",
+        "pokerom"
+    ],
+    "homepage": "https://github.com/bag33188/pokerom",
     "repository": {
         "url": "https://github.com/bag33188/pokerom",
         "type": "git"
+    },
+    "bugs": {
+        "url": "https://github.com/bag33188/pokerom/issues",
+        "email": "bglatman@outlook.com"
+    },
+    "author": {
+        "name": "Brock Glatman",
+        "email": "bglatman@outlook.com",
+        "url": "https://github.com/bag33188"
     },
     "private": true,
     "scripts": {
