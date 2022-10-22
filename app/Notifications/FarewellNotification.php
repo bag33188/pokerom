@@ -15,7 +15,6 @@ class FarewellNotification extends Notification
 
     public User $user;
 
-
     private readonly string $messageBody;
     private readonly string $subject;
     private readonly string $closer;
@@ -36,8 +35,8 @@ class FarewellNotification extends Notification
     private function setMailProps(): void
     {
         $this->messageBody = "{$this->user->name}, we're sad to see you leave.";
-        $this->from = ['address' => Config::get('mail.from.address'), 'name' => config('app.name')];
-        $this->closer = sprintf("Thank you for using %s!", config('app.name'));
+        $this->from = ['address' => Config::get('mail.from.address'), 'name' => Config::get('app.name')];
+        $this->closer = sprintf("Thank you for using %s!", Config::get('app.name'));
         $this->subject = "I guess it's goodbye for now...";
     }
 

@@ -36,9 +36,9 @@ class WelcomeNotification extends Notification
 
     private function setMailProps(): void
     {
-        $this->subject = sprintf("Thank you for joining %s!!", config('app.name'));
-        $this->messageBody = sprintf("Hello %s, welcome to the world of %s!", $this->user->name, config('app.name'));
-        $this->from = ['address' => Config::get('mail.from.address'), 'name' => config('app.name')];
+        $this->subject = sprintf("Thank you for joining %s!!", Config::get('app.name'));
+        $this->messageBody = sprintf("Hello %s, welcome to the world of %s!", $this->user->name, Config::get('app.name'));
+        $this->from = ['address' => Config::get('mail.from.address'), 'name' => Config::get('app.name')];
         $this->action = ['text' => 'Check it out!', 'url' => route('roms.index')];
         $this->closer = 'Enjoy!';
     }
