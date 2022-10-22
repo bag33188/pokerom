@@ -63,11 +63,26 @@ class GridFSConnection
     }
 
     /**
+     * Data Source Name
+     * ----------------
+     * ### Full DSN Format
+     * `mongodb://{$username}:{$password}@{$host}:{$port}/{$database}?authSource={$authDb}&authMechanism={$authMethod}`
+     * <br/><br/>
+     * ### Minimal Format
+     * `mongodb://{$host}:{$port}/{$database}`
+     * <br/><br/>
+     * ### About
+     * This method implements the minimal format, allowing for the other parameters
+     * to be passed in within the `uriOptions` array. This gives the user more control
+     * over what settings are used to connect to the database.
+     *
      * @link https://www.mongodb.com/docs/manual/reference/connection-string/
      * @return string
      */
     private function dsn(): string
     {
+        // full dsn format:
+        # mongodb://{username}:{password}@{host}:{port}/{database}?authSource={authDb}&authMechanism={authMethod}
         return "mongodb://{$this->host}:{$this->port}/";
     }
 
