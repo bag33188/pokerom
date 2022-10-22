@@ -14,6 +14,7 @@ use Gate;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Str;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 
 class UserController extends ApiController
@@ -68,10 +69,11 @@ class UserController extends ApiController
     public function login(LoginUserRequest $request): JsonResponse
     {
         $user = $request->input('user');
-        $newBearerToken = $this->userRepository->generateApiToken($user, API_TOKEN_KEY);
+        $apiTokenName = sprintf("%s_%s_%u", API_TOKEN_KEY, Str::slug($user->name, '_'), $user->id);
+        $bearerToken = $this->userRepository->generateApiToken($user, $apiTokenName);
         return response()->json([
             'success' => true,
-            'token' => $newBearerToken,
+            'token' => $bearerToken,
             'message' => 'You have successfully logged in.',
             'user' => $user,
         ], HttpStatus::HTTP_OK);
