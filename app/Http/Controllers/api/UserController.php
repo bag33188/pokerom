@@ -46,13 +46,13 @@ class UserController extends ApiController
             $userApiToken = $this->userRepository->getCurrentUserBearerToken($request);
 
 
-            $encryption_key = random_bytes(strlen($currentUser->password) + 4);
-            $ciphering_algorithm = "AES-256-CTR"; # $method = 'aes-256-cbc'; // AES-256-GCM
-            $iv_length = openssl_cipher_iv_length($ciphering_algorithm);
-            $initialization_vector = openssl_random_pseudo_bytes($iv_length, $strong_result);
-            $options = 0; # OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING
-            $encryptedUserAuthToken = openssl_encrypt($userApiToken, $ciphering_algorithm, $encryption_key, $options, $initialization_vector);
-            $decryptedUserAuthToken = openssl_decrypt($encryptedUserAuthToken, $ciphering_algorithm, $encryption_key, $options, $initialization_vector);
+            ### $encryption_key = random_bytes(strlen($currentUser->password) + 4);
+            ### $ciphering_algorithm = "AES-256-CTR"; # $method = 'aes-256-cbc'; // AES-256-GCM
+            ### $iv_length = openssl_cipher_iv_length($ciphering_algorithm);
+            ### $initialization_vector = openssl_random_pseudo_bytes($iv_length, $strong_result);
+            ### $options = 0; # OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING
+            ### $encryptedUserAuthToken = openssl_encrypt($userApiToken, $ciphering_algorithm, $encryption_key, $options, $initialization_vector);
+            ### $decryptedUserAuthToken = openssl_decrypt($encryptedUserAuthToken, $ciphering_algorithm, $encryption_key, $options, $initialization_vector);
 
 
             return response()->json([
