@@ -51,6 +51,7 @@ Route::name('api.')->group(function () {
         Route::controller(UserController::class)->group(function () {
             Route::prefix('auth')->name('auth.')->group(function () {
                 Route::get('/me', 'me')->name('me');
+                Route::get('/token', 'token')->name('token');
                 Route::post('/logout', 'logout')->name('logout');
             });
             Route::prefix('users')->name('users.')->group(function () {

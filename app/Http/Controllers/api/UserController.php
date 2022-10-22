@@ -33,6 +33,34 @@ class UserController extends ApiController
         ]);
     }
 
+
+    public function token(Request $request): JsonResponse
+    {
+        try {
+            $currentUser = $request->user();
+            $this->authorize('view', $currentUser);
+            $userApiToken = $this->userRepository->getCurrentUserBearerToken($request);
+
+            $encryption_key = openssl_random_pseudo_bytes(64);
+            $initial_vector = (int)substr(strval(intval(md5($encryption_key), 16)), 0, 16);
+            $ciphering_algorithm = "AES-256-CTR";
+            $options = 0; # OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING
+            $encrypted = openssl_encrypt($userApiToken, $ciphering_algorithm, $encryption_key, $options, $initial_vector);
+            $decrypted = openssl_decrypt($encrypted, $ciphering_algorithm, $encryption_key, $options, $initial_vector);
+
+            return response()->json([
+                'success' => true,
+                'token' => $decrypted,
+            ], HttpStatus::HTTP_OK, ['X-Auth-Type' => 'Bearer Token']);
+        } catch (AuthorizationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage() ?? 'Error: Unauthorized',
+                'token' => NULL
+            ], HttpStatus::HTTP_UNAUTHORIZED);
+        }
+    }
+
     /**
      * @throws AuthorizationException
      */

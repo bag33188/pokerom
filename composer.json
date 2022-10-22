@@ -35,7 +35,8 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.5",
-        "mongodb/mongodb": "^1.12"
+        "mongodb/mongodb": "^1.12",
+        "ext-openssl": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
