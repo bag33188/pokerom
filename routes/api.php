@@ -4,8 +4,12 @@ use App\Http\Controllers\Api\GameController;
 use App\Http\Controllers\Api\RomController;
 use App\Http\Controllers\Api\RomFileController;
 use App\Http\Controllers\Api\UserController;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 
 /*
@@ -83,7 +87,7 @@ Route::name('api.')->group(function () {
         });
 
         Route::controller(RomFileController::class)->prefix('rom-files')->name('rom-files.')->group(function () {
-            Route::get('/', 'index')->name('index');
+            Route::get('/', 'index')->name('index')->middleware(['auth:sanctum', 'ability:viewAny-romFile']);
             Route::post('/upload', 'upload')->name('upload');
             Route::get('/{romFileId}', 'show')->name('show');
             Route::delete('/{romFileId}', 'destroy')->name('destroy');
@@ -93,4 +97,23 @@ Route::name('api.')->group(function () {
 
     });
 
+});
+
+// todo: polish this up
+Route::post('/sanctum/token', function (Request $request) {
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+        'device_name' => 'required',
+    ]);
+
+    $user = User::where('email', $request->email)->first();
+
+    if (!$user || !Hash::check($request->password, $user->password)) {
+        throw ValidationException::withMessages([
+            'email' => ['The provided credentials are incorrect.'],
+        ]);
+    }
+
+    return $user->createToken($request->device_name, ['viewAny-romFile'])->plainTextToken;
 });
