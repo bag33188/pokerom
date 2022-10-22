@@ -68,8 +68,8 @@ return [
             'host' => env('DB_HOST_SECOND', 'localhost'),
             'port' => env('DB_PORT_SECOND', 27017),
             'database' => env('DB_DATABASE_SECOND', 'forge'),
-            'username' => env('DB_USERNAME_SECOND', ''),
-            'password' => env('DB_PASSWORD_SECOND', ''),
+            'username' => env('DB_USERNAME_SECOND', 'homestead'),
+            'password' => env('DB_PASSWORD_SECOND', 'secret'),
             'options' => [
                 // here you can pass more settings to the Mongo Driver Manager
                 // see https://www.php.net/manual/en/mongodb-driver-manager.construct.php under "Uri Options" for a list of complete parameters that you can use
