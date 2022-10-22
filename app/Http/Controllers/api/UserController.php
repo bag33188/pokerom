@@ -44,20 +44,20 @@ class UserController extends ApiController
             $currentUser = $request->user();
             $this->authorize('view', $currentUser);
             $userApiToken = $this->userRepository->getCurrentUserBearerToken($request);
+
+
             $encryption_key = random_bytes(strlen($currentUser->password) + 4);
-            $ciphering_algorithm = "AES-256-CTR";
-            # $method = 'aes-256-cbc'; // AES-256-GCM
+            $ciphering_algorithm = "AES-256-CTR"; # $method = 'aes-256-cbc'; // AES-256-GCM
+            $iv_length = openssl_cipher_iv_length($ciphering_algorithm);
+            $initialization_vector = openssl_random_pseudo_bytes($iv_length, $strong_result);
             $options = 0; # OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING
-            $ivlen = openssl_cipher_iv_length($ciphering_algorithm);
-            $strong_result = NULL;
-            $initialization_vector = openssl_random_pseudo_bytes($ivlen, $strong_result);
             $encrypted = openssl_encrypt($userApiToken, $ciphering_algorithm, $encryption_key, $options, $initialization_vector);
             $decrypted = openssl_decrypt($encrypted, $ciphering_algorithm, $encryption_key, $options, $initialization_vector);
+
 
             return response()->json([
                 'success' => true,
                 'token' => $decrypted,
-                # 'strong_result' => $strong_result,
             ], HttpStatus::HTTP_OK, ['X-Auth-Type' => 'Bearer Token']);
         } catch (AuthorizationException $e) {
             return response()->json([
