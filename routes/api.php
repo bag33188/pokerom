@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\GameController;
 use App\Http\Controllers\Api\RomController;
 use App\Http\Controllers\Api\RomFileController;
 use App\Http\Controllers\Api\UserController;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
 
@@ -22,17 +23,19 @@ Route::name('api.')->group(function () {
 
     Route::get(
         '/version',
-        fn() => response()->json(
+        fn(): JsonResponse => response()->json(
             data: [
                 'success' => true,
                 'version' => config('app.version'),
             ],
             status: HttpStatus::HTTP_OK,
-            headers: array('X-Api-Version' => sprintf(
-                "%s Version %.2f",
-                str_replace(POKE_EACUTE, 'Poke', config('app.name')),
-                config('app.version')
-            ))
+            headers: array(
+                'X-Api-Version' => sprintf(
+                    "%s Version %.2f",
+                    str_replace(POKE_EACUTE, 'Poke', config('app.name')),
+                    config('app.version')
+                )
+            )
         )
     )->name('version');
 

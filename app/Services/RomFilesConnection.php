@@ -11,7 +11,7 @@ class RomFilesConnection extends GridFSConnection
 
     protected bool $useAuth = true;
     protected string $authDatabase = 'admin';
-    protected string $authMechanism = 'SCRAM-SHA-256'; # MONGO_AUTH_METHODS[256];
+    protected string $authMechanism = parent::AUTH_METHODS[256];
     protected string $usernameConfigPath = 'database.connections.mongodb.username';
     protected string $passwordConfigPath = 'database.connections.mongodb.password';
 

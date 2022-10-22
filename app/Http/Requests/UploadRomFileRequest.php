@@ -29,14 +29,14 @@ class UploadRomFileRequest extends FormRequest
     public function rules(): array
     {
         $romFilesCollection = $this->getRomFilesCollectionReference();
-        return array(
+        return [
             'rom_filename' => [
                 'required',
                 'string',
                 new RomFilenameRule,
                 Rule::unique($romFilesCollection, 'filename')
             ]
-        );
+        ];
     }
 
     public function messages(): array

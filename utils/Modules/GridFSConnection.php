@@ -6,14 +6,14 @@ use MongoDB\Client as MongoClient;
 use MongoDB\Driver\Exception\RuntimeException as DriverRuntimeException;
 use MongoDB\GridFS\Bucket;
 
-# define('MONGO_AUTH_METHODS', array(
-#     0 => 'DEFAULT',
-#     1 => 'SCRAM-SHA-1',
-#     256 => 'SCRAM-SHA-256'
-# ));
-
 class GridFSConnection
 {
+    protected final const AUTH_METHODS = [
+        0 => 'DEFAULT',
+        1 => 'SCRAM-SHA-1',
+        256 => 'SCRAM-SHA-256'
+    ];
+
     // CONNECTION PROPERTIES //
     protected string $host = '127.0.0.1';
     protected int $port = 27017;
@@ -22,7 +22,7 @@ class GridFSConnection
 
     // AUTH PROPERTIES //
     protected string $authDatabase = 'admin';
-    protected string $authMechanism = 'DEFAULT';
+    protected string $authMechanism = self::AUTH_METHODS[0];
     /**
      * laravel {@see \Illuminate\Support\Facades\Config config} path-string that points to username value
      *
