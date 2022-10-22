@@ -15,12 +15,12 @@ class UserRepository implements UserRepositoryInterface
 
     public function generateApiToken(User $user, string $tokenName = API_TOKEN_KEY, array $tokenAbilities = []): string
     {
-        if ($user->isAdmin()) $tokenAbilities = ['*'];
+        if ($user->isAdmin()) $tokenAbilities = ["*"];
 
         return $user->createToken($tokenName, $tokenAbilities)->plainTextToken;
     }
 
-    public function getCurrentUserBearerToken(Request $request): ?string
+    public function getCurrentUserApiToken(Request $request): ?string
     {
         return $request->bearerToken();
     }

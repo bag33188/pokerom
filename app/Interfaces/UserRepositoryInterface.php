@@ -11,5 +11,5 @@ interface UserRepositoryInterface
 
     function generateApiToken(User $user, string $tokenName, array $tokenAbilities): string;
 
-    function getCurrentUserBearerToken(Request $request): string|null;
+    function getCurrentUserApiToken(Request $request): string|null;
 }

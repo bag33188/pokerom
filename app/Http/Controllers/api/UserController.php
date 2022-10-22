@@ -37,7 +37,7 @@ class UserController extends ApiController
     {
         $currentUser = $request->user();
         Gate::authorize('view-currentUserData', $currentUser);
-        $userApiToken = $this->userRepository->getCurrentUserBearerToken($request);
+        $userApiToken = $this->userRepository->getCurrentUserApiToken($request);
 
         return response()->json([
             'success' => true,
