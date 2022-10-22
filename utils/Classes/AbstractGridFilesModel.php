@@ -14,7 +14,7 @@ use MongoDB\BSON\ObjectId;
  * The purpose of this abstract class is to provider easier hinting and implementation
  * for GridFS-related models.
  */
-abstract class AbstractGridFSModel extends MongoDbModel
+abstract class AbstractGridFilesModel extends MongoDbModel
 {
     /**
      * _id

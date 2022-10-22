@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Classes\AbstractGridFSModel as GridFSModel;
+use Classes\AbstractGridFilesModel as GridFSModel;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
