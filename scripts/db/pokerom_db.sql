@@ -5,7 +5,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2022 at 10:30 PM
+-- Generation Time: Oct 22, 2022 at 06:51 AM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.10
 
@@ -181,7 +181,7 @@ TRUNCATE TABLE `failed_jobs`;
 --
 -- Table structure for table `games`
 --
--- Creation: Oct 21, 2022 at 05:14 PM
+-- Creation: Oct 21, 2022 at 11:54 PM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -356,7 +356,8 @@ TRUNCATE TABLE `password_resets`;
 --
 -- Table structure for table `personal_access_tokens`
 --
--- Creation: Oct 05, 2022 at 05:43 PM
+-- Creation: Oct 21, 2022 at 11:54 PM
+-- Last update: Oct 22, 2022 at 03:19 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -389,14 +390,14 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'auth_token', '14cc29c5a0770089c0d00f331e1aa7c4f35a57417c38919c3f66ed2c0682b9c3', '[\"*\"]', '2022-10-15 01:49:08', NULL, '2022-10-06 11:42:45', '2022-10-15 01:49:08');
+(1, 'App\\Models\\User', 1, 'auth_token', '14cc29c5a0770089c0d00f331e1aa7c4f35a57417c38919c3f66ed2c0682b9c3', '[\"*\"]', '2022-10-22 10:19:45', NULL, '2022-10-06 18:42:45', '2022-10-22 10:19:45');
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `roms`
 --
--- Creation: Oct 21, 2022 at 05:14 PM
+-- Creation: Oct 22, 2022 at 04:39 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -478,7 +479,7 @@ INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Oct 05, 2022 at 05:43 PM
--- Last update: Oct 21, 2022 at 08:29 PM
+-- Last update: Oct 22, 2022 at 04:02 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -507,14 +508,14 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('Ywb8McQQG9vIWRbgKYD3qD6eKe9AEZhwdpEB3PMH', 1, '192.168.86.57', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiSnZQZlN0NUtFYkh2S21BNnVNV3AwQlpMVFJVTG0zWEt1RkZrRm1RcCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI0OiJodHRwOi8vcG9rZXJvbS50ZXN0L3JvbXMiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJHRVR3JmSFMudE82QUouaUtNdXR3Uy5qMnFqRmZSbUxTc1M1c3VuNmRJZzdkRUhRVlhLWXVhIjt9', 1666384183);
+('Ywb8McQQG9vIWRbgKYD3qD6eKe9AEZhwdpEB3PMH', 1, '192.168.86.57', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiSnZQZlN0NUtFYkh2S21BNnVNV3AwQlpMVFJVTG0zWEt1RkZrRm1RcCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI5OiJodHRwOi8vcG9rZXJvbS50ZXN0L3JvbS1maWxlcyI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkdFVHcmZIUy50TzZBSi5pS011dHdTLmoycWpGZlJtTFNzUzVzdW42ZElnN2RFSFFWWEtZdWEiO30=', 1666411352);
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
 --
--- Creation: Oct 05, 2022 at 05:43 PM
+-- Creation: Oct 21, 2022 at 11:54 PM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -868,6 +869,39 @@ INSERT INTO `pma__relation` (`master_db`, `master_table`, `master_field`, `forei
 ('pokerom_db', 'roms', 'game_id', 'pokerom_db', 'games', 'id'),
 ('pokerom_db', 'users', 'email', 'pokerom_db', 'password_resets', 'email'),
 ('pokerom_db', 'users', 'id', 'pokerom_db', 'sessions', 'user_id');
+
+--
+-- Truncate table before insert `pma__pdf_pages`
+--
+
+TRUNCATE TABLE `pma__pdf_pages`;
+--
+-- Dumping data for table `pma__pdf_pages`
+--
+
+INSERT INTO `pma__pdf_pages` (`db_name`, `page_descr`) VALUES
+('pokerom_db', 'pokerom_db_schema');
+
+SET @LAST_PAGE = LAST_INSERT_ID();
+
+--
+-- Truncate table before insert `pma__table_coords`
+--
+
+TRUNCATE TABLE `pma__table_coords`;
+--
+-- Dumping data for table `pma__table_coords`
+--
+
+INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES
+('pokerom_db', 'failed_jobs', @LAST_PAGE, 62, 479),
+('pokerom_db', 'games', @LAST_PAGE, 339, 639),
+('pokerom_db', 'migrations', @LAST_PAGE, 53, 214),
+('pokerom_db', 'password_resets', @LAST_PAGE, 942, 436),
+('pokerom_db', 'personal_access_tokens', @LAST_PAGE, 1066, 28),
+('pokerom_db', 'roms', @LAST_PAGE, 988, 645),
+('pokerom_db', 'sessions', @LAST_PAGE, 1495, 23),
+('pokerom_db', 'users', @LAST_PAGE, 1437, 520);
 
 --
 -- Truncate table before insert `pma__savedsearches`

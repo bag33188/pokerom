@@ -1,4 +1,4 @@
-// noinspection JSUnresolvedFunction,JSUnresolvedVariable,ES6ConvertVarToLetConst,JSCheckFunctionSignatures,JSUnusedGlobalSymbols
+// noinspection JSUnresolvedFunction,JSUnresolvedVariable,JSCheckFunctionSignatures,JSUnusedGlobalSymbols
 
 conn = new Mongo("localhost:27017");
 
@@ -38,7 +38,7 @@ db.createCollection("rom.files", {
                     minLength: 3,
                     maxLength: 32,
                     description:
-                        "Human-readable name for the stored file. Must pertain to the pattern defined above.",
+                        "Human-readable name for the stored file. String/filename format must pertain to the pattern as defined above.",
                 },
                 uploadDate: {
                     bsonType: "date",
@@ -136,7 +136,7 @@ db.createCollection("rom.chunks", {
 });
 db.rom.chunks.createIndex({ files_id: 1, n: 1 }, { unique: true });
 
-var aggregationsObj = {
+let aggregationsObj = {
     "Calc Total ROMs Size Bytes": [
         { $group: { _id: null, total_length: { $sum: "$length" } } },
         {
