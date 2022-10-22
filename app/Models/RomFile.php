@@ -36,11 +36,11 @@ class RomFile extends MongoDbModel
     {
         return $this->hasMany(RomChunk::class, 'files_id', '_id');
     }
-
-    public function getObjectId(): ObjectId
-    {
-        return new ObjectId(strval($this->getKey()));
-    }
+    //
+    // public function getObjectId(): ObjectId
+    // {
+    //     return new ObjectId(strval($this->getKey()));
+    // }
 
     public function calculateRomSizeFromLength(): int
     {
