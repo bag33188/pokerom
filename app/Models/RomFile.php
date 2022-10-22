@@ -55,8 +55,7 @@ class RomFile extends Model
 
     public function calculateRomSizeFromLength(): int
     {
-        $baseUnitValue = 0x400; // 1024
-        return (int)ceil($this->attributes['length'] / $baseUnitValue);
+        return (int)ceil($this->attributes['length'] / 1024);
     }
 
     protected function serializeDate(DateTimeInterface $date): string
