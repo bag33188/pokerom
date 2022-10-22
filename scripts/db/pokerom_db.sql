@@ -191,7 +191,7 @@ CREATE TABLE `games` (
   `game_name` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `game_type` enum('core','spin-off','hack') COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_released` date NOT NULL,
-  `generation` tinyint(3) UNSIGNED NOT NULL,
+  `generation` tinyint(2) UNSIGNED NOT NULL,
   `region` enum('kanto','johto','hoenn','sinnoh','unova','kalos','alola','galar','other') COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(42) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
