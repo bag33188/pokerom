@@ -75,7 +75,7 @@ class UserController extends ApiController
         return response()->json([
             'success' => true,
             'token' => $newBearerToken,
-            # 'user' => $user, // do we really need to return the user object??
+            'user' => $user,
             'role' => $user->role,
             'message' => 'You have successfully logged in.'
         ]);

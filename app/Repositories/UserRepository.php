@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 
 class UserRepository implements UserRepositoryInterface
 {
-    // todo: evaluate if these methods belong in this class (i mean, they are all api/auth related which is user related ??)
-
     public function revokeApiTokens(User $user): int
     {
         return $user->tokens()->delete();
