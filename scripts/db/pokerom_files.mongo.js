@@ -16,9 +16,21 @@ db.createCollection("rom.files", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
-            required: ["filename", "length", "chunkSize", "uploadDate", "md5"],
-            description: "Represents a single file in GridFS."
+            required: [
+                "filename",
+                "length",
+                "chunkSize",
+                "uploadDate",
+                "md5",
+                "metadata",
+            ],
+            description:
+                "Represents a distinct file in GridFS as a single document.",
             properties: {
+                _id: {
+                    bsonType: "objectId",
+                    description: "The unique identifier for this document.",
+                },
                 filename: {
                     bsonType: "string",
                     pattern:
@@ -26,11 +38,12 @@ db.createCollection("rom.files", {
                     minLength: 3,
                     maxLength: 32,
                     description:
-                        "Human-readable name for stored file. Must pertain to the pattern defined above.",
+                        "Human-readable name for the stored file. Must pertain to the pattern defined above.",
                 },
                 uploadDate: {
                     bsonType: "date",
-                    description: "The date the document was first stored",
+                    description:
+                        "The date-time the document was first stored in GridFS.",
                 },
                 chunkSize: {
                     bsonType: "int",
@@ -42,13 +55,14 @@ db.createCollection("rom.files", {
                     minimum: 1044480,
                     maximum: 18253611008,
                     description:
-                        "The size of the document in bytes. (1020 KiB - 17 GiB)",
+                        "The size of the document in bytes. (1020 KiB - 17 GiB).",
                 },
                 md5: {
                     bsonType: "string",
                     minLength: 32,
                     maxLength: 32,
-                    description: "[Deprecated]: will be removed in the future.",
+                    description:
+                        "[Deprecated]: md5 hash. Will be removed in the future.",
                 },
                 metadata: {
                     bsonType: "object",
@@ -62,12 +76,13 @@ db.createCollection("rom.files", {
                                 "application/x-rom-file",
                             ],
                             description:
-                                "Content type used when uploading/downloading over HTTP.",
+                                "Content type to be specified in an HTTP-Header when uploading/downloading from the GridFS Store.",
                         },
                         romType: {
                             bsonType: "string",
                             enum: ["GB", "GBC", "GBA", "NDS", "3DS", "XCI"],
-                            description: "Specifies the type of ROM file. ",
+                            description:
+                                "The specific ROM type of the ROM file that is stored.",
                         },
                     },
                 },
@@ -92,11 +107,17 @@ db.createCollection("rom.chunks", {
         $jsonSchema: {
             bsonType: "object",
             required: ["files_id", "n", "data"],
-            description:"Represents a distinct chunk of a file in GridFS.",
+            description:
+                "Represents a distinct chunk of a file document in GridFS.",
             properties: {
+                _id: {
+                    bsonType: "objectId",
+                    description: "The unique ObjectId of the chunk.",
+                },
                 files_id: {
                     bsonType: "objectId",
-                    description: "References rom.files._id",
+                    description:
+                        'The _id of the "parent" document, as specified in the files collection. Reference: `rom.files._id`',
                 },
                 data: {
                     bsonType: "binData",
@@ -105,7 +126,7 @@ db.createCollection("rom.chunks", {
                 n: {
                     bsonType: "int",
                     description:
-                        "The sequence number of the chunk. Starts at 0",
+                        "The sequence number of the chunk. Starts at 0.",
                 },
             },
         },
