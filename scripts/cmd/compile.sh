@@ -46,6 +46,7 @@ compile() {
     # printf "\n${bold}%s${normal}\n" "Finished!"
 
     echo -e "\n${bold}Finished!${normal}"
+    date +"%T"
 }
 
 compile
