@@ -16,6 +16,8 @@ while **MariaDB** is used for _all other metadata and user data_.
 add this cookie to the current request:
 > `XDEBUG_SESSION=phpstorm; Path=/; Domain=pokerom.test; Expires=Tue, 16 Jan 2069 13:32:00 GMT;`
 
+under domain `http://pokerom.test` or `https://pokerom.test`
+
 ________
 
 ## Documentation Links

@@ -83,7 +83,7 @@ class Handler extends ExceptionHandler
 
         if ($this->isApiRequest() and !$this->isLivewireRequest()) {
 
-            $this->renderable(fn(AuthenticationException $e) => throw $this->container->make(ApiAuthException::class, [
+            $this->renderable(fn(AuthenticationException $e) => throw App::make(ApiAuthException::class, [
                     'message' => $e->getMessage(),
                     'code' => HttpStatus::HTTP_UNAUTHORIZED,
                     'headers' => [
@@ -92,7 +92,7 @@ class Handler extends ExceptionHandler
                 ]
             ));
 
-            $this->renderable(fn(NotFoundHttpException $e) => throw $this->container->make(NotFoundException::class,
+            $this->renderable(fn(NotFoundHttpException $e) => throw App::make(NotFoundException::class,
                 [
                     'message' => $e->getMessage(),
                     'code' => $this->determineErrorCodeFromException($e),
@@ -102,6 +102,8 @@ class Handler extends ExceptionHandler
                     ]
                 ]
             ));
+
+            # $this->container->make() ....
         }
 
         // handle generic \Symfony\Component\HttpKernel\Exception\HttpException
