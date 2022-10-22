@@ -26,11 +26,11 @@ class Game extends Model
         'region',
     ];
     protected $guarded = ['rom_id'];
-    protected $casts = ['date_released' => 'date'/*:Y-m-d*/];
+    protected $casts = ['date_released' => 'date']; # 'date:Y-m-d'
 
     public function rom(): BelongsTo
     {
-        return $this->belongsTo(Rom::class, 'rom_id', 'id');
+        return $this->belongsTo(Rom::class, 'rom_id', 'id', 'rom');
     }
 
     protected function gameName(): Attribute

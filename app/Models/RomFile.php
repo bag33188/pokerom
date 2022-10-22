@@ -40,14 +40,14 @@ class RomFile extends Model
 
     public function rom(): BelongsTo
     {
-        return $this->belongsTo(Rom::class, '_id', 'file_id');
+        return $this->belongsTo(Rom::class, '_id', 'file_id', 'rom');
     }
 
     public function romChunks(): HasMany
     {
-        //C:\Users\bglat\PhpstormProjects\pokerom\vendor\jenssegers\mongodb\src\Eloquent\Model.php
+        // C:\Users\bglat\PhpstormProjects\pokerom\vendor\jenssegers\mongodb\src\Eloquent\Model.php
         # \Jenssegers\Mongodb\Eloquent\Model::getIdAttribute
-        //https://github.com/jenssegers/laravel-mongodb/issues/1902#issuecomment-882694504
+        // https://github.com/jenssegers/laravel-mongodb/issues/1902#issuecomment-882694504
 
         return $this->hasMany(RomChunk::class, 'files_id', '_id');
     }
