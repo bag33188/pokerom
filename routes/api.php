@@ -25,7 +25,7 @@ Route::name('api.')->group(function () {
         fn() => response()->json(
             data: [
                 'success' => true,
-                'version' => config('app.version')
+                'version' => config('app.version'),
             ],
             status: HttpStatus::HTTP_OK,
             headers: array('X-Api-Version' => sprintf(

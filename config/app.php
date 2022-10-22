@@ -45,6 +45,7 @@ return [
     */
 
     'debug' => (bool)env('APP_DEBUG', false),
+    'ide_helper' => str_to_bool(env('USE_IDE_HELPER', true)),
 
     /*
     |--------------------------------------------------------------------------
