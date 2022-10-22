@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\RomFile;
 use App\Rules\RomFilenameRule;
-use Illuminate\Container\Container;
+use Exception;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -45,23 +45,22 @@ class UploadRomFileRequest extends FormRequest
         ];
     }
 
+    /**
+     * Retrieves the **MongoDB-GridFS DSN reference** for the _`rom.files`_ collection.
+     *
+     * @return string
+     */
     private function getRomFilesCollectionReference(): string
     {
-        $this->setContainer(Container::getInstance());
-
-        /**
-         * ROM Files Collection Reference Name (MongoDB-GridFS)
-         * @var string $romFilesCollectionReference
-         * @noinspection PhpUnusedLocalVariableInspection, PhpRedundantVariableDocTypeInspection
-         */
-        $romFilesCollectionReference = 'null';
+        # $this->setContainer(\Illuminate\Container\Container::getInstance());
 
         try {
             $romFile = $this->container->make(RomFile::class);
             $romFilesCollectionReference = "{$romFile->getConnectionName()}.{$romFile->getTable()}";
         } catch (BindingResolutionException $e) {
-            # $e->getMessage();
             $romFilesCollectionReference = RomFile::class;
+        } catch (Exception $e) {
+            $romFilesCollectionReference = 'undefined';
         } finally {
             return $romFilesCollectionReference;
         }
