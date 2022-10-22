@@ -512,7 +512,6 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('S0ao6MCqr4X1FgR5TSzYjelj27x9r0iFsihddnU0', 1, '192.168.86.57', 'PostmanRuntime/7.29.2', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoibjB0OTRjcWRLRlUyZFZkN0ZES3Ixc0I1U1V0RjBOV1pqUmt3Q2dBYSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjk6Imh0dHA6Ly9wb2tlcm9tLnRlc3QvYXBpL2dhbWVzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1666434536),
 ('S4iz0gXLxbw5ptdcBQG3vcnziRaVHfs0oZIcWWBG', 1, '192.168.86.57', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiRTZ1Wkh0WU12d2theExZRlpmWkFZYW5mRDdVRHlwenJ3eFZPSGFRdCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI0OiJodHRwOi8vcG9rZXJvbS50ZXN0L2hvbWUiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJHRVR3JmSFMudE82QUouaUtNdXR3Uy5qMnFqRmZSbUxTc1M1c3VuNmRJZzdkRUhRVlhLWXVhIjt9', 1666434459);
 
 -- --------------------------------------------------------
