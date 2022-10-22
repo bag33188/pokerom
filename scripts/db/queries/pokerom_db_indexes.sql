@@ -1,3 +1,5 @@
+# noinspection SpellCheckingInspectionForFile
+
 SELECT DISTINCT TABLE_NAME,
                 INDEX_NAME,
                 COLUMN_NAME,
