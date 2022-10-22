@@ -23,7 +23,7 @@ class RomFileResource extends JsonResource
             'length' => $this->length,
             'uploadDate' => $this->uploadDate,
             'md5' => $this->md5,
-            '_id' => $this->_id,
+            '_id' => (string)$this->_id,
             'metadata' => $this->metadata,
 
             'romChunks' => RomChunkResource::collection($this->whenLoaded('romChunks')),

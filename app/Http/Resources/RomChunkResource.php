@@ -19,8 +19,8 @@ class RomChunkResource extends JsonResource
             'n' => $this->n,
             'data' => $this->data,
 
-            'files_id' => $this->files_id,
-            '_id' => $this->_id,
+            'files_id' => (string)$this->files_id,
+            '_id' => (string)$this->_id,
 
             'romFile' => new RomFileResource($this->whenLoaded('romFile')),
         ];
