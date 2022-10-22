@@ -35,7 +35,7 @@ class RomFile extends Model
 
     protected $fillable = [
         'filename',
-        'metadata',
+        'metadata->romType',
     ];
 
     public function rom(): BelongsTo
