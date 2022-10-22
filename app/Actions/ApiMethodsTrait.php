@@ -14,7 +14,7 @@ trait ApiMethodsTrait
     protected function isLivewireRequest(): bool
     {
         $livewireHttpHeader = Request::header('X-Livewire');
-        return isset($livewireHttpHeader);
+        return !is_null($livewireHttpHeader);
     }
 
     protected function requestExpectsJson(): bool
