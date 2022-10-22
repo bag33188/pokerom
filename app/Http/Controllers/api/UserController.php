@@ -26,12 +26,9 @@ class UserController extends ApiController
     {
         $currentUser = $request->user();
         Gate::authorize('view-currentUserData', $currentUser);
-        $authToken = $this->userRepository->getCurrentUserBearerToken($request);
         return response()->json([
             'success' => true,
             'user' => $currentUser,
-            'token' => $authToken,
-            'role' => $currentUser->role,
         ], HttpStatus::HTTP_OK);
     }
 
@@ -76,7 +73,6 @@ class UserController extends ApiController
             'success' => true,
             'token' => $newBearerToken,
             'user' => $user,
-            'role' => $user->role,
             'message' => 'You have successfully logged in.'
         ]);
     }

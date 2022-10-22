@@ -34,7 +34,7 @@ class RomFileController extends WebController
      */
     public function index(): Application|Factory|View
     {
-        # Gate::authorize('view-romFile');
+        # Gate::authorize('viewAny-romFile');
 
         $romFiles = (auth()->user()->isAdmin())
             ? RomFile::with('rom')->get()
