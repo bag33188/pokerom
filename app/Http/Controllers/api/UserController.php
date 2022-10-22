@@ -69,7 +69,7 @@ class UserController extends ApiController
     public function login(LoginUserRequest $request): JsonResponse
     {
         $user = $request->input('user');
-        $apiTokenName = sprintf("%s_%s_%u", API_TOKEN_KEY, Str::slug($user->name, '_'), $user->id);
+        $apiTokenName = sprintf("%s_%u", Str::slug(uniqid(API_TOKEN_PREFIX, true), '_'), $user->id);
         $bearerToken = $this->userRepository->generateApiToken($user, $apiTokenName);
 
         $removeExtraProps = fn(int|string $value, string $key): bool => in_array($key, ['id', 'role', 'name', 'email']);

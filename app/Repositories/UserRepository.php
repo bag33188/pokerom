@@ -28,7 +28,7 @@ class UserRepository implements UserRepositoryInterface
         return $revokeAll ? $user->tokens()->delete() : $request->user()->currentAccessToken()->delete();
     }
 
-    public function generateApiToken(User $user, string $tokenName = API_TOKEN_KEY, array $tokenAbilities = []): string
+    public function generateApiToken(User $user, string $tokenName = API_TOKEN_PREFIX, array $tokenAbilities = []): string
     {
         if ($user->isAdmin()) $tokenAbilities = ["*"];
 

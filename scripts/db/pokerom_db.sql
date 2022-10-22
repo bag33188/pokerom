@@ -5,7 +5,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2022 at 07:00 PM
+-- Generation Time: Oct 23, 2022 at 12:08 AM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.10
 
@@ -182,7 +182,6 @@ TRUNCATE TABLE `failed_jobs`;
 -- Table structure for table `games`
 --
 -- Creation: Oct 22, 2022 at 10:24 AM
--- Last update: Oct 22, 2022 at 10:26 AM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -358,16 +357,16 @@ TRUNCATE TABLE `password_resets`;
 --
 -- Table structure for table `personal_access_tokens`
 --
--- Creation: Oct 22, 2022 at 05:00 PM
--- Last update: Oct 22, 2022 at 05:00 PM
+-- Creation: Oct 22, 2022 at 09:59 PM
+-- Last update: Oct 22, 2022 at 10:03 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(96) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(70) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` char(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
@@ -392,7 +391,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'auth_token_brock_glatman_1', 'b9abb196d9e6eeb2133faf0768986288d8101bf25acebf5838d0538aa6124391', '[\"*\"]', NULL, NULL, '2022-10-22 23:59:04', '2022-10-22 23:59:04');
+(1, 'App\\Models\\User', 1, 'auth_token_635468bda3e2f995629115_1', '83ada9a83f9061b98e18eb9ee0f957af8e8be6bd8e8ecad271d4e71b7bed05e3', '[\"*\"]', NULL, NULL, '2022-10-23 05:03:41', '2022-10-23 05:03:41');
 
 -- --------------------------------------------------------
 
@@ -400,7 +399,6 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Oct 22, 2022 at 10:10 AM
--- Last update: Oct 22, 2022 at 10:26 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -482,15 +480,15 @@ INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_typ
 --
 -- Table structure for table `sessions`
 --
--- Creation: Oct 05, 2022 at 05:43 PM
--- Last update: Oct 22, 2022 at 11:08 AM
+-- Creation: Oct 22, 2022 at 09:57 PM
+-- Last update: Oct 22, 2022 at 10:07 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE `sessions` (
   `id` char(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ip_address` varchar(46) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_activity` int(11) NOT NULL
@@ -512,7 +510,7 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('S4iz0gXLxbw5ptdcBQG3vcnziRaVHfs0oZIcWWBG', 1, '192.168.86.57', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiRTZ1Wkh0WU12d2theExZRlpmWkFZYW5mRDdVRHlwenJ3eFZPSGFRdCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI0OiJodHRwOi8vcG9rZXJvbS50ZXN0L3JvbXMiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJHRVR3JmSFMudE82QUouaUtNdXR3Uy5qMnFqRmZSbUxTc1M1c3VuNmRJZzdkRUhRVlhLWXVhIjt9', 1666436890);
+('UwPLWq3FSxvp7LjUiBY7ZdFcC3BCGdxKRQ65X5VQ', 1, '192.168.86.57', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiR0ZYM2g0THJSdFFHQkpwMERYNENMUFhCUVZ4a3A2aERWNWpLcE41YyI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR0VUdyZkhTLnRPNkFKLmlLTXV0d1MuajJxakZmUm1MU3NTNXN1bjZkSWc3ZEVIUVZYS1l1YSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjQ6Imh0dHA6Ly9wb2tlcm9tLnRlc3Qvcm9tcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1666476459);
 
 -- --------------------------------------------------------
 
@@ -533,7 +531,7 @@ CREATE TABLE `users` (
   `two_factor_recovery_codes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
   `role` enum('admin','user','guest') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` char(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `current_team_id` bigint(20) UNSIGNED DEFAULT NULL,
   `profile_photo_path` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -827,6 +825,13 @@ TRUNCATE TABLE `pma__column_info`;
 --
 
 TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Dumping data for table `pma__table_uiprefs`
+--
+
+INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
+('bag33188', 'pokerom_db', 'sessions', '{\"CREATE_TIME\":\"2022-10-22 14:57:57\",\"col_order\":[0,1,2,3,4,5],\"col_visib\":[1,1,1,1,1,1]}', '2022-10-22 22:07:19');
+
 --
 -- Truncate table before insert `pma__tracking`
 --

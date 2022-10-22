@@ -17,7 +17,7 @@ const _FULLSTOP = "\u{002E}";
 /** directory that contains all bin rom files */
 const ROM_FILES_DIRNAME = 'rom_files';
 /** the key name for sanctum personal access token */
-const API_TOKEN_KEY = 'auth_token';
+const API_TOKEN_PREFIX = 'auth_token_';
 /** concat: Pok, &eacute; ... output: Pok&eacute; */
 const POKE_EACUTE = "Pok" . _EACUTE;
 
