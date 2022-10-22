@@ -41,12 +41,14 @@ class UserController extends ApiController
             $this->authorize('view', $currentUser);
             $userApiToken = $this->userRepository->getCurrentUserBearerToken($request);
 
-            $encryption_key = openssl_random_pseudo_bytes(64);
-            $initial_vector = (int)substr(strval(intval(md5($encryption_key), 16)), 0, 16);
+            $encryption_key = random_bytes(64 * random_int(16, 32));
             $ciphering_algorithm = "AES-256-CTR";
+            # $method = 'aes-256-cbc';
             $options = 0; # OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING
-            $encrypted = openssl_encrypt($userApiToken, $ciphering_algorithm, $encryption_key, $options, $initial_vector);
-            $decrypted = openssl_decrypt($encrypted, $ciphering_algorithm, $encryption_key, $options, $initial_vector);
+            $ivlen = openssl_cipher_iv_length($ciphering_algorithm);
+            $initialization_vector = openssl_random_pseudo_bytes($ivlen);
+            $encrypted = openssl_encrypt($userApiToken, $ciphering_algorithm, $encryption_key, $options, $initialization_vector);
+            $decrypted = openssl_decrypt($encrypted, $ciphering_algorithm, $encryption_key, $options, $initialization_vector);
 
             return response()->json([
                 'success' => true,
