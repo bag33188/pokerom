@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
 use Jenssegers\Mongodb\Relations\HasMany;
-use MongoDB\BSON\ObjectId;
 
 /** @mixin GridFSModel */
 class RomFile extends MongoDbModel
@@ -27,6 +26,18 @@ class RomFile extends MongoDbModel
         'uploadDate' => 'datetime',
     ];
 
+    protected $guarded = [
+        'chunkSize',
+        'length',
+        'md5',
+        'uploadDate',
+    ];
+
+    protected $fillable = [
+        'filename',
+        'metadata',
+    ];
+
     public function rom(): BelongsTo
     {
         return $this->belongsTo(Rom::class, '_id', 'file_id');
@@ -34,16 +45,14 @@ class RomFile extends MongoDbModel
 
     public function romChunks(): HasMany
     {
+
         //C:\Users\bglat\PhpstormProjects\pokerom\vendor\jenssegers\mongodb\src\Eloquent\Model.php
-        //\Jenssegers\Mongodb\Eloquent\Model::getIdAttribute
+        # \Jenssegers\Mongodb\Eloquent\Model::getIdAttribute
         //https://github.com/jenssegers/laravel-mongodb/issues/1902#issuecomment-882694504
+
         return $this->hasMany(RomChunk::class, 'files_id', '_id');
     }
 
-    public function getKeyAsObjectId(): ObjectId
-    {
-        return new ObjectId(strval($this->getKey()));
-    }
 
     public function calculateRomSizeFromLength(): int
     {

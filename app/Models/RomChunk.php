@@ -20,6 +20,12 @@ class RomChunk extends MongoDbModel
     public $incrementing = false;
     public $timestamps = false;
 
+    protected $guarded = [
+        'files_id',
+        'n',
+        'data',
+    ];
+
     public function romFile(): BelongsTo
     {
         return $this->belongsTo(RomFile::class, 'files_id', '_id', 'romFile');

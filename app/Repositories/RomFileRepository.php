@@ -23,7 +23,7 @@ class RomFileRepository implements RomFileRepositoryInterface
 
     public function downloadFromGrid(RomFile $romFile): RomFile
     {
-        $romFileId = $romFile->getKeyAsObjectId();
+        $romFileId = $romFile->getKey();
         ProcessRomFileDownload::dispatchNow($romFileId);
         return $romFile;
     }
@@ -33,7 +33,7 @@ class RomFileRepository implements RomFileRepositoryInterface
         // clone romFile object for use in method's return value
         $romFileClone = $romFile->replicateQuietly(); // mute extraneous events while cloning
         RomFileDeleting::dispatch($romFile);
-        ProcessRomFileDeletion::dispatchSync($romFile->getKeyAsObjectId());
+        ProcessRomFileDeletion::dispatchSync($romFile->getKey());
         return $romFileClone;
     }
 
