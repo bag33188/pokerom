@@ -37,7 +37,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('view-currentUserData', fn(User $user, User $model): bool => $user->id === $model->id);
+        Gate::define('view-currentUserData', fn(User $user, User $model): bool => ($user->id === $model->id) || $user->isAdmin());
 
         // give admin user complete access to all endpoints and actions
         Gate::before(function (User $user, string $ability) {
