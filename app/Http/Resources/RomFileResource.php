@@ -26,6 +26,7 @@ class RomFileResource extends JsonResource
             '_id' => $this->_id,
             'metadata' => $this->metadata,
 
+            'romChunks' => RomChunkResource::collection($this->whenLoaded('romChunks')),
             'rom' => new RomResource($this->whenLoaded('rom')),
         ];
     }
