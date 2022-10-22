@@ -17,6 +17,7 @@ db.createCollection("rom.files", {
         $jsonSchema: {
             bsonType: "object",
             required: ["filename", "length", "chunkSize", "uploadDate", "md5"],
+            description: "Represents a single file in GridFS."
             properties: {
                 filename: {
                     bsonType: "string",
@@ -91,6 +92,7 @@ db.createCollection("rom.chunks", {
         $jsonSchema: {
             bsonType: "object",
             required: ["files_id", "n", "data"],
+            description:"Represents a distinct chunk of a file in GridFS.",
             properties: {
                 files_id: {
                     bsonType: "objectId",
