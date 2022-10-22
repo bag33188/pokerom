@@ -42,7 +42,8 @@ return new class extends Migration {
                 $collection->unsignedBigInteger('length');
                 $collection->dateTime('uploadDate');
                 $collection->char('md5', MD5_HASH_LENGTH);
-                /*! note: metadata `field-object` (of this collection) cannot be represented in this migration */
+                $collection->enum('metadata.romType', ROMFILE_TYPES);
+                $collection->string('metadata.contentType', 36);
             });
         }
     }
