@@ -14,7 +14,7 @@ const MAX_GAME_REGION_LENGTH = 8;
 const MIN_GAME_REGION_LENGTH = 4;
 
 
-const MAX_ROM_NAME_LENGTH = 28;
+const MAX_ROM_NAME_LENGTH = 30;
 const MIN_ROM_NAME_LENGTH = 3;
 const MAX_ROM_TYPE_LENGTH = 4;
 const MIN_ROM_TYPE_LENGTH = 2;
@@ -27,8 +27,8 @@ const MIN_USER_EMAIL_LENGTH = NULL;
 const MAX_USER_PASSWORD_LENGTH = 50;
 const MIN_USER_PASSWORD_LENGTH = 8;
 
-const MIN_ROM_FILENAME_LENGTH = 3; // includes filename and extension
-const MAX_ROM_FILENAME_LENGTH = 32; // includes filename and extension
+const MIN_ROM_FILENAME_LENGTH = 1; // includes filename and extension
+const MAX_ROM_FILENAME_LENGTH = 34; // includes filename and extension
 
 // Database //
 

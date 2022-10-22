@@ -17,6 +17,8 @@ use Illuminate\Validation\Rule;
 /** @mixin Game */
 class StoreGameRequest extends FormRequest
 {
+    private string|int|null $romId = null;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -30,13 +32,15 @@ class StoreGameRequest extends FormRequest
     public function prepareForValidation(): void
     {
         $this->mergeIfMissing([
-            'rom_id' => null,
+            'rom_id' => $this->romId,
         ]);
+
+        $this->romId = $this->query('rom_id') ?? $this->input('rom_id');
 
         $this->merge([
             'date_released' => Date::create($this->input('date_released'))->format('Y-m-d'),
             'game_name' => preg_replace(EACUTE_PATTERN, 'e', $this->input('game_name')),
-            'rom_id' => $this->query('rom_id'),
+            'rom_id' => (int)$this->romId,
         ]);
     }
 
@@ -63,7 +67,7 @@ class StoreGameRequest extends FormRequest
     {
         return [
             'slug.unique' => "The game name {$this->input('game_name')} already exists.",
-            'rom_id.unique' => "The ROM with id of {$this->query('rom_id')} already has a game.",
+            'rom_id.unique' => "The ROM with id of {$this->romId} already has a game.",
         ];
     }
 }

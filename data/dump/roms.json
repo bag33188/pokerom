@@ -502,5 +502,17 @@
         "has_file": true,
         "created_at": "2022-08-26T02:32:25.000000Z",
         "updated_at": "2022-08-26T02:32:25.000000Z"
+    },
+    {
+        "id": 43,
+        "rom_name": "Pokemon_Star_V0_2-RF-Decrypted",
+        "game_id": 43,
+        "file_id": "6353c123c496dc8261001593",
+        "rom_size": 4194304,
+        "rom_type": "3DS",
+        "has_game": true,
+        "has_file": true,
+        "created_at": "2022-10-22T10:10:37.000000Z",
+        "updated_at": "2022-10-22T10:10:37.000000Z"
     }
 ]

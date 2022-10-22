@@ -502,5 +502,17 @@
         "created_at": "2022-08-26T02:33:25.000000Z",
         "updated_at": "2022-08-30T05:26:12.000000Z",
         "rom_id": 42
+    },
+    {
+        "id": 43,
+        "game_name": "Pokémon Stars",
+        "game_type": "Hack",
+        "date_released": "2018-02-10",
+        "generation": 7,
+        "region": "Alola",
+        "slug": "pokemon-stars",
+        "created_at": "2022-10-22T10:26:49.000000Z",
+        "updated_at": "2022-10-22T10:26:49.000000Z",
+        "rom_id": 43
     }
 ]

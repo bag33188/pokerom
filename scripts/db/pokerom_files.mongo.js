@@ -34,9 +34,9 @@ db.createCollection("rom.files", {
                 filename: {
                     bsonType: "string",
                     pattern:
-                        "^(?:([\\w\\d\\-_]{1,28})(?:\\.)(3ds|xci|nds|gbc|gb|gba))$",
+                        "^(?:([\\w\\d\\-_]{1,30})(?:\\.)(3ds|xci|nds|gbc|gb|gba))$",
                     minLength: 3,
-                    maxLength: 32,
+                    maxLength: 34,
                     description:
                         "Human-readable name for the stored file. String/filename format must pertain to the pattern as defined above.",
                 },
