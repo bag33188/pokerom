@@ -69,8 +69,8 @@ class UserController extends ApiController
             return response()->json([
                 'success' => false,
                 'message' => 'Error: appropriate level of "randomness" was not achieved.',
-                'token' => "failed to generate token"
-            ], HttpStatus::HTTP_BAD_REQUEST);
+                'token' => "Failed to parse token"
+            ], HttpStatus::HTTP_I_AM_A_TEAPOT);
         }
     }
 
