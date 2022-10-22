@@ -65,6 +65,12 @@ class UserController extends ApiController
                 'message' => $e->getMessage() ?? 'Error: Unauthorized',
                 'token' => NULL
             ], HttpStatus::HTTP_UNAUTHORIZED);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error: appropriate level of "randomness" was not achieved.',
+                'token' => "failed to generate token"
+            ], HttpStatus::HTTP_BAD_REQUEST);
         }
     }
 
