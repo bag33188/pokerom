@@ -1,0 +1,2 @@
+mysql:host=localhost;port=3306;dbname=pokerom_db;user=bag33188;password=3931Sunflower$
+mongodb://brock:3931Sunflower!@localhost:27017/pokerom_files?authSource=admin&authMechanism=SCRAM-SHA-256

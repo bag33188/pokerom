@@ -81,8 +81,6 @@ class GridFSConnection
      */
     private function dsn(): string
     {
-        // full dsn format:
-        # mongodb://{username}:{password}@{host}:{port}/{database}?authSource={authDb}&authMechanism={authMethod}
         return "mongodb://{$this->host}:{$this->port}/";
     }
 
