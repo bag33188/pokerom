@@ -62,7 +62,7 @@ class FarewellNotification extends Notification
     {
         return (new MailMessage)
             ->subject($this->subject)
-            ->from(...array_values($this->from))
+            ->from(...(list('address' => $address, 'name' => $name) = $this->from))
             ->line($this->messageBody)
             ->line($this->closer);
     }

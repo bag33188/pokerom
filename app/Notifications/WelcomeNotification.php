@@ -66,7 +66,7 @@ class WelcomeNotification extends Notification
             ->subject($this->subject)
             ->from(...array_values($this->from))
             ->line($this->messageBody)
-            ->action(...array_values($this->action))
+            ->action(...(list('text' => $text, 'url' => $url) = $this->action))
             ->line($this->closer);
     }
 
