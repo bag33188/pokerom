@@ -41,9 +41,9 @@ class UserController extends ApiController
             $this->authorize('view', $currentUser);
             $userApiToken = $this->userRepository->getCurrentUserBearerToken($request);
 
-            $encryption_key = random_bytes(64 * random_int(16, 32));
+            $encryption_key = random_bytes(strlen($currentUser->password));
             $ciphering_algorithm = "AES-256-CTR";
-            # $method = 'aes-256-cbc';
+            # $method = 'aes-256-cbc'; // AES-256-GCM
             $options = 0; # OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING
             $ivlen = openssl_cipher_iv_length($ciphering_algorithm);
             $initialization_vector = openssl_random_pseudo_bytes($ivlen);
