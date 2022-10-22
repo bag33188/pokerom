@@ -6,7 +6,7 @@ db = conn.getDB("admin");
 
 db.createUser({
     user: "brock",
-    pwd: "3931Sunflower!", /* passwordPrompt() */
+    pwd: "3931Sunflower!" /* passwordPrompt() */,
     roles: [{ role: "dbAdmin", db: "pokerom_files" }],
 });
 
@@ -24,29 +24,35 @@ db.createCollection("rom.files", {
                         "^(?:([\\w\\d\\-_]{1,28})(?:\\.)(3ds|xci|nds|gbc|gb|gba))$",
                     minLength: 3,
                     maxLength: 32,
+                    description:
+                        "Human-readable name for stored file. Must pertain to the pattern defined above.",
                 },
                 uploadDate: {
                     bsonType: "date",
+                    description: "The date the document was first stored",
                 },
                 chunkSize: {
                     bsonType: "int",
                     minimum: 261120,
+                    description: "The size of each chunk in bytes.",
                 },
                 length: {
                     bsonType: ["int", "long"],
                     minimum: 1044480,
                     maximum: 18253611008,
                     description:
-                        "length can either be int32 or int64. ranges are 1044480 (1020 kibibytes) through 18253611008 (17 gibibytes)",
+                        "The size of the document in bytes. (1020 KiB - 17 GiB)",
                 },
                 md5: {
                     bsonType: "string",
                     minLength: 32,
                     maxLength: 32,
+                    description: "[Deprecated]: will be removed in the future.",
                 },
                 metadata: {
                     bsonType: "object",
                     required: ["contentType", "romType"],
+                    description: "Additional information about the file.",
                     properties: {
                         contentType: {
                             bsonType: "string",
@@ -54,10 +60,13 @@ db.createCollection("rom.files", {
                                 "application/octet-stream",
                                 "application/x-rom-file",
                             ],
+                            description:
+                                "Content type used when uploading/downloading over HTTP.",
                         },
                         romType: {
                             bsonType: "string",
                             enum: ["GB", "GBC", "GBA", "NDS", "3DS", "XCI"],
+                            description: "Specifies the type of ROM file. ",
                         },
                     },
                 },
@@ -89,9 +98,12 @@ db.createCollection("rom.chunks", {
                 },
                 data: {
                     bsonType: "binData",
+                    description: "The chunk's payload as a BSON Binary type.",
                 },
                 n: {
                     bsonType: "int",
+                    description:
+                        "The sequence number of the chunk. Starts at 0",
                 },
             },
         },
