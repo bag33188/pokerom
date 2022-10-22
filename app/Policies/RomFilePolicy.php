@@ -10,6 +10,11 @@ class RomFilePolicy
 {
     use HandlesAuthorization;
 
+    public function viewAny(User $user): bool
+    {
+        return $user->isAdmin() || $user->tokenCan('viewAny-romFile');
+    }
+
     /**
      * Determine whether the user can create models.
      *

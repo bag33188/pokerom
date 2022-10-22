@@ -83,7 +83,7 @@ Route::name('api.')->group(function () {
         });
 
         Route::controller(RomFileController::class)->prefix('rom-files')->name('rom-files.')->group(function () {
-            Route::get('/', 'index')->name('index')->middleware(['auth:sanctum', 'ability:viewAny-romFile']);
+            Route::get('/', 'index')->name('index');
             Route::post('/upload', 'upload')->name('upload');
             Route::get('/{romFileId}', 'show')->name('show');
             Route::delete('/{romFileId}', 'destroy')->name('destroy');
