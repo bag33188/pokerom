@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Classes\AbstractGridChunkModel as GridChunkModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
+use Jenssegers\Mongodb\Eloquent\Model;
 use Jenssegers\Mongodb\Relations\BelongsTo;
 
 /** @mixin GridChunkModel */
-class RomChunk extends MongoDbModel
+class RomChunk extends Model
 {
     use HasFactory;
 

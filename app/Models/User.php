@@ -35,6 +35,13 @@ class User extends Authenticatable
     ];
 
     /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = ['role'];
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var array
@@ -44,7 +51,11 @@ class User extends Authenticatable
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
-        # 'role'
+        'profile_photo_path',
+        'current_team_id',
+        'two_factor_confirmed_at',
+        'email_verified_at',
+        'profile_photo_url'
     ];
 
     /**

@@ -6,11 +6,11 @@ use Classes\AbstractGridFSModel as GridFSModel;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Jenssegers\Mongodb\Eloquent\Model as MongoDbModel;
+use Jenssegers\Mongodb\Eloquent\Model;
 use Jenssegers\Mongodb\Relations\HasMany;
 
 /** @mixin GridFSModel */
-class RomFile extends MongoDbModel
+class RomFile extends Model
 {
     use HasFactory;
 
