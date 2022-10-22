@@ -15,10 +15,9 @@ return new class extends Migration {
 
     public function up(): void
     {
-        /*! don't use down methods as it could overwrite current files in db */
         if (config('database.connections.mongodb.gridfs.allowMigrations', false) === true) {
             Schema::connection($this->connection)->create('rom.chunks', function (Blueprint $collection) {
-                $filesIdIndexName = 'files_id_1_n_1';
+                $filesIdIndexName = 'files_id_1_n_1'; // files_id: ascending, n: ascending
                 $collection->index(
                     columns: ['files_id', 'n'],
                     name: $filesIdIndexName,
