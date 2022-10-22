@@ -24,6 +24,8 @@
 
             const anchorClasses = ["underline", "text-blue-400", "hover:text-blue-500"];
 
+            @verbatim
+            /** @type {Array<EmulatorObject>} */
             let emulators = [
                 {
                     href: "https://desmume.org/",
@@ -56,6 +58,7 @@
                     platform: "nintendo switch/lite (nx)"
                 }
             ];
+            @endverbatim
 
             emulatorLinksList.style.setProperty("list-style-type", "none", "important");
 
