@@ -8,7 +8,6 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Response;
 use MongoDB\Driver\Exception\BulkWriteException;
 use Psr\Log\LogLevel;
@@ -61,7 +60,7 @@ class Handler extends ExceptionHandler
             //
         });
 
-        $this->renderable(fn(BulkWriteException $e) => throw App::make(MongoWriteException::class,
+        $this->renderable(fn(BulkWriteException $e) => throw $this->container->make(MongoWriteException::class,
             [
                 'message' => $e->getMessage(),
                 'code' => HttpStatus::HTTP_CONFLICT,
@@ -71,7 +70,7 @@ class Handler extends ExceptionHandler
             ]
         ));
 
-        $this->renderable(fn(QueryException $e) => throw App::make(SqlQueryException::class,
+        $this->renderable(fn(QueryException $e) => throw $this->container->make(SqlQueryException::class,
             [
                 'message' => $e->getMessage(),
                 'code' => HttpStatus::HTTP_CONFLICT,
@@ -83,7 +82,7 @@ class Handler extends ExceptionHandler
 
         if ($this->isApiRequest() and !$this->isLivewireRequest()) {
 
-            $this->renderable(fn(AuthenticationException $e) => throw App::make(ApiAuthException::class, [
+            $this->renderable(fn(AuthenticationException $e) => throw $this->container->make(ApiAuthException::class, [
                     'message' => $e->getMessage(),
                     'code' => HttpStatus::HTTP_UNAUTHORIZED,
                     'headers' => [
@@ -92,7 +91,7 @@ class Handler extends ExceptionHandler
                 ]
             ));
 
-            $this->renderable(fn(NotFoundHttpException $e) => throw App::make(NotFoundException::class,
+            $this->renderable(fn(NotFoundHttpException $e) => throw $this->container->make(NotFoundException::class,
                 [
                     'message' => $e->getMessage(),
                     'code' => $this->determineErrorCodeFromException($e),
@@ -103,7 +102,6 @@ class Handler extends ExceptionHandler
                 ]
             ));
 
-            # $this->container->make() ....
         }
 
         // handle generic \Symfony\Component\HttpKernel\Exception\HttpException
