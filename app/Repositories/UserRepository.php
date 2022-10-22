@@ -15,7 +15,8 @@ class UserRepository implements UserRepositoryInterface
 
     public function generateApiToken(User $user): string
     {
-        return $user->createToken(API_TOKEN_KEY)->plainTextToken;
+        $abilities = $user->isAdmin() ? ["*"] : [];
+        return $user->createToken(API_TOKEN_KEY, $abilities)->plainTextToken;
     }
 
     public function getCurrentUserBearerToken(Request $request): ?string

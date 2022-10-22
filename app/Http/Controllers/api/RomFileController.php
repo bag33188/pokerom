@@ -11,7 +11,6 @@ use App\Interfaces\RomFileRepositoryInterface;
 use App\Models\RomFile;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
@@ -27,17 +26,16 @@ class RomFileController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
      * @return RomFileCollection
      */
-    public function index(Request $request): RomFileCollection
+    public function index(): RomFileCollection
     {
-//        if (Gate::allows('viewAny', RomFile::class) || $request->user()->tokenCan('viewAny-romFile')) {
-//            $romFiles = RomFile::all();
-//            return new RomFileCollection($romFiles);
-//        } else {
-//            abort(HttpStatus::HTTP_FORBIDDEN);
-//        }
+        # if (Gate::allows('viewAny', RomFile::class) || \Request::user()->tokenCan('viewAny-romFile')) {
+        # $romFiles = RomFile::all();
+        # return new RomFileCollection($romFiles);
+        # } else {
+        # abort(HttpStatus::HTTP_FORBIDDEN);
+        # }
         Gate::authorize('viewAny-romFile');
         $romFiles = RomFile::all();
         return new RomFileCollection($romFiles);
