@@ -36,10 +36,15 @@ class ProcessRomFileUpload implements ShouldQueue
      */
     public function handle(RomFileProcessor $romFileProcessor): void
     {
-        $romFileType = strtoupper(explode('.', $this->romFilename, 2)[1]);
         $romFileProcessor->upload($this->romFilename, [
             'contentType' => 'application/octet-stream',
-            'romType' => $romFileType
+            'romType' => $this->getRomFileType()
         ]);
+    }
+
+    private function getRomFileType(): string
+    {
+        $fileExt = explode(_FULLSTOP, $this->romFilename, 2)[1];
+        return strtoupper($fileExt);
     }
 }
