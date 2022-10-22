@@ -11,4 +11,6 @@ interface GameQueriesInterface
     function getAllRomsWithNoGameSQL(): Collection;
 
     function getAllGamesThatAreROMHacksSQL(): Collection;
+
+    function getCountOfAllCoreGames(): int;
 }

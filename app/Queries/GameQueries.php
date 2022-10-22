@@ -41,4 +41,9 @@ class GameQueries implements GameQueriesInterface
         $query = DB::raw($sql);
         return $this->game->fromQuery($query);
     }
+
+    public function getCountOfAllCoreGames(): int
+    {
+        return $this->game->where('game_type', '=', GAME_TYPES[0])->count();
+    }
 }

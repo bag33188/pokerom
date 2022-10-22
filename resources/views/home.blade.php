@@ -154,7 +154,8 @@
                                     <wbr/>
                                     This databank contains
                                     <span id="adv-count"><!--more than-->{{ $romsDisplayCount }}+</span>
-                                    ROMs, including all 33 of the core Pok&#233;mon ROMs.
+                                    ROMs, including all {{ GameQueries::getCountOfAllCoreGames() }} of the core Pok&#233;mon
+                                    ROMs.
                                 </p>
                                 <br/>
                                 <p class="italic mt-3 mb-0 pb-0 inline-flex flex-row text-sm">
