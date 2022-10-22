@@ -26,12 +26,12 @@ class RomFileQueries implements RomFileQueriesInterface
     public function getListOfRomFilesInStorageDirectory(): array
     {
         $storageRomFilesList = Storage::disk('public')->files(ROM_FILES_DIRNAME);
-        $matchRomFilePattern = fn(string $romFilename): false|int => preg_match("/([\w\-_]+)\.(gb[ac]?|3ds|xci|nds)$/i", $romFilename);
+        $matchRomFilePattern = fn(string $romFilename): false|int => preg_match(str_replace('/^', '/', ROM_FILENAME_PATTERN), $romFilename);
         $removeStorageNameFromRomFilename = fn(string $romFilename): string => str_replace(sprintf("%s/", ROM_FILES_DIRNAME), '', $romFilename);
 
         $romFilesList = array_map(
             $removeStorageNameFromRomFilename,
-            array_values(array_filter($storageRomFilesList, $matchRomFilePattern, ARRAY_FILTER_USE_BOTH))
+            array_values(array_filter($storageRomFilesList, $matchRomFilePattern, mode: ARRAY_FILTER_USE_BOTH))
         );
 
         $sortByStringLength = fn(string $a, string $b): int => strlen($a) <=> strlen($b);

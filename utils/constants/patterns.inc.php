@@ -7,7 +7,7 @@
 /** rom filename regular expression */
 const ROM_FILENAME_PATTERN =
     /** @lang RegExp */
-"/^([\w\d\-_]{1,30})\.(gb(?:[ac]?)|nds|3ds|xci)$/i";
+"/^([\w\d\-_]{1,30})\.(gb[ac]?|nds|3ds|xci)$/i";
 /** game name regular expression */
 const GAME_NAME_PATTERN = /** @lang RegExp */
 "/^Pokemon\s.+$/i";
