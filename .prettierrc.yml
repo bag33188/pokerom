@@ -2,6 +2,6 @@ trailingComma: "es5"
 semi: true
 singleQuote: false
 overrides:
-  - files: "*.dsn.yml"
+  - files: ["*dsn.yml", "*dsn.yaml"]
     options:
       singleQuote: true
