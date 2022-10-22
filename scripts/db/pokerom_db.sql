@@ -405,7 +405,7 @@ CREATE TABLE `roms` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `rom_name` varchar(28) COLLATE utf8mb4_unicode_ci NOT NULL,
   `game_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `file_id` char(24) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'References the `mongodb.pokerom_files.rom.files._id` field in GridFS.',
+  `file_id` char(24) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Points to a single document within GridFS. Reference Path: `mongodb.pokerom_files.rom.files._id`',
   `rom_size` int(10) UNSIGNED NOT NULL DEFAULT 1020,
   `rom_type` enum('gb','gbc','gba','nds','3ds','xci') COLLATE utf8mb4_unicode_ci NOT NULL,
   `has_game` tinyint(1) NOT NULL DEFAULT 0,
