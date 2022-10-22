@@ -13,12 +13,10 @@ return new class extends Migration {
     protected $connection = 'mongodb';
     public $withinTransaction = true;
 
-    protected final const _ALLOW_MIGRATIONS_ = false;
-
     public function up(): void
     {
         /*! don't use down methods as it could overwrite current files in db */
-        if (self::_ALLOW_MIGRATIONS_ === true) {
+        if (config('database.connections.mongodb.gridfs.allowMigrations', false) === true) {
             Schema::connection($this->connection)->create('rom.chunks', function (Blueprint $collection) {
                 $filesIdIndexName = 'files_id_1_n_1';
                 $collection->index(
@@ -38,8 +36,7 @@ return new class extends Migration {
 
     public function down(): void
     {
-        /*! don't use down methods as it could overwrite current files in db */
-        if (self::_ALLOW_MIGRATIONS_ === true) {
+        if (config('database.connections.mongodb.gridfs.allowMigrations', false) === true) {
             Schema::dropIfExists('rom.chunks');
         }
     }

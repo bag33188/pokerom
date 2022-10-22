@@ -14,9 +14,6 @@ return new class extends Migration {
     protected $connection = 'mongodb';
     public $withinTransaction = true;
 
-    protected final const _ALLOW_MIGRATIONS_ = false;
-
-
     /**
      * Run the migrations.
      *
@@ -24,8 +21,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        /*!! never execute. current data is intended to be permanent !!*/
-        if (self::_ALLOW_MIGRATIONS_ === true) {
+        if (config('database.connections.mongodb.gridfs.allowMigrations', false) === true) {
             Schema::connection($this->connection)->create('rom.files', function (Blueprint $collection) {
                 $collection->index(
                     columns: ['length', 'filename'],
@@ -57,8 +53,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        /*! don't use down methods as it could overwrite current files in db */
-        if (self::_ALLOW_MIGRATIONS_ === true) {
+        if (config('database.connections.mongodb.gridfs.allowMigrations', false) === true) {
             Schema::dropIfExists('rom.files');
         }
     }

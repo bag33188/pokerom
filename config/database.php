@@ -81,6 +81,7 @@ return [
             'gridfs' => [
                 'chunkSize' => (int)env('DB_GFS_CHUNK_SIZE', 0x3FC00),
                 'bucketName' => env('DB_GFS_BUCKET_NAME', 'fs'),
+                'allowMigrations' => str_to_bool(env('ALLOW_GFS_MIGRATIONS', false)),
             ]
         ],
 
