@@ -5,7 +5,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2022 at 02:59 AM
+-- Generation Time: Oct 23, 2022 at 03:02 AM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.10
 
@@ -397,7 +397,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 --
 -- Table structure for table `roms`
 --
--- Creation: Oct 22, 2022 at 10:10 AM
+-- Creation: Oct 23, 2022 at 01:01 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -406,7 +406,7 @@ CREATE TABLE `roms` (
   `rom_name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `game_id` bigint(20) UNSIGNED DEFAULT NULL,
   `file_id` char(24) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Points to a single document within GridFS. Reference Path: `mongodb.pokerom_files.rom.files._id`',
-  `rom_size` bigint(10) UNSIGNED NOT NULL DEFAULT 1020,
+  `rom_size` bigint(12) UNSIGNED NOT NULL DEFAULT 1020,
   `rom_type` enum('gb','gbc','gba','nds','3ds','xci') COLLATE utf8mb4_unicode_ci NOT NULL,
   `has_game` tinyint(1) NOT NULL DEFAULT 0,
   `has_file` tinyint(1) NOT NULL DEFAULT 0,
