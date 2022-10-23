@@ -5,7 +5,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2022 at 03:02 AM
+-- Generation Time: Oct 23, 2022 at 03:04 AM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.10
 
@@ -530,7 +530,7 @@ CREATE TABLE `users` (
   `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
   `role` enum('admin','user','guest') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
   `remember_token` char(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `current_team_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `current_team_id` mediumint(8) UNSIGNED DEFAULT NULL,
   `profile_photo_path` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
