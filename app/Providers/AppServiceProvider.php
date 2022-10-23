@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         if ($this->app->isLocal()) {
+            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
             if (config('app.ide_helper') === true) {
                 $this->app->register(IdeHelperServiceProvider::class);
             }

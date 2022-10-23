@@ -223,6 +223,7 @@ return [
         'RomFileQueries' => \App\Facades\RomFileQueriesFacade::class,
         'RomFileRepository' => \App\Facades\RomFileRepositoryFacade::class,
         'UserRepository' => \App\Facades\UserRepositoryFacade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
     ])->toArray(),
 
 ];
