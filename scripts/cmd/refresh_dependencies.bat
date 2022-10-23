@@ -7,7 +7,7 @@
 CALL :REFRESH_DEPENDENCIES
 EXIT /b %ERRORLEVEL%
 
-REM SETX POKEROM "%USERPROFILE%\PhpstormProjects\pokerom" /m
+REM SETX POKEROM "%USERPROFILE%\PhpstormProjects\pokerom"
 
 :REFRESH_DEPENDENCIES
     REM escape newlines for sequencing commands
