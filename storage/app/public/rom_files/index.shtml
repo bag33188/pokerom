@@ -11,5 +11,13 @@
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, veniam?
             </p>
         </div>
+        <div>
+            <p>This page has been accessed <!--#include virtual="/cgi-bin/counter.pl" --> times.</p>
+            <br/>
+            <!--#exec cgi="/cgi-bin/printenv.pl"-->
+
+            <!--https://www.oreilly.com/openbook/cgi/ch05_07.html-->
+            <!--https://httpd.apache.org/docs/current/howto/ssi.html-->
+        </div>
     </body>
 </html>
