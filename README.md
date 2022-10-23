@@ -31,6 +31,7 @@ ________
 * [Vite Docs][]
 * [Tailwind CSS Docs][]
 * [Laravel Jetstream Docs][]
+* [Laravel MongoDB Docs][]
 
 [MariaDB Server Docs]: https://mariadb.com/kb/en/documentation/ "v10.9.3"
 [MongoDB Docs]: https://www.mongodb.com/docs/manual/ "v6.0"
@@ -41,6 +42,7 @@ ________
 [Vite Docs]: https://vitejs.dev/guide "v3.1.3"
 [Tailwind CSS Docs]: https://tailwindcss.com/docs "v3.1.8"
 [Laravel Jetstream Docs]: https://jetstream.laravel.com/2.x/introduction.html "v2.12.3"
+[Laravel MongoDB Docs]: https://github.com/jenssegers/laravel-mongodb#laravel-mongodb "3.9.2"
 
 [//]: # "## Database Links:"
 [//]: # ([mongodb php driver page]: https://www.php.net/manual/en/mongodb.installation.pecl.php)
