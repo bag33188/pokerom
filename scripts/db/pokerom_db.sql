@@ -5,7 +5,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2022 at 03:20 AM
+-- Generation Time: Oct 23, 2022 at 03:24 AM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.10
 
@@ -52,7 +52,7 @@ END$$
 
 DROP PROCEDURE IF EXISTS `spUpdateRomFromRomFileData`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `spUpdateRomFromRomFileData` (IN `ROM_FILE_ID` CHAR(24), IN `ROM_FILE_SIZE` BIGINT UNSIGNED, IN `ROM_ID` BIGINT UNSIGNED)   BEGIN
-    DECLARE `base_bytes_unit` INTEGER(4) UNSIGNED ZEROFILL DEFAULT POW(32, 2); -- 1024
+    DECLARE `base_bytes_unit` INTEGER(4) UNSIGNED DEFAULT POW(32, 2); -- 1024
     DECLARE `_rollback` BOOLEAN DEFAULT FALSE;
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET `_rollback` = TRUE;
     START TRANSACTION;
@@ -98,9 +98,9 @@ CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_SIZE` BIGINT UNSI
     DECLARE `size_unit` CHAR(2);
     DECLARE `size_str` VARCHAR(6);
     -- size calculation values
-    DECLARE `one_kibibyte` SMALLINT UNSIGNED ZEROFILL DEFAULT 1024;
-    DECLARE `one_kilobyte` SMALLINT UNSIGNED ZEROFILL DEFAULT 1000;
-    DECLARE `one_gigabyte` MEDIUMINT UNSIGNED ZEROFILL DEFAULT POWER(`one_kilobyte`, 2);
+    DECLARE `one_kibibyte` SMALLINT UNSIGNED DEFAULT 1024;
+    DECLARE `one_kilobyte` SMALLINT UNSIGNED DEFAULT 1000;
+    DECLARE `one_gigabyte` MEDIUMINT UNSIGNED DEFAULT POWER(`one_kilobyte`, 2);
 
     -- MEGABYTES
     IF `ROM_SIZE` > `one_kibibyte` AND `ROM_SIZE` < `one_gigabyte` THEN
