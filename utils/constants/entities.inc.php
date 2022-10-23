@@ -24,3 +24,7 @@ const POKE_EACUTE = "Pok" . _EACUTE;
 
 /** Pokemon Green release date */
 const FIRST_POKEMON_GAME_RELEASE_DATE = '1996-02-27';
+
+// global env config paths //
+const USE_SQL_TRIGGERS = 'database.connections.mysql.use_triggers';
+const ALLOW_GFS_MIGRATIONS = 'database.connections.mongodb.allowMigrations';

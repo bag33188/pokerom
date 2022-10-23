@@ -23,7 +23,7 @@ class Administrator
      */
     public function handle(Request $request, Closure $next): Response|RedirectResponse|JsonResponse
     {
-        if ($request->user()->isAdmin()) {
+        if ($request->user()->getAttributeValue('role') === USER_ROLES[array_search('admin', USER_ROLES)]) {
             return $next($request);
         } else if (!$request->expectsJson()) {
             return response()->redirectTo(RouteServiceProvider::HOME);

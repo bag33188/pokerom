@@ -8,12 +8,6 @@ use App\Models\Rom;
 class RomObserver
 {
     /**
-     * use database triggers instead of ORM logic
-     * @var bool
-     */
-    private bool $useDbTriggerLogic = true;
-
-    /**
      * Handle events after all transactions are committed.
      *
      * @var bool
@@ -39,7 +33,7 @@ class RomObserver
 
     public function deleted(Rom $rom): void
     {
-        if ($this->useDbTriggerLogic === false) {
+        if (config(USE_SQL_TRIGGERS) === false) {
             $rom->game()->delete();
         }
     }

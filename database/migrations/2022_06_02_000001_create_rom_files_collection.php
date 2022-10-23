@@ -21,7 +21,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        if (config('database.connections.mongodb.gridfs.allowMigrations', false) === true) {
+        if (config(ALLOW_GFS_MIGRATIONS, FALSE) === true) {
 
             $metadataRomTypes = collect(ROMFILE_TYPES)->map(
                 fn(string $romType): string => str_replace(_FULLSTOP, '', $romType)
@@ -60,7 +60,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        if (config('database.connections.mongodb.gridfs.allowMigrations', false) === true) {
+        if (config(ALLOW_GFS_MIGRATIONS, FALSE) === true) {
             Schema::dropIfExists('rom.files');
         }
     }

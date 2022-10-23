@@ -29,7 +29,7 @@ class GameFactory extends Factory
         return [
             'id' => $randomGame['id'],
             'game_name' => $randomGame['game_name'],
-            'slug' => Game::slugifyGameName($randomGame['game_name']),
+            'slug' => Str::slug($randomGame['game_name']),
             'date_released' => Date::create($randomGame['date_released'])->format('Y-m-d'),
             'generation' => $randomGame['generation'],
             'game_type' => $randomGame['game_type'],

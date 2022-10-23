@@ -61,6 +61,7 @@ return [
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
+            'use_triggers' => str_to_bool(env('USE_MARIADB_TRIGGER_LOGIC', 'false'))
         ],
 
         'mongodb' => [
@@ -82,8 +83,8 @@ return [
             'gridfs' => [
                 'chunkSize' => (int)env('DB_GFS_CHUNK_SIZE', 0x3FC00),
                 'bucketName' => env('DB_GFS_BUCKET_NAME', 'fs'),
-                'allowMigrations' => str_to_bool(env('ALLOW_GFS_MIGRATIONS', false)),
-            ]
+            ],
+            'allowMigrations' => str_to_bool(env('ALLOW_MONGODB_MIGRATIONS', 'false')),
         ],
 
         'pgsql' => [

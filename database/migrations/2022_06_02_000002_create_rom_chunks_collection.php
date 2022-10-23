@@ -15,7 +15,7 @@ return new class extends Migration {
 
     public function up(): void
     {
-        if (config('database.connections.mongodb.gridfs.allowMigrations', false) === true) {
+        if (config(ALLOW_GFS_MIGRATIONS, FALSE) === true) {
             Schema::create('rom.chunks', function (Blueprint $collection) {
                 $filesIdIndexName = 'files_id_1_n_1'; // files_id: ascending, n: ascending
 
@@ -38,7 +38,7 @@ return new class extends Migration {
 
     public function down(): void
     {
-        if (config('database.connections.mongodb.gridfs.allowMigrations', false) === true) {
+        if (config(ALLOW_GFS_MIGRATIONS, FALSE) === true) {
             Schema::dropIfExists('rom.chunks');
         }
     }
