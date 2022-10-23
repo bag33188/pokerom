@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->char('password', BCRYPT_PASSWORD_LENGTH);
             $table->enum('role', USER_ROLES)->default(UserRoleEnum::DEFAULT->value);
             $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
+            $table->mediumInteger('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();
         });

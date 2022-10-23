@@ -5,7 +5,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2022 at 12:08 AM
+-- Generation Time: Oct 23, 2022 at 02:59 AM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.10
 
@@ -358,7 +358,6 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Oct 22, 2022 at 09:59 PM
--- Last update: Oct 22, 2022 at 10:03 PM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -407,7 +406,7 @@ CREATE TABLE `roms` (
   `rom_name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `game_id` bigint(20) UNSIGNED DEFAULT NULL,
   `file_id` char(24) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Points to a single document within GridFS. Reference Path: `mongodb.pokerom_files.rom.files._id`',
-  `rom_size` int(10) UNSIGNED NOT NULL DEFAULT 1020,
+  `rom_size` bigint(10) UNSIGNED NOT NULL DEFAULT 1020,
   `rom_type` enum('gb','gbc','gba','nds','3ds','xci') COLLATE utf8mb4_unicode_ci NOT NULL,
   `has_game` tinyint(1) NOT NULL DEFAULT 0,
   `has_file` tinyint(1) NOT NULL DEFAULT 0,
@@ -480,8 +479,7 @@ INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_typ
 --
 -- Table structure for table `sessions`
 --
--- Creation: Oct 22, 2022 at 09:57 PM
--- Last update: Oct 22, 2022 at 10:07 PM
+-- Creation: Oct 22, 2022 at 11:14 PM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -825,13 +823,6 @@ TRUNCATE TABLE `pma__column_info`;
 --
 
 TRUNCATE TABLE `pma__table_uiprefs`;
---
--- Dumping data for table `pma__table_uiprefs`
---
-
-INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
-('bag33188', 'pokerom_db', 'sessions', '{\"CREATE_TIME\":\"2022-10-22 14:57:57\",\"col_order\":[0,1,2,3,4,5],\"col_visib\":[1,1,1,1,1,1]}', '2022-10-22 22:07:19');
-
 --
 -- Truncate table before insert `pma__tracking`
 --
