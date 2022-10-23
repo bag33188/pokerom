@@ -5,7 +5,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2022 at 03:24 AM
+-- Generation Time: Oct 23, 2022 at 03:31 AM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.10
 
@@ -158,7 +158,7 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `failed_jobs`;
 CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
   `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -358,7 +358,6 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Oct 22, 2022 at 09:59 PM
--- Last update: Oct 23, 2022 at 01:19 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -399,7 +398,6 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Oct 23, 2022 at 01:01 AM
--- Last update: Oct 23, 2022 at 01:16 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -482,7 +480,6 @@ INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Oct 22, 2022 at 11:14 PM
--- Last update: Oct 23, 2022 at 01:19 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -632,7 +629,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `games`

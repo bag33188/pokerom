@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Fortify\Fortify;
 
-return new class extends Migration
-{
+return new class extends Migration {
     protected $connection = 'mysql';
     public $withinTransaction = true;
 
@@ -15,21 +14,21 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
             $table->text('two_factor_secret')
-                    ->after('password')
-                    ->nullable();
+                ->after('password')
+                ->nullable();
 
             $table->text('two_factor_recovery_codes')
-                    ->after('two_factor_secret')
-                    ->nullable();
+                ->after('two_factor_secret')
+                ->nullable();
 
             if (Fortify::confirmsTwoFactorAuthentication()) {
                 $table->timestamp('two_factor_confirmed_at')
-                        ->after('two_factor_recovery_codes')
-                        ->nullable();
+                    ->after('two_factor_recovery_codes')
+                    ->nullable();
             }
         });
     }
@@ -39,7 +38,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn(array_merge([
