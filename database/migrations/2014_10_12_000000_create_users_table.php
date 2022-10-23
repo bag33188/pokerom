@@ -30,7 +30,7 @@ return new class extends Migration {
         });
 
         Schema::table('users', function (Blueprint $table) {
-            $table->char('remember_token', 60)->change();
+            $table->char('remember_token', REMEMBER_TOKEN_LENGTH)->change();
         });
     }
 

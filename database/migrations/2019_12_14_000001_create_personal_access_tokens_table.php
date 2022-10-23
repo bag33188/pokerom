@@ -34,7 +34,7 @@ return new class extends Migration {
         });
 
         Schema::table('personal_access_tokens', function (Blueprint $table) {
-            $table->string('tokenable_type', 96)->change(); // <-- part of `morphs('tokenable')`
+            $table->string('tokenable_type', PERSONAL_ACCESS_TOKEN_TYPE_LENGTH)->change(); // <-- part of `morphs('tokenable')`
         });
     }
 
