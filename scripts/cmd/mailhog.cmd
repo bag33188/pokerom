@@ -5,7 +5,7 @@
 :: =====================
 
 REM Launches `mailhog.exe` for assistance
-REM in testing email functionality within the application
+REM in testing laravel email functionality within the application
 
 CALL :LAUNCH_MAILHOG
 EXIT /b %ERRORLEVEL%

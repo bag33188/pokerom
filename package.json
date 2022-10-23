@@ -26,11 +26,12 @@
     },
     "private": true,
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
         "start": "sh ./scripts/cmd/open-url.sh http://pokerom.test",
         "dev": "vite",
         "build": "vite build",
-        "seeds": "NODE_ENV=development node ./scripts/helpers/seeds.test"
+        "seeds": "NODE_ENV=development node ./scripts/helpers/seeds.test",
+        "refresh-dependencies": "composer update && composer install && npm install && npm update && npm run build",
+        "clear-cache": "git rm -rf --cached ."
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
