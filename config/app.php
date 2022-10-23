@@ -202,7 +202,7 @@ return [
         App\Providers\JetstreamServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\QueryServiceProvider::class,
-
+        Jenssegers\Mongodb\MongodbServiceProvider::class,
     ],
 
     /*
