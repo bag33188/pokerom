@@ -13,12 +13,10 @@
         </div>
         <div>
             <p>This page has been accessed <!--#include virtual="/cgi-bin/counter.pl" --> times.</p>
-            <br/>
-            <!--#exec cgi="/cgi-bin/printenv.pl"-->
         </div>
-        <div style="margin-top: 2em;">
+        <div>
             <ul>
-                <li><a href="https://www.oreilly.com/openbook/cgi/ch05_07.html" target="_blank">How to use <code>/cgi-bin/counter.pl</code></a></li>
+                <li><a href="https://www.oreilly.com/openbook/cgi/ch05_07.html" target="_blank">How to use <samp>/cgi-bin/counter.pl</samp></a></li>
                 <li><a href="https://httpd.apache.org/docs/current/howto/ssi.html" target="_blank">Apache SSI Docs</a></li>
             </ul>
         </div>
