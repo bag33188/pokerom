@@ -44,6 +44,10 @@ class GameQueries implements GameQueriesInterface
 
     public function getCountOfAllCoreGames(): int
     {
-        return $this->game->where('game_type', '=', GAME_TYPES[0])->count();
+        return $this->game->where(
+            'game_type',
+            '=',
+            GAME_TYPES[array_search('core', GAME_TYPES)]
+        )->count();
     }
 }

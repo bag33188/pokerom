@@ -14,7 +14,7 @@
                     @foreach($romsWithNoAssocGame as $rom)
                         <option
                             value="{{ $rom->id }}"
-                            @selected(intval(old('rom_id')) == $rom->id)
+                            @selected((int)old('rom_id') == $rom->id)
                         >{{ $rom->rom_name }}</option>
                     @endforeach
                 </x-form-select>
