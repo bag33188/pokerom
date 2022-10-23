@@ -2,7 +2,7 @@
 <html lang="en-US">
     <head>
         <meta charset="UTF-8" />
-        <title>Title</title>
+        <title>ROM Files Storage</title>
     </head>
     <body>
         <div>
@@ -15,9 +15,12 @@
             <p>This page has been accessed <!--#include virtual="/cgi-bin/counter.pl" --> times.</p>
             <br/>
             <!--#exec cgi="/cgi-bin/printenv.pl"-->
-
-            <!--https://www.oreilly.com/openbook/cgi/ch05_07.html-->
-            <!--https://httpd.apache.org/docs/current/howto/ssi.html-->
+        </div>
+        <div style="margin-top: 2em;">
+            <ul>
+                <li><a href="https://www.oreilly.com/openbook/cgi/ch05_07.html" target="_blank">How to use <code>/cgi-bin/counter.pl</code></a></li>
+                <li><a href="https://httpd.apache.org/docs/current/howto/ssi.html" target="_blank">Apache SSI Docs</a></li>
+            </ul>
         </div>
     </body>
 </html>
