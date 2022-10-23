@@ -4,6 +4,9 @@ use App\Http\Controllers\Api\GameController;
 use App\Http\Controllers\Api\RomController;
 use App\Http\Controllers\Api\RomFileController;
 use App\Http\Controllers\Api\UserController;
+use App\Models\Game;
+use App\Models\Rom;
+use App\Models\RomFile;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response as HttpStatus;
@@ -94,3 +97,11 @@ Route::name('api.')->group(function () {
     });
 
 });
+
+if (App::environment('local')) {
+    Route::middleware('guest')->group(function () {
+        Route::get('/seeds/roms', fn() => Rom::all());
+        Route::get('/seeds/games', fn() => Game::all());
+        Route::get('/seeds/rom-files', fn() => RomFile::all());
+    });
+}
