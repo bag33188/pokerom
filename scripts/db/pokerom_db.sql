@@ -5,7 +5,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2022 at 03:04 AM
+-- Generation Time: Oct 23, 2022 at 03:20 AM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.10
 
@@ -52,7 +52,7 @@ END$$
 
 DROP PROCEDURE IF EXISTS `spUpdateRomFromRomFileData`$$
 CREATE DEFINER=`bag33188`@`%` PROCEDURE `spUpdateRomFromRomFileData` (IN `ROM_FILE_ID` CHAR(24), IN `ROM_FILE_SIZE` BIGINT UNSIGNED, IN `ROM_ID` BIGINT UNSIGNED)   BEGIN
-    DECLARE `base_bytes_unit` INTEGER(4) UNSIGNED DEFAULT POW(32, 2); -- 1024
+    DECLARE `base_bytes_unit` INTEGER(4) UNSIGNED ZEROFILL DEFAULT POW(32, 2); -- 1024
     DECLARE `_rollback` BOOLEAN DEFAULT FALSE;
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET `_rollback` = TRUE;
     START TRANSACTION;
@@ -98,9 +98,9 @@ CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_SIZE` BIGINT UNSI
     DECLARE `size_unit` CHAR(2);
     DECLARE `size_str` VARCHAR(6);
     -- size calculation values
-    DECLARE `one_kibibyte` SMALLINT UNSIGNED DEFAULT 1024;
-    DECLARE `one_kilobyte` SMALLINT UNSIGNED DEFAULT 1000;
-    DECLARE `one_gigabyte` MEDIUMINT UNSIGNED DEFAULT POWER(`one_kilobyte`, 2);
+    DECLARE `one_kibibyte` SMALLINT UNSIGNED ZEROFILL DEFAULT 1024;
+    DECLARE `one_kilobyte` SMALLINT UNSIGNED ZEROFILL DEFAULT 1000;
+    DECLARE `one_gigabyte` MEDIUMINT UNSIGNED ZEROFILL DEFAULT POWER(`one_kilobyte`, 2);
 
     -- MEGABYTES
     IF `ROM_SIZE` > `one_kibibyte` AND `ROM_SIZE` < `one_gigabyte` THEN
@@ -358,6 +358,7 @@ TRUNCATE TABLE `password_resets`;
 -- Table structure for table `personal_access_tokens`
 --
 -- Creation: Oct 22, 2022 at 09:59 PM
+-- Last update: Oct 23, 2022 at 01:19 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -390,7 +391,7 @@ TRUNCATE TABLE `personal_access_tokens`;
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'auth_token_635468bda3e2f995629115_1', '83ada9a83f9061b98e18eb9ee0f957af8e8be6bd8e8ecad271d4e71b7bed05e3', '[\"*\"]', NULL, NULL, '2022-10-23 05:03:41', '2022-10-23 05:03:41');
+(1, 'App\\Models\\User', 1, 'auth_token_635496b793514941050074_1', 'a96aba86e37bf4ac721d616d99e6cade1b16dc4e3bd9b363a190dabf3a439933', '[\"*\"]', NULL, NULL, '2022-10-23 08:19:51', '2022-10-23 08:19:51');
 
 -- --------------------------------------------------------
 
@@ -398,6 +399,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 -- Table structure for table `roms`
 --
 -- Creation: Oct 23, 2022 at 01:01 AM
+-- Last update: Oct 23, 2022 at 01:16 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -480,6 +482,7 @@ INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_typ
 -- Table structure for table `sessions`
 --
 -- Creation: Oct 22, 2022 at 11:14 PM
+-- Last update: Oct 23, 2022 at 01:19 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -508,14 +511,14 @@ TRUNCATE TABLE `sessions`;
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('UwPLWq3FSxvp7LjUiBY7ZdFcC3BCGdxKRQ65X5VQ', 1, '192.168.86.57', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiR0ZYM2g0THJSdFFHQkpwMERYNENMUFhCUVZ4a3A2aERWNWpLcE41YyI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR0VUdyZkhTLnRPNkFKLmlLTXV0d1MuajJxakZmUm1MU3NTNXN1bjZkSWc3ZEVIUVZYS1l1YSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjQ6Imh0dHA6Ly9wb2tlcm9tLnRlc3Qvcm9tcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1666476459);
+('phD2MtMqJxZmkUVg7kmQioehhaUWu02ijryJq6QV', 1, '192.168.86.57', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiUzFKVTFvUTYza2c4Q0Y2Q3lEdmVrMlI2M25Scno3UWk1SW03YTh4NCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR0VUdyZkhTLnRPNkFKLmlLTXV0d1MuajJxakZmUm1MU3NTNXN1bjZkSWc3ZEVIUVZYS1l1YSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjQ6Imh0dHA6Ly9wb2tlcm9tLnRlc3Qvcm9tcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1666487972);
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
 --
--- Creation: Oct 21, 2022 at 11:54 PM
+-- Creation: Oct 23, 2022 at 01:17 AM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -530,7 +533,7 @@ CREATE TABLE `users` (
   `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
   `role` enum('admin','user','guest') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
   `remember_token` char(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `current_team_id` mediumint(8) UNSIGNED DEFAULT NULL,
+  `current_team_id` mediumint(8) UNSIGNED ZEROFILL DEFAULT NULL,
   `profile_photo_path` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
