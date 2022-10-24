@@ -39,6 +39,4 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-
-    RewriteRule (^|/)storage/rom_files(/([\w\d_\-]+\.?(?:gb[ac]?|nds|3ds|xci))|$) - [F]
 </IfModule>
