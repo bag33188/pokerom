@@ -96,12 +96,12 @@ Route::name('api.')->group(function () {
 
     });
 
-});
+    if (App::environment('local')) {
+        Route::prefix('seeds')->name('seeds.')->middleware('guest')->group(function () {
+            Route::get('/roms', fn() => Rom::all())->name('roms');
+            Route::get('/games', fn() => Game::all())->name('games');
+            Route::get('/rom-files', fn() => RomFile::all())->name('rom-files');
+        });
+    }
 
-if (App::environment('local')) {
-    Route::prefix('seeds')->name('api.seeds.')->middleware('guest')->group(function () {
-        Route::get('/roms', fn() => Rom::all())->name('roms');
-        Route::get('/games', fn() => Game::all())->name('games');
-        Route::get('/rom-files', fn() => RomFile::all())->name('rom-files');
-    });
-}
+});
