@@ -93,13 +93,20 @@ db.createCollection("rom.files", {
     validationAction: "error",
 });
 db.rom.files.createIndex({ filename: 1, uploadDate: 1 });
+db.rom.files.createIndex({ length: -1 }, { expireAfterSeconds: 600 });
 db.rom.files.createIndex(
     { filename: 1 },
     { unique: true, partialFilterExpression: { filename: { $exists: true } } }
 );
 db.rom.files.createIndex(
     { filename: "text", "metadata.romType": "text" },
-    { sparse: true }
+    {
+        sparse: true,
+        weights: {
+            filename: 10,
+            "metadata.romType": 5,
+        },
+    }
 );
 
 db.createCollection("rom.chunks", {
