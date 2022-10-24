@@ -31,7 +31,7 @@ return new class extends Migration {
         });
 
         Schema::table('sessions', function (Blueprint $table) {
-            $table->string('ip_address', IP_ADDRESS_LENGTH)->change();
+            $table->string('ip_address', IP_ADDRESS_LENGTH)->nullable()->change();
         });
     }
 
