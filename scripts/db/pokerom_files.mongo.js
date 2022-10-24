@@ -94,12 +94,12 @@ db.createCollection("rom.files", {
 });
 db.rom.files.createIndex({ filename: 1, uploadDate: 1 });
 db.rom.files.createIndex(
-    { length: -1 },
-    { expireAfterSeconds: 600, name: "length_ttl600_-1" }
-);
-db.rom.files.createIndex(
     { filename: 1 },
     { unique: true, partialFilterExpression: { filename: { $exists: true } } }
+);
+db.rom.files.createIndex(
+    { length: -1 },
+    { expireAfterSeconds: 600, name: "length_TTL:600s_-1" }
 );
 db.rom.files.createIndex(
     { filename: "text", "metadata.romType": "text" },

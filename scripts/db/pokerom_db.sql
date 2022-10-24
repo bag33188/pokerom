@@ -435,7 +435,7 @@ ALTER TABLE `migrations`
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
+  ADD INDEX `password_resets_email_index` (`email`);
 
 --
 -- Indexes for table `personal_access_tokens`
@@ -443,7 +443,7 @@ ALTER TABLE `password_resets`
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+  ADD INDEX `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
 -- Indexes for table `roms`
@@ -459,8 +459,8 @@ ALTER TABLE `roms`
 --
 ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `sessions_user_id_index` (`user_id`),
-  ADD KEY `sessions_last_activity_index` (`last_activity`);
+  ADD INDEX `sessions_user_id_index` (`user_id`),
+  ADD INDEX `sessions_last_activity_index` (`last_activity`);
 
 --
 -- Indexes for table `users`
