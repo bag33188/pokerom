@@ -23,7 +23,7 @@ return new class extends Migration {
                 ->nullable()->index()
                 ->references('id')->on('users')
                 ->onDelete(ConstraintOption::CASCADE->value)
-                ->onUpdate(ConstraintOption::RESTRICT->value);
+                ->onUpdate(ConstraintOption::SET_NULL->value);
             $table->ipAddress()->nullable();
             $table->text('user_agent')->nullable();
             $table->longText('payload');

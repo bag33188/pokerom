@@ -27,7 +27,7 @@ return new class extends Migration {
             ->references('id')
                 ->on('users')
                 ->cascadeOnDelete()
-                ->onUpdate(ConstraintOption::RESTRICT->value);
+                ->cascadeOnUpdate();
             $table->timestamp('last_used_at')->nullable();
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();

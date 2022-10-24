@@ -22,7 +22,7 @@ return new class extends Migration {
                 ->unique()->references('id')
                 ->on('roms')
                 ->onDelete(ConstraintOption::CASCADE->value)
-                ->onUpdate(ConstraintOption::CASCADE->value);
+                ->onUpdate(ConstraintOption::RESTRICT->value);
             $table->string('game_name', MAX_GAME_NAME_LENGTH);
             $table->enum('game_type', GAME_TYPES);
             $table->date('date_released');
