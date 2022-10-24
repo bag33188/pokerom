@@ -1,8 +1,9 @@
 const fs = require("fs");
 const path = require("path");
 const axios = require("axios").default;
+const { green, yellow, blue, red } = require("colors");
 
-console.log("Generating seeds...\n");
+console.log("Generating seeds...\n".blue);
 
 const __basedir__ = __dirname.replace(
     /([\x2F\x5C]scripts)([\x2F\x5C]helpers)/i,
@@ -21,19 +22,25 @@ const romsDataPath = path.join(dumpDir, "roms.json");
 const romFilesDataPath = path.join(dumpDir, "rom_files.json");
 
 async function generateResourceData() {
-    console.log("Fetching data from API...\n");
+    try {
+        console.log("Fetching data from API...".yellow);
 
-    let { data: games } = await axios.get(`${apiUrl}/seeds/games`);
-    let { data: roms } = await axios.get(`${apiUrl}/seeds/roms`);
-    let { data: romFiles } = await axios.get(`${apiUrl}/seeds/rom-files`);
+        let { data: games } = await axios.get(`${apiUrl}/seeds/games`);
+        let { data: roms } = await axios.get(`${apiUrl}/seeds/roms`);
+        let { data: romFiles } = await axios.get(`${apiUrl}/seeds/rom-files`);
+        console.log("Data fetched successfully!\n".green);
 
-    console.log("Writing data to files...\n");
+        console.log("Writing data to files...".yellow);
 
-    fs.writeFileSync(gamesDataPath, JSON.stringify(games));
+        fs.writeFileSync(gamesDataPath, JSON.stringify(games));
 
-    fs.writeFileSync(romsDataPath, JSON.stringify(roms));
+        fs.writeFileSync(romsDataPath, JSON.stringify(roms));
 
-    fs.writeFileSync(romFilesDataPath, JSON.stringify(romFiles));
+        fs.writeFileSync(romFilesDataPath, JSON.stringify(romFiles));
+        console.log("Data written successfully!\n".green);
+    } catch (e) {
+        throw e;
+    }
 }
 
 generateResourceData()
@@ -46,7 +53,11 @@ generateResourceData()
 
         let { romsData, gamesData, romFilesData } = seedData;
 
-        console.log("Mapping resource data...\n");
+        // console.log(`'roms' length: ${seedData.romsData.length}\n\n`.blue);
+        // console.log(`'games' length: ${seedData.gamesData.length}`.blue);
+        // console.log(`'rom_files' length: ${seedData.romFilesData.length}`.blue);
+
+        console.log("Mapping resource data...".yellow);
 
         gamesData = gamesData.map((gameData) => {
             // delete gameData["id"];
@@ -85,8 +96,9 @@ generateResourceData()
             // delete romFileData["md5"];
             return romFileData;
         });
+        console.log("Resource data mapped successfully!\n".green);
 
-        console.log("Writing resource data to file...\n");
+        console.log("Writing resource data to file...".yellow);
 
         fs.writeFileSync(
             seedFilePath,
@@ -97,6 +109,8 @@ generateResourceData()
             })
         );
 
-        console.log("Seeds generated!");
+        console.log("Resource data written successfully!\n".green);
+
+        console.log("Seeds generated!".blue);
     })
     .catch((err) => console.error(err));
