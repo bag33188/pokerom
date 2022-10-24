@@ -6,6 +6,7 @@ use App\Models\Game;
 use App\Models\Rom;
 use Date;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends Factory<Game>
