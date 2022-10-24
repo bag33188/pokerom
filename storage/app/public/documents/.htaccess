@@ -1,2 +1,10 @@
 DirectoryIndex disabled
 Options +ExecCGI +Indexes +Includes
+
+
+AddType text/html .html
+AddHandler server-parsed .html
+AddType text/html .html
+AddOutputFilter INCLUDES .html
+AddType text/html .shtml
+AddHandler server-parsed .shtml

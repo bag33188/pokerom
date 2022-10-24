@@ -20,13 +20,6 @@
         </IfModule>
     </IfModule>
 
-    AddType text/html .html
-    AddHandler server-parsed .html
-    AddType text/html .html
-    AddOutputFilter INCLUDES .html
-    AddType text/html .shtml
-    AddHandler server-parsed .shtml
-
     <Files info.php>
         Require ip 127.0.0.1
     </Files>

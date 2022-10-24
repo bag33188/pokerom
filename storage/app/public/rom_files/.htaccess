@@ -1,6 +1,13 @@
 DirectoryIndex index.shtml
 Options +ExecCGI +Includes +FollowSymLinks
 
+AddType text/html .html
+AddHandler server-parsed .html
+AddType text/html .html
+AddOutputFilter INCLUDES .html
+AddType text/html .shtml
+AddHandler server-parsed .shtml
+
 <FilesMatch "\.(gb[ac]?|[n3]ds|xci)$">
     Require all denied
 </FilesMatch>
