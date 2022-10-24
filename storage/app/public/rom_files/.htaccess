@@ -3,10 +3,10 @@ Options +ExecCGI +Indexes
 
 # DirectoryIndex index.shtml
 
-<FilesMatch "^\.">
+<FilesMatch "\.(gb[ac]?|[n3]ds|xci)$">
     Require all denied
 </FilesMatch>
 
-<Files ~ "^(.*\.url)$">
-    Require all denied
+<Files ~ "^index\.">
+    Require all granted
 </Files>
