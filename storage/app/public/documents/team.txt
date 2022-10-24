@@ -1,0 +1,61 @@
+Sayan (Infernape) (M) @ Life Orb
+Ability: Iron Fist
+EVs: 32 HP / 224 Atk / 252 Spe
+Jolly Nature
+IVs: 0 SpA
+- Fire Punch
+- Mach Punch
+- Thunder Punch
+- Earthquake
+
+Navi (Clefable) (F) @ Wiki Berry
+Ability: Unaware
+EVs: 252 HP / 96 Def / 120 SpA / 40 SpD
+Bold Nature
+IVs: 0 Atk
+- Moonblast
+- Icy Wind
+- Aromatherapy
+- Wish
+
+Skyron (Skarmory) (F) @ Rocky Helmet
+Ability: Sturdy
+EVs: 252 HP / 252 Def / 4 SpD
+Impish Nature
+IVs: 0 SpA
+- Iron Head
+- Roost
+- Stealth Rock
+- Whirlwind
+
+Turba (Gastrodon) (F) @ Leftovers
+Ability: Storm Drain
+EVs: 252 HP / 4 Def / 252 SpD
+Calm Nature
+IVs: 0 Atk
+- Scald
+- Earth Power
+- Clear Smog
+- Recover
+
+VISTA (Porygon-Z) @ Normalium Z
+Ability: Adaptability
+Shiny: Yes
+EVs: 40 HP / 40 Def / 252 SpA / 176 Spe
+Modest Nature
+IVs: 0 Atk
+- Hyper Beam
+- Discharge
+- Nasty Plot
+- Agility
+
+Ares (Gallade) (M) @ Galladite
+Ability: Justified
+EVs: 252 Atk / 4 Def / 252 Spe
+Jolly Nature
+IVs: 0 SpA
+- Psycho Cut
+- Close Combat
+- Leaf Blade
+- Swords Dance
+

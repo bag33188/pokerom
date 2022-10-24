@@ -1,7 +1,5 @@
-DirectoryIndex disabled
-Options +ExecCGI +Indexes
-
-# DirectoryIndex index.shtml
+DirectoryIndex index.shtml
+Options +ExecCGI
 
 <FilesMatch "\.(gb[ac]?|[n3]ds|xci)$">
     Require all denied

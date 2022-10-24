@@ -1,0 +1,6 @@
+*.mp3
+*.mp4
+!*.txt
+!onedrive_core_roms.url
+!.htaccess
+!.user.ini

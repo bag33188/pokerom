@@ -1,4 +1,5 @@
 *
 !public/
 !public/rom_files
+!public/documents
 !.gitignore
