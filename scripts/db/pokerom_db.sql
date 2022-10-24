@@ -5,7 +5,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2022 at 02:25 AM
+-- Generation Time: Oct 24, 2022 at 02:32 AM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.10
 
@@ -32,9 +32,32 @@ USE `pokerom_db`;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `failed_jobs`
+--
+-- Creation: Oct 05, 2022 at 05:43 PM
+--
+
+DROP TABLE IF EXISTS `failed_jobs`;
+CREATE TABLE `failed_jobs` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- RELATIONSHIPS FOR TABLE `failed_jobs`:
+--
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `games`
 --
--- Creation: Oct 22, 2022 at 10:24 AM
+-- Creation: Oct 24, 2022 at 12:32 AM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -182,9 +205,59 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `password_resets`
+--
+-- Creation: Oct 05, 2022 at 05:43 PM
+--
+
+DROP TABLE IF EXISTS `password_resets`;
+CREATE TABLE `password_resets` (
+  `email` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` char(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- RELATIONSHIPS FOR TABLE `password_resets`:
+--   `email`
+--       `users` -> `email`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+-- Creation: Oct 22, 2022 at 09:59 PM
+-- Last update: Oct 23, 2022 at 11:05 PM
+--
+
+DROP TABLE IF EXISTS `personal_access_tokens`;
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(96) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(70) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` char(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- RELATIONSHIPS FOR TABLE `personal_access_tokens`:
+--   `tokenable_id`
+--       `users` -> `id`
+--
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `roms`
 --
--- Creation: Oct 23, 2022 at 01:01 AM
+-- Creation: Oct 24, 2022 at 12:32 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -264,6 +337,31 @@ INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_typ
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sessions`
+--
+-- Creation: Oct 22, 2022 at 11:14 PM
+-- Last update: Oct 24, 2022 at 12:24 AM
+--
+
+DROP TABLE IF EXISTS `sessions`;
+CREATE TABLE `sessions` (
+  `id` char(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(46) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_activity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- RELATIONSHIPS FOR TABLE `sessions`:
+--   `user_id`
+--       `users` -> `id`
+--
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 -- Creation: Oct 23, 2022 at 01:17 AM
@@ -314,6 +412,13 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `tw
 --
 
 --
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
 -- Indexes for table `games`
 --
 ALTER TABLE `games`
@@ -328,6 +433,21 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`),
+  ADD KEY `personal_access_tokens_tokenable_id_foreign` (`tokenable_id`);
+
+--
 -- Indexes for table `roms`
 --
 ALTER TABLE `roms`
@@ -335,6 +455,14 @@ ALTER TABLE `roms`
   ADD UNIQUE KEY `roms_rom_name_unique` (`rom_name`),
   ADD UNIQUE KEY `roms_game_id_unique` (`game_id`),
   ADD UNIQUE KEY `roms_file_id_unique` (`file_id`);
+
+--
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sessions_user_id_index` (`user_id`),
+  ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
 -- Indexes for table `users`
@@ -348,6 +476,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
@@ -358,6 +492,12 @@ ALTER TABLE `games`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roms`
@@ -381,12 +521,49 @@ ALTER TABLE `users`
 ALTER TABLE `games`
   ADD CONSTRAINT `games_rom_id_foreign` FOREIGN KEY (`rom_id`) REFERENCES `roms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+--
+-- Constraints for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD CONSTRAINT `password_resets_email_foreign` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD CONSTRAINT `personal_access_tokens_tokenable_id_foreign` FOREIGN KEY (`tokenable_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD CONSTRAINT `sessions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
 
 --
 -- Metadata
 --
 USE `phpmyadmin`;
 
+--
+-- Metadata for table failed_jobs
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
 --
 -- Metadata for table games
 --
@@ -426,7 +603,64 @@ TRUNCATE TABLE `pma__table_uiprefs`;
 
 TRUNCATE TABLE `pma__tracking`;
 --
+-- Metadata for table password_resets
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table personal_access_tokens
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
 -- Metadata for table roms
+--
+
+--
+-- Truncate table before insert `pma__column_info`
+--
+
+TRUNCATE TABLE `pma__column_info`;
+--
+-- Truncate table before insert `pma__table_uiprefs`
+--
+
+TRUNCATE TABLE `pma__table_uiprefs`;
+--
+-- Truncate table before insert `pma__tracking`
+--
+
+TRUNCATE TABLE `pma__tracking`;
+--
+-- Metadata for table sessions
 --
 
 --
