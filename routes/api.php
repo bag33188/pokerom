@@ -99,9 +99,9 @@ Route::name('api.')->group(function () {
 });
 
 if (App::environment('local')) {
-    Route::middleware('guest')->group(function () {
-        Route::get('/seeds/roms', fn() => Rom::all());
-        Route::get('/seeds/games', fn() => Game::all());
-        Route::get('/seeds/rom-files', fn() => RomFile::all());
+    Route::prefix('seeds')->name('api.seeds.')->middleware('guest')->group(function () {
+        Route::get('/roms', fn() => Rom::all())->name('roms');
+        Route::get('/games', fn() => Game::all())->name('games');
+        Route::get('/rom-files', fn() => RomFile::all())->name('rom-files');
     });
 }
