@@ -5,7 +5,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2022 at 03:31 AM
+-- Generation Time: Oct 24, 2022 at 02:25 AM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.10
 
@@ -29,153 +29,6 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `pokerom_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `pokerom_db`;
 
-DELIMITER $$
---
--- Procedures
---
-DROP PROCEDURE IF EXISTS `spSelectGamesThatAreROMHacks`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `spSelectGamesThatAreROMHacks` ()  SQL SECURITY INVOKER BEGIN
-	SELECT * FROM `games`
-    WHERE `game_type` = 'hack' OR `generation` = 0
-    ORDER BY `date_released` DESC;
-END$$
-
-DROP PROCEDURE IF EXISTS `spSelectRomsWithNoGame`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `spSelectRomsWithNoGame` ()  READS SQL DATA BEGIN
-    SELECT
-        `id`, `rom_name`, `rom_type`,
-        `has_game`, `game_id`
-    FROM `roms`
-    WHERE `has_game` = FALSE OR `game_id` IS NULL
-    ORDER BY CHAR_LENGTH(`rom_name`) DESC;
-END$$
-
-DROP PROCEDURE IF EXISTS `spUpdateRomFromRomFileData`$$
-CREATE DEFINER=`bag33188`@`%` PROCEDURE `spUpdateRomFromRomFileData` (IN `ROM_FILE_ID` CHAR(24), IN `ROM_FILE_SIZE` BIGINT UNSIGNED, IN `ROM_ID` BIGINT UNSIGNED)   BEGIN
-    DECLARE `base_bytes_unit` INTEGER(4) UNSIGNED DEFAULT POW(32, 2); -- 1024
-    DECLARE `_rollback` BOOLEAN DEFAULT FALSE;
-    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET `_rollback` = TRUE;
-    START TRANSACTION;
-    UPDATE `roms`
-    SET `file_id` = `ROM_FILE_ID`,
-        `rom_size` = CEIL(`ROM_FILE_SIZE` / `base_bytes_unit`), -- get Kibibytes value from bytes
-        `has_file` = TRUE
-    WHERE `id` = `ROM_ID`;
-    IF `_rollback` = TRUE THEN
-        ROLLBACK;
-    ELSE
-        COMMIT;
-    END IF;
-/* !important
-rom size is stored as Kibibytes (base 1024)
-mongodb stored as bytes
-*/
-END$$
-
---
--- Functions
---
-DROP FUNCTION IF EXISTS `FORMAT_GAME_TYPE`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_GAME_TYPE` (`GAME_TYPE` ENUM('core','hack','spin-off')) RETURNS VARCHAR(21) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER BEGIN
-    SET @`eacute` = CAST(CONVERT(x'E9' USING ucs2) AS char(1));
-    CASE `GAME_TYPE`
-        WHEN 'core' THEN RETURN CONCAT('Core Pok', @`eacute`, 'mon Game'); -- Core Pokemon Game
-        WHEN 'hack' THEN RETURN CONCAT('Pok', @`eacute`, 'mon ROM Hack'); -- Pokemon ROM Hack
-        WHEN 'spin-off' THEN RETURN CONCAT('Spin-Off Pok', @`eacute`, 'mon Game'); -- Spin-Off Pokemon Game
-        ELSE RETURN 'N/A';
-        END CASE;
-/* !important
-return value length = 21;
-'Spin-Off Pokemon Game'.length = 21;
-MAX_GAME_TYPE_LENGTH = 21;
-*/
-END$$
-
-DROP FUNCTION IF EXISTS `FORMAT_ROM_SIZE`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `FORMAT_ROM_SIZE` (`ROM_SIZE` BIGINT UNSIGNED) RETURNS VARCHAR(9) CHARSET utf8mb4 DETERMINISTIC SQL SECURITY INVOKER COMMENT 'Issues between different base-units of bytes are corrected.' BEGIN
-    -- size entity values
-    DECLARE `size_num` FLOAT UNSIGNED;
-    DECLARE `size_unit` CHAR(2);
-    DECLARE `size_str` VARCHAR(6);
-    -- size calculation values
-    DECLARE `one_kibibyte` SMALLINT UNSIGNED DEFAULT 1024;
-    DECLARE `one_kilobyte` SMALLINT UNSIGNED DEFAULT 1000;
-    DECLARE `one_gigabyte` MEDIUMINT UNSIGNED DEFAULT POWER(`one_kilobyte`, 2);
-
-    -- MEGABYTES
-    IF `ROM_SIZE` > `one_kibibyte` AND `ROM_SIZE` < `one_gigabyte` THEN
-        SET `size_unit` = 'MB';
-        SET `size_num` = ROUND(`ROM_SIZE` / `one_kilobyte`, 2);
-        -- GIGABYTES
-    ELSEIF `ROM_SIZE` >= `one_gigabyte` THEN
-        SET `size_unit` = 'GB';
-        SET `size_num`= ROUND(`ROM_SIZE` / `one_gigabyte`, 2);
-        -- KILOBYTES
-    ELSEIF `ROM_SIZE` > 1020 AND `ROM_SIZE` <= `one_kibibyte` THEN
-        SET `size_unit` = 'KB';
-        SET `size_num` = CAST(`ROM_SIZE` AS FLOAT);
-        -- BYTES
-    ELSE
-        SET `size_unit` = 'B ';
-        SET `size_num` = CAST((`ROM_SIZE` * `one_kibibyte`) AS FLOAT);
-    END IF;
-    SET `size_str` = CONVERT(`size_num`, VARCHAR(6));
-    RETURN CONCAT(`size_str`, ' ', `size_unit`);
-/* !important
-return value length = 9;
-'262.14 MB'.length = 9;
-MAX_ROM_SIZE_LENGTH = 9; # ex. '164.28 MB'
-*/
-END$$
-
-DROP FUNCTION IF EXISTS `SPLIT_STRING`$$
-CREATE DEFINER=`bag33188`@`%` FUNCTION `SPLIT_STRING` (`STR_VAL` VARCHAR(255), `SEPARATOR` VARCHAR(1), `POSITION` SMALLINT) RETURNS VARCHAR(128) CHARSET utf8mb4 COMMENT 'Splits a string based on a given delimiter.' BEGIN
-    DECLARE `max_results` SMALLINT;
-
-    -- get max number of items
-    SET `max_results` = LENGTH(`STR_VAL`) - LENGTH(REPLACE(`STR_VAL`, `SEPARATOR`, '')) + 1;
-
-    IF `POSITION` > `max_results` THEN
-        RETURN NULL;
-    ELSE
-        RETURN SUBSTRING_INDEX(SUBSTRING_INDEX(`STR_VAL`, `SEPARATOR`, `POSITION`), `SEPARATOR`, -1);
-    END IF;
-/* !important
-keep SEPARATOR as VARCHAR since if CHAR is used
-then a SPACE character will not work as a SEPARATOR
-*/
-END$$
-
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `failed_jobs`
---
--- Creation: Oct 05, 2022 at 05:43 PM
---
-
-DROP TABLE IF EXISTS `failed_jobs`;
-CREATE TABLE `failed_jobs` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- RELATIONSHIPS FOR TABLE `failed_jobs`:
---
-
---
--- Truncate table before insert `failed_jobs`
---
-
-TRUNCATE TABLE `failed_jobs`;
 -- --------------------------------------------------------
 
 --
@@ -329,72 +182,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_resets`
---
--- Creation: Oct 05, 2022 at 05:43 PM
---
-
-DROP TABLE IF EXISTS `password_resets`;
-CREATE TABLE `password_resets` (
-  `email` varchar(55) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` char(60) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- RELATIONSHIPS FOR TABLE `password_resets`:
---   `email`
---       `users` -> `email`
---
-
---
--- Truncate table before insert `password_resets`
---
-
-TRUNCATE TABLE `password_resets`;
--- --------------------------------------------------------
-
---
--- Table structure for table `personal_access_tokens`
---
--- Creation: Oct 22, 2022 at 09:59 PM
---
-
-DROP TABLE IF EXISTS `personal_access_tokens`;
-CREATE TABLE `personal_access_tokens` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(96) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(70) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` char(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `last_used_at` timestamp NULL DEFAULT NULL,
-  `expires_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- RELATIONSHIPS FOR TABLE `personal_access_tokens`:
---   `tokenable_id`
---       `users` -> `id`
---
-
---
--- Truncate table before insert `personal_access_tokens`
---
-
-TRUNCATE TABLE `personal_access_tokens`;
---
--- Dumping data for table `personal_access_tokens`
---
-
-INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 1, 'auth_token_635496b793514941050074_1', 'a96aba86e37bf4ac721d616d99e6cade1b16dc4e3bd9b363a190dabf3a439933', '[\"*\"]', NULL, NULL, '2022-10-23 08:19:51', '2022-10-23 08:19:51');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `roms`
 --
 -- Creation: Oct 23, 2022 at 01:01 AM
@@ -477,45 +264,10 @@ INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_typ
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sessions`
---
--- Creation: Oct 22, 2022 at 11:14 PM
---
-
-DROP TABLE IF EXISTS `sessions`;
-CREATE TABLE `sessions` (
-  `id` char(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `ip_address` varchar(46) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_activity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- RELATIONSHIPS FOR TABLE `sessions`:
---   `user_id`
---       `users` -> `id`
---
-
---
--- Truncate table before insert `sessions`
---
-
-TRUNCATE TABLE `sessions`;
---
--- Dumping data for table `sessions`
---
-
-INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('phD2MtMqJxZmkUVg7kmQioehhaUWu02ijryJq6QV', 1, '192.168.86.57', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiUzFKVTFvUTYza2c4Q0Y2Q3lEdmVrMlI2M25Scno3UWk1SW03YTh4NCI7czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCR0VUdyZkhTLnRPNkFKLmlLTXV0d1MuajJxakZmUm1MU3NTNXN1bjZkSWc3ZEVIUVZYS1l1YSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjQ6Imh0dHA6Ly9wb2tlcm9tLnRlc3Qvcm9tcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1666487972);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 -- Creation: Oct 23, 2022 at 01:17 AM
+-- Last update: Oct 24, 2022 at 12:23 AM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -554,19 +306,12 @@ TRUNCATE TABLE `users`;
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Brock Glatman', 'bglatman@outlook.com', NULL, '$2y$10$tUGrfHS.tO6AJ.iKMutwS.j2qjFfRmLSsS5sun6dIg7dEHQVXKYua', NULL, NULL, NULL, 'admin', 'AT06VUNIiGH9KUxjDEqPqWYHNYjLi2UKePHfWIRbExnS0vOhAXomiFqaKTcS', NULL, NULL, '2022-08-27 23:17:24', '2022-09-02 07:39:41'),
+(1, 'Brock Glatman', 'bglatman@outlook.com', NULL, '$2y$10$tUGrfHS.tO6AJ.iKMutwS.j2qjFfRmLSsS5sun6dIg7dEHQVXKYua', NULL, NULL, NULL, 'admin', 'pu0SzmPR9N4ikLpzT1mAYNQA7T5iTMasUWSakYXgCxn8I0ueq6tO8khEzMyi', NULL, NULL, '2022-08-27 23:17:24', '2022-09-02 07:39:41'),
 (2, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$VBrFySpV1GIGbgE8sAHdKexMAb4u4Om9nyoIGwKo1uTQWA2SzRfVO', NULL, NULL, NULL, 'user', 'scCAtMwPKEFFWOgbvIuBj1oV4YKxA5xDHe39ksiqFpW9dZa3APoXOtAlBsp4', NULL, NULL, '2022-08-30 08:24:08', '2022-10-14 03:09:56');
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
 -- Indexes for table `games`
@@ -583,21 +328,6 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
-
---
--- Indexes for table `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`),
-  ADD KEY `personal_access_tokens_tokenable_id_foreign` (`tokenable_id`);
-
---
 -- Indexes for table `roms`
 --
 ALTER TABLE `roms`
@@ -605,14 +335,6 @@ ALTER TABLE `roms`
   ADD UNIQUE KEY `roms_rom_name_unique` (`rom_name`),
   ADD UNIQUE KEY `roms_game_id_unique` (`game_id`),
   ADD UNIQUE KEY `roms_file_id_unique` (`file_id`);
-
---
--- Indexes for table `sessions`
---
-ALTER TABLE `sessions`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `sessions_user_id_index` (`user_id`),
-  ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
 -- Indexes for table `users`
@@ -626,12 +348,6 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `games`
 --
 ALTER TABLE `games`
@@ -642,12 +358,6 @@ ALTER TABLE `games`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `roms`
@@ -671,49 +381,12 @@ ALTER TABLE `users`
 ALTER TABLE `games`
   ADD CONSTRAINT `games_rom_id_foreign` FOREIGN KEY (`rom_id`) REFERENCES `roms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Constraints for table `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD CONSTRAINT `password_resets_email_foreign` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE CASCADE ON UPDATE NO ACTION;
-
---
--- Constraints for table `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  ADD CONSTRAINT `personal_access_tokens_tokenable_id_foreign` FOREIGN KEY (`tokenable_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `sessions`
---
-ALTER TABLE `sessions`
-  ADD CONSTRAINT `sessions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
 
 --
 -- Metadata
 --
 USE `phpmyadmin`;
 
---
--- Metadata for table failed_jobs
---
-
---
--- Truncate table before insert `pma__column_info`
---
-
-TRUNCATE TABLE `pma__column_info`;
---
--- Truncate table before insert `pma__table_uiprefs`
---
-
-TRUNCATE TABLE `pma__table_uiprefs`;
---
--- Truncate table before insert `pma__tracking`
---
-
-TRUNCATE TABLE `pma__tracking`;
 --
 -- Metadata for table games
 --
@@ -753,64 +426,7 @@ TRUNCATE TABLE `pma__table_uiprefs`;
 
 TRUNCATE TABLE `pma__tracking`;
 --
--- Metadata for table password_resets
---
-
---
--- Truncate table before insert `pma__column_info`
---
-
-TRUNCATE TABLE `pma__column_info`;
---
--- Truncate table before insert `pma__table_uiprefs`
---
-
-TRUNCATE TABLE `pma__table_uiprefs`;
---
--- Truncate table before insert `pma__tracking`
---
-
-TRUNCATE TABLE `pma__tracking`;
---
--- Metadata for table personal_access_tokens
---
-
---
--- Truncate table before insert `pma__column_info`
---
-
-TRUNCATE TABLE `pma__column_info`;
---
--- Truncate table before insert `pma__table_uiprefs`
---
-
-TRUNCATE TABLE `pma__table_uiprefs`;
---
--- Truncate table before insert `pma__tracking`
---
-
-TRUNCATE TABLE `pma__tracking`;
---
 -- Metadata for table roms
---
-
---
--- Truncate table before insert `pma__column_info`
---
-
-TRUNCATE TABLE `pma__column_info`;
---
--- Truncate table before insert `pma__table_uiprefs`
---
-
-TRUNCATE TABLE `pma__table_uiprefs`;
---
--- Truncate table before insert `pma__tracking`
---
-
-TRUNCATE TABLE `pma__tracking`;
---
--- Metadata for table sessions
 --
 
 --
