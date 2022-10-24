@@ -1,11 +1,10 @@
 # noinspection SpellCheckingInspectionForFile
-
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2022 at 02:32 AM
+-- Generation Time: Oct 24, 2022 at 02:49 AM
 -- Server version: 10.9.3-MariaDB
 -- PHP Version: 8.1.10
 
@@ -57,7 +56,7 @@ CREATE TABLE `failed_jobs` (
 --
 -- Table structure for table `games`
 --
--- Creation: Oct 24, 2022 at 12:32 AM
+-- Creation: Oct 24, 2022 at 12:48 AM
 --
 
 DROP TABLE IF EXISTS `games`;
@@ -228,8 +227,7 @@ CREATE TABLE `password_resets` (
 --
 -- Table structure for table `personal_access_tokens`
 --
--- Creation: Oct 22, 2022 at 09:59 PM
--- Last update: Oct 23, 2022 at 11:05 PM
+-- Creation: Oct 24, 2022 at 12:45 AM
 --
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
@@ -258,6 +256,7 @@ CREATE TABLE `personal_access_tokens` (
 -- Table structure for table `roms`
 --
 -- Creation: Oct 24, 2022 at 12:32 AM
+-- Last update: Oct 24, 2022 at 12:48 AM
 --
 
 DROP TABLE IF EXISTS `roms`;
@@ -339,8 +338,8 @@ INSERT INTO `roms` (`id`, `rom_name`, `game_id`, `file_id`, `rom_size`, `rom_typ
 --
 -- Table structure for table `sessions`
 --
--- Creation: Oct 22, 2022 at 11:14 PM
--- Last update: Oct 24, 2022 at 12:24 AM
+-- Creation: Oct 24, 2022 at 12:45 AM
+-- Last update: Oct 24, 2022 at 12:49 AM
 --
 
 DROP TABLE IF EXISTS `sessions`;
@@ -364,8 +363,8 @@ CREATE TABLE `sessions` (
 --
 -- Table structure for table `users`
 --
--- Creation: Oct 23, 2022 at 01:17 AM
--- Last update: Oct 24, 2022 at 12:23 AM
+-- Creation: Oct 24, 2022 at 12:49 AM
+-- Last update: Oct 24, 2022 at 12:49 AM
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -405,7 +404,7 @@ TRUNCATE TABLE `users`;
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
 (1, 'Brock Glatman', 'bglatman@outlook.com', NULL, '$2y$10$tUGrfHS.tO6AJ.iKMutwS.j2qjFfRmLSsS5sun6dIg7dEHQVXKYua', NULL, NULL, NULL, 'admin', 'pu0SzmPR9N4ikLpzT1mAYNQA7T5iTMasUWSakYXgCxn8I0ueq6tO8khEzMyi', NULL, NULL, '2022-08-27 23:17:24', '2022-09-02 07:39:41'),
-(2, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$VBrFySpV1GIGbgE8sAHdKexMAb4u4Om9nyoIGwKo1uTQWA2SzRfVO', NULL, NULL, NULL, 'user', 'scCAtMwPKEFFWOgbvIuBj1oV4YKxA5xDHe39ksiqFpW9dZa3APoXOtAlBsp4', NULL, NULL, '2022-08-30 08:24:08', '2022-10-14 03:09:56');
+(2, 'John Doe', 'jdoe123@gmail.com', NULL, '$2y$10$xv.CXrl8GjeBJPQBYMThBOdf.aGDL7SaxMmI95QTuxnH9AFRCghry', NULL, NULL, NULL, 'user', NULL, NULL, NULL, '2022-10-24 07:49:24', '2022-10-24 07:49:24');
 
 --
 -- Indexes for dumped tables
@@ -444,8 +443,7 @@ ALTER TABLE `password_resets`
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`),
-  ADD KEY `personal_access_tokens_tokenable_id_foreign` (`tokenable_id`);
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
 -- Indexes for table `roms`
@@ -519,7 +517,7 @@ ALTER TABLE `users`
 -- Constraints for table `games`
 --
 ALTER TABLE `games`
-  ADD CONSTRAINT `games_rom_id_foreign` FOREIGN KEY (`rom_id`) REFERENCES `roms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `games_rom_id_foreign` FOREIGN KEY (`rom_id`) REFERENCES `roms` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `password_resets`
@@ -531,13 +529,13 @@ ALTER TABLE `password_resets`
 -- Constraints for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  ADD CONSTRAINT `personal_access_tokens_tokenable_id_foreign` FOREIGN KEY (`tokenable_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `personal_access_tokens_tokenable_id_foreign` FOREIGN KEY (`tokenable_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sessions`
 --
 ALTER TABLE `sessions`
-  ADD CONSTRAINT `sessions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `sessions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE SET NULL;
 
 
 --
