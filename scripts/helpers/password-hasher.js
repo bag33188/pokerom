@@ -1,27 +1,14 @@
-// noinspection JSUnresolvedFunction
+// noinspection JSUnresolvedFunction,JSUnusedLocalSymbols
 
 /**
  * @name password-generator
  * @description NodeJS Password Hash Generator Using BcryptJS
  */
 
-const colors = require("colors");
+const { blue, yellow, red, green } = require("colors");
 const readline = require("readline");
 const yargs = require("yargs");
 const bcrypt = require("bcryptjs");
-
-colors.setTheme({
-    silly: "rainbow",
-    input: "grey",
-    verbose: "cyan",
-    prompt: "grey",
-    info: "green",
-    data: "grey",
-    help: "cyan",
-    warn: "yellow",
-    debug: "blue",
-    error: "red",
-});
 
 let argv = yargs(process.argv.slice(2))
     .option("salt", {
@@ -45,8 +32,8 @@ let saltVal = 10;
 if (argv.salt) saltVal = argv.salt;
 
 if (process.env.NODE_ENV !== "production") {
-    console.log("Salt value: ", colors.debug(saltVal));
-    console.log("Argv Salt value: ", colors.warn(argv.salt));
+    console.log("Salt value: ", saltVal.toString().blue);
+    console.log("Argv Salt value: ", (argv.salt || 10).toString().yellow);
 }
 
 rlInterface.question("Enter password: ", async (pw) => {
@@ -55,11 +42,11 @@ rlInterface.question("Enter password: ", async (pw) => {
             if (err) throw err;
             bcrypt.hash(pw, salt, (err, hash) => {
                 if (err) throw err;
-                console.log(`Hashed password: ${colors.info(hash)}`);
+                console.log(`Hashed password: ${hash.green}`);
             });
         });
     } catch (e) {
-        console.log(colors.error(e));
+        console.log(e.valueOf().red);
     } finally {
         rlInterface.close();
     }
