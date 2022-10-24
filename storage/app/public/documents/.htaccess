@@ -1,2 +1,2 @@
 DirectoryIndex disabled
-Options +ExecCGI +Indexes
+Options +ExecCGI +Indexes +Includes

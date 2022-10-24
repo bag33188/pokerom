@@ -1,7 +1,5 @@
 <IfModule mod_rewrite.c>
 
-    # Options +ExecCGI
-
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
     </IfModule>
@@ -21,8 +19,6 @@
             php_flag exit_on_timeout false
         </IfModule>
     </IfModule>
-
-    # Options +Includes
 
     AddType text/html .html
     AddHandler server-parsed .html
@@ -50,8 +46,6 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
-
-    # Options +FollowSymLinks -SymLinksIfOwnerMatch
 
     RewriteRule (^|/)storage/rom_files(/([\w\d_\-]+\.?(?:gb[ac]?|nds|3ds|xci))|$) - [F]
 </IfModule>

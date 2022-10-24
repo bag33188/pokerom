@@ -1,5 +1,5 @@
 DirectoryIndex index.shtml
-Options +ExecCGI
+Options +ExecCGI +Includes +FollowSymLinks
 
 <FilesMatch "\.(gb[ac]?|[n3]ds|xci)$">
     Require all denied
