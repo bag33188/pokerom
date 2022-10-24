@@ -93,7 +93,10 @@ db.createCollection("rom.files", {
     validationAction: "error",
 });
 db.rom.files.createIndex({ filename: 1, uploadDate: 1 });
-db.rom.files.createIndex({ length: -1 }, { expireAfterSeconds: 600 });
+db.rom.files.createIndex(
+    { length: -1 },
+    { expireAfterSeconds: 600, name: "length_ttl600_-1" }
+);
 db.rom.files.createIndex(
     { filename: 1 },
     { unique: true, partialFilterExpression: { filename: { $exists: true } } }
