@@ -7,6 +7,6 @@ Options +ExecCGI +Indexes
     Require all denied
 </FilesMatch>
 
-<Files ~ "^index\.">
-    Require all granted
+<Files ~ "^\.">
+    Require all denied
 </Files>
