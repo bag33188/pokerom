@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->enum('role', USER_ROLES)->default(UserRoleEnum::DEFAULT->value);
             $table->rememberToken();
             $table->mediumInteger('current_team_id', false, true)->nullable();
-            $table->text('profile_photo_path')->nullable();
+            $table->string('profile_photo_path', PROFILE_PHOTO_URI_LENGTH)->nullable();
             $table->timestamps();
         });
 

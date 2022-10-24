@@ -380,7 +380,7 @@ CREATE TABLE `users` (
   `role` enum('admin','user','guest') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
   `remember_token` char(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `current_team_id` mediumint(8) UNSIGNED ZEROFILL DEFAULT NULL,
-  `profile_photo_path` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `profile_photo_path` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
